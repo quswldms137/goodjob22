@@ -1,5 +1,5 @@
 package com.example.goodjob.dto;
 
-public class managerDto {
+public class ServiceQuestionDto {
 
 }
