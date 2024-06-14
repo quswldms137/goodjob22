@@ -29,7 +29,7 @@ ul {
 
 #sidebar {
 	position:relative;
-	top:93px;
+	top:0px;
 	left:0;
 	width: 180px;
 	height: 702px;

@@ -29,10 +29,10 @@ ul {
 
 #sidebar {
 	position:relative;
-	top:93px;
+	top:0px;
 	left:0;
 	width: 180px;
-	height: 702px;
+	height: auto;
 	border: 1px solid #eee;
 	border-radius: 5px;
 }
@@ -88,11 +88,11 @@ ul {
 			<p><a href="#">입사지원 현황</a></p>
 			<p><a href="#">받은 포지션 제안</a></p>
 		</div>
-		<div class="sidebar-box sidebar-box4">
+		<!-- <div class="sidebar-box sidebar-box4">
 			<h3>커뮤니티</h3>
 			<p><a href="#">문의 내역</a></p>
 			<p><a href="#">내가 쓴 글/댓글</a></p>
-		</div>
+		</div> -->
 		<div class="sidebar-box sidebar-box5">
 			<h3>스크랩/관심기업</h3>
 			<p><a href="#">스크랩한 공고</a></p>

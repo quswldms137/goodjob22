@@ -13,7 +13,7 @@
 		border-top:1px solid #eee;
 	}
 	#foot{
-		width:1250px;
+		width:1100px;
 		margin:0 auto;
 		padding:25px 0;
 	}
