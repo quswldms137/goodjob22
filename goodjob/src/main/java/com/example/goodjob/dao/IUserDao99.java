@@ -8,6 +8,5 @@ import com.example.goodjob.dto.UserDto;
 @Mapper
 public interface IUserDao99 {
 
-//	public int regUser(@Param("userDto")UserDto userDto);
 	public int regUser(UserDto userDto);
 }

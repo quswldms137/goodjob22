@@ -45,15 +45,15 @@ main {
 	</div>
 	<div id="companyForm" style="display:none;">
 		<form name="frm_comJoin">
-			<input type="text" name="username" placeholder="아이디"><br>
-			<input type="password" name="password" placeholder="비밀번호"><br>
-			<input type="hidden" name="role" value="ROLE_COMPANY"><br>
+			<input type="text" name="username1" placeholder="아이디1"><br>
+			<input type="password" name="password1" placeholder="비밀번호1"><br>
+			<input type="text" name="role1" value="ROLE_COMPANY"><br>
 			<input type="text" name="com_name" placeholder="기업명"><br>
 			<input type="text" name="com_type"  placeholder="기업형태"><br>
 			<input type="text" name="com_ceo"  placeholder="대표자명"><br>
 			<input type="text" name="com_addr" placeholder="기업주소"><br>
 			<input type="number" name="com_companynum" placeholder="사업자번호"><br>
-			<input type="date" name="com_tel"  placeholder="전화번호"><br>
+			<input type="number" name="com_tel"  placeholder="전화번호"><br>
 			<input type="text" name="com_email"  placeholder="담당자이메일"><br>
 			<input type="submit" value="가입하기" onclick="companySubmit(event)">
 		</form>
@@ -112,9 +112,9 @@ main {
 		function companySubmit(event){
 			event.preventDefault();
 			
-			const username1 = document.querySelector("Input[name='username']");
-			const password1 = document.querySelector("Input[name='password']");
-			const role1 = document.querySelector("Input[name='role']");
+			const username1 = document.querySelector("Input[name='username1']");
+			const password1 = document.querySelector("Input[name='password1']");
+			const role1 = document.querySelector("Input[name='role1']");
 			const com_name1 = document.querySelector("Input[name='com_name']");
 			const com_type1 = document.querySelector("Input[name='com_type']");
 			const com_ceo1 = document.querySelector("Input[name='com_ceo']");
@@ -131,7 +131,7 @@ main {
 					com_type : com_type1.value,
 					com_ceo : com_ceo1.value,
 					com_addr : com_addr1.value,
-					com_companynum1 : com_companynum1.value,
+					com_companynum : com_companynum1.value,
 					com_tel : com_tel1.value,
 					com_email : com_email1.value
 			}
