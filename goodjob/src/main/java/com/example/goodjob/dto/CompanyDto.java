@@ -11,6 +11,8 @@ public class CompanyDto {
 
 	private Long com_no;
 	private String username;
+	private String password;
+	private String role;
 	private String com_name;
 	private String com_type;
 	private String com_ceo;

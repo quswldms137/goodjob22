@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.goodjob.dao.ICompanyDao99">
+	<insert id="regCompany">
+		INSERT INTO company (username, com_name, com_type, com_ceo, com_addr, com_companynum, com_tel, com_email) 
+		VALUES(#{username}, #{com_name}, #{com_type}, #{com_ceo}, #{com_addr}, #{com_companynum}, #{com_tel}, #{com_email})
+	</insert>
+</mapper>
