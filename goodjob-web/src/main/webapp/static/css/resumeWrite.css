@@ -1,0 +1,436 @@
+@charset "UTF-8";
+
+body {
+	background: #FAFAFA;
+}
+
+section {
+	width: 1100px;
+	margin: 100px auto;
+	padding-bottom: 50px;
+}
+
+h1 {
+	text-align: center;
+	margin: 75px 0 100px;
+}
+
+.container {
+	width: 800px;
+	margin: 0 auto;
+}
+
+input[type="text"], input[type="date"], select {
+	height: 50px;
+	padding-left: 5px;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+	color: #333;
+}
+
+textarea {
+	color: #333;
+}
+
+select[name="edustate"] {
+	width: 120px;
+}
+
+#photo::-webkit-scrollbar {
+	display: none;
+}
+
+.title input[type="text"] {
+	width: 100%;
+	height: 55px;
+	font-size: 19px;
+	padding-left: 10px;
+}
+
+.personal_info_title {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 38px 0 17px;
+}
+
+.personal_info {
+	width: 800px;
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.personal_info_content {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.personal_info_content input {
+	width: 140px;
+}
+
+.personal_info_content select {
+	width: 120px;
+}
+
+.personal_info_content input[name="mem_email"] {
+	width: 200px;
+}
+
+.photolabel {
+	cursor: pointer;
+	position:relative;
+}
+.photolabel .photoFrame-box{
+	width:115px;
+	height:132px;
+	border:1px solid #eee;
+}
+
+input[type="date"]:valid {
+	color: #333;
+}
+
+.personal_info_photo {
+	position: relative;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+#photoFrame {
+	background: #fff;
+}
+
+.photoadd {
+	text-align:center;
+	border:1px solid #eee;
+	border-top:0;
+	padding:8.9px 0;
+	font-size:14px;
+	background:#f7f7f7;
+}
+
+.personal_info input[name="mem_addr"] {
+	width: 630px;
+}
+
+
+select[name="military"] {
+	width: 140px;
+}
+
+.education {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+select[name="graduation"] {
+	width: 120px;
+}
+
+input[name="major"] {
+	width: 150px;
+}
+
+input[name="school"] {
+	width: 150px;
+}
+
+input[name="grades"] {
+	width: 80px;
+}
+
+.admissiondate-text {
+	position: absolute;
+	top: 22px;
+	right: 430px;
+	font-size: 11px;
+	color: #ccc;
+}
+
+.graduatedate-text {
+	position: absolute;
+	top: 22px;
+	right: 312px;
+	font-size: 11px;
+	color: #ccc;
+}
+
+.desiredArea {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.desiredArea input[type="text"] {
+	width: 120px;
+}
+
+.desiredIndustry {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.desiredIndustry input[type="text"] {
+	width: 120px;
+}
+
+.desiredpay {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.desiredpay input[type="text"] {
+	width: 120px;
+}
+
+.career {
+	width: 800px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+	gap: 10px;
+	position: relative;
+}
+
+.career_in {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.cardate_text {
+	position: absolute;
+	top: 22px;
+	right: 553px;
+	font-size: 11px;
+	color: #bbb;
+}
+
+.enddate_text {
+	position: absolute;
+	top: 22px;
+	right: 428px;
+	font-size: 11px;
+	color: #bbb;
+}
+
+
+.career textarea {
+	width: 608px;
+	height: 50px;
+	padding: 5px;
+	box-sizing: border-box;
+	border: 1px solid #ddd;
+	line-height: 35px;
+	resize: none;
+}
+
+.career input[name="companyname"] {
+	width: 360px;
+}
+
+.career input[name="position"], .career input[name="job"] {
+	width: 175px;
+}
+
+.career input[name="salary"], .career input[name="industry"] {
+	width: 114px;
+}
+
+.resumeSkill {
+	width: 800px;
+	padding: 20px;
+	background: #fff;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+	font-size: 18px;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+}
+
+.resumeSkill input[type="text"] {
+	width: 100px;
+}
+
+.resumeSkill button {
+	width: 40px;
+	height: 40px;
+	border: 2px solid #FB8500;
+	background: #fff;
+	font-size: 24px;
+	color: #FB8500;
+	margin-left: 15px;
+	cursor: pointer;
+}
+
+.skillContainer {
+	width: 90%;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	display: flex;
+}
+
+.certificate {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.certificate-text {
+	position: absolute;
+	top: 23px;
+	right: 378px;
+	font-size: 11px;
+	color: #bbb;
+}
+
+.certificate input[name="stack"], .certificate input[name="pulisher"] {
+	width: 200px;
+}
+
+.portfolio-link {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.portfolio-link input[type="text"] {
+	width: 100%;
+}
+
+.other-data {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+.other-data input[type="file"]{
+	display:block;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+	margin-bottom:5px;
+}
+.other-data .addOther-data{
+	width: 40px;
+	height: 40px;
+	border: 2px solid #FB8500;
+	background: #fff;
+	font-size: 24px;
+	color: #FB8500;
+	margin-left: 0px;
+	cursor: pointer;
+}
+
+
+.coverLetter {
+	width: 800px;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.coverLetter textarea {
+	width: 760px;
+	height: 350px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	box-sizing: border-box;
+	resize: none;
+	margin-bottom: 10px;
+}
+
+.coverLetter .personal_info_title {
+	width: 760px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	padding: 15px;
+	padding-left: 15px;
+	box-sizing: border-box;
+	font-size: 17px;
+}
+
+.coverLetter textarea:last-child {
+	margin-bottom: 0;
+}
+
+.public_type {
+	display: flex;
+	justify-content: flex-start;
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 20px;
+	font-size: 18px;
+}
+
+.public_type input {
+	border: 1px solid #ddd;
+	background: #fff;
+}
+
+.public_type label {
+	margin-right: 20px;
+}
+
+.submit_btn {
+	text-align: center;
+	margin: 80px 0;
+}
+
+input[type="submit"] {
+	width: 160px;
+	color: #fff;
+	background: #FB8500;
+	padding: 15px 0;
+	border: 0;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+input[type="button"] {
+	width: 160px;
+	color: #FB8500;
+	background: #fff;
+	border: 1px solid #FB8500;
+	padding: 15px 0;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.upload-name {
+	width: 105px;
+	height: 30px !important;
+}

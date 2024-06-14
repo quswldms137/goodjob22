@@ -88,9 +88,9 @@ header {
 			</div>
 			<div class="company-nav">
 				<ul>
-					<li><a href="#">홈</a></li>
-					<li><a href="#">공고등록</a></li>
-					<li><a href="#">공고·지원자 관리</a></li>
+					<li><a href="/company">홈</a></li>
+					<li><a href="/company/employWrite">공고등록</a></li>
+					<li><a href="/company/employManage">공고·지원자 관리</a></li>
 					<li><a href="#">인재관리</a></li>
 					<li><a href="#">커뮤니티</a></li>
 					<li><a href="#">이벤트</a></li>

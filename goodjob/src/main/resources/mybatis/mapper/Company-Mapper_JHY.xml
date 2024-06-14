@@ -4,11 +4,23 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.example.goodjob.dao.ICompanyDao_JHY">
+	<!-- 내가 쓴 채용공고 목록 조회하기 (지금은 로그인 연동 X -> 등록된 채용공고 전부다 불러옴)-->
 	<select id="findAll">
 		select * from recruit
 	</select>
+	<!-- 내가 쓴 채용공고 목록 조회하기 -->
+	<select id="findByCom_no">
+		SELECT title, career, education, location, RANK, pay, DATEDIFF(deadline_date, NOW()) 'deadline_date' from recruit
+	</select>
 	
-	
+	<!-- 채용공고 등록하기 -->
+	<insert id="recruitWrite">
+		insert into recruit values (null, #{recruit.com_no}, #{recruit.username}, #{recruit.career}, #{recruit.education}, 
+									#{recruit.field}, #{recruit.pay}, #{recruit.location}, #{recruit.working_time}, 
+									#{recruit.rank}, #{recruit.title}, #{recruit.qualification}, #{recruit.welfare}, 
+									#{recruit.seprocedure}, #{recruit.notice}, #{recruit.reg_date}, 
+									#{recruit.deadline_date}, #{recruit.p_number})
+	</insert>
 	
 	
 </mapper>  
