@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.goodjob.dao.EducationDao">
+  
+  <insert id="educationWrite">
+  	insert into education (resume_no, school, edu_join_date, edu_gra_date, graduation, grades, major)
+  	values (#{resume_no}, #{school}, #{edu_join_date}, #{edu_gra_date}, #{graduation}, #{grades}, #{major})
+  </insert>
+  
+  </mapper>

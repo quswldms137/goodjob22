@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.goodjob.dao.ResumeDao">
+  
+  	<insert id="resumeWrite">
+  		insert into resume (mem_no, title, img_url, hope_job, hope_city, hope_pay, addr, part, military, port_url, introduce)
+  		values (#{mem_no}, #{title}, #{img_url}, #{hope_job}, #{hope_city}, #{hope_pay}, #{addr}, #{part}, #{military}, #{part}, #{port_url}, #{introduce})
+  	</insert>
+  
+  </mapper>

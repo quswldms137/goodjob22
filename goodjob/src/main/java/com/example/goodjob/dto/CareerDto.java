@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CareerDto {
 
 	private Long career_no;
-	private Long s_resume_no;
+	private Long resume_no;
 	private String company;
 	private LocalDate car_join_date;
 	private LocalDate quit_date;
