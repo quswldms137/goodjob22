@@ -13,7 +13,7 @@
 }
 
 .recruit-area {
-	width: 800px;
+	width: 950px;
 	margin: 0 auto;
 	display: flex;
 	padding: 30px;
@@ -28,7 +28,7 @@
 }
 
 .recruit-mid {
-	padding-right: 150px;
+	padding-right: 100px;
 }
 
 .recruit-right-top {
@@ -40,26 +40,40 @@
 }
 
 .recruit-right-bot p {
-	padding-right: 20px;
+	padding-right: 15px;
 }
 
-.updateBtn {
+.updateBtn,
+.deleteBtn {
 	background-color: orange;
-	width: 75px;
-	height: 50px;
+	width: 60px;
+	height: 40px;
 	text-align: center;
 	padding: auto;
 	transition: background-color 0.2s ease;
 	border-radius: 10px;
+	border-color: white;
 }
 
-.updateBtn:hover {
+.updateBtn:hover,
+.deleteBtn:hover {
 	background-color: skyblue;
+}
+
+#h1 {
+	margin: 30px;
+	text-align: center;
+}
+
+#h2 {
+	margin: 20px;
+	text-align: center;
 }
 </style>
 </head>
 <body>
 	<script>
+	
 		function recruit() {
 			const xhttp = new XMLHttpRequest();
 			//const careers = document.querySelectorAll(".recruit_career");
@@ -78,17 +92,19 @@
 			//xhttp.setRequestHeader("Content-type", "application/json")
 			xhttp.send();
 		}
+		
 		function inputdata(data){
 			const main = document.querySelector("#main");
+			let number = 1;
 			let str = "";
 			data.forEach(item =>{
 					str += '<div class="recruit-area"> '
 								+ '<div class="recruit-left"> '
-									+ '<h2>1</h2> '
+									+ '<h2>' + number + '</h2> '
 								+ '</div> '
 								+ '<div class="recruit-mid"> '
 									+ '<div class="recruit-right-top"> '
-										+ '<h2><a class="recruit_title" href="employDetail">공고 제목이 들어가는 부분 입니다.</a></h2> '
+										+ '<h2><a class="recruit_title" href="/company/employDetail">공고 제목이 들어가는 부분 입니다.</a></h2> '
 									+ '</div> '
 									+ '<div class="recruit-right-bot"> '
 										+ '<p class="recruit_career">요구 경력</p> '
@@ -96,42 +112,61 @@
 										+ '<p class="recruit_location">근무 위치</p> '
 										+ '<p class="recruit_rank">직급</p> '
 										+ '<p class="recruit_pay">연봉</p> '
+										+ '<p class="recruit_deadline_date">마감기한</p> '
 									+ '</div> '
 								+ '</div> '
 								+ '<div class="recruit-right-right"> '
-									+ '<button class="updateBtn">수정</button> '
+									+ '<button class="updateBtn" onclick="update(event)">수정</button> ' + '<button class="deleteBtn" onclick="delete()">삭제</button> '
+									+ '<input type="hidden" class="recruit_no" name="recruit_no"> '
 								+ '</div> '
 						+ '</div> '; 
-				
+						number++;
+				// forEach 문안에 str 에 누적할때 바로 값을 넣어도 된다. 예시) + '<div class="recruit_career">'+ item.career + '</div> '
 			})
 			
 			main.innerHTML = str;
 			
-			const numbers = document.querySelectorAll(".recruit_number");
+			//const numbers = document.querySelectorAll(".recruit_number");
+			const recruit_nos = document.querySelectorAll(".recruit_no");
 			const titles = document.querySelectorAll(".recruit_title");
 			const careers = document.querySelectorAll(".recruit_career");
 			const educations = document.querySelectorAll(".recruit_education");
 			const locations = document.querySelectorAll(".recruit_location");
 			const ranks = document.querySelectorAll(".recruit_rank");
 			const pays = document.querySelectorAll(".recruit_pay");
+			const deadline_dates = document.querySelectorAll(".recruit_deadline_date");
 			
 			data.forEach((item, index)=>{
 				//numbers[index].textContent = item.recruit_number;
+				recruit_nos[index].textContent = item.recruit_no;
+				recruit_nos[index].value = item.recruit_no;
 				titles[index].textContent = item.title;
 				careers[index].textContent = item.career;
 				educations[index].textContent = item.education;
 				locations[index].textContent = item.location;
 				ranks[index].textContent = item.rank;
 				pays[index].textContent = item.pay + " 만원";
+				deadline_dates[index].textContent = item.deadline_date;
 			});
 		}
 		recruit();
+		
+		function update(event){
+			const recruit_no = event.target.closest(".recruit-area").querySelector("input[name='recruit_no']");
+			console.log(recruit_no);
+			console.log(recruit_no.value);
+			location.href = "/company/employUpdate?recruit_no=" + recruit_no.value;
+			
+		}
+		
+		
 	</script>
 	<header>
 		<%@ include file="../front/company-header.jsp"%>
 	</header>
-	<h1>기업회원 메인페이지</h1>
+	<h1 id="h1">기업회원 메인페이지</h1>
 	<hr>
+	<h2 id="h2">내가 쓴 채용공고 목록</h2>
 	<main id="main">
 		<div class="recruit-area">
 			<div class="recruit-left">
@@ -145,8 +180,9 @@
 					<p class="recruit_career">요구 경력</p>
 					<p class="recruit_education">요구 학력</p>
 					<p class="recruit_location">근무 위치</p>
-					<p class="rank">직급</p>
-					<p class="pay">연봉</p>
+					<p class="recruit_rank">직급</p>
+					<p class="recruit_pay">연봉</p>
+					<p class="recruit_deadline_date">마감기한</p>
 				</div>
 			</div>
 			<div class="recruit-right-right">

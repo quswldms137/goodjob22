@@ -20,6 +20,13 @@ main #container {
 	border: 1px solid #ccc;
 	box-sizing:border-box;
 }
+
+.company-nav ul li:nth-child(3) a{
+	border-bottom:5px solid #FB8500;
+	padding-bottom:10px;
+}
+
+
 </style>
 </head>
 <body>

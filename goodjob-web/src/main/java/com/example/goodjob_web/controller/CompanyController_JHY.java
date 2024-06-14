@@ -1,7 +1,9 @@
 package com.example.goodjob_web.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/company")
@@ -25,6 +27,15 @@ public class CompanyController_JHY { // view
 	
 	@RequestMapping("/employWrite")
 	public String employWrite() {
+		return "company/employWrite";
+	}
+	
+	
+	@RequestMapping("/employUpdate")
+	public String employUpdate(@RequestParam("recruit_no") String recruit_no, Model model) {
+		
+		model.addAttribute("recruit_no", recruit_no);
+		
 		return "company/employWrite";
 	}
 	
