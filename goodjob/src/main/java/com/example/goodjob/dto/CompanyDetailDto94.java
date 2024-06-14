@@ -9,21 +9,23 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompanyDetailDto {
+public class CompanyDetailDto94 {
 
 	private Long com_detail_no;
 	private Long com_no;
 	private String introdiction;
 	private String img_url;
 	private String pension;
-	private String compensation;
-	private String facilities;
-	private String policy;
-	private String convenience;
 	private String sectors;
 	private String history;
 	private String ideal_talent;
 	private Date foundation;
 	private int amount;
 	private String url;
+	
+	private String com_type; 
+	private String com_ceo; 
+	private String com_addr; 
+	
+	
 }
