@@ -29,24 +29,30 @@ ul {
 
 header {
 	width: 100%;
-	height: 60px;
 	margin: 0 auto;
 	background: #FDFDFD;
-	height: 60px;
 	border-bottom: 1px solid #eee;
 }
 
 #head {
-	max-width: 1250px;
+	padding: 15px 0 10px;
+	max-width: 1100px;
 	height: 100%;
 	margin: 0 auto;
+}
+
+.head-bottom {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
+#head .logo{
+	text-align:center;
+	padding-bottom:15px;
+}
 #head .logo img {
-	width: 141px;
+	width: 150px;
 }
 
 #head .nav ul {
@@ -111,33 +117,35 @@ header {
 			<div class="logo">
 				<a href="/"><img src="/resource/img/logo.png"></a>
 			</div>
-			<div class="nav">
-				<ul>
-					<li><a href="#">채용정보</a></li>
-					<li><a href="#">기업정보</a></li>
-					<li><a href="#">커뮤니티</a></li>
-					<li><a href="#">스킬매칭</a></li>
-					<li><a href="#">이벤트</a></li>
-					<li><a href="#">공지사항</a></li>
-				</ul>
-			</div>
-			<div class="search-bar-area">
-				<div class="search-bar">
-					<form action="" method="">
-						<input type="text" name="head-search" id="head-search"> <label
-							for="search-submit"> <input type="submit" value=""
-							id="search-submit"> <img
-							src="/resource/img/search-icon.png">
-						</label>
-					</form>
+			<div class="head-bottom">
+				<div class="nav">
+					<ul>
+						<li><a href="#">채용정보</a></li>
+						<li><a href="#">기업정보</a></li>
+						<li><a href="#">커뮤니티</a></li>
+						<li><a href="#">스킬매칭</a></li>
+						<li><a href="#">이벤트</a></li>
+						<li><a href="#">공지사항</a></li>
+					</ul>
 				</div>
-			</div>
-			<div class="user-area">
-				<ul>
-					<li><a href="#">로그인</a></li>
-					<li><a href="#">회원가입</a></li>
-					<li><a href="#">기업서비스</a></li>
-				</ul>
+				<div class="search-bar-area">
+					<div class="search-bar">
+						<form action="" method="">
+							<input type="text" name="head-search" id="head-search"> <label
+								for="search-submit"> <input type="submit" value=""
+								id="search-submit"> <img
+								src="/resource/img/search-icon.png">
+							</label>
+						</form>
+					</div>
+				</div>
+				<div class="user-area">
+					<ul>
+						<li><a href="#">로그인</a></li>
+						<li><a href="#">회원가입</a></li>
+						<li><a href="#">기업서비스</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</header>
