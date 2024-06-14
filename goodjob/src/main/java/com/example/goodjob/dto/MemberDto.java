@@ -1,11 +1,5 @@
 package com.example.goodjob.dto;
 
-import java.time.LocalDate;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -19,8 +13,8 @@ public class MemberDto {
 	private String mem_tel;
 	private String mem_email;
 	private String mem_gender;
+
 	private LocalDate make_date;
 	private String mem_birth;
 	private String mem_addr;
-	
 }
