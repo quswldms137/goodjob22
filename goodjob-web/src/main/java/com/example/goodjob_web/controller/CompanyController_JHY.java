@@ -23,8 +23,10 @@ public class CompanyController_JHY { // view
 		return "company/employManage";
 	}
 	
-	
-	
+	@RequestMapping("/employWrite")
+	public String employWrite() {
+		return "company/employWrite";
+	}
 	
 	
 	
