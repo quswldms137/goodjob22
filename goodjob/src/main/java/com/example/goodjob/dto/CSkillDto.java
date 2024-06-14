@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ScrapRecruitDto {
+@NoArgsConstructor
+public class CSkillDto {
 
-	private Long s_recruit_no;
-	private Long mem_no;
+	private Long c_skill_no;
 	private Long recruit_no;
-
+	private String skill_name;
 }

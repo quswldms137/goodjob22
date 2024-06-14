@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ScrapRecruitDto {
+public class MemInterestDto {
 
-	private Long s_recruit_no;
+	private Long mem_interest_no;
 	private Long mem_no;
-	private Long recruit_no;
-
+	private Long com_no;
 }

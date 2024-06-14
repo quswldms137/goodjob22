@@ -19,8 +19,8 @@ public class MemberDto {
 	private String mem_tel;
 	private String mem_email;
 	private String mem_gender;
+
 	private LocalDate make_date;
 	private String mem_birth;
 	private String mem_addr;
-	
 }
