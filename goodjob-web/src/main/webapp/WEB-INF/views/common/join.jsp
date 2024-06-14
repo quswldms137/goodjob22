@@ -7,8 +7,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
 <style>
 main {
 	width: 1100px;
@@ -28,7 +26,7 @@ main {
 		<button onclick="showForm('member')">개인회원</button>
 		<button onclick="showForm('company')">기업회원</button>
 	</div>
-	<div id="memberForm" style="display:none;">
+	<div id="memberForm" style="display:block;">
 		<form name="frm_memJoin">
 			<input type="text" name="username" placeholder="아이디"><br>
 			<input type="password" name="password" placeholder="비밀번호"><br>
@@ -45,9 +43,9 @@ main {
 	</div>
 	<div id="companyForm" style="display:none;">
 		<form name="frm_comJoin">
-			<input type="text" name="username1" placeholder="아이디1"><br>
-			<input type="password" name="password1" placeholder="비밀번호1"><br>
-			<input type="text" name="role1" value="ROLE_COMPANY"><br>
+			<input type="text" name="username" placeholder="아이디1"><br>
+			<input type="password" name="password" placeholder="비밀번호1"><br>
+			<input type="hidden" name="role" value="ROLE_COMPANY"><br>
 			<input type="text" name="com_name" placeholder="기업명"><br>
 			<input type="text" name="com_type"  placeholder="기업형태"><br>
 			<input type="text" name="com_ceo"  placeholder="대표자명"><br>
@@ -58,7 +56,6 @@ main {
 			<input type="submit" value="가입하기" onclick="companySubmit(event)">
 		</form>
 	</div>
-	<div id="response">response</div>
 	<script>
 		function showForm(type){
 			var memberForm = document.getElementById('memberForm');
@@ -102,7 +99,12 @@ main {
 			const sendData = JSON.stringify(member);
 			const xhttp = new XMLHttpRequest();
 			xhttp.onload = function(){
-				document.getElementById("response").innerHTML = this.responseText;
+				if(this.status === 200){
+					alert(this.responseText);
+					window.location.href="http://localhost:9991/common99";
+				} else{
+					alert(this.responseText);
+				}
 			}
 			xhttp.open("POST", "http://localhost:8888/api/join/member");
 			xhttp.setRequestHeader("Content-type", "application/json");
@@ -112,9 +114,9 @@ main {
 		function companySubmit(event){
 			event.preventDefault();
 			
-			const username1 = document.querySelector("Input[name='username1']");
-			const password1 = document.querySelector("Input[name='password1']");
-			const role1 = document.querySelector("Input[name='role1']");
+			const username1 = document.querySelector("Input[name='username']");
+			const password1 = document.querySelector("Input[name='password']");
+			const role1 = document.querySelector("Input[name='role']");
 			const com_name1 = document.querySelector("Input[name='com_name']");
 			const com_type1 = document.querySelector("Input[name='com_type']");
 			const com_ceo1 = document.querySelector("Input[name='com_ceo']");
@@ -139,7 +141,12 @@ main {
 			const sendData = JSON.stringify(company);
 			const xhttp = new XMLHttpRequest();
 			xhttp.onload = function(){
-				document.getElementById("response").innerHTML = this.responseText;
+				if(this.status === 200){
+					alert(this.responseText);
+					window.location.href="http://localhost:9991/common99";
+				} else{
+					alert("다시 가입을 시도해주시기 바랍니다.");
+				}
 			}
 			xhttp.open("POST", "http://localhost:8888/api/join/company");
 			xhttp.setRequestHeader("Content-type", "application/json");

@@ -3,6 +3,7 @@ package com.example.goodjob.controller;
 import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +31,7 @@ public class JoinController_99 {
 	private CompanyService99 companyService;
 	
 	@PostMapping("/member")
-	public String joinMember(@RequestBody MemberDto memberDto, HttpSession session) {
+	public ResponseEntity<String> joinMember(@RequestBody MemberDto memberDto, HttpSession session) {
 		System.out.println("memberDto : " + memberDto);
 		
 		//username이 Manager라면 관리자 권한 부여
@@ -45,13 +46,14 @@ public class JoinController_99 {
 		int result2 = memberService.regMember(memberDto);
 		
 		if(result == 1 && result2 == 1) {
-			return "가입완료";
+			return ResponseEntity.ok("성공적으로 가입이 완료되었습니다~! \n취뽀!!");
+		} else {
+			return ResponseEntity.badRequest().body("가입실패");
 		}
-		return "가입실패";
 	}
 	
 	@PostMapping("/company")
-	public String joinCompany(@RequestBody CompanyDto companyDto) {
+	public ResponseEntity<String> joinCompany(@RequestBody CompanyDto companyDto) {
 		System.out.println("companyDto : " + companyDto);
 		
 		int result = userService.regUser(companyDto);
@@ -59,8 +61,9 @@ public class JoinController_99 {
 		int result2 = companyService.regCompany(companyDto);
 		
 		if(result == 1 && result2 == 1) {
-			return "가입완료";
+			return ResponseEntity.ok("성공적으로 가입이 완료되었습니다.");
+		} else {
+			return ResponseEntity.badRequest().body("가입실패");
 		}
-		return "가입실패";
 	}
 }

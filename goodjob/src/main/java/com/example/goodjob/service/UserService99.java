@@ -13,7 +13,7 @@ public class UserService99 {
 
 	@Autowired
 	private IUserDao99 iUserDao99;
-	
+	//기업회원가입
 	public int regUser(CompanyDto companyDto) {
 		UserDto user = new UserDto();
 		user.setUsername(companyDto.getUsername());
@@ -23,7 +23,7 @@ public class UserService99 {
 		
 		return result;
 	}
-	
+	//개인, 관리자 회원가입
 	public int regUser(MemberDto memberDto) {
 		UserDto user = new UserDto();
 		user.setUsername(memberDto.getUsername());
@@ -32,6 +32,19 @@ public class UserService99 {
 		int result = iUserDao99.regUser(user);
 		
 		return result;
+	}
+	
+	//로그인
+	public int userLogin(UserDto userDto) {
+		
+		int result = iUserDao99.userLogin(userDto);
+		return result;
+	}
+	
+	//로그인한 회원 role
+	public String getRole(UserDto userDto) {
+		String role = iUserDao99.getRole(userDto);
+		return role;
 	}
 	
 	

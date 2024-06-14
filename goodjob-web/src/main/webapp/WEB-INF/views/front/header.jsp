@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -140,11 +141,11 @@ header {
 					</div>
 				</div>
 				<div class="user-area">
-					<ul>
-						<li><a href="#">로그인</a></li>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">기업서비스</a></li>
-					</ul>
+				<ul>
+					<li><a href="/common99/login">로그인</a></li>
+					<li><a href="/common99/join">회원가입</a></li>
+					<li><a href="#">기업서비스</a></li>
+				</ul>
 				</div>
 			</div>
 		</div>
