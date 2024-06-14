@@ -20,7 +20,10 @@ public class MemberController {
 	@GetMapping("/info")
 	public String info(HttpSession session) {
 		
-		session.setAttribute("username", "hgd");
+		MemberDto memberDto = new MemberDto();
+		memberDto.setUsername("hgd");
+		
+		session.setAttribute("memberDto", memberDto);
 		
 		return "updateMemberInfo";
 	}

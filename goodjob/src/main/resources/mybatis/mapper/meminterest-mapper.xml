@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.goodjob.dao.IMemInterestDao">
+	<insert id="createSubscribe">
+		INSERT INTO mem_interest VALUES(NULL, #{memInterestDto.mem_no}, #{memInterestDto.com_no});
+	</insert>
+	<select id="getCom_no">
+		SELECT com_no FROM mem_interest WHERE mem_no = #{mem_no};
+	</select>
+	<select id="getSubscribe">
+		SELECT COUNT(mem_interest_no) FROM mem_interest WHERE mem_no = #{memInterestDto.mem_no} AND com_no = #{memInterestDto.com_no};
+	</select>
+	<delete id="removeSubscribe">
+		DELETE FROM mem_interest WHERE mem_no = #{memInterestDto.mem_no} AND com_no = #{memInterestDto.com_no};
+	</delete>
+</mapper>  

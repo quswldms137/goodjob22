@@ -7,6 +7,9 @@
 	<select id="findByUsername" resultType="com.example.goodjob.dto.MemberDto">
 		SELECT * FROM member WHERE username = #{username};
 	</select>
+	<select id="getMem_no">
+		SELECT mem_no FROM member WHERE username = #{username};
+	</select>
 	<update id="update">
 		UPDATE member SET mem_name = #{memberDto.mem_name}, mem_tel = #{memberDto.mem_tel}, mem_email = #{memberDto.mem_email}, 
 		mem_gender = #{memberDto.mem_gender}, mem_birth = #{memberDto.mem_birth}, mem_addr = #{memberDto.mem_addr} WHERE username = #{memberDto.username};

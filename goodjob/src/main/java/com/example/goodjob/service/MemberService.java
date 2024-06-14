@@ -48,5 +48,10 @@ public class MemberService {
 		}
 	}
 	
+	public Long getMem_no(String username) {
+		
+		return iMemberDao.getMem_no(username);
+	}
+	
 	
 }

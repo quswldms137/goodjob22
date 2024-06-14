@@ -50,6 +50,8 @@ public class MemberController {
 		
 		String result = memberService.deleteInformation(mem_no, username);
 		
+		System.out.println("result : " + result);
+		
 		return result;
 	}
 	
