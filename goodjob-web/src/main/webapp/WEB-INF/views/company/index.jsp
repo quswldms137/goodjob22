@@ -6,10 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>기업회원 메인페이지</title>
+<style>
+
+
+
+.company-nav ul li:nth-child(1) a{
+	border-bottom:5px solid #FB8500;
+	padding-bottom:10px;
+}
+</style>
 </head>
 <body>
 <header>
-<%@ include file="../front/header.jsp" %>
+<%@ include file="../front/company-header.jsp" %>
 </header>
 <h1>기업회원 메인페이지</h1>
 <hr>
