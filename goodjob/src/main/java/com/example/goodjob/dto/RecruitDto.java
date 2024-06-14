@@ -16,7 +16,7 @@ public class RecruitDto {
 	private String username;
 	private String career;
 	private String education;
-	private String Field;
+	private String field;
 	private int pay;
 	private String location;
 	private String working_time;
@@ -29,4 +29,5 @@ public class RecruitDto {
 	private LocalDate reg_date;
 	private LocalDate deadline_date;
 	private String p_number;
+	private String recruit_intro;
 }
