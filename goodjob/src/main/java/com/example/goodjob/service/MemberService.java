@@ -27,8 +27,13 @@ public class MemberService {
 	public MemberDto saveInformation(MemberDto memberDto) {
 		
 		iMemberDao.update(memberDto);
+		iUserDao.update(memberDto);
 		
-		return iMemberDao.findByUsername(memberDto.getUsername());
+		MemberDto dto = iMemberDao.findByUsername(memberDto.getUsername());
+		UserDto userDto = iUserDao.findByUsername(memberDto.getUsername());
+		dto.setPassword(userDto.getPassword());
+		
+		return dto;
 	}
 	
 	public String deleteInformation(Long mem_no, String username) {
@@ -41,6 +46,7 @@ public class MemberService {
 		}else {
 			return "회원탈퇴 실패";
 		}
-		
 	}
+	
+	
 }

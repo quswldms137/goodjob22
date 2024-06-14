@@ -22,6 +22,9 @@ main #container {
 	box-sizing: border-box;
 }
 #container h1{
+	font-size: 1.3rem;
+	margin-top: 20px;
+	margin-bottom : 50px;
 	text-align: center;
 }
 form[name=frm]{
@@ -32,6 +35,31 @@ form[name=frm]{
 }
 form[name=frm] input{
 	padding: 10px;
+	border: 1px solid #e0e0e0;
+	color: #ababab;
+}
+
+form[name=frm] input[value=수정하기]{
+	margin: 10px 0;
+	background: #FB8500;
+	border-radius: 3px;
+	color: white;
+}
+
+form[name=frm] input[value=회원탈퇴]{
+	
+
+}
+
+input[name=username], input[name=mem_name]{
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+input[type=email], input[name=mem_addr]{
+	margin-bottom: 10px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 </style>
 </head>
@@ -46,17 +74,23 @@ form[name=frm] input{
 		<div id="container">
 			<h1>회원정보 수정</h1>
 			<form name="frm">
-				<input type="hidden" name="mem_no"> <input type="text"
-					name="username" placeholder="아이디"> <input type="text"
+				<input type="hidden" name="mem_no"> 
+					<input type="text" name="username" placeholder="아이디"> 
+					<input type="password" name="password" placeholder="비밀번호">
+					<input type="email" name="mem_email" placeholder="이메일"> 
+					<div id="usernameResult"></div>
+					<div id="passwordResult"></div>
+					<div id="emailResult"></div>
+
+					<input type="text"
 					name="mem_name" placeholder="이름"> <input type="tel"
-					name="mem_tel" placeholder="010-1234-5678"> <input
-					type="email" name="mem_email" placeholder="이메일"> <input
+					name="mem_tel" placeholder="010-1234-5678"> 
+					<input
 					type="text" name="mem_gender" placeholder="성별"> <input
 					type="text" name="mem_birth" placeholder="생년월일"> <input
 					type="text" name="mem_addr" placeholder="주소"> <input
 					type="submit" value="수정하기" onclick="saveInfo(event)"> <input
 					type="submit" value="회원탈퇴" onclick="deleteInfo()">
-				<div id="demo"></div>
 			</form>
 		</div>
 	</main>
@@ -76,6 +110,7 @@ form[name=frm] input{
 				success : function(response) {
 					$("input[name=mem_no]").val(response.mem_no);
 					$("input[name=username]").val(response.username);
+					$("input[name=password]").val(response.password);
 					$("input[name=mem_name]").val(response.mem_name);
 					$("input[name=mem_tel]").val(response.mem_tel);
 					$("input[name=mem_email]").val(response.mem_email);
@@ -87,6 +122,30 @@ form[name=frm] input{
 					console.log(error);
 				}
 			});
+			
+			// 아이디 중복 체크(유효성검사)
+			$("input[name=username]").on({
+				blur : function(){
+					const username = $("input[name=username]");
+					
+					$.ajax({
+						url : "http://localhost:8888/api/member/id/" + username.val(),
+						method : "GET",
+						dataType : "text",
+						success : function(response){
+							if(response !== "사용 가능한 아이디입니다."){
+								$("#usernameResult").css("color", "red").html(response);
+							}else{
+								$("#usernameResult").css("color", "red").html("");
+							}
+						},
+						error : function(xhr, status, error){
+							console.log(error);
+						}
+					});
+				}
+			});
+			
 		});
 
 		function saveInfo(event) {
@@ -99,6 +158,7 @@ form[name=frm] input{
 				const response = JSON.parse(this.responseText);
 				$("input[name=mem_no]").val(response.mem_no);
 				$("input[name=username]").val(response.username);
+				$("input[name=password]").val(response.password);
 				$("input[name=mem_name]").val(response.mem_name);
 				$("input[name=mem_tel]").val(response.mem_tel);
 				$("input[name=mem_email]").val(response.mem_email);
@@ -112,6 +172,7 @@ form[name=frm] input{
 			const member = JSON.stringify({
 				mem_no : $("input[name=mem_no]").val(),
 				username : $("input[name=username]").val(),
+				password : $("input[name=password]").val(),
 				mem_name : $("input[name=mem_name]").val(),
 				mem_tel : $("input[name=mem_tel]").val(),
 				mem_email : $("input[name=mem_email]").val(),

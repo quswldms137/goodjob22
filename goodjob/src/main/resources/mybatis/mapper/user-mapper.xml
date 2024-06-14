@@ -7,6 +7,12 @@
 	<select id="findByUsername" resultType="com.example.goodjob.dto.UserDto">
 		SELECT * FROM user WHERE username = #{username};
 	</select>
+	<select id="checkId">
+		SELECT COUNT(username) FROM user WHERE username = #{username};
+	</select>
+	<update id="update">
+		UPDATE user SET username = #{memberDto.username}, password = #{memberDto.password} WHERE username = #{memberDto.username};
+	</update>
 	<delete id="deleteUser">
 		DELETE FROM user WHERE username = #{username};
 	</delete>
