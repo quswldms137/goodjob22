@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.goodjob.dao.ICompanyDao_JYC;
 import com.example.goodjob.dao.ICompanyDetailDao_JYC;
 import com.example.goodjob.dao.IMemInterestDao;
-import com.example.goodjob.dto.CompanyDetailDto;
 import com.example.goodjob.dto.CompanyDto_JYC;
 import com.example.goodjob.dto.MemInterestDto;
 import com.example.goodjob.dto.ScrapRecruitDto;
@@ -37,7 +36,7 @@ public class MemInterestService {
 
 			list.forEach(e -> {
 				CompanyDto_JYC companyDto = iCompanyDao.findByCom_no(e);
-				CompanyDetailDto companyDetailDto = iCompanyDetailDao.findByCom_no(e);
+				CompanyDto_JYC companyDetailDto = iCompanyDetailDao.findByCom_no(e);
 
 				companyDto.setCom_detail_no(companyDetailDto.getCom_detail_no());
 				companyDto.setIntrodiction(companyDetailDto.getIntrodiction());
