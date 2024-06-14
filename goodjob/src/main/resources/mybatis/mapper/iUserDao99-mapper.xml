@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.goodjob.dao.IUserDao99">
+	<insert id="regUser2">
+		INSERT INTO user VALUES(#{userDto.username}, #{userDto.password}, #{userDto.role});
+	</insert>
+	<insert id="regUser">
+		INSERT INTO user (username, password, role) VALUES(#{username}, #{password}, #{role});
+	</insert>
+</mapper>
