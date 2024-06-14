@@ -61,6 +61,27 @@ input[type=email], input[name=mem_addr]{
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
+#gender_container{
+	width: 300px;
+	height: 37.78px;
+	border : 1px solid #e0e0e0;
+	box-sizing : border-box; 
+}
+
+#gender_box{
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#man, #woman{
+	border: 1px solid #e0e0e0;
+	padding: 5px 20px;
+	text-align: center;
+}
+#man:visited , #woman:visited {
+	background: blue;
+}
 </style>
 </head>
 <body>
@@ -85,9 +106,14 @@ input[type=email], input[name=mem_addr]{
 					<input type="text"
 					name="mem_name" placeholder="이름"> <input type="tel"
 					name="mem_tel" placeholder="010-1234-5678"> 
+					<div id="gender_container">
+						<div id="gender_box">
+							<a id="man" href="#">남자</a>
+							<a id="woman" href="#">여자</a>
+						</div>
+					</div>
+					<input type="text" name="mem_birth" placeholder="생년월일"> 
 					<input
-					type="text" name="mem_gender" placeholder="성별"> <input
-					type="text" name="mem_birth" placeholder="생년월일"> <input
 					type="text" name="mem_addr" placeholder="주소"> <input
 					type="submit" value="수정하기" onclick="saveInfo(event)"> <input
 					type="submit" value="회원탈퇴" onclick="deleteInfo()">
@@ -114,7 +140,18 @@ input[type=email], input[name=mem_addr]{
 					$("input[name=mem_name]").val(response.mem_name);
 					$("input[name=mem_tel]").val(response.mem_tel);
 					$("input[name=mem_email]").val(response.mem_email);
-					$("input[name=mem_gender]").val(response.mem_gender);
+					if(response.mem_gender === "M"){
+						$("#man").css("background", "red");
+						$("#man").css("color", "white");
+						$("#woman").css("background", "white");
+						$("#woman").css("color", "black");
+					}else {
+						$("#woman").css("background", "red");
+						$("#woman").css("color", "white");
+						$("#man").css("background", "white");
+						$("#man").css("color", "black");
+					}
+					
 					$("input[name=mem_birth]").val(response.mem_birth);
 					$("input[name=mem_addr]").val(response.mem_addr);
 				},
@@ -146,14 +183,41 @@ input[type=email], input[name=mem_addr]{
 				}
 			});
 			
+			$("#man").on({
+				click : function(){
+					$("#man").css("background", "red");
+					$("#man").css("color", "white");
+					$("#woman").css("background", "white");
+					$("#woman").css("color", "black");
+				}
+			});
+			
+			$("#woman").on({
+				click : function(){
+					$("#woman").css("background", "red");
+					$("#woman").css("color", "white");
+					$("#man").css("background", "white");
+					$("#man").css("color", "black");
+				}
+			});
 		});
 
 		function saveInfo(event) {
 			event.preventdefault;
-
+			let gender = "null";
+			const man = document.querySelector("#man");
+			const woman = document.querySelector("#woman");
+			
+			if(man.style.background === "red"){
+				gender = "M";
+			}else{
+				gender = "F";
+			}
+			
+			alert("gender : " + gender);
+			
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function() {
-				alert("수정이 완료됬습니다.");
 				
 				const response = JSON.parse(this.responseText);
 				$("input[name=mem_no]").val(response.mem_no);
@@ -161,8 +225,18 @@ input[type=email], input[name=mem_addr]{
 				$("input[name=password]").val(response.password);
 				$("input[name=mem_name]").val(response.mem_name);
 				$("input[name=mem_tel]").val(response.mem_tel);
+				if(response.mem_gender === "M"){
+					$("#man").css("background", "red");
+					$("#man").css("color", "white");
+					$("#woman").css("background", "white");
+					$("#woman").css("color", "black");
+				}else {
+					$("#woman").css("background", "red");
+					$("#woman").css("color", "white");
+					$("#man").css("background", "white");
+					$("#man").css("color", "black");
+				}
 				$("input[name=mem_email]").val(response.mem_email);
-				$("input[name=mem_gender]").val(response.mem_gender);
 				$("input[name=mem_birth]").val(response.mem_birth);
 				$("input[name=mem_addr]").val(response.mem_addr);
 			}
@@ -176,7 +250,7 @@ input[type=email], input[name=mem_addr]{
 				mem_name : $("input[name=mem_name]").val(),
 				mem_tel : $("input[name=mem_tel]").val(),
 				mem_email : $("input[name=mem_email]").val(),
-				mem_gender : $("input[name=mem_gender]").val(),
+				mem_gender : gender,
 				mem_birth : $("input[name=mem_birth]").val(),
 				mem_addr : $("input[name=mem_addr]").val()
 
@@ -190,7 +264,6 @@ input[type=email], input[name=mem_addr]{
 			const username = $("input[name=username]");
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function(){
-				alert(this.responseText);
 				if(this.responseText === "회원탈퇴 성공"){
 					location.href="";
 				}
@@ -198,6 +271,9 @@ input[type=email], input[name=mem_addr]{
 			xhr.open("DELETE", "http://localhost:8888/api/member/info/" + mem_no.val() + "/" + username.val(), true);
 			xhr.send();
 		}
+		
+		
+		
 	</script>
 </body>
 </html>
