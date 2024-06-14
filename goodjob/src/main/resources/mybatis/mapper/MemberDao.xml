@@ -8,6 +8,10 @@
 		SELECT * FROM member WHERE username = #{username};
 	</select>
 	<update id="update">
-		UPDATE member SET(NULL, #{memberDto.username}, #{memberDto.mem_name}, #{memberDto.mem_tel}, #{memberDto.mem_email}, #{memberDto.mem_gender}, #{memberDto.mem_birth}, #{memberDto.mem_addr});
+		UPDATE member SET mem_name = #{memberDto.mem_name}, mem_tel = #{memberDto.mem_tel}, mem_email = #{memberDto.mem_email}, 
+		mem_gender = #{memberDto.mem_gender}, mem_birth = #{memberDto.mem_birth}, mem_addr = #{memberDto.mem_addr} WHERE username = #{memberDto.username};
 	</update>
+	<delete id="deleteInformation">
+		DELETE FROM member WHERE mem_no = #{mem_no};
+	</delete>
 </mapper>  
