@@ -21,5 +21,4 @@ public class ServiceQuestionDto {
 	private String category;
 	private int ch_private;
 	private String answer;
-	private LocalDate answer_date;
 }
