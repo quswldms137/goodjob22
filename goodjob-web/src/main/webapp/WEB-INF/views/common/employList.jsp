@@ -6,30 +6,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>companyList page</title>
+<title>employList page</title>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <style>
 main {
 	width: 1100px;
 	margin: 80px auto;
+	margin-top: 100px;
 	min-height: 700px;
+	border:1px solid #eee;
 }
+#star-container {
+display: flex;
+flex-direction: row; /* 기본값으로 생략 가능 */
+justify-content: space-evenly; /* 요소들 사이에 공간을 고르게 분배 */
+align-items: center; /* 요소들을 세로 중앙 정렬 */
+gap: 10px; /* 요소 간의 간격을 줄이기 위해 gap 사용 */
 
+}
+.star {
+width:150px;
+height:150px;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 20px;
+
+margin-top: 90px;
+margin-left: -100px;
+margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사용 */
+
+}
 .company-info {
     border: 1px solid #eee;
-    width: 1100px;
+    width: 1030px;
     height: auto;
     padding: 10px;
     box-sizing: border-box;
-    margin: 50px auto;
+    margin: 40px 30px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .company-img {
     border: 1px solid #eee;
-    width: 280px;
+    width: 150px;
     height: 130px;
     padding: 15px;
     box-sizing: border-box;
@@ -41,7 +62,7 @@ main {
 }
 
 .company-name {
-    font-size: 30px;
+    font-size: 25px;
     text-align: left;
 }
 
@@ -50,6 +71,11 @@ main {
     padding-top: 10px;
     font-size: 16px;
     color: #666;
+
+}
+#comname{
+	font-size: 18px;
+	margin-bottom:8px;
 }
 
 .interest-button {
@@ -61,20 +87,51 @@ main {
     cursor: pointer;
     margin-right: 20px; /* 추가: 버튼을 왼쪽으로 이동 */
 }
+.doing-button{
+	padding: 10px 10px;
+    font-size: 16px;
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px; /* 추가: 버튼을 왼쪽으로 이동 */
+}
 
-.interest-button:hover {
+.interest-button:hover, .doing-button:hover {
     background-color: #0056b3;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<header>
 		<%@ include file="../front/header.jsp"%>
 	</header>
-
+	<div id="star-container">
+ 		<div class="star">
+ 		
+ 		</div>
+ 		<div class="star">
+ 	
+ 		</div>
+ 		<div class="star">
+ 	
+ 		</div>
+ 		<div class="star">
+ 	
+ 		</div>
+ 		<div class="star">
+ 		
+ 		</div>
+	</div>
+	
 	<main id="main-content">
-		<!-- 기업 정보가 여기에 동적으로 추가됩니다. -->
+		<div class='company-info'>
+			<div class='company-img'>
+				<a href="/companyDetail?com_no=recruit.com_no">
+	            	<img src="" alt="기업사진">  
+	            </a>
+	         </div>   
+	  	</div>
 	</main>
 
 	<footer>
@@ -83,37 +140,42 @@ main {
 
 <script>
 $(document).ready(function() {
-	// 기업정보리스트 
+	// 채용공고리스트 
 	$.ajax({
-		url: "http://localhost:8888/api/company/companyList",
+		url: "http://localhost:8888/api/recruit94/allRecruitList",
 		method: "GET",
 		dataType: "json",
 		success: function(data) {
-			console.log("company list:", data);
+			console.log(data);
 			let mainContent = $("#main-content");
 			mainContent.empty(); // 기존 내용 삭제
 			
 			// 반복문을 통해 데이터 삽입
-			data.forEach(function(company) {
+			data.forEach(function(recruit) {
 				mainContent.append(
 						"<div class='company-info'>" +
 						"<div class='company-img'>" +  
-	            			"<a href='/companyDetail?com_no=" + company.com_no + "'>" +
-	            				"<img src='" + company.img_url + "' alt='기업사진'>" + 
+	            			"<a href='/companyDetail?com_no=" + recruit.com_no + "'>" +
+	            				"<img src='" + recruit.img_url + "' alt='기업사진'>" + 
 	            			"</a>" +
 	        			"</div>" + 
 	        			"<div class='company-details'>" + 
+	        				"<div id='comname'>"+ recruit.com_name + "</div>" +
 	        				"<div class='company-name'>" + 
-	        					"<a href='/company94/companyDetail?com_no=" + company.com_no + "'>" +
-	            					company.com_name +
+	        					"<a href='/company94/companyDetail?com_no=" + recruit.com_no + "'>" +
+	        					recruit.title +
 	        					"</a>" +
 	        				"</div>" +
 	        				"<p>" + 
-	        					company.sectors + " | " +
-	        					company.com_type +
+	        				recruit.sectors + " | " +
+	        				recruit.com_type +
+	        				recruit.career + " | " +
+							recruit.qualification + " | " +
+							recruit.deadline_date + 
 							"</p>" +
 						"</div>" +
-						"<button class='interest-button' data-company-id='" + company.com_no + "'>관심기업 등록</button>" +
+						"<button class='doing-button' data-company-id='" + recruit.com_no + "'>지원하기</button>" +
+						"<button class='interest-button' data-company-id='" + recruit.com_no + "'>관심기업 등록</button>" +
 	        		"</div>"
 				);
 			});
