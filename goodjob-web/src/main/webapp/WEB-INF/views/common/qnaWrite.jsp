@@ -29,45 +29,45 @@ main {
 	<div class="container mt-5">
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	 	<li class="nav-item" role="presentation">
-	   		<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">문의·신고</button>
+	   		<button class="nav-link active" id="home-tab" onclick="show()" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">문의·신고</button>
 	 	</li>
 	 	<li class="nav-item" role="presentation">
-	   		<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">문의·신고 내역</button>
+	   		<button class="nav-link" id="profile-tab" onclick="getQnaList()" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">문의·신고 내역</button>
 	 	</li>
 	</ul>
-
-<div class="tab-content">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <p>문의·신고 관련 내용이 여기에 표시됩니다.</p>
-  </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <p>문의·신고 내역 관련 내용이 여기에 표시됩니다.</p>
-  </div>
-</div>
-        <h3>문의·신고</h3>
-        <form name="frm-qnaForm">
-            <div class="form-group">
-                <label for="category">문의종류 <span id="blue">(필수)</span></label>
-                <select class="form-control" name="category" required>
-                    <option value="" disabled selected>선택</option>
-                    <option value="서비스 이용문의">서비스 이용문의</option>
-                    <option value="불량정보·오류신고">불량정보·오류신고</option>
-                    <option value="서비스 제안·칭찬">서비스 제안·칭찬</option>
-                </select>
-            </div>
-            <div class="mb-3">
-			  <label for="title" class="form-label">제목 <span id="blue">(필수)</span></label>
-			  <input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요">
-			</div>
-			<div class="mb-3">
-			  <label for="content" class="form-label">내용 <span id="blue">(필수)</span></label>
-			  <textarea class="form-control" name="content" rows="3" placeholder="내용을 입력해주세요"></textarea>
-			</div>
-			<input type="hidden" name="mem_no" value="1">
-            <button type="submit" class="btn btn-primary btn-lg" onclick="submitQuestion(event)">문의하기</button>
-            <button type="reset" class="btn btn-primary btn-lg">취소</button>
-        </form>
-    </div>
+	<div id="qnaWrite" style="display: block;">
+       <form name="frm-qnaForm">
+           <div class="form-group">
+               <label for="category">문의종류 <span id="blue">(필수)</span></label>
+               <select class="form-control" name="category" required>
+                   <option value="" disabled selected>선택</option>
+                   <option value="서비스 이용문의">서비스 이용문의</option>
+                   <option value="불량정보·오류신고">불량정보·오류신고</option>
+                   <option value="서비스 제안·칭찬">서비스 제안·칭찬</option>
+               </select>
+           </div>
+           <div class="mb-3">
+		  <label for="title" class="form-label">제목 <span id="blue">(필수)</span></label>
+		  <input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요">
+		</div>
+		<div class="mb-3">
+		  <label for="content" class="form-label">내용 <span id="blue">(필수)</span></label>
+		  <textarea class="form-control" name="content" rows="3" placeholder="내용을 입력해주세요"></textarea>
+		</div>
+           <button type="submit" class="btn btn-primary btn-lg" onclick="submitQuestion(event)">문의하기</button>
+           <button type="reset" class="btn btn-primary btn-lg">취소</button>
+       </form>
+	</div>
+	<!-- 작성폼 끝 -->
+	<div class="tab-content" id="qnaListContainer" style="display: none;">
+	
+	 <!-- 반복구간 -->
+	 <div id="qnaList"></div>
+		 
+	</div>
+	
+        
+    </div><!-- 컨테이너 종료 -->
 	
 	</main>
 	<footer>
@@ -75,25 +75,38 @@ main {
 	</footer>
 	
 	<script>
+	function show(){
+		var writeForm = document.getElementById('qnaWrite');
+		var qnaList = document.getElementById('qnaListContainer');
+		var homeTab = document.getElementById('home-tab');
+		var profileTab = document.getElementById('profile-tab');
+		
+		writeForm.style.display = 'block';
+		qnaList.style.display = 'none';
+		homeTab.classList.add("active");
+		profileTab.classList.remove("active");
+		homeTab.setAttribute('aria-selected', 'true');
+		profileTab.setAttribute('aria-selected', 'false');
+		
+	}
+	
 	function submitQuestion(event){
 		event.preventDefault();
 		alert("실행");
 		const category1 = document.querySelector("select[name='category']");
 		const title1 = document.querySelector("Input[name='title']");
 		const content1 = document.querySelector("textarea[name='content']");
-		const mem_no1 = document.querySelector("Input[name='mem_no']");
-
 		
 		const qna = {
 				category : category1.value,
 				title : title1.value,
-				content : content1.value,
-				mem_no : mem_no1.value
+				content : content1.value
 		}
 		console.log("qna"+qna);
 		
 		const sendData = JSON.stringify(qna);
 		console.log("sendData"+sendData);
+		
 		const xhttp = new XMLHttpRequest();
 		xhttp.onload = function(){
 			if(this.status === 200){
@@ -105,9 +118,65 @@ main {
 		};
 		xhttp.open("POST", "http://localhost:8888/api/qna-99");
 		xhttp.setRequestHeader("Content-type", "application/json");
+		
+		const username = localStorage.getItem("username");
+    	const role = localStorage.getItem("role");
+
+    	xhttp.setRequestHeader("username", username);
+		xhttp.setRequestHeader("role", role);
+		
 		xhttp.send(sendData);
 		
 	}
+	
+	function getQnaList(){
+		const xhttp = new XMLHttpRequest();
+		
+		var writeForm = document.getElementById('qnaWrite');
+		var qnaList = document.getElementById('qnaListContainer');
+		var homeTab = document.getElementById('home-tab');
+		var profileTab = document.getElementById('profile-tab');
+		
+		writeForm.style.display = 'none';
+		qnaList.style.display = 'block';
+		homeTab.classList.remove("active");
+		profileTab.classList.add("active");
+		homeTab.setAttribute('aria-selected', 'false');
+		profileTab.setAttribute('aria-selected', 'true');
+		
+		xhttp.onload = function(){
+			if(this.readyState == 4 && this.status == 200){
+				const data = JSON.parse(this.responseText);
+				
+				let table = '<table><tr><th>번호</th><th>카테고리</th><th>제목</th><th>작성일자</th></tr>';
+				
+				for(let i = 0 ; i < data.length ; i++){
+					table += '<tr>';
+					table += '<td>' + (i+1) + '</td>';
+					table += '<td>' + data[i].category + '</td>';
+					table += '<td>' + data[i].title + '</td>';
+					table += '<td>' + data[i].reg_date + '</td>';
+					table += '</tr>';
+				}
+				table += '</table>';
+				
+				document.getElementById("qnaList").innerHTML = table;
+			} else if (this.readyState == 4 && this.status != 200){
+				alert("목록을 불러올 수 없습니다. 다시 시도해주세요.");
+			}
+		}
+		
+		const username = localStorage.getItem("username");
+    	const role = localStorage.getItem("role");
+    	console.log(username);
+    	console.log(role);
+		xhttp.open("GET", "http://localhost:8888/api/qna-99");
+		xhttp.setRequestHeader("username", username);
+		xhttp.setRequestHeader("role", role);
+		xhttp.send();
+		
+	}
+	
 	</script>
 </body>
 </html>
