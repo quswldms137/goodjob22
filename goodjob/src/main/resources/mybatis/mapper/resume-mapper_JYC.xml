@@ -7,4 +7,7 @@
 	<select id="findByMem_no" resultType="com.example.goodjob.dto.ResumeDto">
 		SELECT * FROM resume WHERE mem_no = #{mem_no};
 	</select>
+	<select id="getResume_no">
+		SELECT resume_no FROM resume WHERE mem_no = #{mem_no};
+	</select>
 </mapper>  

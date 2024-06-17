@@ -94,7 +94,7 @@ main #container {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			const username = "hgd"; 
+			const username = "${memberDto.username}"; 
 			$.ajax({
 				url : "http://localhost:8888/api/qna/" + username,
 				method : "GET",

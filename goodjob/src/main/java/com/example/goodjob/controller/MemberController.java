@@ -1,5 +1,9 @@
 package com.example.goodjob.controller;
 
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dto.MemberDto;
+import com.example.goodjob.dto.RecruitDto_JYC;
 import com.example.goodjob.dto.UserDto;
 import com.example.goodjob.service.MemberService;
+import com.example.goodjob.service.SkillService_JYC;
 import com.example.goodjob.service.UserService;
 
 @CrossOrigin("http://localhost:9991")
@@ -20,12 +26,13 @@ import com.example.goodjob.service.UserService;
 public class MemberController {
 
 	private MemberService memberService;
-	
+	private SkillService_JYC skillService;
 	private UserService userService;
 	
-	public MemberController(MemberService memberService, UserService userService) {
+	public MemberController(MemberService memberService, UserService userService, SkillService_JYC skillService) {
 		this.memberService = memberService;
 		this.userService = userService;
+		this.skillService = skillService;
 	}
 	
 	@GetMapping("/info/{username}")
@@ -61,4 +68,5 @@ public class MemberController {
 		
 		return result;
 	}
+	
 }
