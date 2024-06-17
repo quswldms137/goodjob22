@@ -61,11 +61,14 @@ ul {
 
 #sidebar .sidebar-box2,
 #sidebar .sidebar-box3,
-#sidebar .sidebar-box4,
 #sidebar .sidebar-box5{
 	height:133px;
 	padding-top:30px;
 }
+#sidebar .sidebar-box4{
+	height: 90px;
+}
+
 #sidebar .sidebar-box6{
 	height:110px;
 	padding-top:30px;
@@ -75,24 +78,20 @@ ul {
 <body>
 
 	<div id="sidebar">
-		<div class="sidebar-box sidebar-box1">
-			<h3><a href="#">MY 홈</a></h3>
-		</div>
 		<div class="sidebar-box sidebar-box2">
 			<h3>이력서 관리</h3>
-			<p><a href="#">이력서 등록</a></p>
 			<p><a href="#" class="resumeManage">이력서 현황</a></p>
+			<p><a href="#">이력서 등록</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box3">
 			<h3>입사지원·제안 관리</h3>
 			<p><a href="#">입사지원 현황</a></p>
 			<p><a href="#">받은 포지션 제안</a></p>
 		</div>
-		<!-- <div class="sidebar-box sidebar-box4">
+		<div class="sidebar-box sidebar-box4">
 			<h3>커뮤니티</h3>
 			<p><a href="#">문의 내역</a></p>
-			<p><a href="#">내가 쓴 글/댓글</a></p>
-		</div> -->
+		</div>
 		<div class="sidebar-box sidebar-box5">
 			<h3>스크랩/관심기업</h3>
 			<p><a href="#">스크랩한 공고</a></p>

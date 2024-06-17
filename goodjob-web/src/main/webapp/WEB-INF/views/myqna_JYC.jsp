@@ -67,6 +67,9 @@ main #container {
 .answer{
 	width: 60px;
 }
+.sidebar-box4 p a{
+	color: #FB8500 !important;
+}
 </style>
 </head>
 <body>
@@ -105,8 +108,12 @@ main #container {
 								'<a href="#"> ' +
 						 		'<p><b>' + item.title + '</b></p> ' + 
 								'<p class="content">' + item.content + '</p> ' +
- 								'<p><span class="category"><b>카테고리 : </b>' + item.category + '</span><span><b>작성일 : </b>' + item.reg_date + '</span></p> ' +
-								'</a>';
+ 								'<p><span class="category"><b>카테고리 : </b>' + item.category + '</span><span><b>작성일 : </b>' + item.reg_date + '</span>';
+ 						if(item.ch_private === 0){
+ 							str += '<span><b> 비공개</b></span></p></a>';
+ 						}else{
+ 							str += '<span><b> 공개</b></span></p></a>';
+ 						}
 						if(item.answer === "미답변"){
 							str += '<div class="answer" style="color:red">' + item.answer + '</div> ';
 						}else{

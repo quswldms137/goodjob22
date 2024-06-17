@@ -4,7 +4,7 @@
   
 <mapper namespace="com.example.goodjob.dao.IServiceQuestionDao">
 	<select id="findByMem_no" resultType="com.example.goodjob.dto.ServiceQuestionDto">
-		SELECT * FROM service_question WHERE mem_no = #{mem_no} AND ch_private = 0 ORDER BY reg_date DESC;
+		SELECT * FROM service_question WHERE mem_no = #{mem_no} ORDER BY reg_date DESC;
 	</select>
 	<delete id="deleteQna">
 		DELETE FROM service_question WHERE cs_no = #{cs_no};

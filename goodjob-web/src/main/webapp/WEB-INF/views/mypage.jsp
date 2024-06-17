@@ -88,8 +88,6 @@ main #container {
 		
 		const username = "hgd";
 		
-		
-		
 		$.ajax({
 			url : "http://localhost:8888/api/member/info/" + username,
 			dataType : "json",
