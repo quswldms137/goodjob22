@@ -12,11 +12,9 @@ public class EducationService {
 	@Autowired
 	private EducationDao educationDao;
 	
-	public EducationDto educationWriteService(EducationDto educationDto) {
+	public int educationWriteService(EducationDto educationDto) {
 		
-		EducationDto result = educationDao.educationWrite(educationDto);
-		
-		return result;
+		return educationDao.educationWrite(educationDto);
 		
 	}
 

@@ -12,11 +12,9 @@ public class LicenseService {
 	@Autowired
 	private LicenseDao licenseDao;
 	
-	public LicenseDto licenseWriteService(LicenseDto licenseDto) {
+	public int licenseWriteService(LicenseDto licenseDto) {
 		
-		LicenseDto result = licenseDao.licenseWrite(licenseDto);
-		
-		return result;
+		return licenseDao.licenseWrite(licenseDto);
 		
 	}
 

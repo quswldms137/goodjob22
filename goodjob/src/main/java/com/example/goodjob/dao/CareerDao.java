@@ -7,6 +7,6 @@ import com.example.goodjob.dto.CareerDto;
 @Mapper
 public interface CareerDao {
 	
-	public CareerDto careerWrite(CareerDto careerDto);
+	public int careerWrite(CareerDto careerDto);
 
 }

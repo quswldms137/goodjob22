@@ -1,6 +1,5 @@
 package com.example.goodjob.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ import com.example.goodjob.dto.UserDto;
 import com.example.goodjob.service.MemberService;
 import com.example.goodjob.service.UserService;
 
-@CrossOrigin("http://localhost:9991/")
+@CrossOrigin("http://localhost:9991")
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {

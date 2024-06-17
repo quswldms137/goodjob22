@@ -118,7 +118,6 @@ input[type=button]:hover{
 									   item.location + ', </span><span>' + item.rank + ', </span><span>' + item.pay + '</span></p>' + 
 									   '</a> ' + 
 									   '<div class="deadline_date"><span>' + item.deadline_date + '</span></div> ' +
-									   
 									   '<input type="button" value="지원하기" onclick="apply()">' + 
 									   '<a href="#" class="interest" onclick="changeScrap(event)"> <img alt="관심 기업" id="scrap' + item.recruit_no + '" src="/resource/img/yesscrap.png" class="starImg"></a> ' +
 						 			   '</div> ';

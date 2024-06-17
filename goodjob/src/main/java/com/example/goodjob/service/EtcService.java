@@ -12,11 +12,9 @@ public class EtcService {
 	@Autowired
 	private EtcDao etcDao;
 	
-	public EtcDto etcWriteService(EtcDto etcDto) {
+	public int etcWriteService(EtcDto etcDto) {
 		
-		EtcDto result = etcDao.etcWrite(etcDto);
-		
-		return result;
+		return etcDao.etcWrite(etcDto);
 	}
 
 }

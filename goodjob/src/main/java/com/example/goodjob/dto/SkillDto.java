@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class SkillDto {
 	
 	private Long skill_no;
-	private Long s_resume_no;
+	private Long resume_no;
 	private String sk_name;
 	
 }

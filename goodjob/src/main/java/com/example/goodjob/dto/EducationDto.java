@@ -16,7 +16,7 @@ public class EducationDto {
 	private String school;
 	private LocalDate edu_join_date;
 	private LocalDate edu_gra_date;
-	private boolean graduation;
+	private String graduation;
 	private String grades;
 	private String major;
 	

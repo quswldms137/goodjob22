@@ -18,13 +18,10 @@ public class ResumeDto {
 	private String hope_job;
 	private String hope_city;
 	private String hope_pay;
-	private String addr;
-	private String part;
 	private String military;
 	private String port_url;
 	private String growth;
 	private String motive;
 	private String personality;
-	private transient MultipartFile imgFile;
 	
 }

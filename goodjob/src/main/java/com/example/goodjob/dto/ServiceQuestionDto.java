@@ -20,5 +20,4 @@ public class ServiceQuestionDto {
 	private LocalDate reg_date;
 	private String category;
 	private String answer;
-	private LocalDate answer_date;
 }

@@ -78,7 +78,7 @@ select[name="edustate"] {
 }
 
 .personal_info_content input[name="mem_email"] {
-	width: 200px;
+	width: 290px;
 }
 
 .photolabel {
@@ -122,7 +122,7 @@ input[type="file"] {
 
 
 select[name="military"] {
-	width: 140px;
+	width: 120px;
 }
 
 .education {
@@ -146,8 +146,14 @@ input[name="school"] {
 	width: 150px;
 }
 
+input[name="edu_join_date"]{
+	width:120px;
+}
+input[name="edu_gra_date"]{
+	width:120px;
+}
 input[name="grades"] {
-	width: 80px;
+	width: 70px;
 }
 
 .admissiondate-text {
@@ -161,7 +167,7 @@ input[name="grades"] {
 .graduatedate-text {
 	position: absolute;
 	top: 22px;
-	right: 312px;
+	right: 306px;
 	font-size: 11px;
 	color: #ccc;
 }
@@ -216,6 +222,7 @@ input[name="grades"] {
 }
 
 .career_in {
+	width:100%;
 	display: flex;
 	gap: 10px;
 	align-items: center;
@@ -224,7 +231,7 @@ input[name="grades"] {
 .cardate_text {
 	position: absolute;
 	top: 22px;
-	right: 553px;
+	right: 478px;
 	font-size: 11px;
 	color: #bbb;
 }
@@ -232,14 +239,14 @@ input[name="grades"] {
 .enddate_text {
 	position: absolute;
 	top: 22px;
-	right: 428px;
+	right: 332px;
 	font-size: 11px;
 	color: #bbb;
 }
 
 
 .career textarea {
-	width: 608px;
+	width: 100%;
 	height: 50px;
 	padding: 5px;
 	box-sizing: border-box;
@@ -248,16 +255,8 @@ input[name="grades"] {
 	resize: none;
 }
 
-.career input[name="companyname"] {
-	width: 360px;
-}
-
-.career input[name="position"], .career input[name="job"] {
-	width: 175px;
-}
-
-.career input[name="salary"], .career input[name="industry"] {
-	width: 114px;
+.career input[name="company"] {
+	width: 250px;
 }
 
 .resumeSkill {
@@ -334,24 +333,34 @@ input[name="grades"] {
 	background: #fff;
 	padding: 20px;
 	box-sizing: border-box;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
 }
 .other-data input[type="file"]{
+	width:240px;
 	display:block;
 	border: 1px solid #ddd;
 	background: #fff;
 	padding: 20px;
 	box-sizing: border-box;
-	margin-bottom:5px;
+	margin-bottom:15px;
 }
 .other-data .addOther-data{
 	width: 40px;
 	height: 40px;
 	border: 2px solid #FB8500;
+	border-radius:50%;
 	background: #fff;
 	font-size: 24px;
 	color: #FB8500;
-	margin-left: 0px;
 	cursor: pointer;
+}
+.other-data-container{
+	width:100%;
+	display:flex;
+	gap:18px;
+	position:relative;
 }
 
 
