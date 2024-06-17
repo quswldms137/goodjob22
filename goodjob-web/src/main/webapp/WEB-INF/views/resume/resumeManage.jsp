@@ -85,7 +85,7 @@ main #container {
 	            
 	            for(let i = 0; i < data.length; i++){
 	            	output += '<div class="resume-area-box">';
-	                output += '<h3><a href="#">' + data[i].title + '</a></h3>';
+	                output += '<h3><a href="/resume/resumeDetail?resume_no='+ data[i].resume_no +'">' + data[i].title + '</a></h3>';
 	                output += '</div>';
 	            }
 	            

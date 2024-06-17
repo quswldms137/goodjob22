@@ -174,10 +174,25 @@ public class ResumeController {
 		return ResponseEntity.ok("파일 업로드 실패");
 	}
 
+	/* 로그인된 멤버 이력서 리스트 */
 	@GetMapping("/list")
 	public List<ResumeDto> resumeList(@RequestParam("mem_no") Long mem_no) {
 
 		return resumeService.resumeGetService(mem_no);
 	}
+	
+	/* 이력서 상세보기 */
+	@GetMapping("/detail")
+	public ResumeDto getResumeDetail(@RequestParam("resume_no") Long resume_no) {
+		
+		return resumeService.getResumeDetailService(resume_no);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
