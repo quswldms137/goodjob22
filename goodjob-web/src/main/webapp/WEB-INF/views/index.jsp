@@ -142,7 +142,7 @@ label:hover {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			const username = "${memberDto.username}";
+			const username = localStorage.getItem("username");
 			
 			$.ajax({
 				url : "http://localhost:8888/api/recruit/skill/" + username,
@@ -195,26 +195,6 @@ label:hover {
 						const newDate = new Date();
 						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-						str += '<div class="vip"> ' + 
-						'<a href=#><div> ' +
-						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
-						'</div> ' + 
-						'<p>' + item.com_name + '</p> ' +
-						'<p><b>' + item.title + '</b></p> ' +
-						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
-						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
-						'</div> ';
-						str += '<div class="vip"> ' + 
-						'<a href=#><div> ' +
-						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
-						'</div> ' + 
-						'<p>' + item.com_name + '</p> ' +
-						'<p><b>' + item.title + '</b></p> ' +
-						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
-						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
-						'</div> ';
 						str += '<div class="vip"> ' + 
 						'<a href=#><div> ' +
 						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
