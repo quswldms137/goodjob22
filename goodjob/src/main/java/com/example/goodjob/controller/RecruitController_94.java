@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dao.IRecruitListDao94;
@@ -18,11 +19,10 @@ public class RecruitController_94 {
 	@Autowired
 	IRecruitListDao94 recuListDao;
 	
-
 	//채용공고리스트
 	@GetMapping("/recruitList")
-	public List<RecruitDto> recruitList(){
-		System.out.println(recuListDao.getRecruitListDto());
-		return recuListDao.getRecruitListDto();
+	public List<RecruitDto> recruitList(@RequestParam("com_no") Long com_no){
+		System.out.println(recuListDao.getRecruitListDto(com_no));
+		return recuListDao.getRecruitListDto(com_no);
 	}
 }
