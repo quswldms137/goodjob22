@@ -140,15 +140,56 @@ header {
 						</form>
 					</div>
 				</div>
-				<div class="user-area">
+				<div class="user-area" id="notLogin" style="display: block;">
 				<ul>
 					<li><a href="/common99/login">로그인</a></li>
 					<li><a href="/common99/join">회원가입</a></li>
 					<li><a href="#">기업서비스</a></li>
 				</ul>
 				</div>
+				<div id="login" style="display:none;">
+					<div><span id="username"></span> <a href="#" onclick="logout()"> 로그아웃</a></div>
+					<div></div>
+				</div>
 			</div>
 		</div>
 	</header>
+<script>
+window.onload = function(){
+	const username = localStorage.getItem("username");
+	console.log(username);
+	
+	if(username){
+		notLogin.style.display = "none";
+		login.style.display = "block";
+		document.getElementById("username").innerText = username + '님 환영합니다 / ';
+	}
+}
+
+function logout(){
+	const username = localStorage.getItem("username");
+	console.log(username);
+	localStorage.removeItem("username");
+	localStorage.removeItem("role");
+	
+	const xhttp = new XMLHttpRequest();
+	
+	xhttp.onload = function(){
+		if(this.status == 200){
+			alert("로그인이 완료되었습니다. 행복한 하루 되세요^^");
+			var response = JSON.parse(this.responseText);
+			window.location.href = response.redirectUrl;
+			
+		} else{
+			alert(this.responseText);
+		}
+	}
+	xhttp.open("POST", "http://localhost:8888/api/login/logout");
+	xhttp.send();
+	
+}
+
+
+</script>
 </body>
 </html>

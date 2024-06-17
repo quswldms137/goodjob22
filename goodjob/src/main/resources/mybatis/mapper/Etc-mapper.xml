@@ -8,5 +8,9 @@
 		insert into etc (resume_no, etc_name1, etc_name2, etc_name3)
 		values (#{resume_no}, #{etc_name1}, #{etc_name2}, #{etc_name3})
 	</insert>
+	
+	<select id="getEtcDetail" resultType="com.example.goodjob.dto.EtcDto">
+		select * from etc where resume_no = #{resume_no};
+	</select>
 
 </mapper>

@@ -7,4 +7,8 @@
 		insert into skill (resume_no, sk_name)
 		values (#{resume_no}, #{sk_name})
 	</insert>
+	
+	<select id="getSkillDetail" resultType="com.example.goodjob.dto.SkillDto">
+		select * from skill where resume_no = #{resume_no};
+	</select>
 </mapper>
