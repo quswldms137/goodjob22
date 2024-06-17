@@ -13,4 +13,10 @@ public class QnAController99 {
 		return "common/qnaWrite";
 	}
 	
+	@RequestMapping("/qnaDetail")
+	public String qnaDetail() {
+		
+		return "common/qnaDetail";
+	}
+	
 }
