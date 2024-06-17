@@ -38,50 +38,15 @@ main #container {
 		<%@ include file="../front/common-sidebar-all.jsp"%>
 	</div>
 	<div id="container">
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	 	<li class="nav-item" role="presentation">
-	   		<button class="nav-link active" id="home-tab" onclick="show()" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">문의·신고</button>
+	   		<button class="nav-link" id="home-tab" onclick="show()" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="false">문의·신고</button>
 	 	</li>
 	 	<li class="nav-item" role="presentation">
-	   		<button class="nav-link" id="profile-tab" onclick="getQnaList()" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">문의·신고 내역</button>
+	   		<button class="nav-link active" id="profile-tab" onclick="getQnaList()" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">문의·신고 내역</button>
 	 	</li>
 	</ul>
-	<div id="qnaWrite" style="display: block;">
-       <form name="frm-qnaForm">
-           <div class="form-group">
-               <label for="category">문의종류 <span id="blue">(필수)</span></label>
-               <select class="form-control" name="category" required>
-                   <option value="" disabled selected>선택</option>
-                   <option value="서비스 이용문의">서비스 이용문의</option>
-                   <option value="불량정보·오류신고">불량정보·오류신고</option>
-                   <option value="서비스 제안·칭찬">서비스 제안·칭찬</option>
-               </select>
-           </div>
-           <div class="mb-3">
-		  <label for="title" class="form-label">제목 <span id="blue">(필수)</span></label>
-		  <input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요">
-		</div>
-		<div class="mb-3">
-		  <label for="content" class="form-label">내용 <span id="blue">(필수)</span></label>
-		  <textarea class="form-control" name="content" rows="3" placeholder="내용을 입력해주세요"></textarea>
-		</div>
-           <button type="submit" class="btn btn-primary btn-lg" onclick="submitQuestion(event)">문의하기</button>
-           <button type="reset" class="btn btn-primary btn-lg">취소</button>
-       </form>
 	</div>
-	<!-- 작성폼 끝 -->
-	<div class="tab-content" id="qnaListContainer" style="display: none;">
-	
-	 <!-- 반복구간 -->
-	 <div id="qnaList"></div>
-		 
-	</div>
-	
-        
-    </div><!-- 컨테이너 종료 -->
-	
-	</div>
-	
 	</main>
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
@@ -167,7 +132,7 @@ main #container {
 					table += '<tr>';
 					table += '<td>' + (i+1) + '</td>';
 					table += '<td>' + data[i].category + '</td>';
-					table += '<td><button onclick="/qna99/qnaDetail">' + data[i].title + '</button></td>';
+					table += '<td><a onclick="">' + data[i].title + '</a></td>';
 					table += '<td>' + data[i].reg_date + '</td>';
 					table += '</tr>';
 				}
