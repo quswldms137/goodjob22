@@ -28,7 +28,7 @@
 }
 
 .recruit-mid {
-	padding-right: 100px;
+	padding-right: 70px;
 }
 
 .recruit-right-top {
@@ -41,6 +41,13 @@
 
 .recruit-right-bot p {
 	padding-right: 15px;
+}
+
+.recruit-right-right {
+	width: 130px;
+	height: 60px;
+	position: absolute;
+	left: 1250px; 
 }
 
 .updateBtn,
@@ -116,7 +123,7 @@
 									+ '</div> '
 								+ '</div> '
 								+ '<div class="recruit-right-right"> '
-									+ '<button class="updateBtn" onclick="update(event)">수정</button> ' + '<button class="deleteBtn" onclick="delete()">삭제</button> '
+									+ '<button type="button" class="updateBtn" onclick="update(event)">수정</button> ' + '<button type="button" class="deleteBtn" onclick="deleteBtn(event)">삭제</button> '
 									+ '<input type="hidden" class="recruit_no" name="recruit_no"> '
 								+ '</div> '
 						+ '</div> '; 
@@ -155,11 +162,25 @@
 			const recruit_no = event.target.closest(".recruit-area").querySelector("input[name='recruit_no']");
 			console.log(recruit_no);
 			console.log(recruit_no.value);
-			location.href = "/company/employUpdate?recruit_no=" + recruit_no.value;
-			
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				const Obj = JSON.parse(responseText);
+				location.href = "/company/employUpdate?recruit_no=" + recruit_no.value;
+			}
+			xhttp.open("PUT", "http://localhost:8888/company/employUpdate?recruit_no=" + recruit_no.value);
+			xhttp.send();
 		}
 		
-		
+		function deleteBtn(event){
+			const recruit_no = event.target.closest(".recruit-area").querySelector("input[name='recruit_no']");
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				alert(this.responseText);
+				location.href = "/company/index";
+			}
+			xhttp.open("DELETE", "http://localhost:8888/api/company/deleteRecruit?recruit_no=" + recruit_no.value);
+			xhttp.send();
+		}
 	</script>
 	<header>
 		<%@ include file="../front/company-header.jsp"%>
