@@ -18,7 +18,8 @@
 			recruit r JOIN company c 
 		ON 
 			c.com_no = r.com_no
-		
+		WHERE
+     		c.com_no = #{com_no}
 
   </select>
 </mapper>
