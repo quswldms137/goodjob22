@@ -85,7 +85,7 @@ main #container {
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-					const username = "hgd";
+					const username = localStorage.getItem("username");
 
 					$.ajax({
 						url : "http://localhost:8888/api/subscrap/subscribe/1/"
@@ -139,7 +139,7 @@ main #container {
 			const id = event;
 			const childElement = id.srcElement;
 			
-			const username = "${memberDto.username}";
+			const username = localStorage.getItem("username");
 			const com_no = event.target.id.substring(8);
 		
 			const xhr = new XMLHttpRequest();
@@ -166,7 +166,7 @@ main #container {
 		function pageChange(event){
 			const page = event.target.value;
 			
-			const username = "hgd"; 
+			const username = localStorage.getItem("username");
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function(){
 				

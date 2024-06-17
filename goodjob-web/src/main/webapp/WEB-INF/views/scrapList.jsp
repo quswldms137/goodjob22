@@ -100,7 +100,7 @@ input[type=button]:hover{
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-					const username = "hgd";
+					const username = localStorage.getItem("username");
 
 					$.ajax({
 						url : "http://localhost:8888/api/subscrap/scrap/1/"
@@ -151,7 +151,7 @@ input[type=button]:hover{
 			const id = event;
 			const childElement = id.srcElement;
 
-			const username = "${memberDto.username}";
+			const username = localStorage.getItem("username");
 			
 			const recruit_no = event.target.id.substring(5);
 			console.log(recruit_no);
@@ -186,7 +186,7 @@ input[type=button]:hover{
 		function pageChange(event){
 			const page = event.target.value;
 			
-			const username = "hgd"; 
+			const username = localStorage.getItem("username");
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function(){
 				
