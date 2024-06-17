@@ -9,7 +9,7 @@ public class CommonController99 {
 
 	@RequestMapping
 	public String index() {
-		return "index";
+		return "common/index";
 	}
 	
 	@RequestMapping("/login")

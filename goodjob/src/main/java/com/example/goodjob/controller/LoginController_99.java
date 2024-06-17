@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.goodjob.dto.UserDto;
 import com.example.goodjob.service.UserService99;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @CrossOrigin("*")
@@ -18,40 +20,48 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/api/login")
 public class LoginController_99 {
 
-	@Autowired
-	private UserService99 userService;
-	
-	@PostMapping
-	public ResponseEntity<String> login(@RequestBody UserDto userDto, HttpSession session) {
-		/*
-		String result = userService.getRole(userDto);
-		System.out.println("role: " + result);
-		if("ROLE_MEMBER".equals(result)) {
-			session.setAttribute("loginMember", userDto);
-			System.out.println("Saved in session: " + session.getAttribute("loginMember"));
-		} else if("ROLE_COMPANY".equals(result)) {
-			session.setAttribute("loginCompany", userDto);
-			System.out.println("Saved in session: " + session.getAttribute("loginCompany"));
-		} else if("ROLE_MANAGER".equals(result)){
-			session.setAttribute("loginManager", userDto);
-			System.out.println("Saved in session: " + session.getAttribute("loginManager"));
-		} */
+    @Autowired
+    private UserService99 userService;
 
-		boolean isValidUser = authenticate(userDto);
-		
-		System.out.println(isValidUser);
-		if(isValidUser) {
-			return ResponseEntity.ok().body("환영합니당~");
-		} 
-		return ResponseEntity.badRequest().body("{\"message\": \"아이디 또는 비밀번호가 일치하지 않습니다.\" }");
-	}
-	
-	private boolean authenticate(UserDto user) {
-		boolean result = false;
-		int result2 = userService.userLogin(user);
-		if(result2 == 1) {
-			result = true;
-		}
-		return result;
-	}
+    @PostMapping
+    public ResponseEntity<String> loginMember(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
+        String role = userService.getRole(userDto);
+        userDto.setRole(role);
+        System.out.println("role: " + role);
+        System.out.println("userDto: " + userDto);
+        
+        int result = userService.userLogin(userDto);
+        if (result == 1) {
+            System.out.println(result);
+            if ("ROLE_MEMBER".equals(role) || "ROLE_MANAGER".equals(role) || "ROLE_COMPANY".equals(role)) {
+                session.setAttribute("user", userDto);
+                System.out.println("Saved in session: " + session.getAttribute("user"));
+                //Header에 저장
+                response.setHeader("username", userDto.getUsername());
+                response.setHeader("role", userDto.getRole());
+                response.addHeader("Access-Control-Expose-Headers", "username, role");
+                
+                if("ROLE_COMPANY".equals(role)) {
+                	return ResponseEntity.ok().body("{\"redirectUrl\": \"http://localhost:9991/company/index\"}");
+                } 
+            } 
+        	return ResponseEntity.ok().body("{\"redirectUrl\": \"http://localhost:9991/common99\"}");
+
+        } else {
+            return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 일치하지 않습니다.");
+        }
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request){
+    	HttpSession session = request.getSession(false);
+    	
+    	if(session != null) {
+    		session.invalidate();
+    		return ResponseEntity.ok("{\"redirectUrl\": \"http://localhost:9991/common99\"}");
+    	} else {
+    		return ResponseEntity.badRequest().body("다시 시도해주세요.");
+    	}
+    	
+    }
 }

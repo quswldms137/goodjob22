@@ -43,9 +43,9 @@ main {
 	</div>
 	<div id="companyForm" style="display:none;">
 		<form name="frm_comJoin">
-			<input type="text" name="username" placeholder="아이디1"><br>
-			<input type="password" name="password" placeholder="비밀번호1"><br>
-			<input type="hidden" name="role" value="ROLE_COMPANY"><br>
+			<input type="text" name="username1" placeholder="아이디1"><br>
+			<input type="password" name="password1" placeholder="비밀번호1"><br>
+			<input type="hidden" name="role1" value="ROLE_COMPANY"><br>
 			<input type="text" name="com_name" placeholder="기업명"><br>
 			<input type="text" name="com_type"  placeholder="기업형태"><br>
 			<input type="text" name="com_ceo"  placeholder="대표자명"><br>
@@ -114,9 +114,9 @@ main {
 		function companySubmit(event){
 			event.preventDefault();
 			
-			const username1 = document.querySelector("Input[name='username']");
-			const password1 = document.querySelector("Input[name='password']");
-			const role1 = document.querySelector("Input[name='role']");
+			const username1 = document.querySelector("Input[name='username1']");
+			const password1 = document.querySelector("Input[name='password1']");
+			const role1 = document.querySelector("Input[name='role1']");
 			const com_name1 = document.querySelector("Input[name='com_name']");
 			const com_type1 = document.querySelector("Input[name='com_type']");
 			const com_ceo1 = document.querySelector("Input[name='com_ceo']");
@@ -137,6 +137,7 @@ main {
 					com_tel : com_tel1.value,
 					com_email : com_email1.value
 			}
+			
 			console.log(company);
 			const sendData = JSON.stringify(company);
 			const xhttp = new XMLHttpRequest();
