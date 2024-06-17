@@ -61,7 +61,7 @@ main #container {
 	            // 받아온 데이터를 UI에 반영
 	            let output = '<div class="resume-detail-area-box">';
 	            output += '<h3 class="resume-title">' + data.title + '</h3>';
-	            output += '<div>' + data.title + '</div>';
+	            output += '<div>' +  + '</div>';
 	            output += '</div>';
 	            
 	            $('.resume-detail-area').html(output);
