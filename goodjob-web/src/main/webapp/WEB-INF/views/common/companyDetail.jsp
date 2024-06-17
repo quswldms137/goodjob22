@@ -183,23 +183,29 @@ th {
     
 <script>
 $(document).ready(function() {
+	console.log('${com_no}');
+	// URL에서 com_no 파라미터 추출
+    const urlParams = new URLSearchParams(window.location.search);
+    const com_no = urlParams.get('com_no');
+    console.log("com_no===========", com_no);
 	// 기업정보
 	$.ajax({
-		url: "http://localhost:8888/api/com-detail/companyInfo",
+		url: "http://localhost:8888/api/com-detail/companyInfo?com_no="+com_no,
 		method: "GET",
 		dataType: "json",
 		success: function(data) {
 			// data가 배열 형태인 경우, 첫 번째 객체를 사용
-            let detail = data[0];
-			console.log("detail:", detail);
+            console.log(data)
+			//let detail = data[0];
+			//console.log("detail:", detail);
 			// DOM에 데이터 삽입
-			$("#companyImage").attr("src", detail.img_url);
-			$("#companyName").text(detail.com_name);
+			$("#companyImage").attr("src", data.img_url);
+			$("#companyName").text(data.com_name);
 			$("#companyDetailsTable").html(
-				"<tr><th>산업</th><td>" + detail.sectors + "</td><th>사원수</th><td>" + detail.amount + "</td></tr>" +
-				"<tr><th>기업형태</th><td>" + detail.com_type + "</td><th>설립일</th><td>" + detail.foundation + "</td></tr>" + 
-				"<tr><th>대표자</th><td>" + detail.com_ceo + "</td><th>연금/보험</th><td>" + detail.pension + "</td></tr>" +
-				"<tr><th>주소</th><td>" + detail.com_addr + "</td><th>기업사이트</th><td><a href='" + detail.url + "'>" + detail.url + "</a></td></tr>"
+				"<tr><th>산업</th><td>" + data.sectors + "</td><th>사원수</th><td>" + data.amount + "</td></tr>" +
+				"<tr><th>기업형태</th><td>" + data.com_type + "</td><th>설립일</th><td>" + data.foundation + "</td></tr>" + 
+				"<tr><th>대표자</th><td>" + data.com_ceo + "</td><th>연금/보험</th><td>" + data.pension + "</td></tr>" +
+				"<tr><th>주소</th><td>" + data.com_addr + "</td><th>기업사이트</th><td><a href='" + data.url + "'>" + data.url + "</a></td></tr>"
 			);
 		},
 		error: function(error) {
@@ -209,7 +215,7 @@ $(document).ready(function() {
 
 	// 채용공고
 	$.ajax({
-		url: "http://localhost:8888/api/recruit94/recruitList",
+		url: "http://localhost:8888/api/recruit94/recruitList?com_no="+com_no,
 		method: "GET",
 		dataType: "json",
 		success: function(data) {
@@ -221,7 +227,7 @@ $(document).ready(function() {
 			data.forEach(function(recruit) {
 				postingDetail.append(
 					"<div class='postingList'>" +
-						"<h3>" + recruit.title + "</h3>" +
+						"<h4>" + recruit.title + "</h4>" +
 						"<p>" + 
 						recruit.career + " | " +
 						recruit.location + " | " +
@@ -239,21 +245,21 @@ $(document).ready(function() {
 	
 	// 연봉정보
 	$.ajax({
-		url: "http://localhost:8888/api/recruit94/recruitList",
+		url: "http://localhost:8888/api/recruit94/recruitList?com_no="+com_no,
 		method: "GET",
 		dataType: "json",
 		success: function(data) {
 			// data가 배열 형태인 경우, 첫 번째 객체를 사용
-            let detail = data[0];
-			console.log("detail2:", detail);
+            let detail2 = data[0];
+			console.log("detail2:", detail2);
 			
 			// 연봉 정보 출력
-            let annualSalary = detail.pay * 12 * 100; // 연간 연봉 계산
+            let annualSalary = detail2.pay * 12 * 100; // 연간 연봉 계산
             console.log("annualSalary:", annualSalary);
-            let entrySalary = detail.pay * 12; 
+            let entrySalary = detail2.pay * 12; 
 
             // DOM에 데이터 삽입
-            $("#com_name").text(detail.com_name);
+            $("#com_name").text(detail2.com_name);
             $("#averageSalary").html("<div>" + annualSalary.toLocaleString() + "원" + "</div>");
             $("#entrySalary").html("<div>" + entrySalary.toLocaleString() + "원" + "</div>");
 		},
@@ -263,23 +269,17 @@ $(document).ready(function() {
 	});
 	// 합격후기 
 	$.ajax({
-		url: "http://localhost:8888/api/com-detail/companyInfo",
+		url: "http://localhost:8888/api/com-detail/companyInfo?com_no=" + com_no,
 		method: "GET",
 		dataType: "json",
 		success: function(data) {
-			console.log("review:", data);
-			let reviewdetail = $("#review");
-			console.log("reviewdetail:",reviewdetail);
-			reviewdetail.empty(); // 기존 내용 삭제
+			console.log("review:", data); 
 			
-			// 반복문을 통해 데이터 삽입
-			data.forEach(function(review) {
-				reviewdetail.append(
-		                "<div class='postingList'>" +
-		                    "<div>" + review.ideal_talent + "</div>" +
-		                "</div>"
-		            );
-			});
+			$("#review").html(
+		    	"<div class='postingList'>" +
+		    		"<div>" + data.ideal_talent + "</div>" +
+		    	"</div>"
+			);
 		},
 		error: function(error) {
 			console.log("Error:", error);
