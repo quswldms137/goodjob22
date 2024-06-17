@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 public class LicenseDto {
 
 	private Long license_no;
-	private Long s_resume_no;
-	private String licence_name;
+	private Long resume_no;
+	private String license_name;
 	private String agency;
 	private LocalDate get_date;
 	

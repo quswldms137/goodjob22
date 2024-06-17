@@ -12,11 +12,9 @@ public class CareerService {
 	@Autowired
 	private CareerDao careerDao;
 	
-	public CareerDto careerWriteService(CareerDto careerDto) {
+	public int careerWriteService(CareerDto careerDto) {
 		
-		CareerDto result = careerDao.careerWrite(careerDto);
-		
-		return result;
+		return careerDao.careerWrite(careerDto);
 	}
 
 }

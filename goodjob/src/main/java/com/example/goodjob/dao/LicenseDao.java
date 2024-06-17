@@ -7,7 +7,7 @@ import com.example.goodjob.dto.LicenseDto;
 @Mapper
 public interface LicenseDao {
 	
-	public LicenseDto licenseWrite(LicenseDto licenseDto);
+	public int licenseWrite(LicenseDto licenseDto);
 	
 
 }
