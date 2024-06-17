@@ -7,5 +7,14 @@
 	<select id="findByRecruit_no" resultType="com.example.goodjob.dto.RecruitDto_JYC">
 		SELECT * FROM recruit WHERE recruit_no = #{recruit_no};
 	</select>
-
+	<select id="getVip" resultType="com.example.goodjob.dto.RecruitDto_JYC">
+		SELECT * FROM recruit;
+	</select>
+	<select id="findVipByCom_no" resultType="com.example.goodjob.dto.RecruitDto_JYC">
+		SELECT * FROM recruit WHERE com_no = #{com_no} ORDER BY reg_date DESC LIMIT 1;
+	</select>
+	<select id="findAllOrderByReg_dateDesc" resultType="com.example.goodjob.dto.RecruitDto_JYC">
+		SELECT * FROM recruit ORDER BY reg_date DESC;
+	</select>
+		
 </mapper>  

@@ -1,3 +1,4 @@
+
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -10,3 +11,4 @@
 		DELETE FROM service_question WHERE cs_no = #{cs_no};
 	</delete>
 </mapper> 
+
