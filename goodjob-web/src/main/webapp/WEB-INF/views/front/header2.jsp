@@ -148,8 +148,8 @@ header {
 				</ul>
 				</div>
 				<div id="login" style="display:none;">
-					<div id="username">test</div>
-					<div><a href="#" onclick="logout()">로그아웃</a></div>
+					<div><span id="username"></span> <a href="#" onclick="logout()"> 로그아웃</a></div>
+					<div></div>
 				</div>
 			</div>
 		</div>
@@ -162,10 +162,13 @@ window.onload = function(){
 	if(username){
 		notLogin.style.display = "none";
 		login.style.display = "block";
+		document.getElementById("username").innerText = username + '님 환영합니다 / ';
 	}
 }
 
 function logout(){
+	const username = localStorage.getItem("username");
+	console.log(username);
 	localStorage.removeItem("username");
 	localStorage.removeItem("role");
 	
@@ -174,7 +177,9 @@ function logout(){
 	xhttp.onload = function(){
 		if(this.status == 200){
 			alert("로그인이 완료되었습니다. 행복한 하루 되세요^^");
+			var response = JSON.parse(this.responseText);
 			window.location.href = response.redirectUrl;
+			
 		} else{
 			alert(this.responseText);
 		}

@@ -12,4 +12,5 @@ public class QnAController99 {
 		
 		return "common/qnaWrite";
 	}
+	
 }

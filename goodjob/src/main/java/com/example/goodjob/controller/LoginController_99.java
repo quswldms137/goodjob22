@@ -54,8 +54,8 @@ public class LoginController_99 {
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request){
-    	HttpSession session = request.getSession(false);
-    	
+    	HttpSession session = request.getSession();
+    	System.out.println(session.getId());
     	if(session != null) {
     		session.invalidate();
     		return ResponseEntity.ok("{\"redirectUrl\": \"http://localhost:9991/common99\"}");
