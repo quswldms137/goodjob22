@@ -22,4 +22,17 @@
      		c.com_no = #{com_no}
 
   </select>
+  
+  <select id="getAllRecruitDto" resultType="com.example.goodjob.dto.RecruitAllDto94">
+    SELECT
+    	r.*,  
+    	cd.*, 
+    	c.*   
+	FROM
+    	recruit r
+	JOIN
+    	company_detail cd ON r.com_no = cd.com_no
+	JOIN
+    	company c ON r.com_no = c.com_no
+  </select>
 </mapper>
