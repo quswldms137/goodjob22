@@ -29,12 +29,17 @@ public class CompanyController_JHY {
 		return list;
 	}
 	
-	@PostMapping("/recruitWrite")
-	public String recruit(@RequestBody RecruitDto recruitDto) {
+	@PostMapping("/employWrite")
+	public String employ(@RequestBody RecruitDto recruitDto) {
 		
-		companyDao.recruitWrite(recruitDto);
+		boolean tf = companyDao.recruitWrite(recruitDto);
+		System.out.println(recruitDto);
+		if(tf == true) {
+			return "채용공고 등록에 성공했습니다.";
+		}else {
+			return "채용공고 등록에 실패했습니다.";
+		}
 		
-		return "";
 	}
 	
 	
