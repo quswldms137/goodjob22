@@ -12,5 +12,9 @@
   	<select id="getList" resultType="com.example.goodjob.dto.ResumeDto">
   		select * from resume where mem_no = #{mem_no}
   	</select>
+  	
+  	<select id="getResumeDetail" resultType="com.example.goodjob.dto.ResumeDto">
+  		select * from resume where resume_no = #{resume_no};
+  	</select>
   
   </mapper>

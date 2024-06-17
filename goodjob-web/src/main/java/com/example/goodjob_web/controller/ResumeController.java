@@ -18,5 +18,11 @@ public class ResumeController {
 		
 		return "resume/resumeWrite";
 	}
+	
+	@RequestMapping("/resumeDetail")
+	public String resumeDetail() {
+		
+		return "resume/resumeDetail";
+	}
 
 }

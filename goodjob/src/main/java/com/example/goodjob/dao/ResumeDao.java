@@ -15,5 +15,8 @@ public interface ResumeDao {
 	
 	/* 로그인된 멤버의 이력서 가져오기 */
 	public List<ResumeDto> getList(@Param("mem_no") Long mem_no);
+	
+	/* 이력서 디테일 */
+	public ResumeDto getResumeDetail(@Param("resume_no") Long resume_no);
 
 }
