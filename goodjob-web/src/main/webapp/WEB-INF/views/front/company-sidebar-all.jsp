@@ -89,7 +89,7 @@ ul {
 
 	<div id="sidebar">
 		<div class="sidebar-box1">
-			<h3><a href="#">공고등록</a></h3>
+			<h3><a href="/company/employWrite">공고등록</a></h3>
 		</div>
 		<div class="sidebar-box sidebar-box2">
 			<h3>공고·지원자 관리</h3>

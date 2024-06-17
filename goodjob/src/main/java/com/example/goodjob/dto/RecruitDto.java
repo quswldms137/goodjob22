@@ -1,6 +1,7 @@
 package com.example.goodjob.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,4 +31,5 @@ public class RecruitDto {
 	private LocalDate deadline_date;
 	private String p_number;
 	private String recruit_intro;
+	private List<String> skill;
 }
