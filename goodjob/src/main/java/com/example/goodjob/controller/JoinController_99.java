@@ -18,7 +18,6 @@ import com.example.goodjob.service.UserService99;
 
 import jakarta.servlet.http.HttpSession;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/join")
 public class JoinController_99 {
