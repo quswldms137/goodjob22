@@ -20,12 +20,15 @@ import com.example.goodjob.dto.CareerDto;
 import com.example.goodjob.dto.EducationDto;
 import com.example.goodjob.dto.EtcDto;
 import com.example.goodjob.dto.LicenseDto;
+import com.example.goodjob.dto.MemberDto;
+import com.example.goodjob.dto.ResumeDetailDto;
 import com.example.goodjob.dto.ResumeDto;
 import com.example.goodjob.dto.SkillDto;
 import com.example.goodjob.service.CareerService;
 import com.example.goodjob.service.EducationService;
 import com.example.goodjob.service.EtcService;
 import com.example.goodjob.service.LicenseService;
+import com.example.goodjob.service.MemberService93;
 import com.example.goodjob.service.ResumeService;
 import com.example.goodjob.service.SkillService;
 import com.example.goodjob.util.FileUploadUtil;
@@ -52,6 +55,9 @@ public class ResumeController {
 
 	@Autowired
 	private EtcService etcService;
+	
+	@Autowired
+	private MemberService93 memberService;
 
 	@PostMapping("/write")
 	public ResponseEntity<String> write(@RequestParam("mem_no") Long mem_no,
@@ -183,10 +189,20 @@ public class ResumeController {
 	
 	/* 이력서 상세보기 */
 	@GetMapping("/detail")
-	public ResumeDto getResumeDetail(@RequestParam("resume_no") Long resume_no) {
+	public ResumeDetailDto getResumeDetail(@RequestParam("resume_no") Long resume_no,
+			@RequestParam("mem_no") Long mem_no) {
 		
-		return resumeService.getResumeDetailService(resume_no);
+		MemberDto memberdto = memberService.getMemberDetailService(mem_no);
+		ResumeDto resumedto = resumeService.getResumeDetailService(resume_no);
+		CareerDto careerdto = careerService.getCareerDetailService(resume_no);
+		LicenseDto licensedto = licenseService.getLicenseDetailService(resume_no);
+		EtcDto etcdto = etcService.getEtcDetailService(resume_no);
+		EducationDto educationdto = educationService.getEducationDetailService(resume_no);
+		SkillDto skilldto = skillService.getSkillDetailService(resume_no);
+		
+		return new ResumeDetailDto(resumedto, careerdto, licensedto, etcdto, educationdto, skilldto, memberdto);
 	}
+	
 	
 	
 	

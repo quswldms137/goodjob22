@@ -38,13 +38,13 @@
 							<option value="f">여자</option>
 						</select> 
 						<input type="text" name="mem_tel" placeholder="휴대폰번호" value="010-8471-2165"> 
-						<input type="text" name="mem_email" placeholder="이메일" value="aaa@naver.com"> 
+						<input type="text" name="mem_email" placeholder="이메일" value="asxowns@naver.com"> 
 						<select	name="military">
 							<option value="1">군필</option>
 							<option value="2">미필</option>
 							<option value="3">면제</option>
 							<option value="4">해당없음</option>
-						</select> <input type="text" name="mem_addr" placeholder="주소" value="부산시 서구">
+						</select> <input type="text" name="mem_addr" placeholder="주소" value="부산시 중구">
 					</div>
 					<div class="personal_info_photo">
 						<label for="photo" class="photolabel">
