@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.goodjob.dto.RecruitListDto94;
+import com.example.goodjob.dto.RecruitDto;
 
 @Mapper
 public interface IRecruitListDao94 {
-	public List<RecruitListDto94> getRecruitListDto();
+	public List<RecruitDto> getRecruitListDto();
 }
 

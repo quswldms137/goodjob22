@@ -276,7 +276,7 @@ $(document).ready(function() {
 			data.forEach(function(review) {
 				reviewdetail.append(
 		                "<div class='postingList'>" +
-		                    "<h3>" + review.ideal_talent + "</h3>" +
+		                    "<div>" + review.ideal_talent + "</div>" +
 		                "</div>"
 		            );
 			});

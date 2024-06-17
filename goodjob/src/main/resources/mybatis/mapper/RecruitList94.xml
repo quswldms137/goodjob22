@@ -4,7 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.example.goodjob.dao.IRecruitListDao94">
-  <select id="getRecruitListDto" resultType="com.example.goodjob.dto.RecruitListDto94">
+  <select id="getRecruitListDto" resultType="com.example.goodjob.dto.RecruitDto">
     SELECT
 			c.com_name,
 			c.com_no,
