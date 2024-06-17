@@ -27,9 +27,14 @@ public class MemInterestService {
 		this.iCompanyDetailDao = iCompanyDetailDao;
 	}
 
-	public List<CompanyDto_JYC> getSubscribeList(Long mem_no) {
+	public List<CompanyDto_JYC> getSubscribeList(Long mem_no, int page) {
 
-		List<Long> list = iMemInterestDao.getCom_no(mem_no);
+		System.out.println("start : " + (page - 1) * 5);
+		System.out.println("end : " + page * 5);
+		
+		List<Long> list = iMemInterestDao.getCom_no(mem_no, (page - 1) * 5);
+		List<Long> count = iMemInterestDao.findByMem_no(mem_no);
+		
 		List<CompanyDto_JYC> result = new ArrayList<>();
 
 		if (list.size() > 0) {
@@ -52,11 +57,11 @@ public class MemInterestService {
 				companyDto.setFoundation(companyDetailDto.getFoundation());
 				companyDto.setAmount(companyDetailDto.getAmount());
 				companyDto.setUrl(companyDetailDto.getUrl());
-
+				companyDto.setTotal(count.size());
 				result.add(companyDto);
 			});
 		}
-
+		
 		return result;
 	}
 	

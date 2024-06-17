@@ -25,10 +25,10 @@ public class QnaController {
 		this.serviceQuestionService = serviceQuestionService;
 	}
 	
-	@GetMapping("/{username}")
-	public ResponseEntity<List<ServiceQuestionDto>> getQna(@PathVariable("username") String username) {
+	@GetMapping("/{page}/{username}")
+	public ResponseEntity<List<ServiceQuestionDto>> getQna(@PathVariable("username") String username, @PathVariable("page") int page) {
 		
-		List<ServiceQuestionDto> result = serviceQuestionService.getQnaList(username);
+		List<ServiceQuestionDto> result = serviceQuestionService.getQnaList(username, page);
 		
 		if(!result.isEmpty()) {
 			return ResponseEntity.status(HttpStatus.OK)
