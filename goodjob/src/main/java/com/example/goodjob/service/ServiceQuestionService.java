@@ -19,12 +19,15 @@ public class ServiceQuestionService {
 		this.iMemberDao = iMemberDao;
 	}
 	
-	public List<ServiceQuestionDto> getQnaList(String username){
+	public List<ServiceQuestionDto> getQnaList(String username, int page){
 		
 		
 		Long mem_no = iMemberDao.getMem_no(username);
 		
-		List<ServiceQuestionDto> result = iServiceQuestionDao.findByMem_no(mem_no);
+		List<ServiceQuestionDto> result = iServiceQuestionDao.findByMem_noPage(mem_no, (page - 1) * 5);
+		List<ServiceQuestionDto> total = iServiceQuestionDao.findByMem_no(mem_no);
+		
+		result.get(0).setTotal(total.size());
 		
 		result.forEach(item -> {
 			if(item.getAnswer() == null) {

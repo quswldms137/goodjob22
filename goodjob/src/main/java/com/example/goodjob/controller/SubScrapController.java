@@ -36,23 +36,23 @@ public class SubScrapController {
 		this.scrapRecruitService = scrapRecruitService;
 	}
 	
-	@GetMapping("/subscribe/{username}")
-	public List<CompanyDto_JYC> getSubscribe(@PathVariable("username") String username){
+	@GetMapping("/subscribe/{page}/{username}")
+	public List<CompanyDto_JYC> getSubscribe(@PathVariable("username") String username, @PathVariable("page") int page){
 		
 		Long mem_no = memberService.getMem_no(username);
 		
-		List<CompanyDto_JYC> result = memInterestService.getSubscribeList(mem_no);
+		List<CompanyDto_JYC> result = memInterestService.getSubscribeList(mem_no, page);
 		
 		return result;
 	}
 	
-	@GetMapping("/scrap/{username}")
-	public List<RecruitDto_JYC> getScrap(@PathVariable("username") String username){
+	@GetMapping("/scrap/{page}/{username}")
+	public List<RecruitDto_JYC> getScrap(@PathVariable("username") String username, @PathVariable("page") int page){
 		
 		Long mem_no = memberService.getMem_no(username);
 		
-		List<RecruitDto_JYC> result = scrapRecruitService.getScrapList(mem_no);
-		
+		List<RecruitDto_JYC> result = scrapRecruitService.getScrapList(mem_no, page);
+			
 		return result;
 	}
 	
