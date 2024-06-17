@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.example.goodjob.dao.ICompanyInfoDetailDao">
-  <select id="getCompanyDetail" resultType="com.example.goodjob.dto.CompanyDetailDto94">
+<mapper namespace="com.example.goodjob.dao.ICompanyListDao">
+  <select id="getCompanyList" resultType="com.example.goodjob.dto.CompanyDetailDto94">
     SELECT
 			c.com_name,
 			c.com_type,
@@ -22,8 +22,7 @@
 			company c JOIN company_detail cd
 		ON 
 			c.com_no = cd.com_no
-		WHERE
-     		c.com_no = #{com_no}
+		
 
   </select>
 </mapper>
