@@ -9,4 +9,8 @@
 		values (#{resume_no}, #{license_name}, #{agency}, #{get_date})
 	</insert>
 
+	<select id="getLicenseDetail" resultType="com.example.goodjob.dto.LicenseDto">
+		select * from license where resume_no = #{resume_no};
+	</select>
+
 </mapper>

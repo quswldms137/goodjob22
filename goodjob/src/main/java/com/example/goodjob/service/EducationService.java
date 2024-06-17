@@ -12,10 +12,19 @@ public class EducationService {
 	@Autowired
 	private EducationDao educationDao;
 	
+	/* 이력서에 학력정보 등록 */
 	public int educationWriteService(EducationDto educationDto) {
 		
 		return educationDao.educationWrite(educationDto);
 		
 	}
+	
+	/* 이력서 학력정보 상세보기 */
+	public EducationDto getEducationDetailService(Long resume_no) {
+		
+		return educationDao.getEducationDetail(resume_no);
+	}
+	
+	
 
 }
