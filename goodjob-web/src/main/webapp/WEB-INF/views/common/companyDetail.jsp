@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%-- JSTL Core --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -18,184 +18,275 @@ header, footer {
     width: 100%;
 }
 main {
-	width: 1100px;
-	margin: 80px auto;
-	min-height: 700px;
-	
-	padding: 0 20px; /* 양옆에 20px 간격을 추가 */
-	
-	display:grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: auto auto;
-	gap: 10px; /* 각 div 요소 사이의 간격 */
+    width: 1100px;
+    margin: 80px auto;
+    min-height: 700px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px;
 }
-#mainCompanyInfo{
-	border: 1px solid #eee;
-	width: 1100px;
-	height: 200px;
-	padding: 10px;
-	box-sizing: border-box;
-	margin: 80px auto;
-	
-	display:flex;
-	
-	align-items: center; /* 수직 가운데 정렬 */
+#mainCompanyInfo {
+    border: 1px solid #eee;
+    width: 1100px;
+    height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 80px auto;
+    display: flex;
+    align-items: center;
 }
-#companyImg_url{
-	border: 1px solid #eee;
-	width: 300px;
-	height: 177px;
-	padding: 15px;
-	box-sizing: border-box;
+#companyImg_url {
+    border: 1px solid #eee;
+    width: 300px;
+    height: 177px;
+    padding: 15px;
+    box-sizing: border-box;
 }
-#companyName{
-	font-size:40px;
-	text-align: left; /* 텍스트를 왼쪽 정렬 */
-	padding-left: 20px; /* 왼쪽 패딩 추가 */
-	flex-grow: 1; /* 남은 공간을 차지 */
+#companyName {
+    font-size: 40px;
+    text-align: left;
+    padding-left: 20px;
+    flex-grow: 1;
 }
-.info{
-	border: 1px solid #eee; /* 각 div 요소의 테두리 설정 (디버깅용) */
-	padding: 20px;
-	box-sizing: border-box;
+.info {
+    border: 1px solid #eee;
+    padding: 20px;
+    box-sizing: border-box;
 }
 table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-top:15px;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
 }
 th, td {
-	padding: 10px;
-	text-align: left;
-	font-size:14px;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
 }
 th {
-	padding-right: 20px; /* th와 td 사이에 공간 추가 */
+    padding-right: 20px;
 }
-.postingList{
-	margin-top:20px;
-	padding:20px;
-	
-	border: 1px solid #eee;
+.postingList {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #eee;
 }
-#companyName2{
-	margin-top:25px;
-	font-size:20px;
-	padding:20px;
-	
-	border: 1px solid #eee;
-	width:458px;
-	height:200px;
-	
-	position: relative;
+#companyName2 {
+    margin-top: 25px;
+    font-size: 20px;
+    padding: 20px;
+    border: 1px solid #eee;
+    width: 458px;
+    height: 200px;
+    position: relative;
+    
+    align-items: center;
 }
+
 .money-container {
-	display: flex; /* Flexbox 사용하여 가로 정렬 */
-	margin-top: 45px; /* 실선 아래에 위치하도록 간격 추가 */
-	justify-content: space-around; /* 자식 요소 사이의 간격 설정 */
-	width: 100%;
+    display: flex;
+    margin-top: 45px;
+    justify-content: space-around;
+    width: 100%;
+    
+    flex-direction: row; 
+    align-items: center; /* 요소들을 세로 방향으로 가운데 정렬합니다. */
+    margin-bottom: 10px;
+} 
+.pay-containger{
+	display: flex;
+	flex-direction: row; 
+	justify-content: center; /* 가운데 정렬 */
+	margin-left: 5px;
 }
-.money{
-	border: 1px solid #eee;
-	padding: 40px;
-	font-size:20px;
+.money-container, .money-container vertical {
+        flex-direction: column; /* vertical 클래스를 사용하여 요소들을 세로로 배열합니다. */
+        align-items: flex-start; /* 요소들을 세로 방향으로 시작점에 정렬합니다. */
+    }
+#averageSalary, #entrySalary {
+
+
+    font-size: 33px;
+}
+.pay-containger span, #averageSalary, money-container vertical, #entrySalary {
+	margin:0 auto;
 }
 </style>
 </head>
 <body>
-	<header>
-		<%@ include file="../front/header.jsp"%>
-	</header>
-	
-	<div id="mainCompanyInfo">
-		<div id="companyImg_url">
-			<img src="">기업사진
-		</div>
-		<div id="companyName">
-			기업이름 
-		</div>
-	</div>
-	<main>
-		<div class="info" id="companyInfo">
-			기업정보
-			<div id="companyInfoDetails">
-				<table>
+    <header>
+        <%@ include file="../front/header.jsp" %>
+    </header>
+    
+    <div id="mainCompanyInfo">
+        <div id="companyImg_url">
+            <img id="companyImage" src="" alt="기업사진">
+        </div>
+        <div id="companyName">
+            기업이름
+        </div>
+    </div>
+    <main>
+        <div class="info" id="companyInfo">
+            기업정보
+            <div id="companyInfoDetails">
+                <table>
                     <tbody id="companyDetailsTable">
-                        <!-- 여기에 AJAX를 통해 데이터를 삽입합니다 -->
+                        <!-- JavaScript로 데이터를 삽입할 부분 -->
                     </tbody>
                 </table>
-			</div>
-		</div>
-		<div class="info" id="postingInfo">
-			채용공고
-			<div>
-				<div class="postingList">채용공고리스트1</div>
-				<div class="postingList">채용공고리스트2</div>
-				<div class="postingList">채용공고리스트3</div>
-			</div>
-		</div>
-		<div class="info" id="salaryInfo">
-			연봉정보
-			<div id="companyName2">삼성전자(주)
-				<div class="money-container">
-					<div class="money">전체 평균 연봉
-						<div> 10,376만원</div>
-					</div>
-					<div class="money">신입사원 초봉
-						<div> 5,035만원</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="info" id="letterInfo">
-			합격후기
-			<div>
-				<div class="postingList">합격후기1</div>
-				<div class="postingList">합격후기2</div>
-				<div class="postingList">합격후기3</div>	
-			</div>
-		</div>
-	</main>
+            </div>
+        </div>
+        <div class="info" id="postingInfo">
+            채용공고
+            <div id="postingDetail">
+                <div class="postingList">채용공고리스트1</div>
+                <div class="postingList">채용공고리스트2</div>
+                <div class="postingList">채용공고리스트3</div>
+            </div>
+        </div>
+        <div class="info" id="salaryInfo">
+            연봉정보
+            <div id="companyName2">
+            	<span id="com_name">삼성전자(주)</span>
+            	<div class="pay-containger">
+                	<div class="money-container">
+                		<span>전체 평균 연봉</span>
+                    	<div id="averageSalary">
+                        
+                    	</div>
+                	</div>
+                	<div class="money-container vertical">   
+                    	<span>신입사원 초봉</span>
+                    	<div id="entrySalary">
+                    
+                    	</div>
+                	</div>
+                </div> 
+            </div>
+        </div>
+        <div class="info" id="letterInfo">
+            합격후기
+            <div id="review">
+                <div class="postingList">합격후기1</div>
+                <div class="postingList">합격후기2</div>
+                <div class="postingList">합격후기3</div>    
+            </div>
+        </div>
+    </main>
 
-	<footer>
-		<%@ include file="../front/footer.jsp"%>
-	</footer>
-	
+    <footer>
+        <%@ include file="../front/footer.jsp" %>
+    </footer>
+    
 <script>
 $(document).ready(function() {
-    $.ajax({
-        url: "http://localhost:8888/api/com-detail/companyInfo",
-        method: "GET",
-        dataType: "json", // 서버에서 반환되는 데이터 타입을 명시
-        success: function(data) {
-            let companyDetail = data[0]; // 데이터의 첫 번째 객체를 가져옴
-            console.log(companyDetail);
-            // 가져온 데이터를 변수에 저장
-            let sectors = companyDetail.sectors;
-            let amount = companyDetail.amount;
-            let comType = companyDetail.com_type;
-            let foundation = companyDetail.foundation;
-            let comCeo = companyDetail.com_ceo;
-            let pension = companyDetail.pension;
-            let comAddr = companyDetail.com_addr;
-            let url = companyDetail.url;
+	// 기업정보
+	$.ajax({
+		url: "http://localhost:8888/api/com-detail/companyInfo",
+		method: "GET",
+		dataType: "json",
+		success: function(data) {
+			// data가 배열 형태인 경우, 첫 번째 객체를 사용
+            let detail = data[0];
+			console.log("detail:", detail);
+			// DOM에 데이터 삽입
+			$("#companyImage").attr("src", detail.img_url);
+			$("#companyName").text(detail.com_name);
+			$("#companyDetailsTable").html(
+				"<tr><th>산업</th><td>" + detail.sectors + "</td><th>사원수</th><td>" + detail.amount + "</td></tr>" +
+				"<tr><th>기업형태</th><td>" + detail.com_type + "</td><th>설립일</th><td>" + detail.foundation + "</td></tr>" + 
+				"<tr><th>대표자</th><td>" + detail.com_ceo + "</td><th>연금/보험</th><td>" + detail.pension + "</td></tr>" +
+				"<tr><th>주소</th><td>" + detail.com_addr + "</td><th>기업사이트</th><td><a href='" + detail.url + "'>" + detail.url + "</a></td></tr>"
+			);
+		},
+		error: function(error) {
+			console.log("Error:", error);
+		}
+	});
+
+	// 채용공고
+	$.ajax({
+		url: "http://localhost:8888/api/recruit94/recruitList",
+		method: "GET",
+		dataType: "json",
+		success: function(data) {
+			console.log("recruit:", data);
+			let postingDetail = $("#postingDetail");
+			postingDetail.empty(); // 기존 내용 삭제
 			
-          	console.log("값:",sectors );
+			// 반복문을 통해 데이터 삽입
+			data.forEach(function(recruit) {
+				postingDetail.append(
+					"<div class='postingList'>" +
+						"<h3>" + recruit.title + "</h3>" +
+						"<p>" + 
+						recruit.career + " | " +
+						recruit.location + " | " +
+						recruit.qualification + " | " +
+						recruit.deadline_date + 
+						"</p>" +
+					"</div>"
+				);
+			});
+		},
+		error: function(error) {
+			console.log("Error:", error);
+		}
+	});
+	
+	// 연봉정보
+	$.ajax({
+		url: "http://localhost:8888/api/recruit94/recruitList",
+		method: "GET",
+		dataType: "json",
+		success: function(data) {
+			// data가 배열 형태인 경우, 첫 번째 객체를 사용
+            let detail = data[0];
+			console.log("detail2:", detail);
+			
+			// 연봉 정보 출력
+            let annualSalary = detail.pay * 12 * 100; // 연간 연봉 계산
+            console.log("annualSalary:", annualSalary);
+            let entrySalary = detail.pay * 12; 
+
             // DOM에 데이터 삽입
-            $("#companyInfoDetails").html(
-                " <table> " +
-                   " <tr><th>산업</th><td>"+sectors+"</td><th>사원수</th><td>"+amount+"</td></tr> " +
-                   " <tr><th>기업형태</th><td>"+comType+"</td><th>설립일</th><td>"+foundation+"</td></tr> " + 
-                   " <tr><th>대표자</th><td>"+comCeo+"</td><th>연금/보험</th><td>"+pension+"</td></tr> " +
-                   " <tr><th>주소</th><td>"+comAddr+"</td><th>기업사이트</th><td>"+url+"</td></tr> " +
-               " </table> "
-            );
-        },
-        error: function(error) {
-            console.log("Error:", error);
-        }
-    });
+            $("#com_name").text(detail.com_name);
+            $("#averageSalary").html("<div>" + annualSalary.toLocaleString() + "원" + "</div>");
+            $("#entrySalary").html("<div>" + entrySalary.toLocaleString() + "원" + "</div>");
+		},
+		error: function(error) {
+			console.log("Error:", error);
+		}
+	});
+	// 합격후기 
+	$.ajax({
+		url: "http://localhost:8888/api/com-detail/companyInfo",
+		method: "GET",
+		dataType: "json",
+		success: function(data) {
+			console.log("review:", data);
+			let reviewdetail = $("#review");
+			console.log("reviewdetail:",reviewdetail);
+			reviewdetail.empty(); // 기존 내용 삭제
+			
+			// 반복문을 통해 데이터 삽입
+			data.forEach(function(review) {
+				reviewdetail.append(
+		                "<div class='postingList'>" +
+		                    "<h3>" + review.ideal_talent + "</h3>" +
+		                "</div>"
+		            );
+			});
+		},
+		error: function(error) {
+			console.log("Error:", error);
+		}
+	});
+
 });
-</script>    
+</script>
 </body>
 </html>

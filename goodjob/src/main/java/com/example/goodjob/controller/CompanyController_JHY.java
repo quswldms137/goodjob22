@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dao.ICompanyDao_JHY;
-import com.example.goodjob.dto.RecruitDto;
+import com.example.goodjob.dto.RecruitListDto94;
 
 @CrossOrigin("http://localhost:9991/")
 @RestController
@@ -22,15 +22,15 @@ public class CompanyController_JHY {
 	private ICompanyDao_JHY companyDao;
 	
 	@GetMapping("/index")
-	public List<RecruitDto> main() {
+	public List<RecruitListDto94> main() {
 		
-		List<RecruitDto> list = companyDao.findAll();
+		List<RecruitListDto94> list = companyDao.findAll();
 		System.out.println(list);
 		return list;
 	}
 	
 	@PostMapping("/recruitWrite")
-	public String recruit(@RequestBody RecruitDto recruitDto) {
+	public String recruit(@RequestBody RecruitListDto94 recruitDto) {
 		
 		companyDao.recruitWrite(recruitDto);
 		
