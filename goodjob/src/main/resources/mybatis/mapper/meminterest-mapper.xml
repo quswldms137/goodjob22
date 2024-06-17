@@ -8,10 +8,13 @@
 		INSERT INTO mem_interest VALUES(NULL, #{memInterestDto.mem_no}, #{memInterestDto.com_no});
 	</insert>
 	<select id="getCom_no">
-		SELECT com_no FROM mem_interest WHERE mem_no = #{mem_no};
+		SELECT com_no FROM mem_interest WHERE mem_no = #{mem_no} LIMIT #{start}, 5;
 	</select>
 	<select id="getSubscribe">
 		SELECT COUNT(mem_interest_no) FROM mem_interest WHERE mem_no = #{memInterestDto.mem_no} AND com_no = #{memInterestDto.com_no};
+	</select>
+	<select id="findByMem_no">
+		SELECT com_no FROM mem_interest WHERE mem_no = #{mem_no};
 	</select>
 	<delete id="removeSubscribe">
 		DELETE FROM mem_interest WHERE mem_no = #{memInterestDto.mem_no} AND com_no = #{memInterestDto.com_no};

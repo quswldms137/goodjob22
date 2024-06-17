@@ -11,7 +11,8 @@ import com.example.goodjob.dto.ScrapRecruitDto;
 public interface IScrapRecruitDao {
 
 	public int createScrap(@Param("scrapRecruitDto") ScrapRecruitDto scrapRecruitDto);
-	public List<Long> getRecruit_no(@Param("mem_no") Long mem_no);
+	public List<Long> getRecruit_no(@Param("mem_no") Long mem_no, @Param("start") int start);
 	public int getScrap(@Param("scrapRecruitDto") ScrapRecruitDto scrapRecruitDto);
 	public int removeScrap(@Param("scrapRecruitDto") ScrapRecruitDto scrapRecruitDto);
+	public List<Long> findByMem_no(@Param("mem_no") Long mem_no);
 }

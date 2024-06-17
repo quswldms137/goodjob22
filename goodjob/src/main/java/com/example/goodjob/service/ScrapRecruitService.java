@@ -24,9 +24,10 @@ public class ScrapRecruitService {
 		this.iCompanyDao = iCompanyDao;
 	}
 	
-	public List<RecruitDto_JYC> getScrapList(Long mem_no) {
+	public List<RecruitDto_JYC> getScrapList(Long mem_no, int page) {
 
-		List<Long> list = iScrapRecruitDao.getRecruit_no(mem_no);
+		List<Long> list = iScrapRecruitDao.getRecruit_no(mem_no, (page - 1) * 5);
+		List<Long> count = iScrapRecruitDao.findByMem_no(mem_no);
 		List<RecruitDto_JYC> result = new ArrayList<>();
 
 		if (list.size() > 0) {
@@ -37,6 +38,7 @@ public class ScrapRecruitService {
 
 				String com_name = iCompanyDao.getCom_name(recruitDto.getCom_no());
 				recruitDto.setCom_name(com_name);
+				recruitDto.setTotal(count.size());
 				result.add(recruitDto);
 			});
 		}

@@ -15,10 +15,11 @@ public class ServiceQuestionDto {
 
 	private Long cs_no;
 	private Long mem_no;
-	private Long com_no;
 	private String title;
 	private String content;
 	private LocalDate reg_date;
 	private String category;
 	private String answer;
+
+	private int total;
 }

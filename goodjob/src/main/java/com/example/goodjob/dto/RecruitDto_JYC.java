@@ -32,5 +32,6 @@ public class RecruitDto_JYC {
 	private LocalDate reg_date;
 	private LocalDate deadline_date;
 	private String p_number;
+	private int total;
 	
 }

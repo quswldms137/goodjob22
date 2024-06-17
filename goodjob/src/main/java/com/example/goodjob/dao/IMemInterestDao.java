@@ -12,7 +12,8 @@ import com.example.goodjob.dto.ScrapRecruitDto;
 public interface IMemInterestDao {
 
 	public int createSubscribe(@Param("memInterestDto") MemInterestDto memInterestDto);
-	public List<Long> getCom_no(@Param("mem_no") Long mem_no);
+	public List<Long> getCom_no(@Param("mem_no") Long mem_no, @Param("start") int start);
 	public int getSubscribe(@Param("memInterestDto") MemInterestDto memInterestDto);
 	public int removeSubscribe(@Param("memInterestDto") MemInterestDto memInterestDto);
+	public List<Long> findByMem_no(@Param("mem_no") Long mem_no);
 }

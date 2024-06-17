@@ -37,5 +37,6 @@ public class CompanyDto_JYC {
 	private Date foundation;
 	private int amount;
 	private String url;
+	private int total;
 	
 }
