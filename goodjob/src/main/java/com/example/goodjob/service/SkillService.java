@@ -12,11 +12,9 @@ public class SkillService {
 	@Autowired
 	private SkillDao skillDao;
 	
-	public SkillDto skillWriteService(SkillDto skillDto) {
+	public int skillWriteService(SkillDto skillDto) {
 		
-		SkillDto result = skillDao.skillWrite(skillDto);
-		
-		return result;
+		return skillDao.skillWrite(skillDto);
 		
 	}
 

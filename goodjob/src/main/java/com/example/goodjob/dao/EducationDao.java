@@ -7,6 +7,6 @@ import com.example.goodjob.dto.EducationDto;
 @Mapper
 public interface EducationDao {
 
-	public EducationDto educationWrite(EducationDto educationDto);
+	public int educationWrite(EducationDto educationDto);
 	
 }

@@ -5,8 +5,8 @@
 <mapper namespace="com.example.goodjob.dao.EtcDao">
 
 	<insert id="etcWrite">
-		insert into etc (resume_no, etc_name, etc_origin_name)
-		values (#{resume_no}, #{etc_name}, #{etc_origin_name})
+		insert into etc (resume_no, etc_name1, etc_name2, etc_name3)
+		values (#{resume_no}, #{etc_name1}, #{etc_name2}, #{etc_name3})
 	</insert>
 
 </mapper>

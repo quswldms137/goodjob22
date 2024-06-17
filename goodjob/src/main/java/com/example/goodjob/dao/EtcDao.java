@@ -7,6 +7,6 @@ import com.example.goodjob.dto.EtcDto;
 @Mapper
 public interface EtcDao {
 	
-	public EtcDto etcWrite(EtcDto etcDto);
+	public int etcWrite(EtcDto etcDto);
 
 }

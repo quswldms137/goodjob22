@@ -7,6 +7,6 @@ import com.example.goodjob.dto.SkillDto;
 @Mapper
 public interface SkillDao {
 
-	public SkillDto skillWrite(SkillDto skillDto);
+	public int skillWrite(SkillDto skillDto);
 	
 }
