@@ -8,5 +8,9 @@
 		insert into career (resume_no, company, car_join_date, quit_date, main_part)
 		values (#{resume_no}, #{company}, #{car_join_date}, #{quit_date}, #{main_part})
 	</insert>
+	
+	<select id="getCareerDetail" resultType="com.example.goodjob.dto.CareerDto">
+		select * from career where resume_no = #{resume_no};
+	</select>
 
 </mapper>

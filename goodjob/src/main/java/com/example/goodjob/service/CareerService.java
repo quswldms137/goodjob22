@@ -12,9 +12,17 @@ public class CareerService {
 	@Autowired
 	private CareerDao careerDao;
 	
+	/* 이력서에 경력사항 등록 */
 	public int careerWriteService(CareerDto careerDto) {
 		
 		return careerDao.careerWrite(careerDto);
 	}
+	
+	/* 이력서 경력사항 상세보기 */
+	public CareerDto getCareerDetailService(Long resume_no) {
+		
+		return careerDao.getCareerDetail(resume_no);
+	}
+	
 
 }

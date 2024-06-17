@@ -12,10 +12,17 @@ public class SkillService {
 	@Autowired
 	private SkillDao skillDao;
 	
+	/* 이력서에 보유스킬정보 등록 */
 	public int skillWriteService(SkillDto skillDto) {
 		
 		return skillDao.skillWrite(skillDto);
 		
+	}
+	
+	/* 이력서 보유스킬 상세보기 */
+	public SkillDto getSkillDetailService(Long resume_no) {
+		
+		return skillDao.getSkillDetail(resume_no);
 	}
 
 }

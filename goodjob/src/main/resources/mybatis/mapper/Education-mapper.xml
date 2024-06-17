@@ -9,4 +9,8 @@
   	values (#{resume_no}, #{school}, #{edu_join_date}, #{edu_gra_date}, #{graduation}, #{grades}, #{major})
   </insert>
   
+  <select id="getEducationDetail" resultType="com.example.goodjob.dto.EducationDto">
+  	select * from education where resume_no = #{resume_no};
+  </select>
+  
   </mapper>
