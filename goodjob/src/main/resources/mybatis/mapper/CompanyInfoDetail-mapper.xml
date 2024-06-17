@@ -4,8 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.example.goodjob.dao.ICompanyInfoDetailDao">
-	<select id="getCompanyDetail" resultType="com.example.goodjob.dto.CompanyDetailDto94">
-		SELECT c.com_type, c.com_ceo, c.com_addr, cd.img_url, cd.Pension, cd.Sectors, cd.foundation, cd.amount, cd.url FROM company c JOIN company_detail cd ON c.com_no = cd.com_no
-	</select>
-</mapper>  
+  <select id="getCompanyDetail" resultType="com.example.goodjob.dto.CompanyDetailDto94">
+    SELECT
+			c.com_name,
+			c.com_type,
+			c.com_ceo,
+			c.com_addr,
+			c.com_no,
+			cd.img_url,
+			cd.Pension,
+			cd.Sectors,
+			cd.foundation,
+			cd.amount,
+			cd.ideal_talent,
+			cd.url
+		FROM
+			company c JOIN company_detail cd
+		ON 
+			c.com_no = cd.com_no
+		
+
+  </select>
+</mapper>
 
