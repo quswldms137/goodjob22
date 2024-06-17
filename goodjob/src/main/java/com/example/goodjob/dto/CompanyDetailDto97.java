@@ -14,7 +14,7 @@ public class CompanyDetailDto97 {
 
 	private Long com_detail_no;
 	private Long com_no;
-	private String introdiction;
+	private String introduction;
 	private String img_url;
 	private String pension;
 	private String sectors;

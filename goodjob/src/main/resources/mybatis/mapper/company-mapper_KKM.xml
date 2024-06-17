@@ -5,11 +5,9 @@
   
   <mapper namespace="com.example.goodjob.dao.ICompany97">
   
-  <insert id="CompanyDetailWrite">
-  	INSERT INTO company_detail (com_detail_no, com_no, introduction, img_url, pension, sectors, HISTORY, ideal_talent, foundation, amount, url)
-  	VALUES(NULL, #{com_no},#{introduction},#{img_url},#{pension},#{sectors}, '#{history}', #{ideal_talent},#{foundation},#{amount},#{url});
-  	
-  	
+  <insert id="CompanyDetailWrite" parameterType="com.example.goodjob.dto.CompanyDetailDto97" useGeneratedKeys="true" keyProperty="com_detail_no">
+  	INSERT INTO company_detail (com_no, introduction, img_url, pension, sectors, history, ideal_talent, foundation, amount, url)
+  	VALUES (#{com_no},#{introduction},#{img_url},#{pension},#{sectors},#{history}, #{ideal_talent},#{foundation},#{amount},#{url});
   </insert>
   
   </mapper>
