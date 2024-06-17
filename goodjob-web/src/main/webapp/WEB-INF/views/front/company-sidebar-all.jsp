@@ -100,7 +100,7 @@ ul {
 		<div class="sidebar-box sidebar-box3">
 			<h3>인재관리</h3>
 			<p><a href="#">인재 검색</a></p>
-			<p><a href="#">관심 구직자 목록</a></p>
+			<p><a href="/company/interestMemberList?com_no=1">관심 구직자 목록</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box6">
 			<h3>회원정보 관리</h3>
