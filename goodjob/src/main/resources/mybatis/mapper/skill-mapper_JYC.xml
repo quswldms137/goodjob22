@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.goodjob.dao.ISkillDao_JYC">
+	<select id="findByResume_no" resultType="com.example.goodjob.dto.SkillDto">
+		SELECT * FROM skill WHERE resume_no = #{resume_no};
+	</select>
+	<select id="count">
+		SELECT skill_no FROM skill WHERE resume_no = #{resume_no};
+	</select>
+	<select id="getSkillName">
+		SELECT sk_name FROM skill WHERE skill_no = #{skill_no};
+	</select>
+</mapper>  

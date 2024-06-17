@@ -18,13 +18,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("/info")
-	public String info(HttpSession session) {
-		
-		MemberDto memberDto = new MemberDto();
-		memberDto.setUsername("hgd");
-		
-		session.setAttribute("memberDto", memberDto);
-		
+	public String info() {
 		return "updateMemberInfo";
 	}
 }
