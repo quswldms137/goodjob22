@@ -23,9 +23,10 @@ public class CompanyDetailDto94 {
 	private int amount;
 	private String url;
 	
+	private String com_name;
 	private String com_type; 
 	private String com_ceo; 
-	private String com_addr; 
+	private String com_addr;  
 	
 	
 }

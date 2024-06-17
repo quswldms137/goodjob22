@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecruitDto {
+public class RecruitListDto94 {
 
 	private Long recruit_no;
 	private Long com_no;

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.goodjob.dao.IRecruitListDao94">
+  <select id="getRecruitListDto" resultType="com.example.goodjob.dto.RecruitListDto94">
+    SELECT
+			c.com_name,
+			c.com_no,
+			r.title,
+			r.qualification,
+			r.career,
+			r.deadline_date,
+			r.location,
+			r.pay
+		FROM
+			recruit r JOIN company c 
+		ON 
+			c.com_no = r.com_no
+		
+
+  </select>
+</mapper>
