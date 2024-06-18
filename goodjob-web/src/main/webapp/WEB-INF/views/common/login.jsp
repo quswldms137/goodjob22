@@ -41,6 +41,8 @@ main {
 		</form>
 	</div>
 	<div id="response"></div>
+	<a href="/common99/findUsername">아이디 찾기</a>
+	<a href="/common99/findPassword">비밀번호 찾기</a>
 	</main>
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
