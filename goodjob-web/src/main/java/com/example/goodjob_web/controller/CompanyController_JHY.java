@@ -31,7 +31,7 @@ public class CompanyController_JHY { // view
 		return "company/employWrite";
 	}
 	
-	/*
+	
 	@RequestMapping("/employUpdate")
 	public String employUpdate(@RequestParam("recruit_no") String recruit_no, Model model) {
 		
@@ -39,7 +39,7 @@ public class CompanyController_JHY { // view
 		
 		return "company/employWrite";
 	}
-	*/
+	
 	@RequestMapping("/interestMemberList")
 	public String interestMemberList() {
 		

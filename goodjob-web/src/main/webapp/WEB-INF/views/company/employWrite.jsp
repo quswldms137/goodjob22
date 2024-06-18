@@ -114,12 +114,12 @@ main #container {
 					<p>고용형태</p>
 					<select id="field" onchange="changeField()">
 						<option>고용형태를 선택해주세요.</option>
-						<option value="정규직">정규직</option>
-						<option value="계약직">계약직</option>
-						<option value="인턴">인턴</option>
-						<option value="파견직">파견직</option>
-						<option value="아르바이트">아르바이트</option>
-						<option value="교육생">교육생</option>
+						<option id="field1" value="정규직">정규직</option>
+						<option id="field2" value="계약직">계약직</option>
+						<option id="field3" value="인턴">인턴</option>
+						<option id="field4" value="파견직">파견직</option>
+						<option id="field5" value="아르바이트">아르바이트</option>
+						<option id="field6" value="교육생">교육생</option>
 					</select>
 					<input type="hidden" name="field">
 				</div>
@@ -155,7 +155,14 @@ main #container {
 					<p>공고마감일</p>
 					<input type="date" name="deadline_date">
 				</div>
-				<div><button type="button" onclick="return recruitWrite()">등록</button> <button type="button" onclick="cancel()">취소</button></div>
+				<div>
+					<c:if test="${recruit_no == null} ">
+					<button type="button" onclick="return recruitWrite()">등록</button> <button type="button" onclick="cancel()">취소</button>
+					</c:if>
+					<c:if test="${recruit_no != null }">
+						<button type="button" onclick="recruitUpdate()">수정</button> <button type="button" onclick="cancel()">취소</button>
+					</c:if>
+				</div>
 			</form>
 		</div>
 	</main>
@@ -207,17 +214,17 @@ main #container {
 			const log = document.querySelector("input[name='recruit_no']");
 			console.log(log);
 		})
-		
+		// select 에서 값이 바뀌면 값을 바꿔주는 용도
 		function changeField(){
 			const selectElement = document.querySelector("#field");
 			const fieldElement = document.querySelector("input[name='field']");
 			fieldElement.value = selectElement.value;
 		}
-		
+		// 취소 버튼 (전체 채용공고 관리 페이지로 이동)
 		function cancel(){
 			window.location.href = "/company/employManage";
 		}
-		
+		// 채용공고 작성 버튼 클릭 - 채용공고를 등록
 		function recruitWrite(){
 			const xhttp = new XMLHttpRequest();
 			const skills = document.querySelectorAll(".skill");
@@ -230,7 +237,6 @@ main #container {
 			console.log(skill);
 			const data = JSON.stringify({
 				com_no : "1",
-				username : "samsung",
 				career : document.querySelector("input[name='career']").value,
 				education : document.querySelector("input[name='education']").value,
 				field : document.querySelector("input[name='field']").value,
@@ -251,6 +257,7 @@ main #container {
 			//const data2 = JSON
 			xhttp.onload = function(){
 				alert(this.responseText);
+				location.href = "/company/employManage";
 			}
 			xhttp.open("POST", "http://localhost:8888/api/company/employWrite");
 			xhttp.setRequestHeader("Content-type", "application/json")
@@ -259,7 +266,95 @@ main #container {
 		}
 		
 		function recruitUpdate(){
+			const xhttp = new XMLHttpRequest();
 			
+			const skills = document.querySelectorAll(".skill");
+			const skill = new Array();
+			console.log(skills);
+			skills.forEach(item =>{
+				skill.push(item.innerText.substring(0, item.innerText.length-1));
+			})
+			
+			const data = JSON.stringify({
+				recruit_no : ${recruit_no},
+				com_no : "1",
+				career : document.querySelector("input[name='career']").value,
+				education : document.querySelector("input[name='education']").value,
+				field : document.querySelector("input[name='field']").value,
+				pay : document.querySelector("input[name='pay']").value,
+				location : document.querySelector("input[name=location]").value,
+				working_time : document.querySelector("input[name='working_time']").value,
+				rank : document.querySelector("input[name='rank']").value,
+				title : document.querySelector("input[name='title']").value,
+				qualification : document.querySelector("input[name='qualification']").value,
+				welfare : document.querySelector("input[name='welfare']").value,
+				seprocedure : document.querySelector("input[name='seprocedure']").value,
+				notice : document.querySelector("input[name='notice']").value,
+				deadline_date : document.querySelector("input[name='deadline_date']").value,
+				p_number : document.querySelector("input[name='p_number']").value,
+				recruit_intro : document.querySelector("input[name='recruit_intro']").value,
+				skill : skill
+			})
+			
+			xhttp.onload = function(){
+				
+			}
+			xhttp.open("POST", "http://localhost:8888/api/company/recruitUpdate?recruint_no=" + recruit_no);
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(data);
+		}
+		
+		// 채용공고 관리 페이지나 메인페이지에서 채용공고 수정 버튼 클릭후 이 페이지 로드시 데이터 받아오는 ajax 통신
+		function recruitLoad(){
+			console.log("${recruit_no}");
+			let recruit_no = "${recruit_no}";
+			console.log(recruit_no);
+			if(recruit_no != null){
+				const xhttp = new XMLHttpRequest();
+				xhttp.onload = function(){
+					const recruit = JSON.parse(this.responseText);
+					console.log(recruit);
+					const field = document.querySelector("input[name='field']");
+					document.querySelector("input[name='career']").value = recruit.career;
+					document.querySelector("input[name='education']").value = recruit.education;
+					document.querySelector("#field").value = recruit.field;
+					document.querySelector("input[name='pay']").value = recruit.pay;
+					document.querySelector("input[name='location']").value = recruit.location;
+					document.querySelector("input[name='working_time']").value = recruit.working_time;
+					document.querySelector("input[name='rank']").value = recruit.rank;
+					document.querySelector("input[name='title']").value = recruit.title;
+					document.querySelector("input[name='qualification']").value = recruit.qualification;
+					document.querySelector("input[name='welfare']").value = recruit.welfare;
+					document.querySelector("input[name='seprocedure']").value = recruit.seprocedure;
+					document.querySelector("input[name='notice']").value = recruit.notice;
+					document.querySelector("input[name='deadline_date']").value = recruit.deadline_date;
+					document.querySelector("input[name='p_number']").value = recruit.p_number;
+					document.querySelector("input[name='recruit_intro']").value = recruit.recruit_intro;
+					
+					// 고용형태 (field) 설정
+		            const fieldSelect = document.getElementById('field');
+		            for (let i = 0; i < fieldSelect.options.length; i++) {
+		                if (fieldSelect.options[i].value === recruit.field) {
+		                    fieldSelect.selectedIndex = i;
+		                    break;
+		                }
+		            }
+		            
+					const searchResults = document.getElementById('searchResults');
+					searchResults.innerHTML = '';
+					recruit.skill.forEach(sk_name => {
+		                const li = document.createElement('li');
+		                li.textContent = sk_name;
+		                addSkill(sk_name);
+		                searchResults.appendChild(li);
+		            });
+				}
+				xhttp.open("GET", "http://localhost:8888/api/company/employUpdate?recruit_no=" + recruit_no);
+				xhttp.send();
+			}
+		}
+		if(${recruit_no} != null){
+			recruitLoad();
 		}
 	</script>
 </body>
