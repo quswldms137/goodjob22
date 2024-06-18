@@ -26,6 +26,7 @@ public interface ICompanyDao_JHY {
 	public RecruitDto findByRecruit_no(@Param("recruit_no") Long recruit_no);
 	// 채용공고에서 요구하는 스킬 조회
 	public List<String> findSkillListByRecruit_no(@Param("recruit_no") Long recruit_no);
-	
+	// 채용공고 수정
+	public boolean updateRecruit(@Param("recruit") RecruitDto recruit);
 	
 }

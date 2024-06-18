@@ -37,7 +37,7 @@ public class CompanyController_JHY { // view
 		
 		model.addAttribute("recruit_no", recruit_no);
 		
-		return "company/employWrite";
+		return "company/employUpdate";
 	}
 	
 	@RequestMapping("/interestMemberList")

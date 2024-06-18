@@ -86,11 +86,15 @@ public class CompanyController_JHY {
 	}
 	
 	@PutMapping("/recruitUpdate")
-	public String recruitUpdate(@RequestBody RecruitDto recruit ,@RequestParam("recruit_no") Long recruit_no) {
-		
-		
-		
-		return "";
+	public String recruitUpdate(@RequestBody RecruitDto recruit) {
+		boolean tf = companyDao.updateRecruit(recruit);
+		String str = "";
+		if(tf == true) {
+			str = "채용공고 수정에 성공하였습니다.";
+		}else {
+			str = "채용공고 수정에 실패하셨습니다. 다시 시도해주세요.";
+		}
+		return str;
 	}
 	
 	

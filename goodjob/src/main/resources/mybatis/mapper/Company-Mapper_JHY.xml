@@ -33,11 +33,26 @@
 									#{recruit.seprocedure}, #{recruit.notice}, now(), 
 									#{recruit.deadline_date}, #{recruit.p_number}, #{recruit.recruit_intro})
 	</insert>
-	
+	<!-- 채용공고 요구 스킬 등록 -->
 	<insert id="regSkill">
 		insert into c_skill values (null, #{recruit_no}, #{skill})
 	</insert>
 	
+	<!-- 채용공고 수정하기 -->
+	<update id="updateRecruit">
+		update recruit set career = #{recruit.career}, education = #{recruit.education}, 
+							field = #{recruit.field}, pay = #{recruit.pay}, location = #{recruit.location}, 
+							working_time = '${recruit.working_time}', rank = #{recruit.rank}, 
+							title = #{recruit.title}, qualification = #{recruit.qualification}, 
+							welfare = #{recruit.welfare}, seprocedure = #{recruit.seprocedure}, 
+							notice = #{recruit.notice}, deadline_date = #{recruit.deadline_date}, 
+							p_number = #{recruit.p_number}, recruit_intro = #{recruit.recruit_intro} 
+							where recruit_no = #{recruit.recruit_no}
+	</update>
+	
+	
+	
+	<!-- 특정 채용공고 삭제 -->
 	<delete id="delete">
 		delete from recruit where recruit_no = #{recruit_no}
 	</delete>
