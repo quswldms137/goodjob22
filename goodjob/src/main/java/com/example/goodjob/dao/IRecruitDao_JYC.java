@@ -14,4 +14,6 @@ public interface IRecruitDao_JYC {
 	public List<RecruitDto_JYC> getVip();
 	public RecruitDto_JYC findVipByCom_no(@Param("com_no") Long com_no);
 	public List<RecruitDto_JYC> findAllOrderByReg_dateDesc();
+	public List<Long> getRecruit_no(@Param("com_no") Long com_no);
+	public int deleteByRecruit_no(@Param("recruit_no") Long recruit_no);
 }

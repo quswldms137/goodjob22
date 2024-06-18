@@ -115,7 +115,9 @@ main #container {
 							if(totalItem % 5 > 0){
 								pages = Math.ceil(totalItem / 5);
 							}
-							
+							if(totalItem % 5 === 0){
+								pages = totalItem / 5;
+							}
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
 									   '<a href="#" class="info"> ' + 
@@ -130,12 +132,14 @@ main #container {
 						 			   '</div> ';
 							});
 							
-							
+							if(pages > 1){
+								
 							str += '<div id="pages">';
 							for(let i = 0; i < pages; i++){
-								str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
+								str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="subscribeBtn">';
 							}
 							str += '</div>';
+							}
 							
 							$("#company_container").html(str);
 							
@@ -193,7 +197,9 @@ main #container {
 				if(totalItem % 5 > 0){
 					pages = Math.ceil(totalItem / 5);
 				}
-				
+				if(totalItem % 5 === 0){
+					pages = totalItem / 5;
+				}
 				let str = "";
 				response.forEach(item => {
 					str += '<div id="company_box"> ' + 
@@ -208,11 +214,14 @@ main #container {
 			 			   '</div> ';
 				});
 				
-				str += '<div id="pages">';
-				for(let i = 0; i < pages; i++){
-					str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
-				}
-				str += '</div>';
+				if(pages > 1){
+					
+					str += '<div id="pages">';
+					for(let i = 0; i < pages; i++){
+						str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="subscribeBtn">';
+					}
+					str += '</div>';
+					}
 				
 				$("#company_container").html(str);
 				

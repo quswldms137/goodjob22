@@ -119,7 +119,9 @@ main #container {
 					if(totalItem % 5 > 0){
 						pages = Math.ceil(totalItem / 5);
 					}
-					
+					if(totalItem % 5 === 0){
+						pages = totalItem / 5;
+					}
 					let str = '';
 					
 					response.forEach(item =>{
@@ -142,11 +144,14 @@ main #container {
 								'</div> ';
 					});
 					
+					if(pages > 1){
+						
 					str += '<div id="pages">';
 					for(let i = 0; i < pages; i++){
 						str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="qnaBtn">';
 					}
 					str += '</div>';
+					}
 					
 					$("#myquestion").html(str);
 				},
@@ -170,10 +175,11 @@ main #container {
 		
 		function deleteQuestion(event){
 			const xhr = new XMLHttpRequest();
-			xhr.onreadystatechange = function(){
+			xhr.onload = function(){
+				
 					const item_box = document.querySelector(".item" + event.target.id.substring(6)).style.display = "none";
-					
 					alert(this.responseText);
+					location.href="/qna";
 			}
 			xhr.open("DELETE", "http://localhost:8888/api/qna/" + event.target.id.substring(6), true);
 			xhr.send();
@@ -194,7 +200,9 @@ main #container {
 				if(totalItem % 5 > 0){
 					pages = Math.ceil(totalItem / 5);
 				}
-				
+				if(totalItem % 5 === 0){
+					pages = totalItem / 5;
+				}
 				let str = '';
 				
 				response.forEach(item =>{
@@ -216,12 +224,14 @@ main #container {
 					str += '<input type="button" value="삭제" onclick="deleteQuestion(event)" id="remove' + item.cs_no + '"> ' +
 							'</div>';
 				});
-				str += '<div id="pages">';
-				for(let i = 0; i < pages; i++){
-					str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="qnaBtn">';
+				if(pages > 1){
 					
-				}
-				str += "</div>";
+					str += '<div id="pages">';
+					for(let i = 0; i < pages; i++){
+						str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="qnaBtn">';
+					}
+					str += '</div>';
+					}
 				$("#myquestion").html(str);
 				
 			}

@@ -7,4 +7,7 @@
 	<select id="findAll" resultType="com.example.goodjob.dto.CSkillDto">
 		SELECT * FROM c_skill;
 	</select>
+	<delete id="deleteByRecruit_no">
+		DELETE FROM c_skill WHERE recruit_no = #{recruit_no};
+	</delete>
 </mapper>  

@@ -90,7 +90,6 @@ input[type=button]:hover{
 }
 .sidebar-box5 p:nth-child(2) a{
 	color:#FB8500 !important;
-	
 }
 </style>
 </head>
@@ -128,7 +127,9 @@ input[type=button]:hover{
 							if(totalItem % 5 > 0){
 								pages = Math.ceil(totalItem / 5);
 							}
-							
+							if(totalItem % 5 === 0){
+								pages = totalItem / 5;
+							}
 							let str = "";
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
@@ -144,11 +145,14 @@ input[type=button]:hover{
 						 			   '</div> ';
 							});
 							
-							str += '<div id="pages">';
-							for(let i = 0; i < pages; i++){
-								str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
-							}
-							str += '</div>';
+							if(pages > 1){
+								
+								str += '<div id="pages">';
+								for(let i = 0; i < pages; i++){
+									str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
+								}
+								str += '</div>';
+								}
 							
 							$("#recruit_container").html(str);
 						},
@@ -211,7 +215,9 @@ input[type=button]:hover{
 				if(totalItem % 5 > 0){
 					pages = Math.ceil(totalItem / 5);
 				}
-				
+				if(totalItem % 5 === 0){
+					pages = totalItem / 5;
+				}
 				let str = "";
 				response.forEach(item => {
 					str += '<div id="company_box"> ' + 
@@ -227,11 +233,14 @@ input[type=button]:hover{
 			 			   '</div> ';
 				});
 				
+				if(pages > 1){
+					
 				str += '<div id="pages">';
 				for(let i = 0; i < pages; i++){
 					str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
 				}
 				str += '</div>';
+				}
 				
 				$("#recruit_container").html(str);
 				

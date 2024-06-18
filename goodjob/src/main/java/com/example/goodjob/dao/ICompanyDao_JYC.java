@@ -13,4 +13,7 @@ public interface ICompanyDao_JYC {
 	public CompanyDto_JYC findByCom_no(@Param("com_no") Long com_no);
 	public String getCom_name(@Param("com_no") Long com_no);
 	public List<Long> getCom_noOrderByVip();
+	public List<CompanyDto_JYC> getCompanyDtoList(@Param("start") int start);
+	public int count();
+	public int deleteByUsername(@Param("username") String username);
 }

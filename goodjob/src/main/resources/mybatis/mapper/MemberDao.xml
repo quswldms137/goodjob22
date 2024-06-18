@@ -10,6 +10,15 @@
 	<select id="getMem_no">
 		SELECT mem_no FROM member WHERE username = #{username};
 	</select>
+	<select id="getMemberDtoList" resultType="com.example.goodjob.dto.MemberDto">
+		SELECT * FROM member ORDER BY mem_name ASC LIMIT #{start}, 4;
+	</select>
+	<select id="count">
+		SELECT COUNT(mem_no) FROM member;
+	</select>
+	<select id="findByMem_no" resultType="com.example.goodjob.dto.MemberDto">
+		SELECT * FROM member WHERE mem_no = #{mem_no};
+	</select>
 	<update id="update">
 		UPDATE member SET mem_name = #{memberDto.mem_name}, mem_tel = #{memberDto.mem_tel}, mem_email = #{memberDto.mem_email}, 
 		mem_gender = #{memberDto.mem_gender}, mem_birth = #{memberDto.mem_birth}, mem_addr = #{memberDto.mem_addr} WHERE username = #{memberDto.username};
