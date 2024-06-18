@@ -17,4 +17,6 @@ public class CompanyService97 {
 		return icompany97.CompanyDetailWrite(companydetail);
 	}
 	
+	
+	
 }

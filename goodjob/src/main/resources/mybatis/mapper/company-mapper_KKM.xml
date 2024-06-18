@@ -9,5 +9,8 @@
   	INSERT INTO company_detail (com_no, introduction, img_url, pension, sectors, history, ideal_talent, foundation, amount, url)
   	VALUES (#{com_no},#{introduction},#{img_url},#{pension},#{sectors},#{history}, #{ideal_talent},#{foundation},#{amount},#{url});
   </insert>
+  <select id="getcompanyinfo">
+  	SELECT * FROM company_detail where com_no = #{com_no}
+  </select>
   
   </mapper>

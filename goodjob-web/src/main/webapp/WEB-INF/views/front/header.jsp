@@ -170,7 +170,7 @@ header {
 				<ul>
 					<li><a href="/common99/login">로그인</a></li>
 					<li><a href="/common99/join">회원가입</a></li>
-					<li><a href="#">기업서비스</a></li>
+					<li><a href="/company">기업서비스</a></li>
 				</ul>
 				</div>
 				<div id="login" style="display:none;">

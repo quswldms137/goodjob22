@@ -139,21 +139,24 @@ input[type="button"] {
 						</label>
 					</div>
 
-					<label>기업소개</label> <input type="text" name="introduction"
-						placeholder="기업소개.."> <input type="text" name="com_no"
-						value="6"> <label>연금/보험</label> <input type="text"
-						name="pension" placeholder="연금/보험.."> <label>업종</label> <input
-						type="text" name="sectors" placeholder="업종.."> <label>연혁</label>
-					<input type="text" name="history" placeholder="연혁.."> <label>인재상</label>
+					<label>기업소개</label>
+					<input type="text" name="introduction"placeholder="기업소개..">
+					<input type="text" name="com_no"value="6">
+					<label>연금/보험</label> <input type="text"name="pension" placeholder="연금/보험..">
+					<label>업종</label>
+					<input type="text" name="sectors" placeholder="업종..">
+					<label>연혁</label>
+					<input type="text" name="history" placeholder="연혁..">
+					<label>인재상</label>
 					<input type="text" name="ideal_talent" placeholder="인재상..">
 					<label>설립연도</label>
-					<div
-						style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-						<input type="date" name="foundation">
+					<div style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+					<input type="date" name="foundation">
 					</div>
-					<label>사원수</label> <input type="text" name="amount"
-						placeholder="사원수.."> <label>사이트주소입력</label> <input
-						type="text" name="url" placeholder="주소입력..">
+					<label>사원수</label>
+					<input type="text" name="amount"placeholder="사원수..">
+					<label>사이트주소입력</label>
+					<input type="text" name="url" placeholder="주소입력..">
 				</div>
 
 				<div class="submit_btn">
@@ -174,9 +177,13 @@ input[type="button"] {
 
 	<script>
 		//취소버튼 클릭시 페이지 리셋
-
+		$('.cancel-btn').on('click', function(){
+			alert("취소하였습니다!!");
+			window.location = "/company/info";
+		});
+		
+		
 		//기업정보 등록
-
 		$(document).ready(function() {
 			$("#companyinfo").submit(function(event) {
 				event.preventDefault();
@@ -239,6 +246,52 @@ input[type="button"] {
 			xhr.send(data);
 		}
 		 */
+		 //기업정보 조회
+		 $(document).ready(function(
+			//페이지 로드 시 URL에서 com_no가져오기
+			const urlParams = new URLSearchParams(window.location.serach);
+			const com_no = urlParams.get('com_no');
+		
+			if(com_no){
+				getinfoDetail(com_no);
+			}
+			
+			function getinfoDetail(com_no){
+			$.ajax({
+				 url: "http://localhost:8888/api/company/info?com_no="+com_no,
+				 method: "GET",
+				 data: {com_no: com_no},
+				 success: function(data){
+					 console.log('기업 정보 조회 성공:', data);
+					 
+		                $('#introduction').val(data.introduction);
+		                $('#pension').val(data.pension);
+		                $('#sectors').val(data.sectors);
+		                $('#history').val(data.history);
+		                $('#idealTalent').val(data.ideal_talent);
+		                $('#foundation').val(data.foundation);
+		                $('#employeeCount').val(data.amount);
+		                $('#websiteUrl').val(data.url);
+					 
+				if(data.img_url){
+					  $('#photoFrame').attr('src', data.img_url);
+	                  $('#photoFrame').css('visibility', 'visible');
+				}
+				 },
+				error: function(error){
+					console.error('기업 정보 조회 실패', error);
+					alert('기업 정보 조회에 실패하였습니다.')
+				}		                
+					 
+				 }
+			
+			 });
+			}
+		 ));
+		 
+		 
+		 
+		 
 	</script>
 
 </body>
