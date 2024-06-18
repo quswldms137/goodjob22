@@ -24,7 +24,7 @@ public class QnAController_99 {
 	@Autowired
 	private QnaService99 qnaService;
 	
-	@PostMapping
+	@PostMapping("/insert")
 	public ResponseEntity<String> regQuestion(@RequestBody ServiceQuestionDto serviceQuestionDto,
 			@RequestHeader("username")String username, @RequestHeader("role")String role ) {
 		System.out.println("실행,,,,");
@@ -84,10 +84,34 @@ public class QnAController_99 {
 		}
 	}
 	
-	
-	
-	
-	
+	@PostMapping("/modify")
+	public ResponseEntity<String> modifyQuestion(@RequestBody ServiceQuestionDto serviceQuestionDto,
+			@RequestHeader("username")String username) {
+		System.out.println("실행,,,,");
+		
+		System.out.println("수정된 내용: " + serviceQuestionDto);
+		
+		System.out.println("username: " + username);
+		
+		Long mem_no = qnaService.getMem_no(username);
+		Long com_no = qnaService.getCom_no(username);
+
+		if(mem_no != null) {
+			System.out.println("mem_no: " + mem_no);
+			serviceQuestionDto.setMem_no(mem_no);
+		} else if(com_no != null){
+			System.out.println("com_no: " + com_no);
+			serviceQuestionDto.setCom_no(com_no);
+		}
+		
+		int result = qnaService.modifyQuestion(serviceQuestionDto);
+		
+		if(result == 1) {
+			return ResponseEntity.ok("수정이 완료되었습니다!");
+		} else {
+			return ResponseEntity.badRequest().body("다시 시도해주세요.");
+		}
+	}
 	
 	
 	
