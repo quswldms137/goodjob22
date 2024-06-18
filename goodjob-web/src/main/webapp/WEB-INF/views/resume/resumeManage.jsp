@@ -32,7 +32,7 @@ main #container {
 	background:#fff;
 }
 
-.resumeManage {
+.sidebar-box2 p:nth-child(2) a{
 	color: #FB8500 !important;
 }
 
