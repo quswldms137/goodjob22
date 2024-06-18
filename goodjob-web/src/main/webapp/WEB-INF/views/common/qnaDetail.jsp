@@ -47,12 +47,14 @@ main #container {
 	 	</li>
 	</ul>
 	</div>
+
 	</main>
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
 	
 	<script>
+
 	function show(){
 		var writeForm = document.getElementById('qnaWrite');
 		var qnaList = document.getElementById('qnaListContainer');
@@ -153,7 +155,10 @@ main #container {
 		xhttp.send();
 		
 	}
-	
+
+	window.onload = function(){
+		
+	} 
 	</script>
 </body>
 </html>

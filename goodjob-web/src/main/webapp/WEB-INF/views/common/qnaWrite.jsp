@@ -167,7 +167,7 @@ main #container {
 					table += '<tr>';
 					table += '<td>' + (i+1) + '</td>';
 					table += '<td>' + data[i].category + '</td>';
-					table += '<td><button onclick="/qna99/qnaDetail">' + data[i].title + '</button></td>';
+					table += '<td><button onclick="loadDetail('+ data[i].cs_no +')">' + data[i].title + '</button></td>';
 					table += '<td>' + data[i].reg_date + '</td>';
 					table += '</tr>';
 				}
@@ -189,6 +189,10 @@ main #container {
 		
 	}
 	
+	function loadDetail(cs_no){
+		window.location.href="/qna99/qnaDetail?cs_no="+cs_no;
+	}
+
 	</script>
 </body>
 </html>
