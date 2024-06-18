@@ -43,4 +43,10 @@ public class QnaService99 {
 	public ServiceQuestionDto getQuestionDetail(Long cs_no) {
 		return iQnaDao.getQuestionDetail(cs_no);
 	}
+	
+	public int modifyQuestion(ServiceQuestionDto serviceQuestionDto) {
+		int result = iQnaDao.modifyQuestion(serviceQuestionDto);
+		return result;
+	}
+	
 }
