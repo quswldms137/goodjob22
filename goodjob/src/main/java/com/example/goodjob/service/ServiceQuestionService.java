@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.goodjob.dao.ICompanyDao_JYC;
 import com.example.goodjob.dao.IMemberDao;
 import com.example.goodjob.dao.IServiceQuestionDao;
 import com.example.goodjob.dto.ServiceQuestionDto;
@@ -13,10 +14,12 @@ public class ServiceQuestionService {
 
 	private IServiceQuestionDao iServiceQuestionDao;
 	private IMemberDao iMemberDao; 
+	private ICompanyDao_JYC iCompanyDao;
 	
-	public ServiceQuestionService(IServiceQuestionDao iServiceQuestionDao, IMemberDao iMemberDao) {
+	public ServiceQuestionService(IServiceQuestionDao iServiceQuestionDao, IMemberDao iMemberDao, ICompanyDao_JYC iCompanyDao) {
 		this.iServiceQuestionDao = iServiceQuestionDao;
 		this.iMemberDao = iMemberDao;
+		this.iCompanyDao = iCompanyDao;
 	}
 	
 	public List<ServiceQuestionDto> getQnaList(String username, int page){
@@ -45,5 +48,39 @@ public class ServiceQuestionService {
 		int result = iServiceQuestionDao.deleteQna(cs_no);
 		
 		return result;
+	}
+	
+	public List<ServiceQuestionDto> getNoAnswerList(int page) {
+
+		int count = iServiceQuestionDao.count();
+
+		List<ServiceQuestionDto> serviceQuestionDtoList = iServiceQuestionDao.getNoAnswerDtoList((page - 1) * 5);
+		
+		serviceQuestionDtoList.get(0).setTotal(count);
+		return serviceQuestionDtoList;
+	}
+	
+	public ServiceQuestionDto getServiceQuestion(Long cs_no) {
+		
+		ServiceQuestionDto serviceQuestionDto = iServiceQuestionDao.findByCs_no(cs_no);
+		
+		if(serviceQuestionDto.getMem_no() != null) {
+			serviceQuestionDto.setUsername(iMemberDao.findByMem_no(serviceQuestionDto.getMem_no()).getUsername());
+		}else{
+			serviceQuestionDto.setUsername(iCompanyDao.findByCom_no(serviceQuestionDto.getCom_no()).getUsername());
+		}
+		
+		return serviceQuestionDto;
+	}
+	
+	public String registAnswer(Long cs_no, String answer) {
+		
+		int result = iServiceQuestionDao.writeAnswer(cs_no, answer);
+		
+		if(result > 0) {
+			return "답변이 성공적으로 등록되었습니다.";
+		}
+		
+		return "";
 	}
 }

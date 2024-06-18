@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 public class ServiceQuestionDto {
 
 	private Long cs_no;
+	private String username;
 	private Long mem_no;
 	private Long com_no;
 	private String title;

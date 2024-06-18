@@ -22,4 +22,7 @@
 	<delete id="deleteByMem_no">
 		DELETE FROM mem_interest WHERE mem_no = #{mem_no};
 	</delete>
+	<delete id="deleteByCom_no">
+		DELETE FROM mem_interest WHERE com_no = #{com_no};
+	</delete>
 </mapper>  

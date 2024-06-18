@@ -6,4 +6,7 @@
 	<select id="findByCom_no" resultType="com.example.goodjob.dto.CompanyDto_JYC">
 		SELECT * FROM company_detail WHERE com_no = #{com_no};
 	</select>
+	<delete id="deleteByCom_no">
+		DELETE FROM company_detail WHERE com_no = #{com_no};
+	</delete>
 </mapper>

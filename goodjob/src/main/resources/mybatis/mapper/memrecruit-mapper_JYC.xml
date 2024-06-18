@@ -6,4 +6,7 @@
 	<delete id="deleteByMem_no">
 		DELETE FROM mem_recruit WHERE mem_no = #{mem_no};
 	</delete>
+	<delete id="deleteByRecruit_no">
+		DELETE FROM mem_recruit WHERE recruit_no = #{recruit_no};
+	</delete>
 </mapper>

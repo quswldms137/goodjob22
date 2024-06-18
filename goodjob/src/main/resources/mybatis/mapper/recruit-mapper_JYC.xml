@@ -16,5 +16,10 @@
 	<select id="findAllOrderByReg_dateDesc" resultType="com.example.goodjob.dto.RecruitDto_JYC">
 		SELECT * FROM recruit ORDER BY reg_date DESC;
 	</select>
-		
+	<select id="getRecruit_no">
+		SELECT recruit_no FROM recruit WHERE com_no = #{com_no};
+	</select>
+	<delete id="deleteByRecruit_no">
+		DELETE FROM recruit WHERE recruit_no = #{recruit_no};
+	</delete>
 </mapper>  

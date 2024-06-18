@@ -7,4 +7,5 @@ import org.apache.ibatis.annotations.Param;
 public interface IComInterestDao_JYC {
 
 	public int deleteByMem_no(@Param("mem_no") Long mem_no);
+	public int deleteByCom_no(@Param("com_no") Long com_no);
 }

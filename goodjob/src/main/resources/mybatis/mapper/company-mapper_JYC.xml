@@ -12,4 +12,13 @@
 	<select id="getCom_noOrderByVip">
 		SELECT com_no FROM company ORDER BY money DESC;
 	</select>
+	<select id="getCompanyDtoList" resultType="com.example.goodjob.dto.CompanyDto_JYC">
+		SELECT * FROM company ORDER BY com_name ASC LIMIT #{start}, 4;
+	</select>
+	<select id="count">
+		SELECT COUNT(com_no) FROM company;
+	</select>
+	<delete id="deleteByUsername">
+		DELETE FROM company WHERE username = #{username};
+	</delete>
 </mapper>

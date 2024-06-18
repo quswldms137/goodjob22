@@ -29,9 +29,6 @@ public class MemInterestService {
 
 	public List<CompanyDto_JYC> getSubscribeList(Long mem_no, int page) {
 
-		System.out.println("start : " + (page - 1) * 5);
-		System.out.println("end : " + page * 5);
-		
 		List<Long> list = iMemInterestDao.getCom_no(mem_no, (page - 1) * 5);
 		List<Long> count = iMemInterestDao.findByMem_no(mem_no);
 		

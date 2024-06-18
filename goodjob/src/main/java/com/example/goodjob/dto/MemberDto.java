@@ -25,4 +25,6 @@ public class MemberDto {
 	private LocalDate make_date;
 	private String mem_birth;
 	private String mem_addr;
+	
+	private int total;
 }

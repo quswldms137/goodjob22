@@ -129,5 +129,26 @@ public class MemberService {
 		return iMemberDao.getMem_no(username);
 	}
 	
+	public List<MemberDto> getMemberList(int page) {
+		
+		List<MemberDto> memberList =  iMemberDao.getMemberDtoList((page - 1) * 4);
+		
+		
+		int count = iMemberDao.count();
+		memberList.get(0).setTotal(count);
+		
+		return memberList;
+	}
+	
+	public MemberDto getMemberDto(Long mem_no) {
+		
+		MemberDto memberDto = iMemberDao.findByMem_no(mem_no);
+		UserDto userDto = iUserDao.findByUsername(memberDto.getUsername());
+		
+		memberDto.setPassword(userDto.getPassword());
+		memberDto.setRole(userDto.getRole());
+		
+		return memberDto;
+	}
 	
 }
