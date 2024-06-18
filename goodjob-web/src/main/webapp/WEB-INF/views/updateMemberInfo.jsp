@@ -81,6 +81,9 @@ input[type=email], input[name=mem_addr]{
 #man:visited , #woman:visited {
 	background: blue;
 }
+.sidebar-box6 p:nth-child(2) a{
+	color:#FB8500 !important;
+}
 </style>
 </head>
 <body>
