@@ -14,16 +14,33 @@ main {
 	margin: 80px auto;
 	margin-top: 10px;
 	min-height: 700px;
-	border:1px solid #eee;
 }
 
-.search-container {
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	margin-top: 50px;
-	margin-left: 115px;
-	text-align: row;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+}
+#jobTypeFilter, #locationFilter{
+	padding: 10px;
+	font-size: 16px;
+	width: 100px;
+	border: 1px solid #ccc;
+	border-radius: 5px
+}
+.search-container {
+	display: flex;
+	align-items: center;
 }
 
 .search-box {
+	margin: 5px;
 	padding: 10px;
 	font-size: 16px;
 	width: 200px;
@@ -31,7 +48,7 @@ main {
 	border-radius: 5px;
 }
 
-.search-button {
+.search-button, #filterBnt {
 	padding: 10px 20px;
 	font-size: 16px;
 	background-color: #FF9900;
@@ -44,26 +61,12 @@ main {
 .search-button:hover {
 	background-color: #CC7A00;
 }
-
-#star-container {
-display: flex;
-flex-direction: row; /* 기본값으로 생략 가능 */
-justify-content: space-evenly; /* 요소들 사이에 공간을 고르게 분배 */
-align-items: center; /* 요소들을 세로 중앙 정렬 */
-gap: 10px; /* 요소 간의 간격을 줄이기 위해 gap 사용 */
-
+#filterBnt:hover {
+	background-color: #CC7A00;
 }
-.star {
-width:150px;
-height:150px;
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 20px;
-
-margin-top: 90px;
-margin-left: -100px;
-margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사용 */
-
+#main-content{
+	border: 1px solid #eee;
+	margin-top: 10px;
 }
 .company-info {
     border: 1px solid #eee;
@@ -139,12 +142,32 @@ margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사�
 		<%@ include file="../front/header.jsp"%>
 	</header>
 	
-	<div class="search-container">
-		<input type="text" id="search-box" class="search-box" placeholder="채용 공고 검색...">
-		<button id="search-button" class="search-button">검색</button>
+	<main>
+	<div class="container">
+		<div id="filters">
+        	<select id="jobTypeFilter">
+            	<option value="">지역</option>
+            	<option value="서울">서울</option>
+            	<option value="경기">경기</option>
+            	<option value="부산">부산</option>
+        	</select>
+        	<select id="locationFilter">
+            	<option value="">직무</option>
+            	<option value="개발">개발</option>
+            	<option value="경영">경영</option>
+            	<option value="회계">회계</option>
+            	<option value="건축">건축</option>
+            	<option value="제조·생산">제조·생산</option>
+        	</select>
+        	<button id="filterBnt" onclick="applyFilters()">filter</button>
+    	</div>
+		<div class="search-container">
+			<input type="text" id="search-box" class="search-box" placeholder="채용 공고 검색...">
+			<button id="search-button" class="search-button">검색</button>
+		</div>
 	</div>
 	
-	<main id="main-content">
+	<div id="main-content">
 		<div class='company-info'>
 			<div class='company-img'>
 				<a href="/companyDetail?com_no=recruit.com_no">
@@ -152,8 +175,9 @@ margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사�
 	            </a>
 	         </div>   
 	  	</div>
+	</div>
 	</main>
-
+	
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>

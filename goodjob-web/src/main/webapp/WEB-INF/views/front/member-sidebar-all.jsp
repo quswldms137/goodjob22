@@ -90,16 +90,16 @@ ul {
 		</div>
 		<div class="sidebar-box sidebar-box4">
 			<h3>커뮤니티</h3>
-			<p><a href="#">문의 내역</a></p>
+			<p><a href="/qna">문의 내역</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box5">
 			<h3>스크랩/관심기업</h3>
-			<p><a href="#">스크랩한 공고</a></p>
-			<p><a href="#">관심 기업</a></p>
+			<p><a href="/subscrap/scrap">스크랩한 공고</a></p>
+			<p><a href="/subscrap/subscribe">관심 기업</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box6">
 			<h3>회원정보 관리</h3>
-			<p><a href="#">회원정보 수정</a></p>
+			<p><a href="/member/info">회원정보 수정</a></p>
 		</div>
 	</div>
 

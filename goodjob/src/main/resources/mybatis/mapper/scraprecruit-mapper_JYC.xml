@@ -19,4 +19,7 @@
 	<select id="findByMem_no">
 		SELECT recruit_no FROM scrap_recruit WHERE mem_no = #{mem_no};
 	</select>
+	<delete id="deleteByMem_no">
+		DELETE FROM scrap_recruit WHERE mem_no = #{mem_no};
+	</delete>
 </mapper>  

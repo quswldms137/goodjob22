@@ -10,4 +10,7 @@
 	<select id="getResume_no">
 		SELECT resume_no FROM resume WHERE mem_no = #{mem_no};
 	</select>
+	<delete id="deleteByResume_no">
+		DELETE FROM resume WHERE resume_no = #{resume_no};
+	</delete>
 </mapper>  

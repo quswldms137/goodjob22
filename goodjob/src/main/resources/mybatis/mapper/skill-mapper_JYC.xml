@@ -13,4 +13,7 @@
 	<select id="getSkillName">
 		SELECT sk_name FROM skill WHERE skill_no = #{skill_no};
 	</select>
+	<delete id="deleteByResume_no">
+		DELETE FROM skill WHERE resume_no = #{resume_no};
+	</delete>
 </mapper>  

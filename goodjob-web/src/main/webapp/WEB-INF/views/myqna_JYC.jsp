@@ -59,7 +59,7 @@ main #container {
 	font-size: 1.5rem;
 	margin-top: 20px;
 	margin-left: 20px;
-	margin-bottom: 50px;
+	margin-bottom: 30px;
 }
 .content{
 	margin: 3px 0;
@@ -75,6 +75,10 @@ main #container {
 }
 #pages{
 	text-align: center;
+	margin: 10px 0;
+}
+#pages input[type=button]{
+	margin: 0 3px;
 }
 </style>
 </head>
