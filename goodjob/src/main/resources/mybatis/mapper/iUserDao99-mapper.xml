@@ -12,4 +12,17 @@
 	<select id="getRole">
 		SELECT ROLE FROM user WHERE username = #{username} AND PASSWORD = #{password}
 	</select>
+	<!-- 아이디, 비밀번호 찾기 -->
+	<select id="getMemUername">
+		select username from member where mem_name = #{mem_name} and mem_tel = #{mem_tel}
+	</select>
+	<select id="memCheck">
+		select count(*) from member where username = #{username} and mem_name = #{mem_name} and mem_tel = #{mem_tel}
+	</select>
+	<select id="getMemPassword">
+		select password from user where username = #{username}
+	</select>
+	<select id="getComUsername">
+		select username from company where com_name = 'com_name' and com_companynum = #{com_companynum}
+	</select>
 </mapper>

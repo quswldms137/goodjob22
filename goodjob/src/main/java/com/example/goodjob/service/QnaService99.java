@@ -19,7 +19,6 @@ public class QnaService99 {
 		LocalDate today= LocalDate.now();
 		serviceQuestionDto.setReg_date(today);
 		int result = iQnaDao.regQuestion(serviceQuestionDto);
-		
 		return result;
 	}
 	
@@ -39,5 +38,9 @@ public class QnaService99 {
 	
 	public List<ServiceQuestionDto> getComQnaList(Long com_no){
 		return iQnaDao.getComQnaList(com_no);
+	}
+	
+	public ServiceQuestionDto getQuestionDetail(int cs_no) {
+		return iQnaDao.getQuestionDetail(cs_no);
 	}
 }
