@@ -118,7 +118,7 @@ input[type="button"] {
 	</header>
 	<!-- 메인 내용 -->
 	<main>
-	<h1>등록페이지 입니다 확인용으로 글 써놓습니다</h1>
+		<h1>수정페이지 입니다 확인용으로 글써놓습니다</h1>
 		<div class="sidebar-container">
 			<%@ include file="../front/company-sidebar-all.jsp"%>
 		</div>
@@ -184,14 +184,14 @@ input[type="button"] {
 		});
 		
 		
-		//기업정보 등록
+		//기업정보 수정 명령어 바꿔줘야함
 		$(document).ready(function() {
 			$("#companyinfo").submit(function(event) {
 				event.preventDefault();
 
 				var formData = new FormData(this);
 				const username = localStorage.getItem("username");
-				//const com_no = localStorage.getItem("com_no");
+				const com_no = localStorage.getItem("com_no");
 				console.log(formData);
 
 				$.ajax({
@@ -199,9 +199,9 @@ input[type="button"] {
 					type : 'POST',
 					beforeSend: function(xhr) {
 				        xhr.setRequestHeader('username', username);
-				        
+				        xhr.setRequestHeader('com_no' com_no);
 				    },
-					url : 'http://localhost:8888/api/company/info',
+					url : 'http://localhost:8888/api/company/infofind',
 					data : formData,
 					processData : false,
 					contentType : false,
@@ -252,7 +252,46 @@ input[type="button"] {
 			xhr.send(data);
 		}
 		 */
- 
+		 //기업정보 조회
+		 
+		 $(document).ready(function(
+			//페이지 로드 시 URL에서 com_no가져오기
+			const urlParams = new URLSearchParams(window.location.serach);
+			const com_no = urlParams.get('com_no');
+		
+			if(com_no){
+				getinfoDetail(com_no);
+			}
+			
+			function getinfoDetail(com_no){
+			    $.ajax({
+			        url: "http://localhost:8888/api/company/info",
+			        method: "GET",
+			        data: { com_no: com_no },
+			        success: function(data){
+			            console.log('기업 정보 조회 성공:', data);
+			            
+			            $('#introduction').val(data.introduction);
+			            $('#pension').val(data.pension);
+			            $('#sectors').val(data.sectors);
+			            $('#history').val(data.history);
+			            $('#idealTalent').val(data.ideal_talent);
+			            $('#foundation').val(data.foundation);
+			            $('#employeeCount').val(data.amount);
+			            $('#websiteUrl').val(data.url);
+			            
+			            if(data.img_url){
+			                $('#photoFrame').attr('src', data.img_url);
+			                $('#photoFrame').css('visibility', 'visible');
+			            }
+			        },
+			        error: function(error){
+			            console.error('기업 정보 조회 실패', error);
+			            alert('기업 정보 조회에 실패하였습니다.');
+			        }
+			    });
+			}
+		 
 		 
 		 
 		 

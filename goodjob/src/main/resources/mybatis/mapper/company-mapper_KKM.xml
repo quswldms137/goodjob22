@@ -13,4 +13,8 @@
   	SELECT * FROM company_detail where com_no = #{com_no}
   </select>
   
+  <select id="getkeyvalue">
+  	SELECT com_detail_no FROM company_detail WHERE com_no= #{com_no}
+  </select>
+  
   </mapper>

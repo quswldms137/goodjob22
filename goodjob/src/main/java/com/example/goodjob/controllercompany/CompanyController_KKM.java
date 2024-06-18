@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.goodjob.dao.ICompany97;
 import com.example.goodjob.dto.CompanyDetailDto97;
 import com.example.goodjob.service.CompanyService97;
+import com.example.goodjob.service.QnaService99;
 import com.example.goodjob.util.FileUploadUtil;
 
 @CrossOrigin("http://localhost:9991/")
@@ -26,29 +28,33 @@ public class CompanyController_KKM {
 
 	@Autowired
 	private CompanyService97 comService;
-	
+	@Autowired
+	private QnaService99 qnaService;
 	@Autowired
 	private ICompany97 icompany;
 
 	// (기업)내 정보 조회 get
-	@GetMapping("/info")
-	public CompanyDetailDto97 companyinfo(@RequestParam("com_no") Long com_no) {
-		System.out.println("컴퍼니 인포 기업정보를 들고오는중... :"+com_no);		
+	@GetMapping("/infofind")
+	public CompanyDetailDto97 companyinfo(@RequestHeader("username") String username) {
+
+		Long com_no = qnaService.getCom_no(username);
+		System.out.println("조회에서 com_no받아오는지" + com_no);
 		return icompany.getcompanyinfo(com_no);
 	}
 
 	// (기업)내 정보 등록 post
 	@PostMapping("/info")
-	public ResponseEntity<String> write(@RequestParam("com_no") Long com_no,
+	public ResponseEntity<String> write(
 			@RequestParam("img_url") MultipartFile imgFile, @RequestParam("introduction") String introduction,
 			@RequestParam("pension") String pension, @RequestParam("sectors") String sectors,
 			@RequestParam("history") String history, @RequestParam("ideal_talent") String ideal_talent,
 			@RequestParam("foundation") String foundation, @RequestParam("amount") int amount,
-			@RequestParam("url") String url) {
+			@RequestParam("url") String url, @RequestHeader("username") String username){
 
-		System.out.println("com_no : " + com_no);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
+		Long com_no = qnaService.getCom_no(username);
+		System.out.println(com_no);
+		
 		// 파일 저장
 		String imgFileName = "";
 
