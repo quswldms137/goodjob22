@@ -54,7 +54,7 @@ public class SkillService_JYC {
 			});
 
 		});
-
+		
 		List<CSkillDto> cSkillDtos = iCSkillDao.findAll();
 
 		
@@ -73,7 +73,6 @@ public class SkillService_JYC {
 			});
 		}
 		
-
 		List<RecruitDto_JYC> recruitDtoList = new ArrayList<>();
 
 		recruit_noList.forEach(recruit_no -> {

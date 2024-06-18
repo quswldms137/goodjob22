@@ -39,9 +39,12 @@ public class MemberController {
 	public MemberDto getInfo(@PathVariable("username") String username) {
 		
 		MemberDto memberDto = memberService.getInformation(username);
+		
 		UserDto userDto = userService.getInfo(username);
+		
 		memberDto.setPassword(userDto.getPassword());
 		memberDto.setRole(userDto.getRole());
+		
 		return memberDto;
 	}
 	
@@ -52,13 +55,17 @@ public class MemberController {
 	}
 	
 	@DeleteMapping("/info/{mem_no}/{username}")
-	public String deleteInfo(@PathVariable("mem_no") Long mem_no, @PathVariable("username") String username) {
+	public ResponseEntity<String> deleteInfo(@PathVariable("mem_no") Long mem_no, @PathVariable("username") String username) {
 		
 		String result = memberService.deleteInformation(mem_no, username);
 		
-		System.out.println("result : " + result);
+		if(result == "회원탈퇴 성공") {
+			return ResponseEntity.status(HttpStatus.OK)
+					.body(result);
+		}
 		
-		return result;
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+				.body(result);
 	}
 	
 	@GetMapping("/id/{username}")

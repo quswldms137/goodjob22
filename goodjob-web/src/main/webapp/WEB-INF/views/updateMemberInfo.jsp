@@ -115,7 +115,7 @@ input[type=email], input[name=mem_addr]{
 					<input
 					type="text" name="mem_addr" placeholder="주소"> <input
 					type="submit" value="수정하기" onclick="saveInfo(event)"> <input
-					type="submit" value="회원탈퇴" onclick="deleteInfo()">
+					type="button" value="회원탈퇴" id="deleteBtn">
 			</form>
 		</div>
 	</main>
@@ -127,7 +127,7 @@ input[type=email], input[name=mem_addr]{
 		// 화면이 실행될때 사용자 정보를 가지고 와서 인풋에 벨류를 넣어주는 식;
 		$(document).ready(function() {
 			const username = localStorage.getItem("username");
-
+			
 			$.ajax({
 				url : "http://localhost:8888/api/member/info/" + username,
 				dataType : "json",
@@ -199,6 +199,36 @@ input[type=email], input[name=mem_addr]{
 					$("#man").css("color", "black");
 				}
 			});
+			
+			let isRequestInProgress = false;
+			
+			$("#deleteBtn").on({
+				"click" : function(){
+					
+					if (isRequestInProgress) return;
+
+			        isRequestInProgress = true;
+					
+					const mem_no = $("input[name=mem_no]");
+					const username = $("input[name=username]");
+					$.ajax({
+						url : "http://localhost:8888/api/member/info/" + mem_no.val() + "/" + username.val(),
+						dataType : "text",
+						method : "DELETE",
+						success : function(response){
+							alert("회원탈퇴가 성공적으로 마쳤습니다.");
+							location.href="/";
+						},
+						error : function(xhr, status, error){
+							console.log(error);
+						},
+						complete : function(){
+							 isRequestInProgress = false;
+						}
+					});
+				}
+			});
+			
 		});
 
 		function saveInfo(event) {
@@ -213,10 +243,10 @@ input[type=email], input[name=mem_addr]{
 				gender = "F";
 			}
 			
-			alert("gender : " + gender);
-			
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function() {
+				
+				alert("회원정보 수정 완료.");
 				
 				const response = JSON.parse(this.responseText);
 				$("input[name=mem_no]").val(response.mem_no);
@@ -258,18 +288,6 @@ input[type=email], input[name=mem_addr]{
 
 		}
 		
-		function deleteInfo(){
-			const mem_no = $("input[name=mem_no]");
-			const username = $("input[name=username]");
-			const xhr = new XMLHttpRequest();
-			xhr.onload = function(){
-				if(this.responseText === "회원탈퇴 성공"){
-					location.href="";
-				}
-			}
-			xhr.open("DELETE", "http://localhost:8888/api/member/info/" + mem_no.val() + "/" + username.val(), true);
-			xhr.send();
-		}
 		
 		
 		
