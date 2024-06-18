@@ -110,7 +110,7 @@ main {
 	margin-bottom:8px;
 }
 
-.interest-button {
+.posting-button {
     padding: 10px 10px;
     font-size: 16px;
     background-color: #007BFF;
@@ -119,7 +119,7 @@ main {
     cursor: pointer;
     margin-right: 20px; /* 추가: 버튼을 왼쪽으로 이동 */
 }
-.doing-button{
+.apply-button{
 	padding: 10px 10px;
     font-size: 16px;
     background-color: #FF9900;
@@ -129,10 +129,10 @@ main {
     margin-right: 20px; /* 추가: 버튼을 왼쪽으로 이동 */
 }
 
-.interest-button:hover {
+.posting-button:hover {
     background-color: #0056b3;
 }
-.doing-button:hover {
+.apply-button:hover {
 	background-color: #CC7A00;
 }
 </style>
@@ -228,47 +228,41 @@ $(document).ready(function() {
 							recruit.deadline_date + 
 							"</p>" +
 						"</div>" +
-						"<button class='doing-button' data-company-id='" + recruit.com_no + "'>지원하기</button>" +
-						"<button class='interest-button' data-company-id='" + recruit.com_no + "'>스크랩</button>" +
+						"<button class='apply-button' data-recruit_no='" + recruit.recruit_no + "'>지원하기</button>" +
+						"<button class='posting-button' data-recruit_no='" + recruit.recruit_no + "'>스크랩</button>" +
 	        		"</div>"
 				);
 			});
 
 			// 스크랩 등록 버튼 클릭 이벤트 핸들러
-			$(".interest-button").on("click", function() {
-				const companyId = $(this).data("company-id");
+			$(".posting-button").on("click", function() {
+				const recruit_no = $(this).data("recruit_no");
+				console.log(recruit_no);
+				
+				// 로컬 스토리지에서 사용자 이름을 가져옴
+				const username = localStorage.getItem("username");
+				console.log(username);
+				
 				$.ajax({
-					url: "http://localhost:8888/api/company/addInterest",
+					url: "http://localhost:8888/api/interest/addScrap",
 					method: "POST",
-					data: JSON.stringify({ companyId: companyId }),
-					contentType: "application/json",
+					beforeSend: function(xhr) {
+						// 요청 헤더에 사용자 이름을 설정
+						xhr.setRequestHeader("username", username);
+					},
+					data: {
+						recruit_no: recruit_no
+					},
 					success: function(response) {
-						alert("스크랩 되었습니다.");
+						alert(response);
 					},
 					error: function(error) {
-						alert("등록에 실패했습니다.");
+						alert("스크랩 등록에 실패했습니다.");
 						console.log("Error:", error);
 					}
 				});
 			});
 			
-			// 지원하기 버튼 클릭 이벤트 핸들러
-			$(".interest-button").on("click", function() {
-				const companyId = $(this).data("company-id");
-				$.ajax({
-					url: "http://localhost:8888/api/company/addInterest",
-					method: "POST",
-					data: JSON.stringify({ companyId: companyId }),
-					contentType: "application/json",
-					success: function(response) {
-						alert("지원 등록 되었습니다.");
-					},
-					error: function(error) {
-						alert("등록에 실패했습니다.");
-						console.log("Error:", error);
-					}
-				});
-			});
 		},
 		error: function(error) {
 			console.log("Error:", error);
