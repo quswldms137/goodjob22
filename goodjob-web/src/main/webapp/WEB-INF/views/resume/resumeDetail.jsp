@@ -201,6 +201,7 @@ main #container {
 	                output += '</div>';
 	                
 	                /* 학력 */
+	                if(data.education && data.education.edu_gra_date && data.education.graduation && data.education.school && data.education.major){
 	                output += '<div class="resume-detail-area-box">';
 	                output += '<div class="resume-info-title">학력</div>';
 	                output += '<div class="resume-info-box1"><div class="edu-box">' + data.education.edu_gra_date;
@@ -208,8 +209,10 @@ main #container {
 	                output += '<span>' + data.education.major + '</span></div>';
 	                output += '</div>';
 	                output += '</div>';
+	                }
 	                
 	                /* 경력 */
+	                if(data.career && data.career.car_join_date && data.career.quit_date && data.career.company && data.career.main_part){
 	                output += '<div class="resume-detail-area-box">';
 	                output += '<div class="resume-info-title">경력</div>';
 	                output += '<div class="resume-info-box1"><div class="career">' + data.career.car_join_date + ' ~ ';
@@ -217,8 +220,10 @@ main #container {
 	                output += '<span>담당 업무 : ' + data.career.main_part + '</span></div>';
 	                output += '</div>';
 	                output += '</div>';
+	                }
 	                
 					/* 자격증 */
+					if(data.license && data.license.get_date && data.license.license_name && data.license.agency){
 					output += '<div class="resume-detail-area-box">';
 	                output += '<div class="resume-info-title">자격증</div>';
 	                output += '<div class="resume-info-box1"><div class="license">' + data.license.get_date;
@@ -226,6 +231,7 @@ main #container {
 	                output += '<span>' + data.license.agency + '</span></div>';
 	                output += '</div>';
 	                output += '</div>';
+					}
 	                
 	                /* 자기소개서 */
 					output += '<div class="resume-detail-area-box">';
@@ -244,8 +250,9 @@ main #container {
 	                output += '</div>';
 	                
 	                /* 포트폴리오 주소 */
+	                if(data.resume && data.resume.port_url){
 					output += '<div class="resume-detail-area-box">';
-	                output += '<div class="resume-info-title">자격증</div>';
+	                output += '<div class="resume-info-title">포트폴리오 주소</div>';
 	                output += '<div class="resume-info-box1"><div class="portfolio">';
 	                output += '<span class="port-addr"><img src="/resource/img/port-img.png">';
 	                output += '<a href="'+ data.resume.port_url +'" target="_blank">' + data.resume.port_url + '</a>'
@@ -254,8 +261,10 @@ main #container {
 	                output += '</div>';
 	                output += '</div>';
 	                output += '</div>';
+	                }
 	                
 	                /* 기타첨부파일 */
+	                if(data.etc && data.etc.etc_name1 && data.etc.etc_name2 && data.etc.etc_name3){
 					output += '<div class="resume-detail-area-box">';
 	                output += '<div class="resume-info-title">기타 첨부파일</div>';
 	                output += '<div class="resume-info-box1"><div class="etc">';
@@ -266,8 +275,10 @@ main #container {
 	                output += '</div>';
 	                output += '</div>';
 	                output += '</div>';
+	                }
 	                
 	                /* 희망근무조건 */
+	                if(data.resume && data.resume.hope_city && data.resume.hope_job && data.resume.hope_pay){
 					output += '<div class="resume-detail-area-box">';
 	                output += '<div class="resume-info-title">희망근무조건</div>';
 	                output += '<div class="resume-info-box1"><div class="hope">';
@@ -278,6 +289,7 @@ main #container {
 	                output += '</div>';
 	                output += '</div>';
 	                output += '</div>';
+	                }
 	                
 	                
 	                $('.resume-detail-area').html(output);

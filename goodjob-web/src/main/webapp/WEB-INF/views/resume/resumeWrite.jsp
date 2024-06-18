@@ -173,7 +173,7 @@
 	<script>
 	
 	$('.cancel-btn').on('click', function(){
-		window.location = "/member/mypage";
+		window.location = "/resume/resumeManage";
 	});
 	
 	$(document).ready(function () {
