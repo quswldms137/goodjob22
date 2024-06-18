@@ -26,6 +26,11 @@ a {
 
 ul {
 	list-style: none;
+	margin:0;
+	padding-left:0;
+}
+img{
+	vertical-align:baseline;
 }
 
 header {
@@ -51,6 +56,7 @@ header {
 #head .logo{
 	text-align:center;
 	padding-bottom:15px;
+	line-height:normal;
 }
 #head .logo img {
 	width: 150px;
@@ -109,6 +115,26 @@ header {
 #head .user-area ul li:nth-child(3) a {
 	color: #333;
 }
+
+#username{
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FB8500;
+	padding: 7px 20px;
+	border: 1px solid #eee;
+	border-radius: 8px;
+}
+.logout-btn{
+	display: inline-block;
+	font-size: 12px;
+	font-weight: bold;
+	color: #333;
+	padding: 7px 20px;
+	border: 1px solid #eee;
+	border-radius: 8px;
+	font-weight:400;
+}
 </style>
 </head>
 <body>
@@ -148,7 +174,7 @@ header {
 				</ul>
 				</div>
 				<div id="login" style="display:none;">
-					<div><span id="username"></span> <a href="#" onclick="logout()"> 로그아웃</a></div>
+					<div><a href="/resume/resumeManage"><span id="username"></span></a> <a href="#" onclick="logout()" class="logout-btn"> 로그아웃</a></div>
 					<div></div>
 				</div>
 			</div>
@@ -162,7 +188,7 @@ window.onload = function(){
 	if(username){
 		notLogin.style.display = "none";
 		login.style.display = "block";
-		document.getElementById("username").innerText = username + '님 환영합니다 / ';
+		document.getElementById("username").innerText = username + ' 님';
 	}
 }
 
@@ -176,7 +202,7 @@ function logout(){
 	
 	xhttp.onload = function(){
 		if(this.status == 200){
-			alert("로그인이 완료되었습니다. 행복한 하루 되세요^^");
+			alert("로그아웃 완료되었습니다. 다음에 또 보장*^^*");
 			var response = JSON.parse(this.responseText);
 			window.location.href = response.redirectUrl;
 			
