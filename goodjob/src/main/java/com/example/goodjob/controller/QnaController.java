@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,5 +53,42 @@ public class QnaController {
 		
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 				.body("문의내역 삭제가 실패했습니다.");
+	}
+	
+	@GetMapping("/noanswer/list/{page}")
+	public ResponseEntity<List<ServiceQuestionDto>> getNoAnswerList(@PathVariable("page") int page){
+		
+		List<ServiceQuestionDto> serviceQuestionDtoList = serviceQuestionService.getNoAnswerList(page);
+		
+		if(serviceQuestionDtoList == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(serviceQuestionDtoList);
+	}
+	
+	@GetMapping("/noanswer/detail/{cs_no}")
+	public ResponseEntity<ServiceQuestionDto> getServiceQuestionDto(@PathVariable("cs_no") Long cs_no){
+		
+		ServiceQuestionDto serviceQuestionDto = serviceQuestionService.getServiceQuestion(cs_no);
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(serviceQuestionDto);
+	}
+	
+	@PostMapping("/answer")
+	public ResponseEntity<String> registAnswer(@RequestBody ServiceQuestionDto serviceQuestionDto){
+
+		String result = serviceQuestionService.registAnswer(serviceQuestionDto.getCs_no(), serviceQuestionDto.getAnswer());
+		
+		if(!result.equals("답변이 성공적으로 등록되었습니다.")) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(result);
 	}
 }

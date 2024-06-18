@@ -59,7 +59,7 @@ public class MemberController {
 		
 		String result = memberService.deleteInformation(mem_no, username);
 		
-		if(result == "회원탈퇴 성공") {
+		if(result.equals("회원탈퇴 성공")) {
 			return ResponseEntity.status(HttpStatus.OK)
 					.body(result);
 		}
@@ -74,6 +74,34 @@ public class MemberController {
 		String result = userService.checkId(username);
 		
 		return result;
+	}
+	
+	@GetMapping("/list/{page}")
+	public ResponseEntity<List<MemberDto>> getMemberList(@PathVariable("page") int page){
+		
+		List<MemberDto> memberList = memberService.getMemberList(page);
+		
+		if(memberList == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(memberList);
+	}
+	
+	@GetMapping("/detail/{mem_no}")
+	public ResponseEntity<MemberDto> getMemberDetail(@PathVariable("mem_no") Long mem_no){
+		
+		MemberDto memberDto = memberService.getMemberDto(mem_no);
+		
+		if(memberDto == null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(memberDto);
 	}
 	
 }

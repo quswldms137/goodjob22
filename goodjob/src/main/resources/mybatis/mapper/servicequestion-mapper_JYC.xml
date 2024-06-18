@@ -4,6 +4,9 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.example.goodjob.dao.IServiceQuestionDao">
+	<update id="writeAnswer">
+		UPDATE service_question SET answer = #{answer} WHERE cs_no = #{cs_no};
+	</update>
 	<select id="findByMem_no" resultType="com.example.goodjob.dto.ServiceQuestionDto">
 		SELECT * FROM service_question WHERE mem_no = #{mem_no} ORDER BY reg_date DESC;
 	</select>
@@ -13,11 +16,21 @@
 	<select id="getCs_no">
 		SELECT cs_no FROM service_question WHERE mem_no = #{mem_no};
 	</select>
+	<select id="getNoAnswerDtoList" resultType="com.example.goodjob.dto.ServiceQuestionDto">
+		SELECT * FROM service_question WHERE answer IS NULL ORDER BY reg_date DESC LIMIT #{start}, 5;	
+	</select>
+	<select id="findByCs_no" resultType="com.example.goodjob.dto.ServiceQuestionDto">
+		SELECT * FROM service_question WHERE cs_no = #{cs_no};
+	</select>
+	<select id="count" resultType="int">
+		SELECT COUNT(cs_no) FROM service_question WHERE answer IS NULL;
+	</select>
 	<delete id="deleteQna">
 		DELETE FROM service_question WHERE cs_no = #{cs_no};
 	</delete>
 	<delete id="deleteByMem_no">
 		DELETE FROM service_question WHERE mem_no = #{mem_no};
 	</delete>
+	
 </mapper> 
 

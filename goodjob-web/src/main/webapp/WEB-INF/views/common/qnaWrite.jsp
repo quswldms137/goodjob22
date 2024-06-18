@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>문의글 작성 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 main {
 	width: 1100px;
@@ -50,7 +51,7 @@ main #container {
        <form name="frm-qnaForm">
            <div class="form-group">
                <label for="category">문의종류 <span id="blue">(필수)</span></label>
-               <select class="form-control" name="category" required>
+               <select class="form-control" id="category" name="category" required>
                    <option value="" disabled selected>선택</option>
                    <option value="서비스 이용문의">서비스 이용문의</option>
                    <option value="불량정보·오류신고">불량정보·오류신고</option>
@@ -59,13 +60,14 @@ main #container {
            </div>
            <div class="mb-3">
 		  <label for="title" class="form-label">제목 <span id="blue">(필수)</span></label>
-		  <input type="text" class="form-control" name="title" placeholder="제목을 입력해주세요">
+		  <input type="text" id="title" class="form-control" name="title" placeholder="제목을 입력해주세요">
 		</div>
 		<div class="mb-3">
 		  <label for="content" class="form-label">내용 <span id="blue">(필수)</span></label>
-		  <textarea class="form-control" name="content" rows="3" placeholder="내용을 입력해주세요"></textarea>
+		  <textarea class="form-control" id="content" name="content" rows="3" placeholder="내용을 입력해주세요"></textarea>
 		</div>
-           <button type="submit" class="btn btn-primary btn-lg" onclick="submitQuestion(event)">문의하기</button>
+           <div id="writeSubmit" style="display:block;"><button type="submit" id="submit" class="btn btn-primary btn-lg" onclick="submitQuestion(event)">문의하기</button></div>
+           <div id="modifySubmit" style="display:none;"><button type="submit" id="submit" class="btn btn-primary btn-lg" onclick="submitUpdate(event)">수정하기</button></div>
            <button type="reset" class="btn btn-primary btn-lg">취소</button>
        </form>
 	</div>
@@ -76,11 +78,8 @@ main #container {
 	 <div id="qnaList"></div>
 		 
 	</div>
-	
-        
     </div><!-- 컨테이너 종료 -->
 	
-	</div>
 	
 	</main>
 	<footer>
@@ -88,6 +87,75 @@ main #container {
 	</footer>
 	
 	<script>
+	$(document).ready(function(){
+		const urlParams = new URLSearchParams(window.location.search);
+		let cs_no = urlParams.get('cs_no');
+		var writeForm = document.getElementById('writeSubmit');
+		var modifyForm = document.getElementById('modifySubmit');
+		
+		if(cs_no){
+			modifyContent(cs_no);
+			$('#writeForm').hide();
+			$('#modifyForm').show();
+		}
+		
+	});
+	
+	function modifyContent(cs_no){
+		$.ajax({
+			url: "http://localhost:8888/api/qna-99/detail",
+			type: "GET",
+			data: {
+				cs_no : cs_no
+			},
+			success: function(data){
+				$('#title').val(data.title);
+				$('#content').html(data.content);
+				$('#category').val(data.category);
+				$('#submit').text('수정하기');
+			},
+			error: function(error){
+				console.log("불러오는데 실패했습니다. 다시 시도해주세요.",error);
+			}
+		});
+	}
+	
+	function submitUpdate(event){
+		alert("수정!");
+		event.preventDefault();
+		const category1 = document.querySelector("select[name='category']");
+		const title1 = document.querySelector("Input[name='title']");
+		const content1 = document.querySelector("textarea[name='content']");
+		
+		const qna = {
+				category : category1.value,
+				title : title1.value,
+				content : content1.value
+		}
+		console.log("qna: "+qna);
+		
+		const sendData = JSON.stringify(qna);
+		console.log("sendData"+sendData);
+		
+		const xhttp = new XMLHttpRequest();
+		xhttp.onload = function(){
+			if(this.status === 200){
+				alert(this.responseText);
+				//getQnaList();
+			} else{
+				alert("다시 입력해주세요.");
+			}
+		};
+		xhttp.open("POST", "http://localhost:8888/api/qna-99/modify");
+		xhttp.setRequestHeader("Content-type", "application/json");
+		
+		const username = localStorage.getItem("username");
+    	xhttp.setRequestHeader("username", username);
+		
+		xhttp.send(sendData);
+		
+	}
+	
 	function show(){
 		var writeForm = document.getElementById('qnaWrite');
 		var qnaList = document.getElementById('qnaListContainer');
@@ -105,7 +173,6 @@ main #container {
 	
 	function submitQuestion(event){
 		event.preventDefault();
-		alert("실행");
 		const category1 = document.querySelector("select[name='category']");
 		const title1 = document.querySelector("Input[name='title']");
 		const content1 = document.querySelector("textarea[name='content']");
@@ -129,7 +196,7 @@ main #container {
 				alert("다시 입력해주세요.");
 			}
 		};
-		xhttp.open("POST", "http://localhost:8888/api/qna-99");
+		xhttp.open("POST", "http://localhost:8888/api/qna-99/insert");
 		xhttp.setRequestHeader("Content-type", "application/json");
 		
 		const username = localStorage.getItem("username");

@@ -47,12 +47,11 @@ main #container {
 	   		<button class="nav-link active" id="profile-tab" onclick="getQnaList()" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">문의·신고 내역</button>
 	 	</li>
 	</ul>
+	<div id="detail"></div>
+	<a href="/qna99/qnaWrite">수정하기</a>
 	</div>
 	<!-- 문의 상세내용 -->
-	<div id="title"></div>
-	<div id="category"></div>
-	<div id="content"></div>
-	<div id="reg_date"></div>
+	
 
 	</main>
 	<footer>
@@ -80,6 +79,13 @@ main #container {
 		const urlParams = new URLSearchParams(window.location.search);
 		let cs_no = urlParams.get('cs_no');
 		
+		if(cs_no){
+			$('a[href="/qna99/qnaWrite"]').attr('href', function(){
+				return '/qna99/qnaWrite?cs_no=' + cs_no;
+			});
+			
+		}
+		
 		function getQnaDetail(cs_no){
 			$.ajax({
 				url: "http://localhost:8888/api/qna-99/detail",
@@ -90,10 +96,12 @@ main #container {
 				success: function(data){
 					let detail = 
 						'<div>'+ data.cs_no +'</div>';
-						detail += '<h1>'+ data.title +'</h1>';
-						detail += '<h1>'+ data.content +'</h1>';
+						detail += '<div>'+ data.category +'</div>';
+						detail += '<div>'+ data.reg_date +'</div>';
+						detail += '<div>'+ data.title +'</div>';
+						detail += '<div>'+ data.content +'</div>';
 						
-					$('#title').html(detail);
+					$('#detail').html(detail);
 
 				},
 				error: function(error){

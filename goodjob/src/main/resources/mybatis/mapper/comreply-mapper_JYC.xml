@@ -1,0 +1,10 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.goodjob.dao.IComReplyDao_JYC">
+	<delete id="deleteByComCommunity_no">
+		DELETE FROM com_reply WHERE com_community_no = #{comCommunity_no};
+	</delete>
+
+</mapper>

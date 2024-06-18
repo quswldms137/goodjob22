@@ -69,7 +69,32 @@ main {
 
 		    const username2 = document.querySelector("Input[name='username1']");
 		    const password2 = document.querySelector("Input[name='password1']");
+		    var memberForm = document.getElementById('memberForm');
+			var companyForm = document.getElementById('companyForm');
 		    
+		    let formActive = memberForm.style.display !== 'none' ? 'member' : 'company';
+			
+		    if(formActive === 'member'){
+		    	if(username1.value == ''){
+			    	alert("아이디를 입력해주세요.");
+			    	username1.focus();
+			    	return ;
+			    } else if(password1.value == ''){
+			    	alert("비밀번호를 입력해주세요.");
+			    	password1.focus();
+			    	return ;
+			    } 
+		    } else if(formActice === 'company'){
+		    	if(username2.value == ''){
+			    	alert("아이디를 입력해주세요.");
+			    	username2.focus();
+			    	return ;
+			    } else if(password2.value == ''){
+			    	alert("비밀번호를 입력해주세요.");
+			    	password2.focus();
+			    	return ;
+			    } 
+		    } 
 		    let user;
 		    if(username1.value){
 		    	console.log(username1.value);
@@ -114,7 +139,8 @@ main {
 		    xhttp.open("POST", "http://localhost:8888/api/login");
 		    xhttp.setRequestHeader("Content-type", "application/json");
 		    xhttp.send(sendData);
-		}
+	    	
+		};
 
 	</script>
 </body>

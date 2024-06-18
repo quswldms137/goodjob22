@@ -22,4 +22,7 @@
 	<select id="getQuestionDetail" resultType="com.example.goodjob.dto.ServiceQuestionDto">
 		select * from service_question where cs_no = #{cs_no}
 	</select>
+	<update id="modifyQuestion">
+		update service_question set title = #{title}, content = #{content}, category = #{category} where cs_no = #{cs_no}
+	</update>
 </mapper>
