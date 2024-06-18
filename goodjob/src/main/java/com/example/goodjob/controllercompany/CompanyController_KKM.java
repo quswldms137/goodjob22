@@ -3,11 +3,13 @@ package com.example.goodjob.controllercompany;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -18,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.goodjob.dao.ICompany97;
 import com.example.goodjob.dto.CompanyDetailDto97;
+import com.example.goodjob.dto.MemRecruitDto;
+import com.example.goodjob.dto.RecruitDto;
 import com.example.goodjob.service.CompanyService97;
 import com.example.goodjob.service.QnaService99;
 import com.example.goodjob.util.FileUploadUtil;
@@ -45,6 +49,24 @@ public class CompanyController_KKM {
 		return icompany.getcompanyinfo(com_no);
 	}
 
+	//Detail이 있는지 확인하기
+	@GetMapping("/info/detail/{username}")
+	public String findInfo(@PathVariable("username")String username) {
+		
+		Long com_no = qnaService.getCom_no(username);
+		CompanyDetailDto97 result = icompany.getkeyvalue(com_no);
+		System.out.println("result:" + result);
+		System.out.println("컴앤오 :" + com_no);
+		System.out.println("유저네임 :" + username);
+		if(result == null) {
+			return ""; 
+		}else {
+			return "이미 기정정보가 존재합니다 수정페이지로 이동합니다!!";
+		}
+		
+		 
+	}
+	
 	// (기업)내 정보 등록 post
 	@PostMapping("/info")
 	public ResponseEntity<String> write(
@@ -136,6 +158,15 @@ public class CompanyController_KKM {
 		}
 	 
 	 //지원받은 이력서 목록페이지(조회만 하면된다)
+	 @GetMapping("/receiveResume")
+	 public MemRecruitDto getreceiveResume(@RequestParam("recruit_no") Long recruit_no) {
+		 
+		 RecruitDto memrecruit = icompany.findByRecruit_no(recruit_no);
+		 List<MemRecruitDto> list = icompany.findrecruit_no(recruit_no);
+		 memrecruit.setRecruit_no(recruit_no);
+		 
+		 return memrecruit;
+	 }
 	 
 	 //지원자 및 관심 구직자 이력서 상세보기 페이지(이것도 조회인데 합격 불합격 여부는 수정을 통해 이루어진다.)
 	 

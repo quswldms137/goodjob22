@@ -8,6 +8,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="/static/css/resumeWrite.css">
 <style>
+body{
+	background:#f4f4f9;
+}
+
+#sidebar{
+	background:#fff;
+}
+
 main {
 	width: 1100px;
 	margin: 80px auto;
@@ -17,9 +25,11 @@ main {
 
 main #container {
 	width: 900px;
-	min-height: 700px;
-	border: 1px solid #ccc;
+	margin:0 auto;
+	background:#fff;
 	box-sizing: border-box;
+	border-radius:5px;
+	padding-top:50px;
 }
 
 .company-nav ul li:nth-child(2) a {
@@ -27,24 +37,15 @@ main #container {
 	padding-bottom: 10px;
 }
 
-<
-style>body {
-	font-family: Arial, sans-serif;
-	background-color: #f4f4f9;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	margin: 0;
-}
 
 .companyInfoForm {
-	background-color: #fff;
+	width:600px;
+	margin:0 auto;
 	padding: 20px;
+	background-color: #fff;
 	border-radius: 8px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	max-width: 800px;
-	width: 100%;
+	box-sizing:border-box;
 }
 
 .companyInfoForm label {
@@ -76,13 +77,14 @@ style>body {
 }
 
 .photolabel .photoFrame-box {
-	width: 800px;
+	width: 100%;
 	height: 200px;
 	border: 1px solid #eee;
+	box-sizing:border-box;
 }
 
-<!--
-버튼style -->.submit_btn {
+<!--버튼style -->
+.submit_btn {
 	text-align: center;
 	margin: 80px 0;
 }
@@ -113,13 +115,11 @@ input[type="button"] {
 		<%@ include file="../front/company-header.jsp"%>
 	</header>
 	<main>
-		<h1>수정페이지 입니다 확인용으로 글써놓습니다</h1>
-		<div class="sidebar-container">
+	<div class="sidebar-container">
 			<%@ include file="../front/company-sidebar-all.jsp"%>
 		</div>
-		<div class="container">
+		<div id="container">
 			<form name="frm" id="companyinfo" enctype="multipart/form-data">
-				<p class="personal_info_title">기업정보</p>
 				<div class="companyInfoForm">
 					<div class="personal_info_photo">
 						<label for="photo" class="photolabel">
@@ -155,7 +155,7 @@ input[type="button"] {
 					<input type="button" value="취소" class="cancel-btn">
 				</div>
 			</form>
-		</div>
+			</div>
 	</main>
 	<footer>
 		<%@ include file="../front/footer.jsp"%>

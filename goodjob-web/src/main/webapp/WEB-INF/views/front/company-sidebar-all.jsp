@@ -80,7 +80,7 @@ ul {
 }
 #sidebar .sidebar-box5,
 #sidebar .sidebar-box6{
-	height:110px;
+	height:156px;
 	padding-top:25px;
 }
 </style>
@@ -94,7 +94,7 @@ ul {
 		<div class="sidebar-box sidebar-box2">
 			<h3>공고·지원자 관리</h3>
 			<p><a href="/company/employManage">전체 채용공고 관리</a></p>
-			<p><a href="#">지원자 관리</a></p>
+			<p><a href="/company/receiveResume">지원자 관리</a></p>
 			<p><a href="#">면접 캘린더</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box3">
