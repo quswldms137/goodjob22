@@ -118,7 +118,7 @@ public class CompanyController_JHY {
 		List<ResumeDto> resumeList = new ArrayList<>();
 		for(int i = 0; i < list.size(); i++) {
 			ResumeDto resume = resumeDao.findByMem_no(list.get(i)); // mem_no 값을 넣고 매퍼에서 mem_no 랑 대표이력서 여부 main = 1 인 이력서 받아오기
-			String mem_name = memberDao.findByMem_no(list.get(i)); // mem_no 값으로 mem_name 받아오기
+			String mem_name = memberDao.findMem_nameWithMem_no(list.get(i)); // mem_no 값으로 mem_name 받아오기
 			resume.setMem_name(mem_name); // 받아온 mem_name 을 resume 에 저장
 			resumeList.add(resume); // resumeList 에 resume 를 저장 -> 반복
 		}
