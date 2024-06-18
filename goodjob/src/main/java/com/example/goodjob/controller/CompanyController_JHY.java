@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dao.ICompanyDao_JHY;
+import com.example.goodjob.dto.CSkillDto;
 import com.example.goodjob.dto.RecruitDto;
-import com.example.goodjob.dto.SkillDto;
 
 @CrossOrigin("http://localhost:9991/")
 @RestController
@@ -37,12 +37,16 @@ public class CompanyController_JHY {
 	public String employWrite(@RequestBody RecruitDto recruitDto) {
 		boolean tf = companyDao.recruitWrite(recruitDto);
 		System.out.println(recruitDto);
+		
 		List<RecruitDto> recruit = companyDao.findLatest(1L);
 		System.out.println(recruit);
+		
 		Long recruit_no = recruit.get(0).getRecruit_no();
 		System.out.println(recruit_no);
+		
 		List<String> skill = recruitDto.getSkill();
 		System.out.println(skill);
+		
 		for(String sk_name : skill) {
 			companyDao.regSkill(sk_name, recruit_no);
 		}
@@ -54,11 +58,16 @@ public class CompanyController_JHY {
 		
 	}
 	
-	@PutMapping("/employUpdate")
+	@GetMapping("/employUpdate")
 	public RecruitDto employUpdate(@RequestParam("recruit_no") Long recruit_no) {
 		
 		RecruitDto recruit = companyDao.findByRecruit_no(recruit_no);
+		List<String> list = companyDao.findSkillListByRecruit_no(recruit_no);
+		recruit.setSkill(list);
 		
+		System.out.println("==========================");
+		System.out.println("list : " + list);
+		System.out.println("recruit : " + recruit);
 		return recruit;
 	}
 	
@@ -76,7 +85,13 @@ public class CompanyController_JHY {
 		return str;
 	}
 	
-	
+	@PutMapping("/recruitUpdate")
+	public String recruitUpdate(@RequestBody RecruitDto recruit ,@RequestParam("recruit_no") Long recruit_no) {
+		
+		
+		
+		return "";
+	}
 	
 	
 	
