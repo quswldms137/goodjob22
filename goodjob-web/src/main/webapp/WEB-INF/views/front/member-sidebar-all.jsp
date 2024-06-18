@@ -80,8 +80,8 @@ ul {
 	<div id="sidebar">
 		<div class="sidebar-box sidebar-box2">
 			<h3>이력서 관리</h3>
-			<p><a href="#" class="resumeManage">이력서 현황</a></p>
-			<p><a href="#">이력서 등록</a></p>
+			<p><a href="/resume/resumeManage" class="resumeManage">이력서 현황</a></p>
+			<p><a href="/resume/resumeWrite">이력서 등록</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box3">
 			<h3>입사지원·제안 관리</h3>

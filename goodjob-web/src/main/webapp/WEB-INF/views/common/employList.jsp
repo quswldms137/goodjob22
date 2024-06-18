@@ -12,10 +12,39 @@
 main {
 	width: 1100px;
 	margin: 80px auto;
-	margin-top: 100px;
+	margin-top: 10px;
 	min-height: 700px;
 	border:1px solid #eee;
 }
+
+.search-container {
+	margin-top: 50px;
+	margin-left: 115px;
+	text-align: row;
+}
+
+.search-box {
+	padding: 10px;
+	font-size: 16px;
+	width: 200px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.search-button {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #FF9900;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.search-button:hover {
+	background-color: #CC7A00;
+}
+
 #star-container {
 display: flex;
 flex-direction: row; /* 기본값으로 생략 가능 */
@@ -42,7 +71,7 @@ margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사�
     height: auto;
     padding: 10px;
     box-sizing: border-box;
-    margin: 40px 30px;
+    margin: 30px 30px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -97,8 +126,11 @@ margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사�
     margin-right: 20px; /* 추가: 버튼을 왼쪽으로 이동 */
 }
 
-.interest-button:hover, .doing-button:hover {
+.interest-button:hover {
     background-color: #0056b3;
+}
+.doing-button:hover {
+	background-color: #CC7A00;
 }
 </style>
 </head>
@@ -106,22 +138,10 @@ margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사�
 	<header>
 		<%@ include file="../front/header.jsp"%>
 	</header>
-	<div id="star-container">
- 		<div class="star">
- 		
- 		</div>
- 		<div class="star">
- 	
- 		</div>
- 		<div class="star">
- 	
- 		</div>
- 		<div class="star">
- 	
- 		</div>
- 		<div class="star">
- 		
- 		</div>
+	
+	<div class="search-container">
+		<input type="text" id="search-box" class="search-box" placeholder="채용 공고 검색...">
+		<button id="search-button" class="search-button">검색</button>
 	</div>
 	
 	<main id="main-content">
@@ -140,6 +160,16 @@ margin-right: -100px; /* 오른쪽 간격을 줄이기 위해 margin-right 사�
 
 <script>
 $(document).ready(function() {
+	// 검색 버튼 클릭 이벤트 핸들러
+	$("#search-button").on("click", function() {
+		const query = $("#search-box").val();
+		if (query.trim() !== "") {
+			searchRecruit(query);
+		} else {
+			alert("검색어를 입력하세요.");
+		}
+	});
+	
 	// 채용공고리스트 
 	$.ajax({
 		url: "http://localhost:8888/api/recruit94/allRecruitList",
@@ -175,12 +205,12 @@ $(document).ready(function() {
 							"</p>" +
 						"</div>" +
 						"<button class='doing-button' data-company-id='" + recruit.com_no + "'>지원하기</button>" +
-						"<button class='interest-button' data-company-id='" + recruit.com_no + "'>관심기업 등록</button>" +
+						"<button class='interest-button' data-company-id='" + recruit.com_no + "'>스크랩</button>" +
 	        		"</div>"
 				);
 			});
 
-			// 관심기업 등록 버튼 클릭 이벤트 핸들러
+			// 스크랩 등록 버튼 클릭 이벤트 핸들러
 			$(".interest-button").on("click", function() {
 				const companyId = $(this).data("company-id");
 				$.ajax({
@@ -189,7 +219,25 @@ $(document).ready(function() {
 					data: JSON.stringify({ companyId: companyId }),
 					contentType: "application/json",
 					success: function(response) {
-						alert("관심기업으로 등록되었습니다.");
+						alert("스크랩 되었습니다.");
+					},
+					error: function(error) {
+						alert("등록에 실패했습니다.");
+						console.log("Error:", error);
+					}
+				});
+			});
+			
+			// 지원하기 버튼 클릭 이벤트 핸들러
+			$(".interest-button").on("click", function() {
+				const companyId = $(this).data("company-id");
+				$.ajax({
+					url: "http://localhost:8888/api/company/addInterest",
+					method: "POST",
+					data: JSON.stringify({ companyId: companyId }),
+					contentType: "application/json",
+					success: function(response) {
+						alert("지원 등록 되었습니다.");
 					},
 					error: function(error) {
 						alert("등록에 실패했습니다.");

@@ -7,12 +7,14 @@ import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.goodjob.dao.ICompany97;
 import com.example.goodjob.dto.CompanyDetailDto97;
 import com.example.goodjob.service.CompanyService97;
 import com.example.goodjob.util.FileUploadUtil;
@@ -24,9 +26,16 @@ public class CompanyController_KKM {
 
 	@Autowired
 	private CompanyService97 comService;
+	
+	@Autowired
+	private ICompany97 icompany;
 
 	// (기업)내 정보 조회 get
-	// @GetMapping("/info")
+	@GetMapping("/info")
+	public CompanyDetailDto97 companyinfo(@RequestParam("com_no") Long com_no) {
+		System.out.println("컴퍼니 인포 기업정보를 들고오는중... :"+com_no);		
+		return icompany.getcompanyinfo(com_no);
+	}
 
 	// (기업)내 정보 등록 post
 	@PostMapping("/info")

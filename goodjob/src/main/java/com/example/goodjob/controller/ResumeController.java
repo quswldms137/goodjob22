@@ -3,6 +3,7 @@ package com.example.goodjob.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,15 +67,15 @@ public class ResumeController {
 			@RequestParam("hope_pay") String hope_pay, @RequestParam("military") String military,
 			@RequestParam("port_url") String port_url, @RequestParam("growth") String growth,
 			@RequestParam("motive") String motive, @RequestParam("personality") String personality,
-			@RequestParam("company") String company, @RequestParam("car_join_date") String car_join_date,
-			@RequestParam("quit_date") String quit_date, @RequestParam("main_part") String main_part,
-			@RequestPart(value = "etc_name1", required = false) MultipartFile etcFile1,
-			@RequestPart(value = "etc_name2", required = false) MultipartFile etcFile2,
-			@RequestPart(value = "etc_name3", required = false) MultipartFile etcFile3,
+			@RequestParam("company") String company, @RequestParam(value = "car_join_date", required = false) String car_join_date,
+			@RequestParam(value="quit_date", required = false) String quit_date, @RequestParam("main_part") String main_part,
+			@RequestParam(value = "etc_name1", required = false) MultipartFile etcFile1,
+			@RequestParam(value = "etc_name2", required = false) MultipartFile etcFile2,
+			@RequestParam(value = "etc_name3", required = false) MultipartFile etcFile3,
 			@RequestParam("license_name") String license_name, @RequestParam("agency") String agency,
-			@RequestParam("get_date") String get_date, @RequestParam("sk_name") String sk_name,
-			@RequestParam("school") String school, @RequestParam("edu_join_date") String edu_join_date,
-			@RequestParam("edu_gra_date") String edu_gra_date, @RequestParam("graduation") String graduation,
+			@RequestParam(value="get_date", required=false) String get_date, @RequestParam("sk_name") String sk_name,
+			@RequestParam("school") String school, @RequestParam(value="edu_join_date", required=false) String edu_join_date,
+			@RequestParam(value="edu_gra_date", required=false) String edu_gra_date, @RequestParam("graduation") String graduation,
 			@RequestParam("grades") String grades, @RequestParam("major") String major,
 			@RequestParam("username") String username, @RequestParam("mem_birth") String mem_birth,
 			@RequestParam("mem_gender") String mem_gender, @RequestParam("mem_email") String mem_email,
@@ -134,8 +135,22 @@ public class ResumeController {
 		licenseDto.setResume_no(resumeNo);
 		licenseDto.setLicense_name(license_name);
 		licenseDto.setAgency(agency);
-		LocalDate parsedGetDate = LocalDate.parse(get_date, formatter);
-		licenseDto.setGet_date(parsedGetDate);
+		
+		LocalDate parsedGetDate = null;
+		if (get_date != null || !get_date.trim().isEmpty()) {
+			try {
+				parsedGetDate = LocalDate.parse(get_date.trim(), formatter);
+				licenseDto.setGet_date(parsedGetDate);
+			}catch(DateTimeParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (parsedGetDate != null) {
+            System.out.println("Parsed date: " + parsedGetDate);
+        } else {
+            System.out.println("Date is null or empty.");
+        }
 
 		// SkillDto 설정
 		SkillDto skillDto = new SkillDto();
@@ -146,10 +161,39 @@ public class ResumeController {
 		EducationDto educationDto = new EducationDto();
 		educationDto.setResume_no(resumeNo);
 		educationDto.setSchool(school);
-		LocalDate parsedEduJoinDate = LocalDate.parse(edu_join_date, formatter);
-		educationDto.setEdu_join_date(parsedEduJoinDate);
-		LocalDate parsedEduGraDate = LocalDate.parse(edu_gra_date, formatter);
-		educationDto.setEdu_gra_date(parsedEduGraDate);
+		
+		LocalDate parsedEduJoinDate = null;
+		if (edu_join_date != null || !edu_join_date.trim().isEmpty()) {
+			try {
+				parsedEduJoinDate = LocalDate.parse(edu_join_date.trim(), formatter);
+				educationDto.setEdu_join_date(parsedEduJoinDate);
+			}catch(DateTimeParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (parsedEduJoinDate != null) {
+            System.out.println("Parsed date: " + parsedEduJoinDate);
+        } else {
+            System.out.println("Date is null or empty.");
+        }
+		
+		LocalDate parsedEduGraDate = null;
+		if (edu_gra_date != null || !edu_gra_date.trim().isEmpty()) {
+			try {
+				parsedEduGraDate = LocalDate.parse(edu_gra_date.trim(), formatter);
+				educationDto.setEdu_gra_date(parsedEduGraDate);
+			}catch(DateTimeParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (parsedEduGraDate != null) {
+            System.out.println("Parsed date: " + parsedEduGraDate);
+        } else {
+            System.out.println("Date is null or empty.");
+        }
+		
 		educationDto.setGraduation(graduation);
 		educationDto.setGrades(grades);
 		educationDto.setMajor(major);
@@ -158,10 +202,39 @@ public class ResumeController {
 		CareerDto careerDto = new CareerDto();
 		careerDto.setResume_no(resumeNo);
 		careerDto.setCompany(company);
-		LocalDate parsedCarJoinDate = LocalDate.parse(car_join_date, formatter);
-		careerDto.setCar_join_date(parsedCarJoinDate);
-		LocalDate parsedQuitDate = LocalDate.parse(quit_date, formatter);
-		careerDto.setQuit_date(parsedQuitDate);
+		
+		LocalDate parsedCarJoinDate = null;
+		if (car_join_date != null || !car_join_date.trim().isEmpty()) {
+			try {
+				parsedCarJoinDate = LocalDate.parse(car_join_date.trim(), formatter);
+				careerDto.setCar_join_date(parsedCarJoinDate);
+			}catch(DateTimeParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (parsedCarJoinDate != null) {
+            System.out.println("Parsed date: " + parsedCarJoinDate);
+        } else {
+            System.out.println("Date is null or empty.");
+        }
+		
+		LocalDate parsedQuitDate = null;
+		if (quit_date != null || !quit_date.trim().isEmpty()) {
+			try {
+				parsedQuitDate = LocalDate.parse(quit_date, formatter);
+				careerDto.setQuit_date(parsedQuitDate);
+			}catch(DateTimeParseException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if (parsedQuitDate != null) {
+            System.out.println("Parsed date: " + parsedQuitDate);
+        } else {
+            System.out.println("Date is null or empty.");
+        }
+		
 		careerDto.setMain_part(main_part);
 
 		// EtcDto 설정
