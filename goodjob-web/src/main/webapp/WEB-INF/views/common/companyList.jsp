@@ -12,7 +12,35 @@
 main {
 	width: 1100px;
 	margin: 80px auto;
+	margin-top: 10px;
 	min-height: 700px;
+}
+.search-container {
+	margin-top: 50px;
+	margin-left: 115px;
+	text-align: row;
+}
+
+.search-box {
+	padding: 10px;
+	font-size: 16px;
+	width: 200px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.search-button {
+	padding: 10px 20px;
+	font-size: 16px;
+	background-color: #FF9900;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.search-button:hover {
+	background-color: #CC7A00;
 }
 
 .company-info {
@@ -21,7 +49,7 @@ main {
     height: auto;
     padding: 10px;
     box-sizing: border-box;
-    margin: 50px auto;
+    margin: 15px auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -55,7 +83,7 @@ main {
 .interest-button {
     padding: 10px 10px;
     font-size: 16px;
-    background-color: #007BFF;
+    background-color: #FF9900;
     color: white;
     border: none;
     cursor: pointer;
@@ -63,7 +91,7 @@ main {
 }
 
 .interest-button:hover {
-    background-color: #0056b3;
+    background-color: #CC7A00;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -72,7 +100,12 @@ main {
 	<header>
 		<%@ include file="../front/header.jsp"%>
 	</header>
-
+	
+	<div class="search-container">
+		<input type="text" id="search-box" class="search-box" placeholder="채용 공고 검색...">
+		<button id="search-button" class="search-button">검색</button>
+	</div>
+	
 	<main id="main-content">
 		<!-- 기업 정보가 여기에 동적으로 추가됩니다. -->
 	</main>
