@@ -17,6 +17,9 @@ public class CompanyService97 {
 		return icompany97.CompanyDetailWrite(companydetail);
 	}
 	
-	
+	public int updateCompanyDetail(CompanyDetailDto97 companydetail) {
+		
+		return icompany97.updateCompanyDetail(companydetail);
+	}
 	
 }

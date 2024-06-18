@@ -15,4 +15,5 @@ public interface ICompany97 {
 	//컴퍼니 디테일에 키값이 있는지 조회
 	public CompanyDetailDto97 getkeyvalue(@Param("com_no") Long com_no);
 	
+	public int updateCompanyDetail(CompanyDetailDto97 companyDetailDto);
 }

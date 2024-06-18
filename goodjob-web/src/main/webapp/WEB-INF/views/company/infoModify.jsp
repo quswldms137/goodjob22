@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>기업 상세정보</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="/static/css/resumeWrite.css">
 <style>
 main {
@@ -108,15 +107,11 @@ input[type="button"] {
 	cursor: pointer;
 }
 </style>
-
-
 </head>
 <body>
-
 	<header>
 		<%@ include file="../front/company-header.jsp"%>
 	</header>
-	<!-- 메인 내용 -->
 	<main>
 		<h1>수정페이지 입니다 확인용으로 글써놓습니다</h1>
 		<div class="sidebar-container">
@@ -124,97 +119,125 @@ input[type="button"] {
 		</div>
 		<div class="container">
 			<form name="frm" id="companyinfo" enctype="multipart/form-data">
-
-				<!-- 기업 정보 -->
 				<p class="personal_info_title">기업정보</p>
 				<div class="companyInfoForm">
-					<!-- 기업사진 -->
 					<div class="personal_info_photo">
 						<label for="photo" class="photolabel">
 							<div class="photoFrame-box">
-								<img id="photoFrame" title="photo" width="800" height="200"
-									src="" alt="Photo Preview" style="visibility: hidden;">
-							</div> <input type="file" class="file" id="photo" name="img_url"
-							accept="image/*" onchange="previewImage(event)">
+								<img id="photoFrame" title="photo" width="800" height="200" src="" alt="Photo Preview" style="visibility: hidden;">
+							</div>
+							<input type="file" class="file" id="photo" name="img_url" accept="image/*" onchange="previewImage(event)">
 							<p class="companyphoto">기업사진 추가 +</p>
 						</label>
 					</div>
-
 					<label>기업소개</label>
-					<input type="text" name="introduction"placeholder="기업소개..">
+					<input type="text" id="introduction" name="introduction" placeholder="기업소개..">
 					
-					<label>연금/보험</label> <input type="text"name="pension" placeholder="연금/보험..">
+					<label>연금/보험</label>
+					<input type="text" id="pension" name="pension" placeholder="연금/보험..">
 					<label>업종</label>
-					<input type="text" name="sectors" placeholder="업종..">
+					<input type="text" id="sectors" name="sectors" placeholder="업종..">
 					<label>연혁</label>
-					<input type="text" name="history" placeholder="연혁..">
+					<input type="text" id="history" name="history" placeholder="연혁..">
 					<label>인재상</label>
-					<input type="text" name="ideal_talent" placeholder="인재상..">
+					<input type="text" id="ideal_talent" name="ideal_talent" placeholder="인재상..">
 					<label>설립연도</label>
 					<div style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-					<input type="date" name="foundation">
+						<input type="date" id="foundation" name="foundation">
 					</div>
 					<label>사원수</label>
-					<input type="text" name="amount"placeholder="사원수..">
+					<input type="text" id="amount" name="amount" placeholder="사원수..">
 					<label>사이트주소입력</label>
-					<input type="text" name="url" placeholder="주소입력..">
+					<input type="text" id="url" name="url" placeholder="주소입력..">
 				</div>
-
 				<div class="submit_btn">
 					<input type="submit" value="저장" onclick="submitForm(event)">
 					<input type="button" value="취소" class="cancel-btn">
 				</div>
-
 			</form>
 		</div>
 	</main>
-	<!-- 여기까지 -->
-
-
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
 
-
 	<script>
-		//취소버튼 클릭시 페이지 리셋
-		$('.cancel-btn').on('click', function(){
+		// 취소 버튼 클릭 시 페이지 리셋
+		$('.cancel-btn').on('click', function() {
 			alert("취소하였습니다!!");
 			window.location = "/company/info";
 		});
-		
-		
-		//기업정보 수정 명령어 바꿔줘야함
+
+		// 기업정보 조회
 		$(document).ready(function() {
-			$("#companyinfo").submit(function(event) {
-				event.preventDefault();
+			// 페이지 로드 시 URL에서 com_no 가져오기
+			// const urlParams = new URLSearchParams(window.location.search);
+			// const com_no = urlParams.get('com_no');
+			
+			const username = localStorage.getItem("username");
+			
+			if (username !== null) {
+				getinfoDetail(username);
+			}
 
-				var formData = new FormData(this);
-				const username = localStorage.getItem("username");
-				const com_no = localStorage.getItem("com_no");
-				console.log(formData);
-
+			function getinfoDetail(username) {
 				$.ajax({
-
-					type : 'POST',
-					beforeSend: function(xhr) {
-				        xhr.setRequestHeader('username', username);
-				        xhr.setRequestHeader('com_no' com_no);
-				    },
-					url : 'http://localhost:8888/api/company/infofind',
-					data : formData,
-					processData : false,
-					contentType : false,
-					success : function(response) {
-						alert('기업정보가 등록되었습니다!!');
-						window.location = "/company";//어디로보낼지 고민좀 해보자잉
+					url: "http://localhost:8888/api/company/infofind",
+					method: "GET",
+					data: { username : username },
+					success: function(data) {
+						
+						console.log('기업 정보 조회 성공:', data);
+						
+						$('#introduction').val(data.introduction);
+						$('#pension').val(data.pension);
+						$('#sectors').val(data.sectors);
+						$('#history').val(data.history);
+						$('#ideal_talent').val(data.ideal_talent);
+						$('#foundation').val(data.foundation);
+						$('#amount').val(data.amount);
+						$('#url').val(data.url);
+						
+						if (data.img_url) {
+							$('#photoFrame').attr('src', data.img_url);
+							$('#photoFrame').css('visibility', 'visible');
+						}
 					},
-					error : function(error) {
-						alert('기업정보 등록에 실패하였습니다!!!');
-						console.error('Error');
+					error: function(error) {
+						console.error('기업 정보 조회 실패', error);
+						alert('기업 정보 조회에 실패하였습니다.');
 					}
-
 				});
+			}
+		});
+
+		// 기업정보 수정
+		$("#companyinfo").submit(function(event) {
+			event.preventDefault();
+
+			var formData = new FormData(this);
+			const username = localStorage.getItem("username");
+			const com_no = localStorage.getItem("com_no");
+			console.log(formData);
+
+			$.ajax({
+				type: 'PUT',
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader('username', username);
+					xhr.setRequestHeader('com_no', com_no);
+				},
+				url: 'http://localhost:8888/api/company/info',
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(response) {
+					alert('기업정보가 수정되었습니다!!');
+					window.location = "/company"; // 이동할 위치 설정
+				},
+				error: function(error) {
+					alert('기업정보 등록에 실패하였습니다!!!');
+					console.error('Error:', error);
+				}
 			});
 		});
 
@@ -234,68 +257,6 @@ input[type="button"] {
 				reader.readAsDataURL(file);
 			}
 		}
-
-		/*
-		function submitForm(event){
-			
-			var input = event.target;
-			var file = input.files[0];
-			
-			console.log(file);
-			return false;
-			const xhr = new XMLHttpRequest();
-			xhr.onload = function(){
-				
-			}
-			xhr.open("POST", "http://localhost:8888/api/company/info", true);
-			xhr.setRequestHeader("Content-type", "application/json");
-			xhr.send(data);
-		}
-		 */
-		 //기업정보 조회
-		 
-		 $(document).ready(function(
-			//페이지 로드 시 URL에서 com_no가져오기
-			const urlParams = new URLSearchParams(window.location.serach);
-			const com_no = urlParams.get('com_no');
-		
-			if(com_no){
-				getinfoDetail(com_no);
-			}
-			
-			function getinfoDetail(com_no){
-			    $.ajax({
-			        url: "http://localhost:8888/api/company/info",
-			        method: "GET",
-			        data: { com_no: com_no },
-			        success: function(data){
-			            console.log('기업 정보 조회 성공:', data);
-			            
-			            $('#introduction').val(data.introduction);
-			            $('#pension').val(data.pension);
-			            $('#sectors').val(data.sectors);
-			            $('#history').val(data.history);
-			            $('#idealTalent').val(data.ideal_talent);
-			            $('#foundation').val(data.foundation);
-			            $('#employeeCount').val(data.amount);
-			            $('#websiteUrl').val(data.url);
-			            
-			            if(data.img_url){
-			                $('#photoFrame').attr('src', data.img_url);
-			                $('#photoFrame').css('visibility', 'visible');
-			            }
-			        },
-			        error: function(error){
-			            console.error('기업 정보 조회 실패', error);
-			            alert('기업 정보 조회에 실패하였습니다.');
-			        }
-			    });
-			}
-		 
-		 
-		 
-		 
 	</script>
-
 </body>
 </html>

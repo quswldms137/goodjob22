@@ -105,7 +105,8 @@ ul {
 		<div class="sidebar-box sidebar-box6">
 			<h3>회원정보 관리</h3>
 			<p><a href="#">회원정보 수정</a></p>
-			<p><a href="/company/info">기업정보 관리</a></p>
+			<p><a href="/company/info">기업정보 등록</a></p>
+			<p><a href="/company/infoModify">기업정보 수정</a></p>
 		</div>
 	</div>
 

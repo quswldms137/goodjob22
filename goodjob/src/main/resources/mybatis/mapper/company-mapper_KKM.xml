@@ -17,4 +17,10 @@
   	SELECT com_detail_no FROM company_detail WHERE com_no= #{com_no}
   </select>
   
+  <update id ="updateCompanyDetail">
+  	UPDATE company_detail SET 
+  	introduction = #{introduction},img_url = #{img_url},pension = #{pension}, sectors = #{sectors},history = #{history},
+  	ideal_talent = #{ideal_talent}, amount = #{amount}, url = #{url};
+  </update>
+  
   </mapper>

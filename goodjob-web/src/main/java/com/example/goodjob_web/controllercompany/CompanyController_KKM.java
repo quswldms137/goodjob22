@@ -26,4 +26,10 @@ public class CompanyController_KKM {
 		
 		return"company/receiveResume";
 	}
+	
+	@RequestMapping("/interestMemberResumeDetail")
+	public String interestResumeDetail() {	
+	
+		return"company/interestMemberResumeDetail";
+	}
 }
