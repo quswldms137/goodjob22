@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.goodjob.dao.ICompanyDetailDao">
+	
+	<select id="RecruitDetailCompany" resultType="com.example.goodjob.dto.CompanyDto">
+		select * from company where com_no = #{com_no};
+	</select>
+	
+	<select id="RecruitDetailCompany2" resultType="com.example.goodjob.dto.CompanyDetailDto97">
+		select * from company_detail where com_detail_no = #{com_detail_no} and com_no = #{com_no};
+	</select>
+
+</mapper>
