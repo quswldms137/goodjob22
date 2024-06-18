@@ -19,4 +19,6 @@ public interface IQnaDao99 {
 	//로그인한 회원 유형에 따른 문의 내역 리스트
 	public List<ServiceQuestionDto> getMemQnaList(Long mem_no);
 	public List<ServiceQuestionDto> getComQnaList(Long com_no);
+	//상세 문의글
+	public ServiceQuestionDto getQuestionDetail(int cs_no);
 }

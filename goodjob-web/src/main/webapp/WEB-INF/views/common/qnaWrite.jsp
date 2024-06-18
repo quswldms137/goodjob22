@@ -167,7 +167,7 @@ main #container {
 					table += '<tr>';
 					table += '<td>' + (i+1) + '</td>';
 					table += '<td>' + data[i].category + '</td>';
-					table += '<td><button onclick="loadDetail('+ data[i].cs_no +')">' + data[i].title + '</button></td>';
+					table += '<td><a href="/qna99/qnaDetail?cs_no='+data[i].cs_no + '">' + data[i].title + '</a></td>';
 					table += '<td>' + data[i].reg_date + '</td>';
 					table += '</tr>';
 				}
@@ -182,7 +182,7 @@ main #container {
 		const username = localStorage.getItem("username");
     	const role = localStorage.getItem("role");
 
-    	xhttp.open("GET", "http://localhost:8888/api/qna-99");
+    	xhttp.open("GET", "http://localhost:8888/api/qna-99/list");
 		xhttp.setRequestHeader("username", username);
 		xhttp.setRequestHeader("role", role);
 		xhttp.send();

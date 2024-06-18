@@ -19,4 +19,7 @@
 	<select id="getComQnaList">
 		select * from service_question where com_no = #{com_no}
 	</select>
+	<select id="getQuestionDetail">
+		select * from service_question where cs_no = #{cs_no}
+	</select>
 </mapper>
