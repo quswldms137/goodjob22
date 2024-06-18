@@ -79,6 +79,15 @@ input[type=button]{
 input[type=button]:hover{
 	cursor: pointer;
 }
+#pages{
+	text-align: center;
+	margin: 10px;
+}
+#pages input[type=button]{
+	background: #ededed;
+	color: black;
+	margin: 0 3px;
+}
 </style>
 </head>
 <body>

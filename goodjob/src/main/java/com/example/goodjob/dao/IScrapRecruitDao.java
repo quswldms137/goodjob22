@@ -15,4 +15,5 @@ public interface IScrapRecruitDao {
 	public int getScrap(@Param("scrapRecruitDto") ScrapRecruitDto scrapRecruitDto);
 	public int removeScrap(@Param("scrapRecruitDto") ScrapRecruitDto scrapRecruitDto);
 	public List<Long> findByMem_no(@Param("mem_no") Long mem_no);
+	public int deleteByMem_no(@Param("mem_no") Long mem_no);
 }

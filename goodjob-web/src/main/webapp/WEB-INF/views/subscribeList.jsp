@@ -64,6 +64,17 @@ main #container {
 	width: 30px;
 	height: 30px;
 }
+#pages{
+	text-align: center;
+	margin: 10px;
+}
+#pages input[type=button]{
+	padding: 5px 7px;
+	margin: 0 3px;
+}
+.pension{
+	margin: 5px 0;
+}
 </style>
 </head>
 <body>
@@ -105,11 +116,12 @@ main #container {
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
 									   '<a href="#" class="info"> ' + 
-									   '<p class="com_name">' + item.com_name + '</p> ' + 
+									   '<p class="com_name">' + item.com_name + '</p> ' +
 									   '<div> ' + 
 									   '<span>' + item.sectors + '</span><span> &#183; </span><span>' + item.com_addr + '</span><span> &#183; </span> ' + 
 									   '<span>' + item.foundation + '</span> ' +
 									   '</div> ' +
+									   '<p class="pension">' + item.pension + '</p>' + 
 									   '</a> ' +
 									   '<a href="#" class="interest" onclick="changeInterest(event)"> <img alt="관심 기업" id="interest' + item.com_no + '" src="/resource/img/yesinterest.png" class="starImg"></a> ' +
 						 			   '</div> ';

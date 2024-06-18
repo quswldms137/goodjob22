@@ -16,8 +16,10 @@ main {
 	margin: 80px auto;
 	border: 1px solid #eee;
 }
-
-#skillRecommendation, #vip, #everyRecruit{
+.slide{
+	display: flex;
+}
+#vip, #everyRecruit{
 	margin: 20px 0;
 	width: 1100px;
 	height: 300px;
@@ -26,7 +28,13 @@ main {
 	flex-wrap: nowrap;
 	position: relative;
 }
-
+#skillRecommendation{
+	margin: 20px 0;
+	height: 300px;
+	overflow: hidden;
+	transition: all 1s ease-out;
+	display: flex;
+}
 #vip{
 	width: 300vw;
 	margin: 20px 0;
@@ -114,6 +122,10 @@ label:hover {
 	width: 1100px;
 	margin: 20px;
 }
+body::-webkit-scrollbar{
+  display:none;
+}
+출처: https://wooaoe.tistory.com/49 [개발개발 울었다:티스토리]
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -124,8 +136,7 @@ label:hover {
 
 
 	<main>
-		<p id="prev">&#60;</p>
-		<p id="next">&#62;</p>
+		
 		<div id="skillRecommendation">
 		
 		</div>
@@ -149,11 +160,18 @@ label:hover {
 				method : "GET",
 				dataType : "json",
 				success : function(response) {
-
-					console.log(response);
-					let str = '<div id="slide1">';
 					
+					let str = "";
+					let index = 0;
+					let slide = 1;
+					 
 					response.forEach(item =>{
+						
+						if(index % 4 === 0){
+							str += '<div class="slide" id="slide' + slide + '">';
+							slide++;
+						}
+						
 						const array = item.location.split(" ");
 						const location = array[0] + " " + array[1];
 						
@@ -171,9 +189,18 @@ label:hover {
 						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
 						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
 						'</div> ';
+						if(index % 4 === 3){
+							str += '</div>';
+						}
+						
+						index++;
 					});
-					str += '</div>';
+					
+					let width = slide * 1300;
+						console.log(str);
 					$("#skillRecommendation").html(str);
+					$("#skillRecommendation").css("width", width + "px");
+					$("#slide" + (slide - 1)).css("display", "none");
 					
 				},
 				error : function(xhr, status, error) {
@@ -195,6 +222,7 @@ label:hover {
 						const newDate = new Date();
 						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+						
 						str += '<div class="vip"> ' + 
 						'<a href=#><div> ' +
 						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
@@ -268,13 +296,13 @@ label:hover {
 		let totalPage = document.querySelectorAll(".skill");
 		console.log(totalPage);
 		
-		$('#prev').on('click', function() {
+		$('#prevSkill').on('click', function() {
 			currentPage++;
 			  $('#vip').css('transform', 'translateX(' + (-100) + 'vw)');
 			  $('#vip').css('transition', 'transform 0.5s ease');
 			});
 		
-		$('#next').on('click', function() {
+		$('#nextSkill').on('click', function() {
 			currentPage--;
 			  $('#vip').css('transform', 'translateX(' + (+100) + 'vw)');
 			  $('#vip').css('transition', 'transform 0.5s ease');

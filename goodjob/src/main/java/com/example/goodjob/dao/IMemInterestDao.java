@@ -16,4 +16,5 @@ public interface IMemInterestDao {
 	public int getSubscribe(@Param("memInterestDto") MemInterestDto memInterestDto);
 	public int removeSubscribe(@Param("memInterestDto") MemInterestDto memInterestDto);
 	public List<Long> findByMem_no(@Param("mem_no") Long mem_no);
+	public int deleteByMem_no(@Param("mem_no") Long mem_no);
 }

@@ -19,4 +19,7 @@
 	<delete id="removeSubscribe">
 		DELETE FROM mem_interest WHERE mem_no = #{memInterestDto.mem_no} AND com_no = #{memInterestDto.com_no};
 	</delete>
+	<delete id="deleteByMem_no">
+		DELETE FROM mem_interest WHERE mem_no = #{mem_no};
+	</delete>
 </mapper>  

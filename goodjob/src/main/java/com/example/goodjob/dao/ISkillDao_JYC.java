@@ -13,4 +13,5 @@ public interface ISkillDao_JYC {
 	public List<SkillDto> findByResume_no(@Param("resume_no") Long resume_no);
 	public List<Long> getSkill_no(@Param("resume_no") Long resume_no);
 	public String getSkillName(@Param("skill_no") Long skill_no);
+	public int deleteByResume_no(@Param("resume_no") Long resume_no);
 }
