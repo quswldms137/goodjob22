@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dto.ServiceQuestionDto;
@@ -54,12 +55,12 @@ public class QnAController_99 {
 	}
 	
 	@GetMapping("/detail")
-	public ResponseEntity<ServiceQuestionDto> getQuestionDetail(@RequestBody String cs_no, @RequestHeader("username") String username){
+	public ServiceQuestionDto getQuestionDetail(@RequestParam("cs_no") Long cs_no, @RequestHeader("username") String username){
 		System.out.println("실행중....");
-		
 		System.out.println(cs_no);
-		qnaService.getQuestionDetail(0);
-		return ResponseEntity.ok(null);
+		ServiceQuestionDto detail = qnaService.getQuestionDetail(cs_no);
+		System.out.println(detail);
+		return detail;
 	}
 	
 	@GetMapping("/list")
