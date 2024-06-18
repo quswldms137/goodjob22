@@ -15,13 +15,32 @@ main {
 	margin-top: 10px;
 	min-height: 700px;
 }
-.search-container {
+
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	margin-top: 50px;
-	margin-left: 115px;
-	text-align: row;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+}
+#jobTypeFilter, #locationFilter{
+	padding: 10px;
+	font-size: 16px;
+	width: 100px;
+	border: 1px solid #ccc;
+	border-radius: 5px
+}
+.search-container {
+	display: flex;
+	align-items: center;
 }
 
 .search-box {
+	margin: 5px;
 	padding: 10px;
 	font-size: 16px;
 	width: 200px;
@@ -29,7 +48,7 @@ main {
 	border-radius: 5px;
 }
 
-.search-button {
+.search-button, #filterBnt {
 	padding: 10px 20px;
 	font-size: 16px;
 	background-color: #FF9900;
@@ -42,17 +61,19 @@ main {
 .search-button:hover {
 	background-color: #CC7A00;
 }
-
+#filterBnt:hover {
+	background-color: #CC7A00;
+}
 .company-info {
     border: 1px solid #eee;
     width: 1100px;
     height: auto;
     padding: 10px;
     box-sizing: border-box;
-    margin: 15px auto;
     display: flex;
+    margin-top: 12px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .company-img {
@@ -101,15 +122,37 @@ main {
 		<%@ include file="../front/header.jsp"%>
 	</header>
 	
-	<div class="search-container">
-		<input type="text" id="search-box" class="search-box" placeholder="채용 공고 검색...">
-		<button id="search-button" class="search-button">검색</button>
+	<main>
+		<div class="container">
+			<div id="filters">
+        		<select id="jobTypeFilter">
+            		<option value="">지역</option>
+            		<option value="서울">서울</option>
+            		<option value="경기">경기</option>
+            		<option value="부산">부산</option>
+        		</select>
+        		<select id="locationFilter">
+            		<option value="">직무</option>
+            		<option value="개발">개발</option>
+            		<option value="경영">경영</option>
+            		<option value="회계">회계</option>
+            		<option value="건축">건축</option>
+            		<option value="제조·생산">제조·생산</option>
+        		</select>
+        		<button id="filterBnt" onclick="applyFilters()">filter</button>
+    		</div>
+			<div class="search-container">
+				<input type="text" id="search-box" class="search-box" placeholder="기업 검색...">
+				<button id="search-button" class="search-button">검색</button>
+			</div>
+    	</div>
+	
+	<div id="main-content">
+		<!-- 기업 정보가 여기에 동적으로 추가됩니다. -->
 	</div>
 	
-	<main id="main-content">
-		<!-- 기업 정보가 여기에 동적으로 추가됩니다. -->
 	</main>
-
+	
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
