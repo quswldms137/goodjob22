@@ -53,7 +53,16 @@ public class QnAController_99 {
 		return ResponseEntity.badRequest().body("다시 입력해주세요.");
 	}
 	
-	@GetMapping
+	@GetMapping("/detail")
+	public ResponseEntity<ServiceQuestionDto> getQuestionDetail(@RequestBody String cs_no, @RequestHeader("username") String username){
+		System.out.println("실행중....");
+		
+		System.out.println(cs_no);
+		qnaService.getQuestionDetail(0);
+		return ResponseEntity.ok(null);
+	}
+	
+	@GetMapping("/list")
 	public ResponseEntity<List<ServiceQuestionDto>> getQnaList(@RequestHeader("username")String username, @RequestHeader("role")String role ){
 		System.out.println("실행중,,,,,,,,,");
 		Long mem_no = qnaService.getMem_no(username);
@@ -72,6 +81,13 @@ public class QnAController_99 {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
-		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -21,4 +21,19 @@ public class CommonController99 {
 	public String joinForm() {
 		return "common/join";
 	}
+	
+	@RequestMapping("/findUsername")
+	public String findUsernameForm() {
+		return "common/findUsernameWrite";
+	}
+	
+	@RequestMapping("/showUsername")
+	public String resultUsername() {
+		return "common/resultUsername";
+	}
+	
+	@RequestMapping("/findPassword")
+	public String findPasswordForm() {
+		return "common/findPasswordWrite";
+	}
 }

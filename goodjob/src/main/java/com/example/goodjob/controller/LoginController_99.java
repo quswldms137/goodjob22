@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.goodjob.dto.CompanyDto;
+import com.example.goodjob.dto.MemberDto;
 import com.example.goodjob.dto.UserDto;
 import com.example.goodjob.service.UserService99;
 
@@ -27,15 +29,12 @@ public class LoginController_99 {
     public ResponseEntity<String> loginMember(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
         String role = userService.getRole(userDto);
         userDto.setRole(role);
-        System.out.println("role: " + role);
-        System.out.println("userDto: " + userDto);
         
         int result = userService.userLogin(userDto);
         if (result == 1) {
             System.out.println(result);
             if ("ROLE_MEMBER".equals(role) || "ROLE_MANAGER".equals(role) || "ROLE_COMPANY".equals(role)) {
                 session.setAttribute("user", userDto);
-                System.out.println("Saved in session: " + session.getAttribute("user"));
                 //Header에 저장
                 response.setHeader("username", userDto.getUsername());
                 response.setHeader("role", userDto.getRole());
@@ -64,4 +63,44 @@ public class LoginController_99 {
     	}
     	
     }
+    
+    @PostMapping("/mem-username")
+	public ResponseEntity<String> getMemUsername(@RequestBody MemberDto memberDto){
+		String memUsername = userService.getMemUsername(memberDto.getMem_name(), memberDto.getMem_tel());
+		System.out.println("memusername" + memUsername);
+		
+		
+		if(memUsername != null) {
+			return ResponseEntity.ok(memUsername);
+		} else {
+			return ResponseEntity.badRequest().body("가입이력이 없습니다. 가입 폼으로 이동합니다.");
+		}
+	}
+    
+    @PostMapping("/com-username")
+	public ResponseEntity<String> getComUsername(@RequestBody CompanyDto companyDto){
+		String comUsername = userService.getComUsername(companyDto.getCom_name(), companyDto.getCom_companynum());
+		System.out.println("comusername" + comUsername);
+		
+		if(comUsername != null) {
+			return ResponseEntity.ok(comUsername);
+		} else {
+			return ResponseEntity.badRequest().body("가입이력이 없습니다. 가입 폼으로 이동합니다.");
+		}
+	}
+    
+    @PostMapping("/password")
+	public ResponseEntity<String> getPassword(@RequestBody MemberDto memberDto){
+		int member = userService.memCheck(memberDto);
+		System.out.println(member);
+		
+		if(member > 0) {
+			String username = memberDto.getUsername();
+			System.out.println(username);
+			String password = userService.getMemPassword(username);
+			return ResponseEntity.ok(password);
+		} else {
+			return ResponseEntity.badRequest().body("존재하지 않는 회원입니다.");
+		}
+	}
 }
