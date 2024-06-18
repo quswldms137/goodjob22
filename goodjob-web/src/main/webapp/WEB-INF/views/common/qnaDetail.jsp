@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>문의글 작성 수정</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 main {
 	width: 1100px;
@@ -75,42 +76,40 @@ main #container {
 		
 	}
 	
-	window.onload = function(){
+	$(document).ready(function(){
 		const urlParams = new URLSearchParams(window.location.search);
-		const cs_no = urlParams.get("cs_no");
-		console.log(cs_no);
+		let cs_no = urlParams.get('cs_no');
 		
-		const cs_no2 = {
-				cs_no : cs_no
+		function getQnaDetail(cs_no){
+			$.ajax({
+				url: "http://localhost:8888/api/qna-99/detail",
+				type: "GET",
+				data: {
+					cs_no : cs_no
+				},
+				success: function(data){
+					let detail = 
+						'<div>'+ data.cs_no +'</div>';
+						detail += '<h1>'+ data.title +'</h1>';
+						detail += '<h1>'+ data.content +'</h1>';
+						
+					$('#title').html(detail);
+
+				},
+				error: function(error){
+					alert("불러오는데 실패했습니다. 다시 시도해주세요.", error);
+					console.log(data);
+				}
+			});
 		}
 		
-		const sendData = JSON.stringify(cs_no2);
-		
-		const xhttp = new XMLHttpRequest();
-		xhttp.onload = function(){
-			if(this.status === 200){
-				alert(this.responseText);
-			} else{
-				alert("다시 입력해주세요.");
-			}
-		};
-		xhttp.open("GET", "http://localhost:8888/api/qna-99/detail");
-		xhttp.setRequestHeader("Content-type", "application/json");
-		
-		const username = localStorage.getItem("username");
-    	const role = localStorage.getItem("role");
-
-    	xhttp.setRequestHeader("username", username);
-		xhttp.setRequestHeader("role", role);
-		
-		xhttp.send(sendData);
-		
-	}
-	
-	
-	function qnaWrite(){
-		window.location.href="/qna99/qnaWrite";
-	}
+		if(cs_no){
+			getQnaDetail(cs_no);
+			console.log(cs_no);
+		} else{
+			alert("불러오는데 실패했습니다. 다시 시도해주세요.");
+		}
+	});
 	</script>
 </body>
 </html>

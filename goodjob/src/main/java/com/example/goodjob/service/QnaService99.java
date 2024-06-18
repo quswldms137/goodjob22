@@ -40,7 +40,7 @@ public class QnaService99 {
 		return iQnaDao.getComQnaList(com_no);
 	}
 	
-	public ServiceQuestionDto getQuestionDetail(int cs_no) {
+	public ServiceQuestionDto getQuestionDetail(Long cs_no) {
 		return iQnaDao.getQuestionDetail(cs_no);
 	}
 }

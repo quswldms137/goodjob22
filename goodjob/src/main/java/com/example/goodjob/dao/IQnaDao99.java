@@ -20,5 +20,5 @@ public interface IQnaDao99 {
 	public List<ServiceQuestionDto> getMemQnaList(Long mem_no);
 	public List<ServiceQuestionDto> getComQnaList(Long com_no);
 	//상세 문의글
-	public ServiceQuestionDto getQuestionDetail(int cs_no);
+	public ServiceQuestionDto getQuestionDetail(Long cs_no);
 }
