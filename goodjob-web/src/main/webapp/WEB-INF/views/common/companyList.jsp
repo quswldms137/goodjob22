@@ -189,21 +189,32 @@ $(document).ready(function() {
 	        					company.com_type +
 							"</p>" +
 						"</div>" +
-						"<button class='interest-button' data-company-id='" + company.com_no + "'>관심기업 등록</button>" +
+						"<button class='interest-button' data-com_no='" + company.com_no + "'>관심기업 등록</button>" +
 	        		"</div>"
 				);
 			});
 
 			// 관심기업 등록 버튼 클릭 이벤트 핸들러
 			$(".interest-button").on("click", function() {
-				const companyId = $(this).data("company-id");
+				// 클릭된 버튼의 data-com_no 속성 값을 가져옴
+				const com_no_ = $(this).data("com_no");
+				console.log(com_no_);
+				// 로컬 스토리지에서 사용자 이름을 가져옴
+				const username = localStorage.getItem("username");
+				console.log(username);
+				// AJAX POST 요청을 통해 관심기업 등록
 				$.ajax({
-					url: "http://localhost:8888/api/company/addInterest",
+					url: "http://localhost:8888/api/interest/add",
 					method: "POST",
-					data: JSON.stringify({ companyId: companyId }),
-					contentType: "application/json",
+					beforeSend: function(xhr) {
+						// 요청 헤더에 사용자 이름을 설정
+						xhr.setRequestHeader("username", username);
+					},
+					data: {
+						com_no: com_no_
+					},
 					success: function(response) {
-						alert("관심기업으로 등록되었습니다.");
+						alert(response);
 					},
 					error: function(error) {
 						alert("등록에 실패했습니다.");
