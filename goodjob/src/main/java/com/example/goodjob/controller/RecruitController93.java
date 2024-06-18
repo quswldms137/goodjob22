@@ -1,16 +1,21 @@
 package com.example.goodjob.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dto.CompanyDetailDto97;
 import com.example.goodjob.dto.CompanyDto;
+import com.example.goodjob.dto.MemRecruitDto;
 import com.example.goodjob.dto.RecruitDetailDto;
 import com.example.goodjob.dto.RecruitDto;
+import com.example.goodjob.service.MemRecruitService;
 import com.example.goodjob.service.RecruitCompanyDetailService;
 import com.example.goodjob.service.RecruitService93;
 
@@ -25,6 +30,9 @@ public class RecruitController93 {
 	@Autowired
 	private RecruitCompanyDetailService companyDetailService;
 	
+	@Autowired
+	private MemRecruitService memRecruitService;
+	
 	@GetMapping("/detail")
 	public RecruitDetailDto recruitDetail(@RequestParam("recruit_no") Long recruit_no,
 			@RequestParam("com_no") Long com_no,
@@ -36,5 +44,12 @@ public class RecruitController93 {
 		
 		return new RecruitDetailDto(recruitDto, companyDto, companyDto2);
 	}
+	
+	@PostMapping("/nowApply")
+    public ResponseEntity<String> nowApply(@RequestBody MemRecruitDto memRecruitDto) {
+		
+        memRecruitService.nowApplyService(memRecruitDto);
+        return ResponseEntity.ok("즉시지원 완료");
+    }
 	
 }
