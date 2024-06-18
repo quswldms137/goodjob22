@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>채용공고 상세페이지</title>
+<link rel="stylesheet" as="style" crossorigin
+	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
@@ -115,17 +117,19 @@ main {
 	text-align:center;
 	margin-top:50px;
 }
-.output-btn a{
+.output-btn button{
 	display:inline-block;
 	font-size:20px;
+	cursor:pointer;
+	font-family: "Pretendard Variable", Pretendard;
 }
-.output-btn a:nth-child(1){
+.output-btn button:nth-child(1){
 	background:#FB8500;
 	border:1px solid #FB8500;
 	padding:15px 45px;
 	color:#fff;
 }
-.output-btn a:nth-child(2){
+.output-btn button:nth-child(2){
 	background:#fff;
 	border:1px solid #FB8500;
 	padding:15px 45px;
@@ -142,8 +146,8 @@ main {
 		<div id="recruitDetail-area"></div>
 		
 		<div class="output-btn">
-			<a href="#">즉시지원</a>
-			<a href="#">스크랩</a>
+			<button id="nowApply">즉시지원</button>
+			<button id="nowScrap">스크랩</button>
 		</div>
 	</main>
 
@@ -199,7 +203,7 @@ main {
 						output += '<div class="info-area-leftBot2">';
 						output += '<h4>근무조건</h4>';
 						output += '<p><span>고용형태</span>'+ data.recruit.field +'</p>';
-						output += '<p><span>급여</span>'+ data.recruit.pay +'</p>';
+						output += '<p><span>급여</span>'+ data.recruit.pay +' 만원</p>';
 						output += '<p><span>지역</span>'+ data.recruit.location +'</p>';
 						output += '<p><span>직급</span>'+ data.recruit.rank +'</p>';
 						output += '<p><span>근무시간</span>'+ data.recruit.working_time +'</p>';
@@ -238,6 +242,40 @@ main {
 				console.error("recruit number is missing.");
 			}
 		});
+		
+		
+		$(document).ready(function () {
+	        $('#nowApply').click(function (event) {
+	            event.preventDefault(); // 폼 기본 제출 방지
+
+	         	// 필요한 데이터를 객체로 수집
+	            var data = {
+	                mem_no: 1,
+	                recruit_no: 1,
+	                resume_pass: 1,
+	                view: true,
+	                resume_no: 1,
+	                interview_pass: 1
+	            };
+	            
+	            $.ajax({
+	                type: 'POST',
+	                url: 'http://localhost:8888/api/recruit/nowApply',
+	                data: JSON.stringify(data),      	
+	                contentType: "application/json",
+	                success: function (response) {
+	                    alert('즉시지원 성공!!');
+	                },
+	                error: function (error) {
+	                    alert('즉시지원에 실패 하셨습니다.ㅜ');
+	                    console.error('Error:', error);
+	                }
+	            });
+	        });
+	    });
+		
+		
+		
 	</script>
 
 </body>

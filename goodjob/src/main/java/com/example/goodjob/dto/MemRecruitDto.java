@@ -13,6 +13,6 @@ public class MemRecruitDto {
 	private Long recruit_no;
 	private int resume_pass;
 	private boolean view;
-	private Long s_resume_no;
+	private Long resume_no;
 	private int interview_pass;
 }
