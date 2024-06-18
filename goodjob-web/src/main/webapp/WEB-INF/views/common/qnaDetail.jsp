@@ -78,7 +78,7 @@ main #container {
 	
 	$(document).ready(function(){
 		const urlParams = new URLSearchParams(window.location.search);
-		const cs_no = urlParams.get('cs_no');
+		let cs_no = urlParams.get('cs_no');
 		
 		function getQnaDetail(cs_no){
 			$.ajax({
@@ -89,16 +89,17 @@ main #container {
 				},
 				success: function(data){
 					let detail = 
-						"<div>'"+ data +"'</div>";
+						'<div>'+ data.cs_no +'</div>';
+						detail += '<h1>'+ data.title +'</h1>';
+						detail += '<h1>'+ data.content +'</h1>';
+						
 					$('#title').html(detail);
 
 				},
 				error: function(error){
-					alert("불러오는데 실패했습니다. 다시 시도해주세요.");
+					alert("불러오는데 실패했습니다. 다시 시도해주세요.", error);
 					console.log(data);
 				}
-				
-			
 			});
 		}
 		
