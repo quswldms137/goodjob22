@@ -126,7 +126,7 @@ function logout(){
 	
 	xhttp.onload = function(){
 		if(this.status == 200){
-			alert("로그인이 완료되었습니다. 행복한 하루 되세요^^");
+			alert("로그아웃이 완료되었습니다. 행복한 하루 되세요^^");
 			var response = JSON.parse(this.responseText);
 			window.location.href = response.redirectUrl;
 			
