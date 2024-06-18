@@ -12,4 +12,6 @@ public interface IMemberDao {
 	public Long getMem_no(@Param("username") String username);
 	public void update(@Param("memberDto") MemberDto memberDto);
 	public void deleteInformation(@Param("mem_no") Long mem_no);
+	
+	public String findByMem_no(@Param("mem_no") Long mem_no);
 }

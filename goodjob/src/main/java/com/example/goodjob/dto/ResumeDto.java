@@ -1,6 +1,6 @@
 package com.example.goodjob.dto;
 
-import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,5 +23,5 @@ public class ResumeDto {
 	private String growth;
 	private String motive;
 	private String personality;
-	
+	private String mem_name;
 }
