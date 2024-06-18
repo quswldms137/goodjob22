@@ -156,7 +156,7 @@ public class CompanyController_KKM {
 
 		    return ResponseEntity.ok("기업 정보 업데이트 성공");
 		}
-	 
+	 /*
 	 //지원받은 이력서 목록페이지(조회만 하면된다)
 	 @GetMapping("/receiveResume")
 	 public MemRecruitDto getreceiveResume(@RequestParam("recruit_no") Long recruit_no) {
@@ -167,7 +167,7 @@ public class CompanyController_KKM {
 		 
 		 return memrecruit;
 	 }
-	 
+	 */
 	 //지원자 및 관심 구직자 이력서 상세보기 페이지(이것도 조회인데 합격 불합격 여부는 수정을 통해 이루어진다.)
 	 
 	 
