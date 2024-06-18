@@ -21,4 +21,10 @@ public class CommonController_94 {
 	public String companyList() {
 		return "common/companyList";
 	}
+	
+	//채용공고리스트 페이지
+	@RequestMapping("/employList")
+	public String emplouList() {
+		return "common/employList";
+	}
 }
