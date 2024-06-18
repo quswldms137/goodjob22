@@ -192,6 +192,7 @@ main #container {
 	function loadDetail(cs_no){
 		window.location.href="/qna99/qnaDetail?cs_no="+cs_no;
 	}
+
 	</script>
 </body>
 </html>
