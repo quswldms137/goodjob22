@@ -16,7 +16,7 @@
 	width: 950px;
 	margin: 0 auto;
 	display: flex;
-	padding: 30px;
+	padding: 25px;
 	border: 1px solid #ccc;
 	border-top: 2px solid #777;
 }
@@ -28,7 +28,8 @@
 }
 
 .recruit-mid {
-	padding-right: 100px;
+	width: 700px;
+	padding-right: 50px;
 }
 
 .recruit-right-top {
@@ -41,6 +42,13 @@
 
 .recruit-right-bot p {
 	padding-right: 15px;
+}
+
+.recruit-right-right {
+	width: 130px;
+	height: 60px;
+	margin-left: 20px;
+	margin-right: 10px;
 }
 
 .updateBtn,
@@ -110,13 +118,14 @@
 										+ '<p class="recruit_career">요구 경력</p> '
 										+ '<p class="recruit_education">요구 학력</p> '
 										+ '<p class="recruit_location">근무 위치</p> '
+										+ '<p class="recruit_field">고용 형태</p>'
 										+ '<p class="recruit_rank">직급</p> '
 										+ '<p class="recruit_pay">연봉</p> '
 										+ '<p class="recruit_deadline_date">마감기한</p> '
 									+ '</div> '
 								+ '</div> '
 								+ '<div class="recruit-right-right"> '
-									+ '<button class="updateBtn" onclick="update(event)">수정</button> ' + '<button class="deleteBtn" onclick="delete()">삭제</button> '
+									+ '<button type="button" class="updateBtn" onclick="update(event)">수정</button> ' + '<button type="button" class="deleteBtn" onclick="deleteBtn(event)">삭제</button> '
 									+ '<input type="hidden" class="recruit_no" name="recruit_no"> '
 								+ '</div> '
 						+ '</div> '; 
@@ -132,6 +141,7 @@
 			const careers = document.querySelectorAll(".recruit_career");
 			const educations = document.querySelectorAll(".recruit_education");
 			const locations = document.querySelectorAll(".recruit_location");
+			const fields = document.querySelectorAll(".recruit_field");
 			const ranks = document.querySelectorAll(".recruit_rank");
 			const pays = document.querySelectorAll(".recruit_pay");
 			const deadline_dates = document.querySelectorAll(".recruit_deadline_date");
@@ -144,6 +154,7 @@
 				careers[index].textContent = item.career;
 				educations[index].textContent = item.education;
 				locations[index].textContent = item.location;
+				fields[index].textContent = item.field;
 				ranks[index].textContent = item.rank;
 				pays[index].textContent = item.pay + " 만원";
 				deadline_dates[index].textContent = item.deadline_date;
@@ -156,10 +167,25 @@
 			console.log(recruit_no);
 			console.log(recruit_no.value);
 			location.href = "/company/employUpdate?recruit_no=" + recruit_no.value;
-			
+			/*const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				const Obj = JSON.parse(responseText);
+				location.href = "/company/employUpdate?recruit_no=" + recruit_no.value;
+			}
+			xhttp.open("PUT", "http://localhost:8888/company/employUpdate?recruit_no=" + recruit_no.value);
+			xhttp.send();*/
 		}
 		
-		
+		function deleteBtn(event){
+			const recruit_no = event.target.closest(".recruit-area").querySelector("input[name='recruit_no']");
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function(){
+				alert(this.responseText);
+				location.href = "/company/index";
+			}
+			xhttp.open("DELETE", "http://localhost:8888/api/company/deleteRecruit?recruit_no=" + recruit_no.value);
+			xhttp.send();
+		}
 	</script>
 	<header>
 		<%@ include file="../front/company-header.jsp"%>

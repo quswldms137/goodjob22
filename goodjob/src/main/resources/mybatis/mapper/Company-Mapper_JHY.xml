@@ -12,15 +12,34 @@
 	<select id="findByCom_no">
 		SELECT title, career, education, location, RANK, pay, DATEDIFF(deadline_date, NOW()) 'deadline_date' from recruit
 	</select>
+	<!-- 제일 최근에 등록한 채용공고 조회 -->
+	<select id="findLatest">
+		select * from recruit where com_no = #{com_no} order by reg_date desc
+	</select>
+	<!-- 채용공고에 등록된 요구스킬 조회 -->
+	<select id="findSkillListByRecruit_no">
+		select skill_name from c_skill where recruit_no = #{recruit_no}
+	</select>
+	<!-- 채용공고 번호로 특정 채용공고 정보 조회 -->
+	<select id="findByRecruit_no">
+		select * from recruit where recruit_no = #{recruit_no}
+	</select>
 	
 	<!-- 채용공고 등록하기 -->
 	<insert id="recruitWrite">
-		insert into recruit values (null, #{recruit.com_no}, #{recruit.username}, #{recruit.career}, #{recruit.education}, 
+		insert into recruit values (null, #{recruit.com_no}, #{recruit.career}, #{recruit.education}, 
 									#{recruit.field}, #{recruit.pay}, #{recruit.location}, #{recruit.working_time}, 
 									#{recruit.rank}, #{recruit.title}, #{recruit.qualification}, #{recruit.welfare}, 
-									#{recruit.seprocedure}, #{recruit.notice}, #{recruit.reg_date}, 
-									#{recruit.deadline_date}, #{recruit.p_number})
+									#{recruit.seprocedure}, #{recruit.notice}, now(), 
+									#{recruit.deadline_date}, #{recruit.p_number}, #{recruit.recruit_intro})
 	</insert>
 	
+	<insert id="regSkill">
+		insert into c_skill values (null, #{recruit_no}, #{skill})
+	</insert>
+	
+	<delete id="delete">
+		delete from recruit where recruit_no = #{recruit_no}
+	</delete>
 	
 </mapper>  
