@@ -247,19 +247,24 @@ main {
 		$(document).ready(function () {
 	        $('#nowApply').click(function (event) {
 	            event.preventDefault(); // 폼 기본 제출 방지
+	            
+	            const username = localStorage.getItem("username");
+	        	//const role = localStorage.getItem("role");
+
+	        	xhttp.setRequestHeader("username", username);
+	    		//xhttp.setRequestHeader("role", role);
 
 	         	// 필요한 데이터를 객체로 수집
 	            var data = {
-	                mem_no: 1,
 	                recruit_no: 1,
-	                resume_pass: 1,
-	                view: true,
-	                resume_no: 1,
-	                interview_pass: 1
 	            };
 	            
 	            $.ajax({
 	                type: 'POST',
+	                beforeSend: function(xhr) {
+						// 요청 헤더에 사용자 이름을 설정
+						xhr.setRequestHeader("username", username);
+					},
 	                url: 'http://localhost:8888/api/recruit/nowApply',
 	                data: JSON.stringify(data),      	
 	                contentType: "application/json",
