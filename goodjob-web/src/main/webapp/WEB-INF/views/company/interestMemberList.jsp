@@ -27,10 +27,66 @@ main #container {
 	padding-bottom:10px;
 }
 
-.sidebar-box3 p:nth-child(2) {
+.sidebar-box3 p:nth-child(3) {
 	font-weight: bold;
 }
 
+.list-area {
+	width: 857px;
+	margin: 0;
+	display: flex;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-top: 2px solid #777;
+}
+
+.list-left {
+	border-right: 1px solid #eee;
+	padding-top: 20px;
+	padding-right: 25px;
+	margin-right: 25px;
+}
+
+.list-mid {
+	width: 520px;
+	padding-right: 10px;
+	
+}
+
+.list-mid-top {
+	padding-bottom: 20px;
+}
+
+.list-mid-bot {
+	display: flex;
+}
+
+.list-mid-bot p {
+	padding-right: 15px;
+}
+
+.list-right {
+	width: 130px;
+	height: 60px;
+	margin-left: 0;
+	margin-right: 0px;
+	align-content: center;
+}
+
+.interestBtn, .propositionBtn {
+	background-color: orange;
+	widows: 55px;
+	height: 40px;
+	text-align: center;
+	padding: 5px;
+	transition: background-color 0.2s ease;
+	border-radius: 10px;
+	border-color: white;
+}
+
+.interestBtn:hover, .propositionBtn:hover {
+	background-color: skyblue;
+}
 </style>
 </head>
 <body>
@@ -53,9 +109,9 @@ main #container {
 				</div>
 				<div class="list-mid-bot">
 					<p class="hope_job">희망직무</p>
+					<p class="hope_city">희망근무지역</p>
+					<p class="hope_pay">희망연봉</p>
 					<p class="sk_name">보유스킬</p>
-					<p class="part">지원분야</p>
-					<p class="addr">주소</p>
 				</div>
 			</div>
 			<div class="list-right">
@@ -67,5 +123,49 @@ main #container {
 <footer>
 	<%@ include file="../front/footer.jsp" %>
 </footer>
+<script type="text/javascript">
+	function comInterestList(){
+		const xhttp = new XMLHttpRequest();
+		
+		xhttp.onload = function(){
+			const interestMemList = JSON.parse(this.responseText);
+			console.log(interestMemList);
+			inputdata(interestMemList);
+		}
+		
+		xhttp.open("GET", "http://localhost:8888/api/company/interestMemberList");
+		xhttp.send();
+	}
+	
+	function inputdata(data){
+		const container = document.querySelector("#container");
+		let str = "";
+		data.forEach(resume =>{
+			str += '<div class="recruit-area">'
+					+	'<div class="list-left">'
+						+	'<h3 class="member_name">' + resume.mem_name + '</h3>'
+					+	'</div>'
+					+	'<div class="list-mid">'
+						+	'<div class="list-mid-top">'
+							+	'<h3 class="list-">' + resume.title + '</h3>'
+						+	'</div>'
+						+	'<div class="list-mid-bot">'
+							+	'<p class="hope_job">' + resume.hope_job + '</p>'
+							+	'<p class="hope_city">' + resume.hope_city + '</p>'
+							+	'<p class="hope_pay">' + resume.hope_pay + '</p>'
+							+	'<p class="sk_name">' + resume.sk_name + '</p>'
+						+	'</div>'
+					+	'</div>'
+					+	'<div class="list-right">'
+						+	'<button class="interestBtn" onclick="interest()">관심</button> <button class="propositionBtn" onclick="proposition()">포지션 제안</button>'
+					+	'</div>'
+				+	'</div>';
+		})
+		
+		container.innerHTML = str;
+	}
+	
+	comInterestList();
+</script>
 </body>
 </html>

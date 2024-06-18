@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-<title>채용공고 작성</title>
+<title>채용공고 수정</title>
 <style>
 main {
 	width: 1100px;
@@ -265,6 +265,100 @@ main #container {
 			console.log(data);
 		}
 		
+		function recruitUpdate(){
+			const xhttp = new XMLHttpRequest();
+			
+			const skills = document.querySelectorAll(".skill");
+			const skill = new Array();
+			console.log(skills);
+			skills.forEach(item =>{
+				skill.push(item.innerText.substring(0, item.innerText.length-1));
+			})
+			
+			const data = JSON.stringify({
+				recruit_no : ${recruit_no},
+				com_no : "1",
+				career : document.querySelector("input[name='career']").value,
+				education : document.querySelector("input[name='education']").value,
+				field : document.querySelector("input[name='field']").value,
+				pay : document.querySelector("input[name='pay']").value,
+				location : document.querySelector("input[name=location]").value,
+				working_time : document.querySelector("input[name='working_time']").value,
+				rank : document.querySelector("input[name='rank']").value,
+				title : document.querySelector("input[name='title']").value,
+				qualification : document.querySelector("input[name='qualification']").value,
+				welfare : document.querySelector("input[name='welfare']").value,
+				seprocedure : document.querySelector("input[name='seprocedure']").value,
+				notice : document.querySelector("input[name='notice']").value,
+				deadline_date : document.querySelector("input[name='deadline_date']").value,
+				p_number : document.querySelector("input[name='p_number']").value,
+				recruit_intro : document.querySelector("input[name='recruit_intro']").value,
+				skill : skill
+			})
+			
+			xhttp.onload = function(){
+				alert(this.responseText);
+				location.href = "/company/employManage";
+			}
+			xhttp.open("PUT", "http://localhost:8888/api/company/recruitUpdate");
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(data);
+		}
+		
+		// 채용공고 관리 페이지나 메인페이지에서 채용공고 수정 버튼 클릭후 이 페이지 로드시 데이터 받아오는 ajax 통신
+		function recruitLoad(){
+			console.log("${recruit_no}");
+			let recruit_no = "${recruit_no}";
+			console.log(recruit_no);
+			if(recruit_no != null){
+				const xhttp = new XMLHttpRequest();
+				xhttp.onload = function(){
+					const recruit = JSON.parse(this.responseText);
+					console.log(recruit);
+					const field = document.querySelector("input[name='field']");
+					document.querySelector("input[name='career']").value = recruit.career;
+					document.querySelector("input[name='education']").value = recruit.education;
+					document.querySelector("#field").value = recruit.field;
+					document.querySelector("input[name='pay']").value = recruit.pay;
+					document.querySelector("input[name='location']").value = recruit.location;
+					document.querySelector("input[name='working_time']").value = recruit.working_time;
+					document.querySelector("input[name='rank']").value = recruit.rank;
+					document.querySelector("input[name='title']").value = recruit.title;
+					document.querySelector("input[name='qualification']").value = recruit.qualification;
+					document.querySelector("input[name='welfare']").value = recruit.welfare;
+					document.querySelector("input[name='seprocedure']").value = recruit.seprocedure;
+					document.querySelector("input[name='notice']").value = recruit.notice;
+					document.querySelector("input[name='deadline_date']").value = recruit.deadline_date;
+					document.querySelector("input[name='p_number']").value = recruit.p_number;
+					document.querySelector("input[name='recruit_intro']").value = recruit.recruit_intro;
+					
+					// 고용형태 (field) 설정
+		            const fieldSelect = document.getElementById('field');
+		            for (let i = 0; i < fieldSelect.options.length; i++) {
+		                if (fieldSelect.options[i].value === recruit.field) {
+		                    fieldSelect.selectedIndex = i;
+		                    break;
+		                }
+		            }
+		            
+					const searchResults = document.getElementById('searchResults');
+					searchResults.innerHTML = '';
+					recruit.skill.forEach(sk_name => {
+		                const li = document.createElement('li');
+		                li.textContent = sk_name;
+		                addSkill(sk_name);
+		                searchResults.appendChild(li);
+		            });
+					
+				}
+				xhttp.open("GET", "http://localhost:8888/api/company/employUpdate?recruit_no=" + recruit_no);
+				xhttp.send();
+			}
+		}
+		if(${recruit_no} != null){
+			recruitLoad();
+			console.log(${recruit_no});
+		}
 	</script>
 </body>
 </html>
