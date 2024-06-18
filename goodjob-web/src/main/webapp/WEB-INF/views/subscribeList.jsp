@@ -85,15 +85,23 @@ main #container {
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-					const username = "${memberDto.username}";
+					const username = localStorage.getItem("username");
 
 					$.ajax({
-						url : "http://localhost:8888/api/subscrap/subscribe/"
+						url : "http://localhost:8888/api/subscrap/subscribe/1/"
 								+ username,
 						dataType : "json",
 						method : "GET",
 						success : function(response) {
 							let str = "";
+							
+							const totalItem = response[0].total;
+							let pages = 0;
+							
+							if(totalItem % 5 > 0){
+								pages = Math.ceil(totalItem / 5);
+							}
+							
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
 									   '<a href="#" class="info"> ' + 
@@ -107,7 +115,15 @@ main #container {
 						 			   '</div> ';
 							});
 							
+							
+							str += '<div id="pages">';
+							for(let i = 0; i < pages; i++){
+								str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
+							}
+							str += '</div>';
+							
 							$("#company_container").html(str);
+							
 						},
 						error : function(xhr, status, error) {
 							console.log(error);
@@ -117,11 +133,13 @@ main #container {
 				
 		});
 		
+		
+		
 		function changeInterest(event){
 			const id = event;
 			const childElement = id.srcElement;
 			
-			const username = "${memberDto.username}";
+			const username = localStorage.getItem("username");
 			const com_no = event.target.id.substring(8);
 		
 			const xhr = new XMLHttpRequest();
@@ -144,6 +162,50 @@ main #container {
 			});
 			xhr.send(data);
 		}
+		
+		function pageChange(event){
+			const page = event.target.value;
+			
+			const username = localStorage.getItem("username");
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				
+				const response = JSON.parse(this.responseText);
+				
+				const totalItem = response[0].total;
+				let pages = 0;
+				
+				if(totalItem % 5 > 0){
+					pages = Math.ceil(totalItem / 5);
+				}
+				
+				let str = "";
+				response.forEach(item => {
+					str += '<div id="company_box"> ' + 
+						   '<a href="#" class="info"> ' + 
+						   '<p class="com_name">' + item.com_name + '</p> ' + 
+						   '<div> ' + 
+						   '<span>' + item.sectors + '</span><span> &#183; </span><span>' + item.com_addr + '</span><span> &#183; </span> ' + 
+						   '<span>' + item.foundation + '</span> ' +
+						   '</div> ' +
+						   '</a> ' +
+						   '<a href="#" class="interest" onclick="changeInterest(event)"> <img alt="관심 기업" id="interest' + item.com_no + '" src="/resource/img/yesinterest.png" class="starImg"></a> ' +
+			 			   '</div> ';
+				});
+				
+				str += '<div id="pages">';
+				for(let i = 0; i < pages; i++){
+					str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
+				}
+				str += '</div>';
+				
+				$("#company_container").html(str);
+				
+			}
+			xhr.open("GET", "http://localhost:8888/api/subscrap/subscribe/"+ page + "/" + username, true);
+			xhr.send();
+		}
+		
 		
 	</script>
 </body>

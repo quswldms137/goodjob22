@@ -126,7 +126,7 @@ input[type=email], input[name=mem_addr]{
 	<script type="text/javascript">
 		// 화면이 실행될때 사용자 정보를 가지고 와서 인풋에 벨류를 넣어주는 식;
 		$(document).ready(function() {
-			const username = "${memberDto.username}";
+			const username = localStorage.getItem("username");
 
 			$.ajax({
 				url : "http://localhost:8888/api/member/info/" + username,

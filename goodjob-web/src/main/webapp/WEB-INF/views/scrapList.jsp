@@ -100,14 +100,22 @@ input[type=button]:hover{
 	<script type="text/javascript">
 		$(document).ready(
 				function() {
-					const username = "${memberDto.username}";
+					const username = localStorage.getItem("username");
 
 					$.ajax({
-						url : "http://localhost:8888/api/subscrap/scrap/"
+						url : "http://localhost:8888/api/subscrap/scrap/1/"
 								+ username,
 						dataType : "json",
 						method : "GET",
 						success : function(response) {
+							
+							const totalItem = response[0].total;
+							let pages = 0;
+							
+							if(totalItem % 5 > 0){
+								pages = Math.ceil(totalItem / 5);
+							}
+							
 							let str = "";
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
@@ -123,6 +131,12 @@ input[type=button]:hover{
 						 			   '</div> ';
 							});
 							
+							str += '<div id="pages">';
+							for(let i = 0; i < pages; i++){
+								str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
+							}
+							str += '</div>';
+							
 							$("#recruit_container").html(str);
 						},
 						error : function(xhr, status, error) {
@@ -137,7 +151,7 @@ input[type=button]:hover{
 			const id = event;
 			const childElement = id.srcElement;
 
-			const username = "${memberDto.username}";
+			const username = localStorage.getItem("username");
 			
 			const recruit_no = event.target.id.substring(5);
 			console.log(recruit_no);
@@ -167,6 +181,50 @@ input[type=button]:hover{
 		
 		function apply(){
 			 
+		}
+		
+		function pageChange(event){
+			const page = event.target.value;
+			
+			const username = localStorage.getItem("username");
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				
+				const response = JSON.parse(this.responseText);
+				
+				const totalItem = response[0].total;
+				let pages = 0;
+				
+				if(totalItem % 5 > 0){
+					pages = Math.ceil(totalItem / 5);
+				}
+				
+				let str = "";
+				response.forEach(item => {
+					str += '<div id="company_box"> ' + 
+						   '<a href="#" class="info"> ' + 
+						   '<p class="com_name">' + item.com_name + '</p> ' + 
+						   '<p class="title">' + item.title + '</p>' + 
+						   '<p class="detail"><span>' + item.career + ', </span><span>' + item.education + ', </span><span>' + 
+						   item.location + ', </span><span>' + item.rank + ', </span><span>' + item.pay + '</span></p>' + 
+						   '</a> ' + 
+						   '<div class="deadline_date"><span>' + item.deadline_date + '</span></div> ' +
+						   '<input type="button" value="지원하기" onclick="apply()">' + 
+						   '<a href="#" class="interest" onclick="changeScrap(event)"> <img alt="관심 기업" id="scrap' + item.recruit_no + '" src="/resource/img/yesscrap.png" class="starImg"></a> ' +
+			 			   '</div> ';
+				});
+				
+				str += '<div id="pages">';
+				for(let i = 0; i < pages; i++){
+					str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="scrapBtn">';
+				}
+				str += '</div>';
+				
+				$("#recruit_container").html(str);
+				
+			}
+			xhr.open("GET", "http://localhost:8888/api/subscrap/scrap/"+ page + "/" + username, true);
+			xhr.send();
 		}
 		
 	</script>

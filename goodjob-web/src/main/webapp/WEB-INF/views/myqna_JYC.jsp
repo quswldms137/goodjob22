@@ -70,6 +70,12 @@ main #container {
 .sidebar-box4 p a{
 	color: #FB8500 !important;
 }
+.qnaBtn{
+	padding: 5px 7px;
+}
+#pages{
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -94,12 +100,21 @@ main #container {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			const username = "${memberDto.username}"; 
+			const username = localStorage.getItem("username");
+			
 			$.ajax({
-				url : "http://localhost:8888/api/qna/" + username,
+				url : "http://localhost:8888/api/qna/1/" + username,
 				method : "GET",
 				dataType : "json",
 				success : function(response){
+					
+					const totalItem = response[0].total;
+					
+					let pages = 0;
+					
+					if(totalItem % 5 > 0){
+						pages = Math.ceil(totalItem / 5);
+					}
 					
 					let str = '';
 					
@@ -122,6 +137,12 @@ main #container {
 						str += '<input type="button" value="삭제" onclick="deleteQuestion(event)" id="remove' + item.cs_no + '"> ' +
 								'</div> ';
 					});
+					
+					str += '<div id="pages">';
+					for(let i = 0; i < pages; i++){
+						str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="qnaBtn">';
+					}
+					str += '</div>';
 					
 					$("#myquestion").html(str);
 				},
@@ -151,6 +172,56 @@ main #container {
 					alert(this.responseText);
 			}
 			xhr.open("DELETE", "http://localhost:8888/api/qna/" + event.target.id.substring(6), true);
+			xhr.send();
+		}
+		
+		function pageChange(event){
+			const page = event.target.value;
+			const username = localStorage.getItem("username");
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				
+				const response = JSON.parse(this.responseText);
+				
+				const totalItem = response[0].total;
+				
+				let pages = 0;
+				
+				if(totalItem % 5 > 0){
+					pages = Math.ceil(totalItem / 5);
+				}
+				
+				let str = '';
+				
+				response.forEach(item =>{
+					 str += '<div id="item_box" class="item' + item.cs_no + '"> ' + 
+							'<a href="#"> ' +
+					 		'<p><b>' + item.title + '</b></p> ' + 
+							'<p class="content">' + item.content + '</p> ' +
+								'<p><span class="category"><b>카테고리 : </b>' + item.category + '</span><span><b>작성일 : </b>' + item.reg_date + '</span>';
+						if(item.ch_private === 0){
+							str += '<span><b> 비공개</b></span></p></a>';
+						}else{
+							str += '<span><b> 공개</b></span></p></a>';
+						}
+					if(item.answer === "미답변"){
+						str += '<div class="answer" style="color:red">' + item.answer + '</div> ';
+					}else{
+						str += '<div class="answer" style="color:blue">' + item.answer + '</div> ';
+					}
+					str += '<input type="button" value="삭제" onclick="deleteQuestion(event)" id="remove' + item.cs_no + '"> ' +
+							'</div>';
+				});
+				str += '<div id="pages">';
+				for(let i = 0; i < pages; i++){
+					str += '<input type="button" value="' + (i + 1) + '" onclick="pageChange(event)" class="qnaBtn">';
+					
+				}
+				str += "</div>";
+				$("#myquestion").html(str);
+				
+			}
+			xhr.open("GET", "http://localhost:8888/api/qna/"+ page + "/" + username, true);
 			xhr.send();
 		}
 	</script>

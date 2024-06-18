@@ -14,7 +14,6 @@
 main {
 	width: 1100px;
 	margin: 80px auto;
-	min-height: 700px;
 	border: 1px solid #eee;
 }
 
@@ -28,17 +27,43 @@ main {
 	position: relative;
 }
 
+#vip{
+	width: 300vw;
+	margin: 20px 0;
+	height: 300px;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: nowrap;
+	position: relative;
+}
+
+#all{
+	width: 100%;
+	margin: 20px 0;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+}
 
 label:hover {
 	cursor: pointer;
 }
 
-.skill, .vip, .all {
+.skill, .all {
 	width: 275px;
 	height: 300px;
 	border: 1px solid black;
 	box-sizing: border-box;
 }
+
+.vip {
+	width: 275px;
+	height: 300px;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+
 .skill p, .vip p, .all p{
 	margin: 5px 0;
 }
@@ -85,7 +110,12 @@ label:hover {
 	font-size:50px;
 	cursor:pointer;
 }
+.page{
+	width: 1100px;
+	margin: 20px;
+}
 </style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 	<header>
@@ -112,7 +142,7 @@ label:hover {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			
-			const username = "${memberDto.username}";
+			const username = localStorage.getItem("username");
 			
 			$.ajax({
 				url : "http://localhost:8888/api/recruit/skill/" + username,
@@ -121,7 +151,7 @@ label:hover {
 				success : function(response) {
 
 					console.log(response);
-					let str = '';
+					let str = '<div id="slide1">';
 					
 					response.forEach(item =>{
 						const array = item.location.split(" ");
@@ -142,6 +172,7 @@ label:hover {
 						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
 						'</div> ';
 					});
+					str += '</div>';
 					$("#skillRecommendation").html(str);
 					
 				},
@@ -154,7 +185,7 @@ label:hover {
 				method : "GET",
 				dataType : "json",
 				success : function(response){
-					console.log(response);
+
 					let str = '';
 					response.forEach(item =>{
 						const array = item.location.split(" ");
@@ -175,6 +206,7 @@ label:hover {
 						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
 						'</div> ';
 					});
+					$("#vip").css("width",  300 + "vw");
 					$("#vip").html(str);
 				},
 				error : function(xhr, status, error){
@@ -187,11 +219,20 @@ label:hover {
 				dataType : "json",
 				success : function(response){
 					let str = '';
-					console.log(response);
+
+					const totalPage = (response.length)
+					let index = 0;
+					let count = 0;
 					response.forEach(item =>{
+						
+						index++;
+						count++;
+						
+						if(index = 0) {
+							str += '<div class="page" id="page' + index + '">';
+						}
 						const array = item.location.split(" ");
 						const location = array[0] + " " + array[1];
-						
 						const oldDate = new Date(item.deadline_date);
 						const newDate = new Date();
 						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
@@ -206,7 +247,12 @@ label:hover {
 						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
 						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
 						'</div> ';
+						if(count === 4){
+							count = 0;
+							str += "</div>";
+						}
 					});
+					
 					$("#everyRecruit").html(str);
 				},
 				error : function(xhr, status, error){
@@ -223,19 +269,21 @@ label:hover {
 		console.log(totalPage);
 		
 		$('#prev').on('click', function() {
-			  $('#skillRecommendation').css('transform', 'translateX(-275px)');
-			  $('#skillRecommendation').css('transition', 'transform 0.5s ease');
+			currentPage++;
+			  $('#vip').css('transform', 'translateX(' + (-100) + 'vw)');
+			  $('#vip').css('transition', 'transform 0.5s ease');
 			});
 		
 		$('#next').on('click', function() {
-			  $('#skillRecommendation').css('transform', 'translateX(0px)');
-			  $('#skillRecommendation').css('transition', 'transform 0.5s ease');
+			currentPage--;
+			  $('#vip').css('transform', 'translateX(' + (+100) + 'vw)');
+			  $('#vip').css('transition', 'transform 0.5s ease');
 			});
-		
 		
 		
 		
 	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 </body>
 </html>

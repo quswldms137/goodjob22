@@ -25,6 +25,23 @@ main #container {
 	border-bottom: 5px solid #FB8500;
 	padding-bottom: 10px;
 }
+
+  table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
 </style>
 </head>
 <body>
@@ -37,7 +54,16 @@ main #container {
 			<%@ include file="../front/company-sidebar-all.jsp"%>
 		</div>
 		<div id="container">
-			<h4>작업즁</h4>
+			<table border=1>
+				<thead>
+					<tr>
+						<th>채용공고</th><th>이름</th><th>이력서요약</th><th>구직상태</th><th>포지션제안</th>
+					</tr>
+				</thead>
+				<tbody>
+					<
+				</tbody>
+			</table>
 		</div>
 	</main>
 <!-- 여기까지 -->

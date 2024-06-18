@@ -10,6 +10,7 @@ import com.example.goodjob.dto.ServiceQuestionDto;
 @Mapper
 public interface IServiceQuestionDao {
 	
+	public List<ServiceQuestionDto> findByMem_noPage(@Param("mem_no") Long mem_no, @Param("start") int start);
 	public List<ServiceQuestionDto> findByMem_no(@Param("mem_no") Long mem_no);
 	public int deleteQna(@Param("cs_no") Long cs_no);
 
