@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.goodjob.dao.IComInterestDao_JHY">
+	
+	<select id="findMem_no">
+		select mem_no from com_interest where com_no = #{com_no}
+	</select>
+	
+</mapper>

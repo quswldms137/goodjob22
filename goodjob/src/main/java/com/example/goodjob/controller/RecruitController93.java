@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.example.goodjob.dto.MemRecruitDto;
 import com.example.goodjob.dto.RecruitDetailDto;
 import com.example.goodjob.dto.RecruitDto;
 import com.example.goodjob.service.MemRecruitService;
+import com.example.goodjob.service.QnaService99;
 import com.example.goodjob.service.RecruitCompanyDetailService;
 import com.example.goodjob.service.RecruitService93;
 
@@ -33,6 +35,9 @@ public class RecruitController93 {
 	@Autowired
 	private MemRecruitService memRecruitService;
 	
+	@Autowired
+	private QnaService99 qnaService99;
+	
 	@GetMapping("/detail")
 	public RecruitDetailDto recruitDetail(@RequestParam("recruit_no") Long recruit_no,
 			@RequestParam("com_no") Long com_no,
@@ -46,7 +51,11 @@ public class RecruitController93 {
 	}
 	
 	@PostMapping("/nowApply")
-    public ResponseEntity<String> nowApply(@RequestBody MemRecruitDto memRecruitDto) {
+    public ResponseEntity<String> nowApply(@RequestBody MemRecruitDto memRecruitDto, @RequestHeader("username") String username) {
+		
+		Long mem_no = qnaService99.getMem_no(username);
+		
+		memRecruitDto.setMem_no(mem_no);
 		
         memRecruitService.nowApplyService(memRecruitDto);
         return ResponseEntity.ok("즉시지원 완료");

@@ -26,4 +26,8 @@
 	<delete id="deleteInformation">
 		DELETE FROM member WHERE mem_no = #{mem_no};
 	</delete>
+	
+	<select id="findMem_nameWithMem_no">
+		select mem_name from member where mem_no = #{mem_no}
+	</select>
 </mapper>  
