@@ -33,4 +33,13 @@ public class RecruitController_94 {
 		System.out.println("전체채용공고리스트:" + recuListDao.getAllRecruitDto());
 		return recuListDao.getAllRecruitDto();
 	}
+	
+	//채용공고목록 페이지 - 필터(직무/지역/기업형태)
+	@GetMapping("/filterList")								//필터링위해 파라미터를 선택적으로 받기 
+	public List<RecruitAllDto94> getFilterRecruitList(@RequestParam(value = "sectors", required = false) String sectors,
+													  @RequestParam(value = "location", required = false) String location,
+													  @RequestParam(value = "com_type", required = false) String com_type){
+		System.out.println("필터채용공고리스트:" + recuListDao.getFilterRecruitList(sectors, location, com_type));
+		return recuListDao.getFilterRecruitList(sectors, location, com_type);
+	}
 }
