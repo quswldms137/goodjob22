@@ -20,6 +20,8 @@
 			c.com_no = r.com_no
 		WHERE
      		c.com_no = #{com_no}
+     	ORDER BY 
+        	r.reg_date DESC
 
   </select>
   
@@ -34,6 +36,8 @@
     	company_detail cd ON r.com_no = cd.com_no
 	JOIN
     	company c ON r.com_no = c.com_no
+    ORDER BY 
+        r.reg_date DESC	
   </select>
   
    <select id="getFilterRecruitList" resultType="com.example.goodjob.dto.RecruitAllDto94">
@@ -58,6 +62,8 @@
             <if test="com_type != null and com_type != ''">
                 AND c.com_type = #{com_type}
             </if>
+	ORDER BY 
+		r.reg_date DESC        
   </select>
   
 </mapper>

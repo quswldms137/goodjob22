@@ -245,14 +245,16 @@ function renderRecruitList(data) {
         mainContent.append(
             "<div class='company-info'>" +
                 "<div class='company-img'>" +
-                    "<a href='/employ/detail?recruit_no=" + recruit.recruit_no + "'>" +
+                    "<a href='/employ/detail/" + recruit.recruit_no + "'>" +
                         "<img src='/resource/img/" + recruit.img_url + "' alt='기업사진'>" +
                     "</a>" +
                 "</div>" +
                 "<div class='company-details'>" +
-                    "<div id='comname'>" + recruit.com_name + "</div>" +
+                	"<a href='/company94/companyDetail?com_no="+ recruit.com_no + "'>" +
+                    	"<div id='comname'>" + recruit.com_name + "</div>" +
+                    "</a>" +	
                     "<div class='company-name'>" +
-                        "<a href='/employ/detail?recruit_no=" + recruit.recruit_no + "'>" +
+                        "<a href='/employ/detail/" + recruit.recruit_no + "'>" +
                             recruit.title +
                         "</a>" +
                     "</div>" +
@@ -261,7 +263,7 @@ function renderRecruitList(data) {
                         recruit.com_type + " | " +
                         recruit.career + " | " +
                         recruit.qualification + " | " +
-                        recruit.deadline_date +
+                        "공고마감일 : " + recruit.deadline_date +
                     "</p>" +
                 "</div>" +
                 "<button class='apply-button' data-recruit_no='" + recruit.recruit_no + "'>지원하기</button>" +
