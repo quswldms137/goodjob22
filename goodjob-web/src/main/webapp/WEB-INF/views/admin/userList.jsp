@@ -14,7 +14,15 @@
 main {
 	width: 1100px;
 	margin: 80px auto;
-	min-height: 700px;
+	display:flex;
+	justify-content:space-between;
+}
+
+main #container {
+	width:900px;
+	min-height:700px;
+	border: 1px solid #ccc;
+	box-sizing:border-box;
 }
 
 .userList-area {
@@ -99,18 +107,25 @@ font-size: 20px;
 	border:1px solid #333 !important;
 	color: #333 !important; /* 텍스트 색상 */
 }
+.sidebar-box3 p:nth-child(2) a{
+	color: #FB8500 !important;
+}
 </style>
 </head>
 <body>
 	<header>
-		<%@ include file="../front/header.jsp"%>
+		<%@ include file="../front/admin-header.jsp"%>
 	</header>
-
 	<main>
+		<div class="sidebar-container">
+			<%@ include file="../front/admin-sidebar-all.jsp"%>
+		</div>
+		<div id="container">
 		<h2 class="listTitle1">개인 회원 리스트</h2>
 		<div id="memberUser"></div>
 		<h2 class="listTitle2">기업 회원 리스트</h2>
 		<div id="companyUser"></div>
+		</div>
 	</main>
 
 	<footer>
