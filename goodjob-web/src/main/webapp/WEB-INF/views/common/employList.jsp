@@ -211,6 +211,22 @@ main {
 	</footer>
 
 <script>
+$(document).ready(function() {
+    // 페이지 로드 시 전체 채용 공고 리스트를 로드
+    loadRecruitList();
+
+    // 검색 버튼 클릭 이벤트 핸들러
+    $("#search-button").on("click", function() {
+        const searchQuery = $("#search-box").val().trim();
+        if (!searchQuery) {
+            alert("검색어를 입력하세요");
+            return;
+        }
+        console.log(searchQuery);
+        searchRecruit(searchQuery);
+    });
+});
+
 // 채용공고리스트 필터 적용 함수
 function applyFilters() {
     const sectors = $("#jobTypeFilter").val();
@@ -235,12 +251,44 @@ function applyFilters() {
     });
 }
 
+// 채용공고리스트 로드 함수
+function loadRecruitList() {
+    $.ajax({
+        url: "http://localhost:8888/api/recruit94/allRecruitList",
+        method: "GET",
+        dataType: "json",
+        success: function(data) {
+            renderRecruitList(data);
+        },
+        error: function(error) {
+            console.log("Error:", error);
+        }
+    });
+}
+
+// 검색 기능 구현
+function searchRecruit(query) {
+    $.ajax({
+        url: "http://localhost:8888/api/recruit94/searchRecruit",
+        method: "GET",
+        dataType: "json",
+        data: { query: query },
+        success: function(data) {
+            renderRecruitList(data);
+            console.log(data);
+        },
+        error: function(error) {
+            console.log("Error:", error);
+            alert("검색 중 오류가 발생했습니다.");
+        }
+    });
+}
+
 // 채용공고리스트 렌더링 함수
 function renderRecruitList(data) {
     let mainContent = $("#main-content");
     mainContent.empty(); // 기존 내용 삭제
 
-    // 반복문을 통해 데이터 삽입
     data.forEach(function(recruit) {
         mainContent.append(
             "<div class='company-info'>" +
@@ -250,9 +298,9 @@ function renderRecruitList(data) {
                     "</a>" +
                 "</div>" +
                 "<div class='company-details'>" +
-                	"<a href='/company94/companyDetail?com_no="+ recruit.com_no + "'>" +
-                    	"<div id='comname'>" + recruit.com_name + "</div>" +
-                    "</a>" +	
+                    "<a href='/company94/companyDetail?com_no=" + recruit.com_no + "'>" +
+                        "<div id='comname'>" + recruit.com_name + "</div>" +
+                    "</a>" +
                     "<div class='company-name'>" +
                         "<a href='/employ/detail/" + recruit.recruit_no + "'>" +
                             recruit.title +
@@ -277,7 +325,6 @@ function renderRecruitList(data) {
         const recruit_no = $(this).data("recruit_no");
         console.log(recruit_no);
 
-        // 로컬 스토리지에서 사용자 이름을 가져옴
         const username = localStorage.getItem("username");
         console.log(username);
 
@@ -285,7 +332,6 @@ function renderRecruitList(data) {
             url: "http://localhost:8888/api/interest/addScrap",
             method: "POST",
             beforeSend: function(xhr) {
-                // 요청 헤더에 사용자 이름을 설정
                 xhr.setRequestHeader("username", username);
             },
             data: {
@@ -299,54 +345,6 @@ function renderRecruitList(data) {
                 console.log("Error:", error);
             }
         });
-    });
-}
-
-// 페이지 로드 시 전체 채용공고 리스트를 로드
-$(document).ready(function() {
-    // 검색 버튼 클릭 이벤트 핸들러
-    $("#search-button").on("click", function() {
-        const query = $("#search-box").val();
-        if (query.trim() !== "") {
-            searchRecruit(query);
-        } else {
-            alert("검색어를 입력하세요.");
-        }
-    });
-
-    // 채용공고리스트 초기 로드
-    loadRecruitList();
-});
-
-// 채용공고리스트 로드 함수
-function loadRecruitList() {
-    $.ajax({
-        url: "http://localhost:8888/api/recruit94/allRecruitList",
-        method: "GET",
-        dataType: "json",
-        success: function(data) {
-            renderRecruitList(data);
-        },
-        error: function(error) {
-            console.log("Error:", error);
-        }
-    });
-}
-
-// 검색 기능 구현 (예시)
-function searchRecruit(query) {
-    // 검색 쿼리로 필터링된 데이터를 가져오는 로직을 구현
-    $.ajax({
-        url: "http://localhost:8888/api/recruit94/searchRecruit",
-        method: "GET",
-        dataType: "json",
-        data: { query: query },
-        success: function(data) {
-            renderRecruitList(data);
-        },
-        error: function(error) {
-            console.log("Error:", error);
-        }
     });
 }
 </script>

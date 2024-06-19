@@ -36,4 +36,10 @@ public class CompanyController94 {
 		return comListDao.getFilterCompanyList(sectors, location, com_type);
 	}
 	
+	//기업 검색창 
+	@GetMapping("/searchCompany")
+	public List<CompanyDetailDto94> getSearchCompany(@RequestParam("query") String searchQuery) {
+		System.out.println(comListDao.getSearchCompany(searchQuery));
+		return comListDao.getSearchCompany(searchQuery);
+	}
 }

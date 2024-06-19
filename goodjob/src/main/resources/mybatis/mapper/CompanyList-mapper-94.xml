@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.example.goodjob.dao.ICompanyListDao">
+  <!-- 기업리스트 -->
   <select id="getCompanyList" resultType="com.example.goodjob.dto.CompanyDetailDto94">
     SELECT 
 			c.com_name,
@@ -24,7 +25,7 @@
 		JOIN company_detail cd ON c.com_no = cd.com_no
 		
   </select>
-  
+  <!-- 기업필터 -->
   <select id="getFilterCompanyList" resultType="com.example.goodjob.dto.CompanyDetailDto94">
     SELECT 
 			c.com_name,
@@ -55,6 +56,22 @@
             <if test="com_type != null and com_type != ''">
                 AND c.com_type = #{com_type}
             </if>
+  </select>
+  <!-- 기업검색창 -->
+  <select id="getSearchCompany" resultType="com.example.goodjob.dto.CompanyDetailDto94">
+    SELECT 
+			c.*,
+			cd.*
+		FROM
+			company c 
+		JOIN 
+			company_detail cd 
+		ON 
+			c.com_no = cd.com_no
+		WHERE 
+			c.com_name LIKE CONCAT('%', #{query}, '%') OR
+    		cd.location LIKE CONCAT('%', #{query}, '%') OR
+    		cd.sectors LIKE CONCAT('%', #{query}, '%')
   </select>
 </mapper>
 
