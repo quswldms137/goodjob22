@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.goodjob.dao.IEducationDao_JYC">
+	<select id="getEducation" resultType="com.example.goodjob.dto.EducationDto">
+		SELECT * FROM education WHERE resume_no = #{resume_no};
+	</select>
 	<delete id="deleteByResume_no">
 		DELETE FROM education WHERE resume_no = #{resume_no};
 	</delete>

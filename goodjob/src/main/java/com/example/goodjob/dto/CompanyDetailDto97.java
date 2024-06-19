@@ -23,6 +23,7 @@ public class CompanyDetailDto97 {
 	private LocalDate foundation;
 	private int amount;
 	private String url;
+	private String location;
 	
 	private String com_name;
 	private String com_type; 

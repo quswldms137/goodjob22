@@ -148,7 +148,7 @@ h1, h2 {
 		const username = localStorage.getItem("username");
 		
 		$.ajax({
-			url : "http://localhost:8888/api/company/receiveResume/" + 1,
+			url : "http://localhost:8888/api/company/receiveResume?username=" + username,
 			method : "GET",
 			dataType : "json",
 			success : function(response){
@@ -166,7 +166,7 @@ h1, h2 {
 					str += '<h2>구직중</h2>';
 					str += '</div>';
 					str += '<div class="recruit-right-top">';
-					str += '<h2 class="recruit_title">'+item.title +'</h2>';
+					str += '<h2 class="recruit_title"><a href="/company/interestMemberResumeDetail/'+ item.resume_no + '">' +item.title +'</a></h2>';
 					str += '</div>';
 					str += '<div class="recruit-right-bot">';
 					str += '<p class="recruit_career">희망직무 | ' + item.hope_job + '</p>';

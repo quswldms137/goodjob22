@@ -22,12 +22,30 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.goodjob.dao.ICompany97;
 import com.example.goodjob.dao.IRecruitListDao94;
+import com.example.goodjob.dto.CareerDto;
 import com.example.goodjob.dto.CompanyDetailDto97;
+import com.example.goodjob.dto.EducationDto;
+import com.example.goodjob.dto.EtcDto;
+import com.example.goodjob.dto.LicenseDto;
 import com.example.goodjob.dto.MemRecruitDto;
 import com.example.goodjob.dto.MemRecruitJoinDto;
+import com.example.goodjob.dto.MemberDto;
 import com.example.goodjob.dto.RecruitDto;
+import com.example.goodjob.dto.ResumeDetailCompanyDto_KKM;
+import com.example.goodjob.dto.ResumeDetailDto;
+import com.example.goodjob.dto.ResumeDto;
+import com.example.goodjob.dto.SkillDto;
+import com.example.goodjob.service.CareerService;
 import com.example.goodjob.service.CompanyService97;
+import com.example.goodjob.service.EducationService;
+import com.example.goodjob.service.EtcService;
+import com.example.goodjob.service.LicenseService;
+import com.example.goodjob.service.MemberService93;
 import com.example.goodjob.service.QnaService99;
+import com.example.goodjob.service.ResumeService;
+import com.example.goodjob.service.ResumeService_JYC;
+import com.example.goodjob.service.ResumeService_KKM;
+import com.example.goodjob.service.SkillService;
 import com.example.goodjob.util.FileUploadUtil;
 
 @CrossOrigin("http://localhost:9991/")
@@ -41,6 +59,23 @@ public class CompanyController_KKM {
 	private QnaService99 qnaService;
 	@Autowired
 	private ICompany97 icompany;
+	
+	//이력서 관련
+	@Autowired
+	private CareerService careerService;
+	@Autowired
+	private EducationService educationService;
+	@Autowired
+	private SkillService skillService;
+	@Autowired
+	private LicenseService licenseService;
+	@Autowired
+	private EtcService etcService;
+	@Autowired
+	private MemberService93 memberService;
+	@Autowired
+	private ResumeService_KKM resumeService;
+	
 
 	// (기업)내 정보 조회 get
 	@GetMapping("/infofind")
@@ -122,6 +157,7 @@ public class CompanyController_KKM {
 		        @RequestParam("img_url") MultipartFile imgFile, @RequestParam("introduction") String introduction,
 		        @RequestParam("pension") String pension, @RequestParam("sectors") String sectors,
 		        @RequestParam("history") String history, @RequestParam("ideal_talent") String ideal_talent,
+		        @RequestParam("location") String location,
 		        @RequestParam("foundation") String foundation, @RequestParam("amount") int amount,
 		        @RequestParam("url") String url, @RequestHeader("username") String username){
 
@@ -152,6 +188,7 @@ public class CompanyController_KKM {
 		    companyDetailDto.setIdeal_talent(ideal_talent);
 		    LocalDate foundationDate = LocalDate.parse(foundation, formatter);
 		    companyDetailDto.setFoundation(foundationDate);
+		    companyDetailDto.setLocation(location);
 		    companyDetailDto.setAmount(amount);
 		    companyDetailDto.setUrl(url);
 
@@ -162,6 +199,7 @@ public class CompanyController_KKM {
 		}
 	 
 	 //지원받은 이력서 목록페이지(조회만 하면된다)
+	 /*
 	 @GetMapping("/receiveResume/{com_no}")
 	 public ResponseEntity<List<MemRecruitJoinDto>> getreceiveResume(@PathVariable("com_no") Long com_no) {
 		 
@@ -175,8 +213,35 @@ public class CompanyController_KKM {
 		 return ResponseEntity.status(HttpStatus.OK)
 				 .body(resumeList);
 	 }
+	*/
+	 @GetMapping("/receiveResume")
+	 public ResponseEntity<List<MemRecruitJoinDto>> getreceiveResume(@RequestParam("username") String username) {
+		 Long com_no = qnaService.getCom_no(username);
+		 List<MemRecruitJoinDto> resumeList = comService.getReceiveResumeList(com_no);
+		 
+		 if(resumeList == null) {
+			 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					 .body(null);
+		 }
+		 
+		 return ResponseEntity.status(HttpStatus.OK)
+				 .body(resumeList);
+	 }
 	 
-	 //지원자 및 관심 구직자 이력서 상세보기 페이지(이것도 조회인데 합격 불합격 여부는 수정을 통해 이루어진다.)
+	 //지원자 및 관심 구직자 이력서 상세보기 페이지
+	 @GetMapping("/resumeDetail/{resume_no}")
+		public ResumeDetailCompanyDto_KKM getResumeDetail(@PathVariable("resume_no") Long resume_no) {
+			
+		 ResumeDetailCompanyDto_KKM resumeDetailDto = resumeService.getResumeDetail(resume_no);
+		 
+		 System.out.println("result : " + resumeDetailDto);
+		 
+		 if(resumeDetailDto == null) {
+			 return null;
+		 }
+		 
+		 return resumeDetailDto;
+	 }
 	 
 	 
 	 
