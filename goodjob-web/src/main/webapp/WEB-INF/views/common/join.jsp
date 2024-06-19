@@ -231,7 +231,7 @@ main {
 		    	return ;
 		    } else if(com_tel1.value.match(/[^0-9]/g)){
 		    	alert("담당자 전화번호는 숫자만 입력해 주세요.");
-		    	com_companynum1.focus();
+		    	com_tel1.focus();
 		    	return ;
 		    } else if(com_tel1.value == ''){
 		    	alert("담당자 전화번호를 입력해 주세요.");
