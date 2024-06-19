@@ -133,7 +133,7 @@ input[type=button]:hover{
 							let str = "";
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
-									   '<a href="#" class="info"> ' + 
+									   '<a href="/employ/detail/' + item.recruit_no + '" class="info"> ' + 
 									   '<p class="com_name">' + item.com_name + '</p> ' + 
 									   '<p class="title">' + item.title + '</p>' + 
 									   '<p class="detail"><span>' + item.career + ', </span><span>' + item.education + ', </span><span>' + 
@@ -221,7 +221,7 @@ input[type=button]:hover{
 				let str = "";
 				response.forEach(item => {
 					str += '<div id="company_box"> ' + 
-						   '<a href="#" class="info"> ' + 
+						   '<a href="/employ/detail/' + item.recruit_no + '" class="info"> ' + 
 						   '<p class="com_name">' + item.com_name + '</p> ' + 
 						   '<p class="title">' + item.title + '</p>' + 
 						   '<p class="detail"><span>' + item.career + ', </span><span>' + item.education + ', </span><span>' + 

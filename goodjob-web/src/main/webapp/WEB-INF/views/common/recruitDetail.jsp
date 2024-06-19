@@ -251,12 +251,9 @@ main {
 	            const username = localStorage.getItem("username");
 	        	//const role = localStorage.getItem("role");
 
-	        	xhttp.setRequestHeader("username", username);
-	    		//xhttp.setRequestHeader("role", role);
-
 	         	// 필요한 데이터를 객체로 수집
 	            var data = {
-	                recruit_no: 1,
+	                recruit_no: "${recruit_no}"
 	            };
 	            
 	            $.ajax({
