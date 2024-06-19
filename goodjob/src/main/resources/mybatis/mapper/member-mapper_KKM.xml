@@ -1,0 +1,12 @@
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.goodjob.dao.IMemberDao_KKM">
+	<select id="getMem_no">
+		SELECT mem_no FROM resume WHERE resume_no = #{resume_no};
+	</select>	
+	<select id="getMemberDto" resultType="com.example.goodjob.dto.MemberDto">
+		SELECT * FROM member WHERE mem_no = #{mem_no};
+	</select>
+</mapper>

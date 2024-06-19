@@ -15,5 +15,6 @@ public class MemRecruitJoinDto {
 	private String mem_name;
 	private String hope_job;
 	private String hope_city;
+	private Long resume_no;
 	
 }

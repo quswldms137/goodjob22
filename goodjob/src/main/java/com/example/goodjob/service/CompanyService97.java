@@ -49,6 +49,7 @@ public class CompanyService97 {
 				dto.setHope_job(resumeDto.getHope_job());
 				dto.setTitle(resumeDto.getTitle());
 				dto.setCom_no(com_no);
+				dto.setResume_no(resumeDto.getResume_no());
 				
 				result.add(dto);
 			});

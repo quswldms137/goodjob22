@@ -33,6 +33,15 @@ main #container {
 	padding-top:50px;
 }
 
+#titlename{
+	
+	text-align: center;
+}
+
+#foundation{
+	border-radius: 4px;
+}
+
 .company-nav ul li:nth-child(2) a {
 	border-bottom: 5px solid #FB8500;
 	padding-bottom: 10px;
@@ -124,6 +133,7 @@ input[type="button"] {
 			<%@ include file="../front/company-sidebar-all.jsp"%>
 		</div>
 		<div id="container">
+			<h2 id="titlename">기업 상세정보 등록</h2>
 			<form name="frm" id="companyinfo" enctype="multipart/form-data">
 
 				<!-- 기업 정보 -->
@@ -152,8 +162,10 @@ input[type="button"] {
 					<input type="text" name="ideal_talent" placeholder="인재상..">
 					<label>설립연도</label>
 					<div style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
-					<input type="date" name="foundation">
+					<input type="date" id="foundation" name="foundation">
 					</div>
+					<label>본사위치</label>
+					<input type="text" name="location"placeholder="본사위치..">
 					<label>사원수</label>
 					<input type="text" name="amount"placeholder="사원수..">
 					<label>사이트주소입력</label>
