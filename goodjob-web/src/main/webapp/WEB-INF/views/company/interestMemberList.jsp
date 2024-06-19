@@ -148,6 +148,7 @@ main #container {
 </footer>
 <script type="text/javascript">
 	function comInterestList(){
+		const username = localStorage.getItem("username");
 		const xhttp = new XMLHttpRequest();
 		
 		xhttp.onload = function(){
@@ -156,27 +157,27 @@ main #container {
 			inputdata(interestMemList);
 		}
 		
-		xhttp.open("GET", "http://localhost:8888/api/company/interestMemberList");
+		xhttp.open("GET", "http://localhost:8888/api/company/interestMemberList?username=" + username);
 		xhttp.send();
 	}
 	
 	function inputdata(data){
 		const container = document.querySelector("#container");
-		let str = "";
+		let str = '<h2 class="h2">관심 구직자 목록</h2>';
 		data.forEach(resume =>{
-			str += '<div class="recruit-area">'
+			str += '<div class="list-area">'
 					+	'<div class="list-left">'
-						+	'<h3 class="member_name">' + resume.mem_name + '</h3>'
+						+	'<h3 class="mem_name">' + resume.mem_name + '</h3>'
 					+	'</div>'
 					+	'<div class="list-mid">'
 						+	'<div class="list-mid-top">'
-							+	'<h3 class="list-">' + resume.title + '</h3>'
+							+	'<h3 class="list-title">' + '<a href=/resume/resumeDetail?resume_no=' + resume.resume_no +'&mem_no=' + resume.mem_no + '>' + resume.title + '</a>' + '</h3>'
 						+	'</div>'
 						+	'<div class="list-mid-bot">'
 							+	'<p class="hope_job">' + resume.hope_job + '</p>'
 							+	'<p class="hope_city">' + resume.hope_city + '</p>'
 							+	'<p class="hope_pay">' + resume.hope_pay + '</p>'
-							+	'<p class="sk_name">' + resume.sk_name + '</p>'
+							+	'<p class="sk_name">' + resume.sk_name.sk_name + '</p>'
 						+	'</div>'
 					+	'</div>'
 					+	'<div class="list-right">'

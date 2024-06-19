@@ -14,11 +14,13 @@
 
 .recruit-area {
 	width: 950px;
-	margin: 0 auto;
+	margin: 10px auto;
 	display: flex;
 	padding: 25px;
-	border: 1px solid #ccc;
-	border-top: 2px solid #777;
+	border: 1px solid #ddd;
+	border-top: 2px solid #FB8500;
+	border-radius: 10px;
+	background-color: #f9f9f9;
 }
 
 .recruit-left {
@@ -53,6 +55,7 @@
 
 .updateBtn,
 .deleteBtn {
+	color: white;
 	background-color: orange;
 	width: 60px;
 	height: 40px;
@@ -60,7 +63,8 @@
 	padding: auto;
 	transition: background-color 0.2s ease;
 	border-radius: 10px;
-	border-color: white;
+	/*border-color: white;*/
+	border: none;
 }
 
 .updateBtn:hover,
@@ -81,8 +85,10 @@
 </head>
 <body>
 	<script>
+		const username = localStorage.getItem("username");
 	
 		function recruit() {
+			//const username = 1;
 			const xhttp = new XMLHttpRequest();
 			//const careers = document.querySelectorAll(".recruit_career");
 			
@@ -91,7 +97,7 @@
 				//document.getElementById("demo").innerHTML = this.responseText;
 				//careers.forEach()
 			//}
-			xhttp.open("GET", "http://localhost:8888/api/company/index", true);
+			xhttp.open("GET", "http://localhost:8888/api/company/index?username=" + username, true);
 			xhttp.onreadystatechange = function(){
 				const data = JSON.parse(xhttp.responseText);
 				console.log(data);
@@ -112,7 +118,7 @@
 								+ '</div> '
 								+ '<div class="recruit-mid"> '
 									+ '<div class="recruit-right-top"> '
-										+ '<h2><a class="recruit_title" href="/company/employDetail">공고 제목이 들어가는 부분 입니다.</a></h2> '
+										+ '<h2><a class="recruit_title" href="/employ/detail/' + item.recruit_no + '">공고 제목이 들어가는 부분 입니다.</a></h2> '
 									+ '</div> '
 									+ '<div class="recruit-right-bot"> '
 										+ '<p class="recruit_career">요구 경력</p> '
@@ -160,7 +166,10 @@
 				deadline_dates[index].textContent = item.deadline_date;
 			});
 		}
-		recruit();
+		
+		if(username != null){
+			recruit();
+		}
 		
 		function update(event){
 			const recruit_no = event.target.closest(".recruit-area").querySelector("input[name='recruit_no']");
@@ -186,36 +195,19 @@
 			xhttp.open("DELETE", "http://localhost:8888/api/company/deleteRecruit?recruit_no=" + recruit_no.value);
 			xhttp.send();
 		}
+		
+		
 	</script>
 	<header>
 		<%@ include file="../front/company-header.jsp"%>
 	</header>
 	<h1 id="h1">기업회원 메인페이지</h1>
 	<hr>
-	<h2 id="h2">내가 쓴 채용공고 목록</h2>
+	<c:if test="">
+		<h2 id="h2">내가 쓴 채용공고 목록</h2>
+	</c:if>
 	<main id="main">
-		<div class="recruit-area">
-			<div class="recruit-left">
-				<h2 class="recruit_number">1</h2>
-			</div>
-			<div class="recruit-mid">
-				<div class="recruit-right-top">
-					<h2 class="recruit_title">공고 제목이 들어가는 부분 입니다.</h2>
-				</div>
-				<div class="recruit-right-bot">
-					<p class="recruit_career">요구 경력</p>
-					<p class="recruit_education">요구 학력</p>
-					<p class="recruit_location">근무 위치</p>
-					<p class="recruit_rank">직급</p>
-					<p class="recruit_pay">연봉</p>
-					<p class="recruit_deadline_date">마감기한</p>
-				</div>
-			</div>
-			<div class="recruit-right-right">
-				<button class="updateBtn">수정</button>
-			</div>
-		</div>
-		<div id="demo"></div>
+		
 	</main>
 	<footer>
 		<%@ include file="../front/footer.jsp"%>

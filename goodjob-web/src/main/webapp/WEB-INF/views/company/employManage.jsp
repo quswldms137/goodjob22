@@ -45,7 +45,7 @@ main #container {
 }
 
 .recruit-area {
-	width: 848px;
+	width: 95%;
 	margin: 10px auto;
 	display: flex;
 	padding: 25px;
@@ -86,6 +86,7 @@ main #container {
 }
 
 .updateBtn, .deleteBtn {
+	color: white;
 	background-color: orange;
 	width: 55px;
 	height: 40px;
@@ -93,7 +94,8 @@ main #container {
 	padding: 5px;
 	transition: background-color 0.2s ease;
 	border-radius: 10px;
-	border-color: white;
+	/*border-color: white;*/
+	border: none;
 }
 
 .updateBtn:hover, .deleteBtn:hover {
@@ -150,6 +152,7 @@ main #container {
 	</footer>
 	<script>
 function recruit() {
+	const username = localStorage.getItem("username");
 	const xhttp = new XMLHttpRequest();
 	//const careers = document.querySelectorAll(".recruit_career");
 	
@@ -158,7 +161,7 @@ function recruit() {
 		//document.getElementById("demo").innerHTML = this.responseText;
 		//careers.forEach()
 	//}
-	xhttp.open("GET", "http://localhost:8888/api/company/index", true);
+	xhttp.open("GET", "http://localhost:8888/api/company/index?username=" + username, true);
 	xhttp.onreadystatechange = function(){
 		const data = JSON.parse(xhttp.responseText);
 		console.log(data);
@@ -248,7 +251,7 @@ function deleteBtn(event){
 	const xhttp = new XMLHttpRequest();
 	xhttp.onload = function(){
 		alert(this.responseText);
-		location.href = "/company/index";
+		location.href = "/company/employManage";
 	}
 	xhttp.open("DELETE", "http://localhost:8888/api/company/deleteRecruit?recruit_no=" + recruit_no.value);
 	xhttp.send();
