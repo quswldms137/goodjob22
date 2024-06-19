@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
 main {
 	width: 1100px;
@@ -21,8 +25,6 @@ main #container {
 	box-sizing:border-box;
 }
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<header>
@@ -35,11 +37,7 @@ main #container {
 	<div id="container">
 	<div id="id" style="display:none;">아이디 조회</div>
 	<div id="pw" style="display:none;">비밀번호 조회</div> 
-	<div>
-		<div>- 입력된 정보로 등록된 아이디는 총 <span id="num"></span>개 있습니다.</div>
-		<div></div>
-		<div id="username"></div>
-	</div>
+	<div id="demo"></div>
 	<a class="btn btn-primary btn-lg" href="/common99/login">로그인</a>
     <a class="btn btn-primary btn-lg" href="/common99/findPassword">비밀번호찾기</a>
 	</div>
@@ -54,11 +52,8 @@ main #container {
 		const password = urlParams.get("password");
 		
 		if(username != null){
-			console.log("username", username);
-			$('#username').text(username);
-		} else if(password != null){
-			console.log("password",password);
-			$('#password').text(password);
+			console.log("username = ", username);
+			$('#demo').html(username);
 		}
 		
 	});

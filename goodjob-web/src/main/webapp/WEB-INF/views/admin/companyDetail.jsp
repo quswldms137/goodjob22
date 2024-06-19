@@ -18,27 +18,52 @@ main {
 	width: 1100px;
 	margin: 80px auto;
 	min-height: 700px;
-	border:1px solid #eee;
 }
 #companyDetail{
+	width:600px;
 	display: flex;
+	align-items:center;
 	flex-direction: column;
-	width: 30%;
 	margin: 10px auto;
+}
+#companyDetail h2{
+	margin-bottom:15px;
 }
 #companyDetail p{
-	border: 1px solid #e8e8e8;
-	padding: 10px;
-	text-align: center;
+	width:600px;
+	border-bottom: 1px solid #e8e8e8;
+	border-right:1px solid #e8e8e8;
+	border-left:1px solid #e8e8e8;
+}
+#companyDetail p:nth-child(2){
+	border-top:1px solid #e8e8e8;
+}
+#companyDetail p b{
+	display:inline-block;
+	width:100px;
+	text-align:center;
+	background:#f9f9f9;
+	padding:20px;
+	margin-right:20px;
 }
 #companyDetail input[type=button]{
+	display:inline-block;
 	width: 100px;
-	padding: 5px 10px;
-	margin: 10px auto;
-	
+	padding: 10px 15px;
+	margin: 30px auto;
+	border:1px solid #ccc;
+	background:#fff;
+	cursor:pointer;
 }
-#companyDetail p:hover{
-	background:#cfcaca;
+#companyDetail input[type=button]:nth-child(1){
+	background:#eee;
+	border:1px solid #ccc;
+	color:#333;
+}
+
+.btn-box{
+	display:flex;
+	gap:30px;
 }
 </style>
 </head>
@@ -72,7 +97,7 @@ main {
 					money = 0;
 				}
 				
-				let str ='';
+				let str = '<h2>기업 회원</h2>';
 				str += '<p><b>회원번호 : </b>' + response.com_no + '</p> ' + 
 					   '<p><b>대표이름 : </b>' + response.com_ceo + '</p> ' + 
 					   '<p><b>아이디 : </b>' + response.username + '</p> ' + 
@@ -82,7 +107,10 @@ main {
 					   '<p><b>사업자번호 : </b>' + response.com_companynum + '</p>' + 
 					   '<p><b>후원금 : </b>' + money + '만원</p>' + 
 					   '<p><b>설립연도 : </b>' + response.foundation + '</p>' + 
-					   '<input type="button" value="회원삭제" onclick="deleteCompany(event)" class="' + response.username + ' com_no' + response.com_no + '">';
+					   '<div class="btn-box">' +
+					   '<input type="button" value="회원삭제" onclick="deleteCompany(event)" class="' + response.username + ' com_no' + response.com_no + '">' +
+					   '<input type="button" value="목록보기" onclick="backList(event)">' +
+					   '</div>';
 					   
 				$("#companyDetail").html(str);	   
 					   
@@ -108,7 +136,10 @@ main {
 		}
 		xhr.open("DELETE", "http://localhost:8888/api/company/info/" + com_no + "/" + username, true);
 		xhr.send();
-		
+	}
+	
+	function backList(){
+		window.location.href="/admin/user/list";
 	}
 </script>
 </body>

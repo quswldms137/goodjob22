@@ -22,10 +22,10 @@ public class AdminController_JYC {
 		return "/admin/memberDetail";
 	}
 	
-	@GetMapping("/company/detail/{mem_no}")
-	public String getCompnayDetail(@PathVariable("mem_no") Long mem_no, Model model) {
+	@GetMapping("/company/detail/{com_no}")
+	public String getCompnayDetail(@PathVariable("com_no") Long com_no, Model model) {
 		
-		model.addAttribute("companyNo", mem_no);
+		model.addAttribute("companyNo", com_no);
 		return "/admin/companyDetail";
 	}
 	
