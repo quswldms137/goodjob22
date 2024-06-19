@@ -38,11 +38,16 @@ main {
     align-items: center;
 }
 #companyImg_url {
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     width: 300px;
     height: 177px;
-    padding: 15px;
     box-sizing: border-box;
+}
+#companyImg_url img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+    box-sizing: border-box; 
 }
 #companyName {
     font-size: 40px;
@@ -199,7 +204,7 @@ $(document).ready(function() {
 			//let detail = data[0];
 			//console.log("detail:", detail);
 			// DOM에 데이터 삽입
-			$("#companyImage").attr("src", data.img_url);
+			$("#companyImage").attr("src", "/resource/img/" + data.img_url);
 			$("#companyName").text(data.com_name);
 			$("#companyDetailsTable").html(
 				"<tr><th>산업</th><td>" + data.sectors + "</td><th>사원수</th><td>" + data.amount + "</td></tr>" +

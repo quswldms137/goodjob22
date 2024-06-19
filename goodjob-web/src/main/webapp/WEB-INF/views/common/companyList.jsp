@@ -77,12 +77,18 @@ main {
 }
 
 .company-img {
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     width: 280px;
     height: 130px;
-    padding: 15px;
     box-sizing: border-box;
 }
+.company-info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-sizing: border-box; 
+}
+
 
 .company-details {
     flex-grow: 1;
@@ -174,8 +180,8 @@ $(document).ready(function() {
 				mainContent.append(
 						"<div class='company-info'>" +
 						"<div class='company-img'>" +  
-	            			"<a href='/companyDetail?com_no=" + company.com_no + "'>" +
-	            				"<img src='" + company.img_url + "' alt='기업사진'>" + 
+	            			"<a href='/company94/companyDetail?com_no=" + company.com_no + "'>" +
+	            				"<img src='/resource/img/" + company.img_url + "' alt='기업사진'>" + 
 	            			"</a>" +
 	        			"</div>" + 
 	        			"<div class='company-details'>" + 

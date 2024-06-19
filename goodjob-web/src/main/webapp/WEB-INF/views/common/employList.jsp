@@ -81,11 +81,16 @@ main {
 }
 
 .company-img {
-    border: 1px solid #eee;
-    width: 150px;
+    border: 2px solid #eee;
+    width: 160px;
     height: 130px;
-    padding: 15px;
     box-sizing: border-box;
+}
+.company-info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    box-sizing: border-box; 
 }
 
 .company-details {
@@ -135,6 +140,8 @@ main {
 .apply-button:hover {
 	background-color: #CC7A00;
 }
+
+
 </style>
 </head>
 <body>
@@ -168,13 +175,7 @@ main {
 	</div>
 	
 	<div id="main-content">
-		<div class='company-info'>
-			<div class='company-img'>
-				<a href="/companyDetail?com_no=recruit.com_no">
-	            	<img src="" alt="기업사진">  
-	            </a>
-	         </div>   
-	  	</div>
+		<!-- 채용공고리스트 -->
 	</div>
 	</main>
 	
@@ -209,14 +210,14 @@ $(document).ready(function() {
 				mainContent.append(
 						"<div class='company-info'>" +
 						"<div class='company-img'>" +  
-	            			"<a href='/companyDetail?com_no=" + recruit.com_no + "'>" +
-	            				"<img src='" + recruit.img_url + "' alt='기업사진'>" + 
+	            			"<a href='/employ/detail?com_no=" + recruit.com_no + "'>" +
+	            				"<img src='/resource/img/" + recruit.img_url + "' alt='기업사진'>" + 
 	            			"</a>" +
 	        			"</div>" + 
 	        			"<div class='company-details'>" + 
 	        				"<div id='comname'>"+ recruit.com_name + "</div>" +
 	        				"<div class='company-name'>" + 
-	        					"<a href='/company94/companyDetail?com_no=" + recruit.com_no + "'>" +
+	        					"<a href='/employ/detail?com_no=" + recruit.com_no + "'>" +
 	        					recruit.title +
 	        					"</a>" +
 	        				"</div>" +
