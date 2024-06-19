@@ -48,8 +48,8 @@ main #container {
 	 	</li>
 	</ul>
 	<div id="qnaWrite" style="display: block;">
-       <form name="frm-qnaForm">
-           <div class="form-group">
+    <form name="frm-qnaForm">
+    	<div class="form-group">
                <label for="category">문의종류 <span id="blue">(필수)</span></label>
                <select class="form-control" id="category" name="category" required>
                    <option value="" disabled selected>선택</option>
@@ -66,10 +66,11 @@ main #container {
 		  <label for="content" class="form-label">내용 <span id="blue">(필수)</span></label>
 		  <textarea class="form-control" id="content" name="content" rows="3" placeholder="내용을 입력해주세요"></textarea>
 		</div>
-           <div id="writeSubmit" style="display:block;"><button type="submit" id="submitWrite" class="btn btn-primary btn-lg" onclick="submitQuestion(event)">문의하기</button></div>
-           <div id="modifySubmit" style="display:none;"><button type="submit" id="submitUpdate" class="btn btn-primary btn-lg" onclick="submitUpdate(event)">수정하기</button></div>
-           <button type="reset" class="btn btn-primary btn-lg">취소</button>
-       </form>
+          <button type="submit" id="submitWrite" class="btn btn-primary btn-lg" onclick="submitQuestion(event)">문의하기</button>
+          <button type="submit" id="submitUpdate" class="btn btn-primary btn-lg" onclick="submitUpdate(event)">수정하기</button>
+          <button type="reset" class="btn btn-primary btn-lg">취소</button>
+    </form>
+           
 	</div>
 	<!-- 작성폼 끝 -->
 	<div class="tab-content" id="qnaListContainer" style="display: none;">
@@ -90,8 +91,8 @@ main #container {
 	$(document).ready(function(){
 		const urlParams = new URLSearchParams(window.location.search);
 		let cs_no = urlParams.get('cs_no');
-		var writeForm = $('writeSubmit');
-		var modifyForm = $('modifySubmit');
+		var writeForm = $('#submitWrite');
+		var modifyForm = $('#submitUpdate');
 		console.log(cs_no);
 		if(cs_no){
 			modifyContent(cs_no);
@@ -120,6 +121,7 @@ main #container {
 	}
 	
 	function submitQuestion(event){
+		alert("등록코드");
 		event.preventDefault();
 		const category1 = document.querySelector("select[name='category']");
 		const title1 = document.querySelector("Input[name='title']");
@@ -130,7 +132,7 @@ main #container {
 				title : title1.value,
 				content : content1.value
 		}
-		console.log("qna"+qna);
+		console.log("qna",qna);
 		
 		const sendData = JSON.stringify(qna);
 		console.log("sendData"+sendData);
