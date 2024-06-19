@@ -8,6 +8,17 @@
 <title>Insert title here</title>
 <style>
 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar{
+	background:#fff;
+}
+
 main {
 	width: 1100px;
 	margin: 80px auto;
@@ -18,8 +29,10 @@ main {
 main #container {
 	width: 900px;
 	min-height: 700px;
-	border: 1px solid #ccc;
+	background-color: #fff;
+	border-radius: 10px;
 	box-sizing: border-box;
+	padding: 20px;
 }
 
 .company-nav ul li:nth-child(4) a{
@@ -32,12 +45,14 @@ main #container {
 }
 
 .list-area {
-	width: 857px;
-	margin: 0;
+	width: 90%;
+	margin: 10px auto;
 	display: flex;
-	padding: 20px;
-	border: 1px solid #ccc;
-	border-top: 2px solid #777;
+	padding: 25px;
+	border: 1px solid #ddd;
+	border-top: 2px solid #FB8500;
+	border-radius: 10px;
+	background-color: #f9f9f9;
 }
 
 .list-left {
@@ -75,17 +90,25 @@ main #container {
 
 .interestBtn, .propositionBtn {
 	background-color: orange;
-	widows: 55px;
-	height: 40px;
+	width: 100px;
+	height: 30px;
+	color: white;
 	text-align: center;
 	padding: 5px;
 	transition: background-color 0.2s ease;
 	border-radius: 10px;
-	border-color: white;
+	/*border-color: white;*/
+	border: none;
+	margin: 2px 0;
 }
 
 .interestBtn:hover, .propositionBtn:hover {
 	background-color: skyblue;
+}
+
+.h2 {
+	margin: 30px;
+	text-align: center;
 }
 </style>
 </head>
@@ -98,7 +121,7 @@ main #container {
 		<%@ include file="../front/company-sidebar-all.jsp"%>
 	</div>
 	<div id="container">
-		<h2>관심 구직자 목록</h2>
+		<h2 class="h2">관심 구직자 목록</h2>
 		<div class="list-area">
 			<div class="list-left">
 				<h3 class="member_name">관심 구직자 이름</h3>

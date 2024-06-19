@@ -7,6 +7,18 @@
 <meta charset="UTF-8">
 <title>채용공고 관리 페이지</title>
 <style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar{
+	background:#fff;
+}
+
 main {
 	width: 1100px;
 	margin: 80px auto;
@@ -17,8 +29,10 @@ main {
 main #container {
 	width: 900px;
 	min-height: 700px;
-	border: 1px solid #ccc;
+	background-color: #fff;
+	border-radius: 10px;
 	box-sizing: border-box;
+	padding: 20px;
 }
 
 .company-nav ul li:nth-child(3) a {
@@ -32,11 +46,13 @@ main #container {
 
 .recruit-area {
 	width: 848px;
-	margin: 0 auto;
+	margin: 10px auto;
 	display: flex;
 	padding: 25px;
-	border: 1px solid #ccc;
-	border-top: 2px solid #777;
+	border: 1px solid #ddd;
+	border-top: 2px solid #FB8500;
+	border-radius: 10px;
+	background-color: #f9f9f9;
 }
 
 .recruit-left {
@@ -155,9 +171,7 @@ function recruit() {
 function inputdata(data){
 	const main = document.querySelector("#container");
 	let number = 1;
-	let str = '<h1 id="h1">전체 채용공고 관리</h1>'
-			+ '<hr>'
-			+ '<h2 id="h2">내가 쓴 채용공고 목록</h2>';
+	let str = '<h2 id="h2">내가 쓴 채용공고 목록</h2>';
 	data.forEach(item =>{
 			str += '<div class="recruit-area"> '
 					+ '<div class="recruit-left"> '
@@ -165,7 +179,7 @@ function inputdata(data){
 					+ '</div> '
 					+ '<div class="recruit-mid"> '
 						+ '<div class="recruit-right-top"> '
-							+ '<h2><a class="recruit_title" href="/employ/detail">공고 제목이 들어가는 부분 입니다.</a></h2> '
+							+ '<h2><a class="recruit_title" href="/employ/detail/'+ item.recruit_no + '">공고 제목이 들어가는 부분 입니다.</a></h2> '
 						+ '</div> '
 						+ '<div class="recruit-right-bot"> '
 							+ '<p class="recruit_career">요구 경력</p> '

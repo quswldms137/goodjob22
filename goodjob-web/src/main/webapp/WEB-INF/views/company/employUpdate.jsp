@@ -71,12 +71,7 @@ main #container {
 			<%@ include file="../front/company-sidebar-all.jsp"%>
 		</div>
 		<div id="container">
-			<c:if test="${recruit.recruit_no == null}">
-				<h2 class="h2">채용공고 작성</h2>
-			</c:if>
-			<c:if test="${recruit.recruit_no != null}">
-				<h2 class="h2">채용공고 수정</h2>
-			</c:if>
+			<h2 class="h2">채용공고 수정</h2>
 			<form name="frm">
 				<div class="title">
 					<input type="hidden" name="recruit_no" value="${recruit_no }">
