@@ -7,6 +7,12 @@
 	<select id="findAll" resultType="com.example.goodjob.dto.CSkillDto">
 		SELECT * FROM c_skill;
 	</select>
+	<select id="getSkillName">
+		SELECT DISTINCT skill_name FROM c_skill;
+	</select>
+	<select id="getCount">
+		SELECT COUNT(c_skill_no) FROM c_skill WHERE skill_name = #{skill_name};
+	</select>
 	<delete id="deleteByRecruit_no">
 		DELETE FROM c_skill WHERE recruit_no = #{recruit_no};
 	</delete>

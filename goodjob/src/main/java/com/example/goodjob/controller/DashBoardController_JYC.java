@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.goodjob.service.CSkillService_JYC;
 import com.example.goodjob.service.CompanyService_JYC;
 import com.example.goodjob.service.UserService_JYC;
 
@@ -20,10 +21,12 @@ public class DashBoardController_JYC {
 
 	private UserService_JYC userService;
 	private CompanyService_JYC companyService;
+	private CSkillService_JYC cSkillService;
 	
-	public DashBoardController_JYC(UserService_JYC userService, CompanyService_JYC companyService) {
+	public DashBoardController_JYC(UserService_JYC userService, CompanyService_JYC companyService, CSkillService_JYC cSkillService) {
 		this.userService = userService;
 		this.companyService = companyService;
+		this.cSkillService = cSkillService;
 	}
 	
 	@GetMapping("/user")
@@ -39,6 +42,15 @@ public class DashBoardController_JYC {
 	public ResponseEntity<Map<List<String>, List<Long>>> getCompanyMoney(){
 		
 		Map<List<String>, List<Long>> map = companyService.getCompanyMoney();
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(map);
+	}
+	
+	@GetMapping("/skill")
+	public ResponseEntity<Map<List<String>, List<Long>>> getCompanySkill(){
+		
+		Map<List<String>, List<Long>> map = cSkillService.getCompanySkill();
 		
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(map);
