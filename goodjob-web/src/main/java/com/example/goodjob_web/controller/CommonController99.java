@@ -36,4 +36,9 @@ public class CommonController99 {
 	public String findPasswordForm() {
 		return "common/findPasswordWrite";
 	}
+	
+	@RequestMapping("/newPassword")
+	public String newPassword() {
+		return "common/modifyPassword";
+	}
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 재설정</title>
+<title>Insert title here</title>
 <style>
 main {
 	width: 1100px;
@@ -19,9 +19,6 @@ main #container {
 	min-height:700px;
 	box-sizing:border-box;
 }
-#red {
-	color: red;
-}
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -34,22 +31,154 @@ main #container {
 			<%@ include file="../front/common-sidebar-all.jsp"%>
 		</div>
 	<div id="container">
-	<div>비밀번호 재설정</div>
-	<div><span id="red">새로운 비밀번호</span>를 입력해 주세요.</div>
-	<table>
-		<tr>
-			<th>새로운 비밀번호</th>
-			<td><input type="text" name="password"></td>
-		</tr>
-	</table>
-	<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindPassword(event)">비밀번호 찾기</button>
+	<h3>비밀번호 찾기</h3>
+	<div>회원정보 입력</div>
+	<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	 	<li class="nav-item" role="presentation">
+	   		<button class="nav-link active" id="home-tab" onclick="showForm('memberForm')" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">개인회원</button>
+	 	</li>
+	 	<li class="nav-item" role="presentation">
+	   		<button class="nav-link" id="profile-tab" onclick="showForm('companyForm')" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">기업회원</button>
+	 	</li>
+	</ul>
+	<div id="memberForm" style="display:block;">
+		<span>아이디</span><input type="text" name="username"><br>
+		<span>이름</span><input type="text" name="mem_name"><br>
+		<span>전화번호</span><input type="text" name="mem_tel"><br>
+		<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindMemPassword(event)">비밀번호 찾기</button>
+		
+	</div>
+	<div id="companyForm" style="display:none;">
+		<span>아이디</span><input type="text" name="username1"><br>
+		<span>가입자명</span><input type="text" name="com_name"><br>
+		<span>사업자등록번호</span><input type="number" name="com_companynum"><br>
+		<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindComPassword(event)">비밀번호 찾기</button>
+	</div>
 	</div>
 	</main>
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
 	<script>
+	function showForm(type){
+		var memberForm = document.getElementById('memberForm');
+		var companyForm = document.getElementById('companyForm');
+		var homeTab = document.getElementById('home-tab');
+		var profileTab = document.getElementById('profile-tab');
+		
+		if(type === 'memberForm'){
+			memberForm.style.display = 'block';
+			companyForm.style.display = 'none';
+			homeTab.classList.add("active");
+			profileTab.classList.remove("active");
+			homeTab.setAttribute('aria-selected', 'true');
+			profileTab.setAttribute('aria-selected', 'false');
+		} else {
+			memberForm.style.display = 'none';
+			companyForm.style.display = 'block';
+			homeTab.classList.remove("active");
+			profileTab.classList.add("active");
+			homeTab.setAttribute('aria-selected', 'false');
+			profileTab.setAttribute('aria-selected', 'true');
+		}
+	}
 	
+	function submitFindMemPassword(event){
+		const username = document.querySelector("Input[name='username']");
+		const mem_name = document.querySelector("Input[name='mem_name']");
+		const mem_tel = document.querySelector("Input[name='mem_tel']");
+		
+		if(mem_name.value == null || mem_name.value == ''){
+			alert("이름을 입력해주세요.");
+			mem_name.focus();
+			return ;
+		} else if(mem_tel.value == null || mem_tel.value == ''){
+			alert("전화번호를 입력해주세요.");
+			mem_tel.focus();
+			return ;
+		} else if(username.value == null || username.value == ''){
+			alert("아이디를 입력해주세요.");
+			username.focus();
+			return ;
+		} else{
+			console.log(username.value);
+			console.log(mem_name.value);
+			console.log(mem_tel.value);
+			
+			const findPassword = {
+				username : username.value,
+				mem_name : mem_name.value,
+				mem_tel : mem_tel.value
+			};
+			console.log(findPassword);
+			const sendData = JSON.stringify(findPassword);
+			const xhttp = new XMLHttpRequest();
+			
+			xhttp.onload = function(){
+				if(this.status == 200){
+					const username = this.responseText;
+					console.log("username: ",username);
+					alert("인증되었습니다.");
+					window.location.href="/common99/newPassword?username="+encodeURIComponent(username);
+				} else {
+					alert(this.responseText);
+					window.location.href="/common99/join";
+				}
+			};
+			xhttp.open("POST", "http://localhost:8888/api/login/mem-password");
+		    xhttp.setRequestHeader("Content-type", "application/json");
+		    xhttp.send(sendData);
+		}
+	}
+	
+	function submitFindComPassword(event){
+		const username = document.querySelector("Input[name='username1']");
+		const com_name = document.querySelector("Input[name='com_name']");
+		const com_companynum = document.querySelector("Input[name='com_companynum']");
+		
+		if(com_name.value == null){
+			alert("가입자명을 입력해주세요.");
+			com_name.focus();
+			return ;
+		} else if(com_companynum == null){
+			alert("사업자번호를 입력해주세요.");
+			com_companynum.focus();
+			return ;
+		} else if(username.value == null || username.value == ''){
+			alert("아이디를 입력해주세요.");
+			username.focus();
+			return ;
+		} else{
+			console.log(username.value);
+			console.log(com_name.value);
+			console.log(com_companynum.value);
+			
+			const findPassword = {
+				username : username.value,
+				com_name : com_name.value,
+				com_companynum : com_companynum.value
+			};
+			
+			console.log(findPassword);
+			const sendData = JSON.stringify(findPassword);
+			const xhttp = new XMLHttpRequest();
+			
+			xhttp.onload = function(){
+				if(this.status == 200){
+					alert("인증되었습니다.");
+					const username = this.responseText;
+					window.location.href="/common99/newPassword?username="+encodeURIComponent(username);
+				} else {
+					alert(this.responseText);
+					window.location.href="/common99/join";
+				}
+			};
+			xhttp.open("POST", "http://localhost:8888/api/login/com-password");
+		    xhttp.setRequestHeader("Content-type", "application/json");
+		    xhttp.send(sendData);
+		} 
+	}
 	</script>
 </body>
 </html>

@@ -1,13 +1,13 @@
 package com.example.goodjob.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dto.CompanyDto;
@@ -81,7 +81,6 @@ public class LoginController_99 {
 		String memUsername = userService.getMemUsername(memberDto.getMem_name(), memberDto.getMem_tel());
 		System.out.println("memusername" + memUsername);
 		
-		
 		if(memUsername != null) {
 			return ResponseEntity.ok(memUsername);
 		} else {
@@ -101,20 +100,55 @@ public class LoginController_99 {
 		}
 	}
     
-    @PostMapping("/password")
-	public ResponseEntity<String> getPassword(@RequestBody MemberDto memberDto){
+    @PostMapping("/mem-password")
+	public ResponseEntity<String> checkMemInfo(@RequestBody MemberDto memberDto){
 		int member = userService.memCheck(memberDto);
 		System.out.println(member);
 		
 		if(member > 0) {
 			String username = memberDto.getUsername();
 			System.out.println(username);
-			String password = userService.getMemPassword(username);
-			return ResponseEntity.ok(password);
+			return ResponseEntity.ok(username);
 		} else {
-			return ResponseEntity.badRequest().body("존재하지 않는 회원입니다.");
+			return ResponseEntity.badRequest().body("가입이력이 없습니다. 가입 폼으로 이동합니다.");
 		}
 	}
+    
+    @PostMapping("/com-password")
+   	public ResponseEntity<String> checkComInfo(@RequestBody CompanyDto companyDto){
+   		int company = userService.comCheck(companyDto);
+   		System.out.println(company);
+   		
+   		if(company > 0) {
+   			String username = companyDto.getUsername();
+   			System.out.println(username);
+   			return ResponseEntity.ok(username);
+   		} else {
+   			return ResponseEntity.badRequest().body("가입이력이 없습니다. 가입 폼으로 이동합니다.");
+   		}
+   	}
+    
+    @PutMapping("/newPassword")
+    public ResponseEntity<String> newPassword(@RequestBody UserDto userDto){
+    	String username = userDto.getUsername();
+    	String password = userDto.getPassword();
+    	String newPw = passwordService.hashPassword(password);
+    	userDto.setPassword(newPw);
+    	userService.modifyPassword(userDto);
+    	
+    	String passwordDB = userService.getMemPassword2(username);
+    	
+    	System.out.println("result : " + passwordDB);
+    	
+    	boolean result = passwordService.checkPassword(password, passwordDB);
+    	
+    	if(result) {
+    		return ResponseEntity.ok("비밀번호 변경이 완료되었습니다.");
+    	} else {
+    		return ResponseEntity.badRequest().body("다시 시도해주세요.");
+    	}
+    }
+    
     
     
 }

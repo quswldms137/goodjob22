@@ -31,6 +31,7 @@ main #container {
 			<%@ include file="../front/common-sidebar-all.jsp"%>
 		</div>
 	<div id="container">
+	<h3>아이디 찾기</h3>
 	<div>회원정보 입력</div>
 	<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -106,14 +107,13 @@ main #container {
 			xhttp.onload = function(){
 				if(this.status == 200){
 					const username = this.responseText;
+					console.log(username);
 					window.location.href="/common99/showUsername?username=" + username;
 				} else {
 					alert(this.responseText);
 					window.location.href="/common99/join";
 				}
-				
 			};
-			
 			xhttp.open("POST", "http://localhost:8888/api/login/mem-username");
 		    xhttp.setRequestHeader("Content-type", "application/json");
 		    xhttp.send(sendData);
@@ -154,13 +154,10 @@ main #container {
 				}
 				
 			};
-			
 			xhttp.open("POST", "http://localhost:8888/api/login/com-username");
 		    xhttp.setRequestHeader("Content-type", "application/json");
 		    xhttp.send(sendData);
 		} 
-		
-		
 	}
 	
 	</script>

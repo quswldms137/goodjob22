@@ -21,8 +21,14 @@ main {
 main #container {
 	width:900px;
 	min-height:700px;
-	border: 1px solid #ccc;
 	box-sizing:border-box;
+}
+
+#resultBox{
+	width: 900px;
+	height: 200px;
+	box-sizing:border-box;
+	border:1px solid #ccc;
 }
 </style>
 </head>
@@ -35,9 +41,15 @@ main #container {
 			<%@ include file="../front/common-sidebar-all.jsp"%>
 		</div>
 	<div id="container">
-	<div id="id" style="display:none;">아이디 조회</div>
-	<div id="pw" style="display:none;">비밀번호 조회</div> 
-	<div id="demo"></div>
+	<h3>아이디 조회</h3>
+	<div>· 개인정보보호를 위해 일부분은 *로 표시됩니다.</div>
+	<div>· 동명이인이 있는 경우, 본인 외의 ID가 노출될 수 있습니다.</div>
+	<div id="resultBox"><!-- 박스 모양으로 테두리 -->
+		<div>- 입력된 정보로 등록된 아이디가 아래에 표시됩니다.</div>
+		<div id="pw" style="display:none;">비밀번호 조회</div>
+		<div id="id" style="display:none;">아이디 조회</div>
+		<div id="demo"></div>
+	</div>
 	<a class="btn btn-primary btn-lg" href="/common99/login">로그인</a>
     <a class="btn btn-primary btn-lg" href="/common99/findPassword">비밀번호찾기</a>
 	</div>
@@ -49,11 +61,20 @@ main #container {
 	$(document).ready(function (){
 		const urlParams = new URLSearchParams(window.location.search);
 		const username = urlParams.get("username");
-		const password = urlParams.get("password");
+		//const password = urlParams.get("password");
 		
-		if(username != null){
-			console.log("username = ", username);
-			$('#demo').html(username);
+		function maskUsername(username){
+			if(username.length <= 2){
+				return "*",repeat(username.length);
+			} else{
+				return username.substring(0, username.length - 2) + "*".repeat(2);
+			}
+		}
+		
+		if(username){
+			const maskedUsername = maskUsername(username);
+			console.log("maskedUsername = ", maskedUsername);
+			$('#demo').html(maskedUsername);
 		}
 		
 	});

@@ -100,9 +100,7 @@ main #container {
 					cs_no : cs_no
 				},
 				success: function(data){
-					let detail = 
-						'<div>'+ data.cs_no +'</div>';
-						detail += '<div>'+ data.category +'</div>';
+					let detail = '<div>'+ data.category +'</div>';
 						detail += '<div>'+ data.reg_date +'</div>';
 						detail += '<div>'+ data.title +'</div>';
 						detail += '<div>'+ data.content +'</div>';
