@@ -33,51 +33,48 @@ public class UserService99 {
 		
 		return result;
 	}
-	
 	//로그인
 	public int userLogin(UserDto userDto) {
 		
 		int result = iUserDao.userLogin(userDto);
 		return result;
 	}
-	
 	//로그인한 회원 role
 	public String getRole(UserDto userDto) {
 		String role = iUserDao.getRole(userDto);
 		return role;
 	}
-	
 	//개인회원 아이디 찾기
 	public String getMemUsername(String mem_name, String mem_tel) {
 		String username = iUserDao.getMemUername(mem_name, mem_tel);
 		
 		return username;
 	}
-	
 	//개인회원 암호화된 비밀번호 찾기
 	public String getPassword(String username) {
 		String password = iUserDao.getPassword(username);
 		return password;
 	}
-	
 	//개인회원 정보체크
 	public int memCheck(MemberDto memberDto) {
 		int result = iUserDao.memCheck(memberDto);
 		return result;
 	}
-	
+	//로그인시 복호화 과정
 	public String getMemPassword(String username) {
 		String password = iUserDao.getMemPassword(username);
 		return password;
 	}
-	
 	//기업회원 아이디 찾기
 	public String getComUsername(String com_name, String com_companynum) {
 		String username = iUserDao.getComUsername(com_name, com_companynum);
 		return username;
 	}
-	
-	//
+	//아이디 중복체크
+	public int checkUsername(String username) {
+		int result = iUserDao.checkUsername(username);
+		return result;
+	}
 	
 	
 	

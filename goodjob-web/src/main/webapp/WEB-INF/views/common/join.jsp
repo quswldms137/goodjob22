@@ -30,7 +30,8 @@ main {
 	</div>
 	<div id="memberForm" style="display:block;">
 		<form name="frm_memJoin">
-			<div>아이디</div><input type="text" name="username"><br>
+			<span>아이디</span><button onclick="checkUsername(event)">아이디 중복 확인</button><br>
+			<input type="text" name="username"><br>
 			<div>비밀번호</div><input type="password" name="password"><br>
 			<input type="hidden" name="role" value="ROLE_MEMBER">
 			<div>이름</div><input type="text" name="mem_name" ><br>
@@ -66,6 +67,31 @@ main {
 		</form>
 	</div>
 	<script>
+	function checkUsername(event){
+		event.preventDefault(); 
+		const inputUsername = document.querySelector("Input[name='username']");
+		const username = inputUsername.value;
+		const url = "http://localhost:8888/api/join/check-username?username="+encodeURIComponent(username);
+		console.log(username);
+		const sendData = JSON.stringify(username);
+		const xhttp = new XMLHttpRequest();
+		
+		xhttp.onload = function(){
+			if(this.status === 200){
+				alert(this.responseText);
+			} else{
+				alert(this.responseText);
+			}
+			inputUsername.focus();
+		};
+		xhttp.onerror = function(){
+			alert("네트워크 오류가 발생했습니다.");
+		};
+		xhttp.open("GET", url);
+		xhttp.send();
+	}
+	
+		
 		function showForm(type){
 			var memberForm = document.getElementById('memberForm');
 			var companyForm = document.getElementById('companyForm');
@@ -244,10 +270,9 @@ main {
 				xhttp.setRequestHeader("Content-type", "application/json");
 				xhttp.send(sendData);
 		    }
-			
-		    
-		    
 		}
+		
+		
 	</script>
 	</main>
 	<footer>

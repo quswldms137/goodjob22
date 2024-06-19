@@ -24,5 +24,6 @@ public interface IUserDao99 {
 	public String getMemPassword(@Param("username") String username);
 	//기업 아이디 찾기
 	public String getComUsername(@Param("com_name") String com_name, @Param("com_companynum") String com_companynum);
-	
+	//개인회원 아이디 중복체크
+	public int checkUsername(@Param("username") String username);
 }
