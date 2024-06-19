@@ -21,15 +21,16 @@ main {
 main #container {
 	width:900px;
 	min-height:700px;
-	border: 1px solid #ccc;
+	border: 1px solid #eee;
+	border-radius:5px;
 	box-sizing:border-box;
+	padding-top:30px;
 }
 
 .userList-area {
 	width: 800px;
 	height: 460px;
 	margin: 0 auto;
-	border: 1px solid #eee;
 	padding-top: 60px;
 	padding-left: 60px;
 	padding-right: 60px;
