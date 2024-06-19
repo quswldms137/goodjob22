@@ -17,10 +17,23 @@
   	SELECT com_detail_no FROM company_detail WHERE com_no= #{com_no}
   </select>
   
+  <select id="getRecruitList" resultType="com.example.goodjob.dto.RecruitDto">
+  	SELECT recruit_no, title FROM recruit WHERE com_no = #{com_no};
+  </select>
+  <select id="getMemRecruitList" resultType="com.example.goodjob.dto.MemRecruitDto">
+  	SELECT * FROM mem_recruit WHERE recruit_no = #{recruit_no};
+  </select>
+  <select id="getResumeDto" resultType="com.example.goodjob.dto.ResumeDto">
+  	SELECT * FROM resume WHERE resume_no = #{resume_no};
+  </select>
+  <select id="getMem_name">
+  	SELECT mem_name FROM member WHERE mem_no = #{mem_no};
+  </select>
   <update id ="updateCompanyDetail">
   	UPDATE company_detail SET 
   	introduction = #{introduction},img_url = #{img_url},pension = #{pension}, sectors = #{sectors},history = #{history},
   	ideal_talent = #{ideal_talent}, amount = #{amount}, url = #{url};
   </update>
+  
   
   </mapper>

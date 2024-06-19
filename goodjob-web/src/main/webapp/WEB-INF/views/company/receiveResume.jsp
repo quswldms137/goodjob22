@@ -4,6 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -38,10 +41,14 @@ main #container {
 	box-sizing: border-box;
 	padding: 20px;
 }
-
+#pagename	{
+	text-align: center;
+    margin: 20px;
+	}
+	
 .recruit-area {
 	width: 90%;
-	margin: 0 auto;
+	margin: 0 0 10px 0;
 	display: flex;
 	padding: 25px;
 	border: 1px solid #ddd;
@@ -67,7 +74,7 @@ main #container {
 
 .recruit-right-bot {
 	display: flex;
-    justify-content: space-between;
+ 
 }
 
 .recruit-right-bot p {
@@ -84,7 +91,7 @@ main #container {
 
 .updateBtn, .deleteBtn {
 	background-color: orange;
-	width: 60px;
+	width: 100px;
 	height: 30px;
 	text-align: center;
 	padding: 5px;
@@ -127,30 +134,7 @@ h1, h2 {
 		</div>
 		
 		<div id="container">
-			<div class="recruit-area">
-				<div class="recruit-left">
-					<h2 class="recruit_number">채용공고명이 들어가는 부분</h2>
-				</div>
-				<div class="recruit-mid">
-					<div class="recruit-labels">
-						<h2>이름</h2>
-						<h2>구직상태</h2>
-					</div>
-					<div class="recruit-right-top">
-						<h2 class="recruit_title">이력서 제목이 들어갈겁니다</h2>
-					</div>
-					<div class="recruit-right-bot">
-						<p class="recruit_career">희망직무</p>
-						<p class="recruit_education">지원분야</p>
-						<p class="recruit_location">주소</p>
-					</div>
-				</div>
-				<div class="recruit-right-right">
-					<button class="updateBtn">수정</button>
-					<button class="deleteBtn">삭제</button>
-				</div>
-			</div>
-			<div id="demo"></div>
+			
 		</div>
 </main>
 <!-- 여기까지 -->
@@ -158,5 +142,56 @@ h1, h2 {
 <footer>
 		<%@ include file="../front/footer.jsp"%>
 </footer>
+<script>
+	$(document).ready(function(){
+		
+		const username = localStorage.getItem("username");
+		
+		$.ajax({
+			url : "http://localhost:8888/api/company/receiveResume/" + 1,
+			method : "GET",
+			dataType : "json",
+			success : function(response){
+				console.log(response);
+				
+				let str = '<h2 id="pagename">지원받은 이력서</h2>';
+				response.forEach(item =>{
+					str += '<div class="recruit-area"> '; 
+					str += '<div class="recruit-left"> ';
+					str += '<h2 class="recruit_number">' + item.rectitle + '</h2> ';
+					str += '</div> ';
+					str += '<div class="recruit-mid"> ';
+					str += '<div class="recruit-labels">';
+					str += '<h2>'+ item.mem_name +'</h2>';
+					str += '<h2>구직중</h2>';
+					str += '</div>';
+					str += '<div class="recruit-right-top">';
+					str += '<h2 class="recruit_title">'+item.title +'</h2>';
+					str += '</div>';
+					str += '<div class="recruit-right-bot">';
+					str += '<p class="recruit_career">희망직무 | ' + item.hope_job + '</p>';
+					str += '<p class="recruit_location">희망지역 | ' + item.hope_city + '</p>';
+					str += '</div>';
+					str += '</div>';
+					str += '<div class="recruit-right-right">';
+					str += '<button class="updateBtn">관심</button>';
+					str += '<button class="deleteBtn">포지션 제안</button>';
+					str += '</div>';
+					str += '</div>';
+					str += '<div id="demo"></div>';
+				});
+				
+				$("#container").html(str);
+			},
+			error : function(xhr, status, error){
+				console.log(error);
+			}
+		});
+		
+		
+	});
+
+</script>
+
 </body>
 </html>

@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 import com.example.goodjob.dto.CompanyDetailDto97;
 import com.example.goodjob.dto.MemRecruitDto;
+import com.example.goodjob.dto.MemRecruitJoinDto;
 import com.example.goodjob.dto.RecruitDto;
+import com.example.goodjob.dto.ResumeDto;
 
 @Mapper
 public interface ICompany97 {
@@ -23,6 +25,10 @@ public interface ICompany97 {
 	
 	//특정 채용공고 정보 조회
 	public RecruitDto findByRecruit_no(@Param("recruit_no") Long recruit_no);
-	//지원받은 이력서 리스트 
-	public List<MemRecruitDto> findrecruit_no(@Param("recruit_no") Long recruit_no);
+	
+	public List<RecruitDto> getRecruitList(@Param("com_no") Long com_no);
+	public List<MemRecruitDto> getMemRecruitList(@Param("recruit_no") Long recruit_no);
+	public ResumeDto getResumeDto(@Param("resume_no") Long resume_no);
+	public String getMem_name(@Param("mem_no") Long mem_no);
+	
 }
