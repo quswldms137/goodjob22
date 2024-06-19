@@ -16,6 +16,8 @@ public interface IUserDao99 {
 	public String getRole(UserDto userDto);
 	//개인회원 아이디 찾기
 	public String getMemUername(@Param("mem_name") String mem_name, @Param("mem_tel") String mem_tel);
+	//개인회원 암호화된 비밀번호 찾기
+	public String getPassword(@Param("username") String username);
 	//개인회원 정보 확인
 	public int memCheck(MemberDto memberDto);
 	//개인회원 비밀번호 찾기

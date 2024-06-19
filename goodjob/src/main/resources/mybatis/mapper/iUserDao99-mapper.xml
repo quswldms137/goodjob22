@@ -12,6 +12,9 @@
 	<select id="getRole">
 		SELECT ROLE FROM user WHERE username = #{username} AND PASSWORD = #{password}
 	</select>
+	<select id="getPassword">
+		select password from user where username = #{username}
+	</select>
 	<!-- 아이디, 비밀번호 찾기 -->
 	<select id="getMemUername">
 		select username from member where mem_name = #{mem_name} and mem_tel = #{mem_tel}

@@ -54,6 +54,12 @@ public class UserService99 {
 		return username;
 	}
 	
+	//개인회원 암호화된 비밀번호 찾기
+	public String getPassword(String username) {
+		String password = iUserDao.getPassword(username);
+		return password;
+	}
+	
 	//개인회원 정보체크
 	public int memCheck(MemberDto memberDto) {
 		int result = iUserDao.memCheck(memberDto);
