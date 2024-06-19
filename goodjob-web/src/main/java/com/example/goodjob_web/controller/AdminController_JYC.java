@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController_JYC {
 
+	@GetMapping("")
+	public String main() {
+		return "/admin/main";
+	}
+	
 	@GetMapping("/user/list")
 	public String getUserList() {
 		return "/admin/userList";
@@ -48,3 +53,4 @@ public class AdminController_JYC {
 	}
 	
 }
+
