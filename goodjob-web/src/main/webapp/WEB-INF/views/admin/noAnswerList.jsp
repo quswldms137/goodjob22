@@ -14,8 +14,15 @@
 main {
 	width: 1100px;
 	margin: 80px auto;
-	min-height: 700px;
-	border:1px solid #eee;
+	display:flex;
+	justify-content:space-between;
+}
+
+main #container {
+	width:900px;
+	min-height:700px;
+	border: 1px solid #ccc;
+	box-sizing:border-box;
 }
 .item{
 	display: flex;
@@ -59,16 +66,16 @@ main {
 </head>
 <body>
 	<header>
-		<%@ include file="../front/header.jsp"%>
+		<%@ include file="../front/admin-header.jsp"%>
 	</header>
-
 	<main>
-		
-		<div id="noAnswer">
-		
+		<div class="sidebar-container">
+			<%@ include file="../front/admin-sidebar-all.jsp"%>
 		</div>
-		
-	
+		<div id="container">
+			<div id="noAnswer">
+			</div>
+		</div>
 	</main>
 
 	<footer>
@@ -97,9 +104,7 @@ main {
 						pages = totalItem / 5;
 					}
 
-					let str = '<div id="changePageInputs"><input type="button" value="답변안한문의(' + response[0].noAnswerTotal + ')" onclick="moveToNoAnswer()"> ' + 
-					
-				      '<input type="button" value="답변한문의(' + response[0].yesAnswerTotal + ')" onclick="moveToYesAnswer()"></div>';
+					let str = '';
 					
 					response.forEach(qna => {
 						 str += '<div class="item" id="item' + qna.cs_no + '"> ' + 
@@ -156,9 +161,7 @@ main {
 				}
 
 
-				let str = '<div id="changePageInputs"><input type="button" value="답변안한문의(' + response[0].noAnswerTotal + ')" onclick="moveToNoAnswer()"> ' + 
-				
-			      '<input type="button" value="답변한문의(' + response[0].yesAnswerTotal + ')" onclick="moveToYesAnswer()"></div>';
+				let str = '';
 					      
 				response.forEach(qna => {
 					 str += '<div class="item" id="item' + qna.cs_no + '"> ' + 
@@ -195,13 +198,6 @@ main {
 		function answerToQna(event){
 			const cs_no = event.target.id.substring(6);
 			location.href="/admin/noanswer/answer/" + cs_no;
-		}
-		
-		function moveToNoAnswer(){
-			location.href="/admin/noanswer/list";
-		}
-		function moveToYesAnswer(){
-			location.href="/admin/yesanswer/list";
 		}
 		
 	</script>
