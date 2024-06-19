@@ -18,6 +18,9 @@
 	<select id="count">
 		SELECT COUNT(com_no) FROM company;
 	</select>
+	<select id="getCompanyMoney" resultType="com.example.goodjob.dto.CompanyDto_JYC">
+		SELECT com_name, money FROM company ORDER BY money DESC;
+	</select>
 	<delete id="deleteByUsername">
 		DELETE FROM company WHERE username = #{username};
 	</delete>
