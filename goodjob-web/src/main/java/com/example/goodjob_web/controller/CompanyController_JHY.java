@@ -58,6 +58,4 @@ public class CompanyController_JHY { // view
 	
 	
 	
-	
-	
 }

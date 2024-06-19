@@ -20,6 +20,7 @@ main #container {
 	min-height: 700px;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
+	padding: 20px;
 }
 
 .company-nav ul li:nth-child(2) a {
@@ -28,38 +29,83 @@ main #container {
 }
 
 .skill-container {
-            margin-top: 5px;
-        }
-        .skill {
-            display: inline-block;
-            margin: 5px;
-            padding: 5px 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .remove-skill {
-            margin-left: 10px;
-            color: red;
-            cursor: pointer;
-        }
-        #searchResults {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            position: absolute;
-            background-color: white;
-            border: 1px solid #ccc;
-            width: 200px; /* Adjust based on your needs */
-        }
-        #searchResults li {
-            padding: 5px;
-            cursor: pointer;
-        }
-        #searchResults li:hover {
-            background-color: #f0f0f0;
-        }
-
+	margin-top: 5px;
+}
+.skill {
+	display: inline-block;
+	margin: 5px;
+	padding: 5px 10px;
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+.remove-skill {
+	margin-left: 10px;
+	color: red;
+	cursor: pointer;
+}
+#searchResults {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	background-color: white;
+	border: 1px solid #ccc;
+	width: 200px; /* Adjust based on your needs */
+}
+#searchResults li {
+	padding: 5px;
+	cursor: pointer;
+}
+#searchResults li:hover {
+	background-color: #f0f0f0;
+}
+.h1 {
+	text-align: center;
+	margin: 50px 0 60px;
+}
+.title input[type="text"] {
+	align-content: center;
+	width: 95%;
+	height: 45px;
+	font-size: 19px;
+	padding-left: 10px;
+}
+.section-title {
+	font-size: 20px;
+	margin-top: 20px;
+	font-weight: bold;
+}
+.form-group {
+	margin-bottom: 15px;
+}
+.form-group p {
+	margin: 5px 0;
+}
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="date"],
+.form-group select {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.btn {
+	background-color: orange;
+	border-color: white;
+	border-radius: 10px;
+	width: 100px;
+	height: 40px;
+	transition: background-color 0.2s ease;
+	padding: auto;
+	margin-left: 30px;
+}
+.btn:hover {
+	background-color: skyblue;
+}
+#btn-group {
+	text-align: center;
+}
 </style>
 </head>
 <body>
@@ -71,41 +117,40 @@ main #container {
 			<%@ include file="../front/company-sidebar-all.jsp"%>
 		</div>
 		<div id="container">
-			<h2 class="h2">채용공고 수정</h2>
+			<h1 class="h1">채용공고 수정</h1>
 			<form name="frm">
-				<div class="title">
+				<div class="title form-group">
 					<input type="hidden" name="recruit_no" value="${recruit_no }">
 					<p>제목</p>
 					<input type="text" name="title" placeholder="채용공고의 제목을 입력하세요."><br>
 				</div>
-				<div class="recruit_intro">
-					<p>상세요강</p>
-					<input type="text" name="recruit_intro"
-						placeholder="채용공고의 상세요강을 입력하세요.">
-				</div>
-				<div class="qualification">
+				
+				<div class="section-title">지원자격</div>
+				<div class="qualification form-group">
 					<p>자격요건</p>
 					<input type="text" name="qualification" placeholder="자격요건">
 				</div>
-				<div class="career">
+				<div class="career form-group">
 					<p>경력</p>
 					<input type="text" name="career" placeholder="경력">
 				</div>
-				<div class="education">
+				<div class="education form-group">
 					<p>학력</p>
 					<input type="text" name="education" placeholder="학력">
 				</div>
-				<div class="sk_name">
+				<div class="sk_name form-group">
 					<p>우대사항(보유스킬)</p>
 				    <input type="text" id="skillSearch" placeholder="Search for a skill..." oninput="searchSkills()">
 				    <ul id="searchResults"></ul>
 				    <div class="skill-container" id="addedSkills"></div>
 				</div>
-				<div class="p_number">
+
+				<div class="section-title">근무조건</div>
+				<div class="p_number form-group">
 					<p>모집인원</p>
 					<input type="number" name="p_number" placeholder="모집인원">
 				</div>
-				<div class="field">
+				<div class="field form-group">
 					<p>고용형태</p>
 					<select id="field" onchange="changeField()">
 						<option>고용형태를 선택해주세요.</option>
@@ -118,45 +163,48 @@ main #container {
 					</select>
 					<input type="hidden" name="field">
 				</div>
-				<div class="rank">
+				<div class="rank form-group">
 					<p>직급</p>
 					<input type="text" name="rank" placeholder="직급">
 				</div>
-				<div class="pay">
+				<div class="pay form-group">
 					<p>급여</p>
 					<input type="number" name="pay" placeholder="급여">
 				</div>
-				<div class="location">
+				<div class="location form-group">
 					<p>지역</p>
 					<input type="text" name="location" placeholder="근무지역">
 				</div>
-				<div class="working_time">
+				<div class="working_time form-group">
 					<p>근무시간</p>
 					<input type="text" name="working_time" placeholder="근무시간">
 				</div>
-				<div class="welfares">
-					<p> 복지</p>
+				<div class="welfares form-group">
+					<p>복지</p>
 					<input type="text" name="welfare" placeholder="복지">
 				</div>
-				<div class="seprocedure">
+
+				<div class="section-title">기타</div>
+				<div class="recruit_intro form-group">
+					<p>상세요강</p>
+					<input type="text" name="recruit_intro" placeholder="채용공고의 상세요강을 입력하세요.">
+				</div>
+				<div class="seprocedure form-group">
 					<p>전형절차</p>
 					<input type="text" name="seprocedure" placeholder="전형절차">
 				</div>
-				<div class="notice">
+				<div class="notice form-group">
 					<p>유의사항</p>
 					<input type="text" name="notice" placeholder="유의사항을 입력하세요.">
 				</div>
-				<div class="deadline_date">
+				<div class="deadline_date form-group">
 					<p>공고마감일</p>
 					<input type="date" name="deadline_date">
 				</div>
-				<div>
-					<c:if test="${recruit_no == null} ">
-					<button type="button" onclick="return recruitWrite()">등록</button> <button type="button" onclick="cancel()">취소</button>
-					</c:if>
-					<c:if test="${recruit_no != null }">
-						<button type="button" onclick="recruitUpdate()">수정</button> <button type="button" onclick="cancel()">취소</button>
-					</c:if>
+				
+				<div class="form-group" id="btn-group">
+					<button type="button" class="btn" onclick="recruitUpdate()">수정</button> 
+					<button type="button" class="btn" onclick="cancel()">취소</button>
 				</div>
 			</form>
 		</div>
@@ -204,11 +252,30 @@ main #container {
             addedSkills.removeChild(skillDiv);
         }
 		// -----------------------------------
-		$(document).ready(function() {
+		
+		$(document).ready(function(){
+			
+			const username = localStorage.getItem("username");
 			console.log(`${recruit_no}`);
 			const log = document.querySelector("input[name='recruit_no']");
 			console.log(log);
+			
+			$.ajax({
+				url : "http://localhost:8888/api/company/employWrite?username=" + username,
+				method : "GET",
+				dataType : "text",
+				success : function(response){
+					com_no1 = response;
+					console.log(com_no1);
+				},
+				error : function(xhr, status, error){
+					
+				}
+				
+			});
+			
 		})
+		
 		// select 에서 값이 바뀌면 값을 바꿔주는 용도
 		function changeField(){
 			const selectElement = document.querySelector("#field");
@@ -231,7 +298,7 @@ main #container {
 			
 			console.log(skill);
 			const data = JSON.stringify({
-				com_no : "1",
+				com_no : com_no1,
 				career : document.querySelector("input[name='career']").value,
 				education : document.querySelector("input[name='education']").value,
 				field : document.querySelector("input[name='field']").value,
@@ -272,7 +339,7 @@ main #container {
 			
 			const data = JSON.stringify({
 				recruit_no : ${recruit_no},
-				com_no : "1",
+				com_no : com_no1,
 				career : document.querySelector("input[name='career']").value,
 				education : document.querySelector("input[name='education']").value,
 				field : document.querySelector("input[name='field']").value,

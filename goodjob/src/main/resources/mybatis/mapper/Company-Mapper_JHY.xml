@@ -30,7 +30,7 @@
 		insert into recruit values (null, #{recruit.com_no}, #{recruit.career}, #{recruit.education}, 
 									#{recruit.field}, #{recruit.pay}, #{recruit.location}, #{recruit.working_time}, 
 									#{recruit.rank}, #{recruit.title}, #{recruit.qualification}, #{recruit.welfare}, 
-									#{recruit.seprocedure}, #{recruit.notice}, now(), 
+									#{recruit.seprocedure}, #{recruit.notice}, CURRENT_TIMESTAMP, 
 									#{recruit.deadline_date}, #{recruit.p_number}, #{recruit.recruit_intro})
 	</insert>
 	<!-- 채용공고 요구 스킬 등록 -->
@@ -50,11 +50,20 @@
 							where recruit_no = #{recruit.recruit_no}
 	</update>
 	
+	<!-- 로그인시 저장된 회사번호로 채용공고 조회 -->
+	<select id="findRecruitList">
+		select * from recruit where com_no = #{com_no}
+	</select>
 	
 	
 	<!-- 특정 채용공고 삭제 -->
 	<delete id="delete">
 		delete from recruit where recruit_no = #{recruit_no}
+	</delete>
+	
+	<!-- 채용공고 수정시 등록되있던 스킬 정보 리셋 (삭제용)-->
+	<delete id="deleteC_skill">
+		delete from c_skill where recruit_no = #{recruit_no}
 	</delete>
 	
 </mapper>  

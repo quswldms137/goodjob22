@@ -5,7 +5,11 @@
 <mapper namespace="com.example.goodjob.dao.IResumeDao_JHY">
 	
 	<select id="findByMem_no">
-		select * from resume where mem_no = #{mem_no} and main = '1'
+		select * from resume where mem_no = #{mem_no} and main = 1
+	</select>
+	
+	<select id="findSk_nameWithResume_no">
+		select sk_name from skill where resume_no = #{resume_no}
 	</select>
 	
 </mapper>
