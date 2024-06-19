@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.goodjob.dto.CompanyDto;
 import com.example.goodjob.dto.MemberDto;
 import com.example.goodjob.dto.UserDto;
+import com.example.goodjob.service.PasswordService99;
 import com.example.goodjob.service.UserService99;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,15 +25,23 @@ public class LoginController_99 {
 
     @Autowired
     private UserService99 userService;
-
+    @Autowired
+    private PasswordService99 passwordService;
+    
     @PostMapping
     public ResponseEntity<String> loginMember(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
+        //암호화된 비밀번호 찾기
+        String password = userDto.getPassword();
+        String username = userDto.getUsername();
+        String hashedPassword = userService.getPassword(username);
+        userDto.setPassword(hashedPassword);
         String role = userService.getRole(userDto);
         userDto.setRole(role);
+        //사용자가 입력한 비밀번호와 암호화된 비밀번호 비교
+        boolean result = passwordService.checkPassword(password, hashedPassword);
         
-        int result = userService.userLogin(userDto);
-        if (result == 1) {
-            System.out.println(result);
+        if(result) {
+        	System.out.println(result);
             if ("ROLE_MEMBER".equals(role) || "ROLE_MANAGER".equals(role) || "ROLE_COMPANY".equals(role)) {
                 session.setAttribute("user", userDto);
                 //Header에 저장
@@ -48,6 +57,7 @@ public class LoginController_99 {
 
         } else {
             return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 일치하지 않습니다.");
+        
         }
     }
 

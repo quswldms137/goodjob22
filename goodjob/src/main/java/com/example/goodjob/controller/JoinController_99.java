@@ -4,7 +4,6 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +13,7 @@ import com.example.goodjob.dto.CompanyDto;
 import com.example.goodjob.dto.MemberDto;
 import com.example.goodjob.service.CompanyService99;
 import com.example.goodjob.service.MemberService99;
+import com.example.goodjob.service.PasswordService99;
 import com.example.goodjob.service.UserService99;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +28,9 @@ public class JoinController_99 {
 	private MemberService99 memberService;
 	@Autowired
 	private CompanyService99 companyService;
+	@Autowired
+	private PasswordService99 passwordService;
+	
 	
 	@PostMapping("/member")
 	public ResponseEntity<String> joinMember(@RequestBody MemberDto memberDto, HttpSession session) {
@@ -40,6 +43,11 @@ public class JoinController_99 {
 		//가입일자
 		LocalDate today = LocalDate.now();
 		memberDto.setMake_date(today);
+		//비밀번호 암호화
+		String password = memberDto.getPassword();
+		String hashedPassword = passwordService.hashPassword(password);
+		memberDto.setPassword(hashedPassword);
+		
 		int result = userService.regUser(memberDto);
 
 		int result2 = memberService.regMember(memberDto);
@@ -54,6 +62,10 @@ public class JoinController_99 {
 	@PostMapping("/company")
 	public ResponseEntity<String> joinCompany(@RequestBody CompanyDto companyDto) {
 		System.out.println("companyDto : " + companyDto);
+		//비밀번호 암호화
+		String password = companyDto.getPassword();
+		String hashedPassword = passwordService.hashPassword(password);
+		companyDto.setPassword(hashedPassword);
 		
 		int result = userService.regUser(companyDto);
 
