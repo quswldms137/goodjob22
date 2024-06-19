@@ -4,6 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.example.goodjob.dao.IRecruitListDao94">
+  <!-- 해당기업상세페이지의 채용공고목록 -->
   <select id="getRecruitListDto" resultType="com.example.goodjob.dto.RecruitDto">
     SELECT
 			c.com_name,
@@ -24,7 +25,7 @@
         	r.reg_date DESC
 
   </select>
-  
+  <!-- 채용공고목록(최근등록순) -->
   <select id="getAllRecruitDto" resultType="com.example.goodjob.dto.RecruitAllDto94">
     SELECT
     	r.*,  
@@ -39,8 +40,8 @@
     ORDER BY 
         r.reg_date DESC	
   </select>
-  
-   <select id="getFilterRecruitList" resultType="com.example.goodjob.dto.RecruitAllDto94">
+  <!-- 채용공고페이지 필터 -->
+  <select id="getFilterRecruitList" resultType="com.example.goodjob.dto.RecruitAllDto94">
     SELECT
     	r.*,  
     	cd.*, 
@@ -65,5 +66,24 @@
 	ORDER BY 
 		r.reg_date DESC        
   </select>
-  
+  <!-- 채용공고검색창 -->
+  <select id="getSearchRecruit" resultType="com.example.goodjob.dto.RecruitAllDto94">
+    SELECT 
+			r.*,
+			c.*,
+			cd.*
+		FROM
+			recruit r
+		JOIN 
+			company_detail cd ON r.com_no = cd.com_no
+		JOIN
+    		company c ON r.com_no = c.com_no
+		WHERE 
+			c.com_name LIKE CONCAT('%', #{query}, '%') OR
+			c.com_type LIKE CONCAT('%', #{query}, '%') OR
+    		r.location LIKE CONCAT('%', #{query}, '%') OR
+    		r.career LIKE CONCAT('%', #{query}, '%') OR
+    		cd.sectors LIKE CONCAT('%', #{query}, '%')
+    		
+  </select>
 </mapper>

@@ -131,49 +131,50 @@ main {
 	<main>
 		<div class="container">
 			<div id="filters">
-        	<select id="jobTypeFilter">
-            	<option value="">직종</option>
-                <option value="개발">개발/프로그래밍</option>
-                <option value="디자인">디자인</option>
-                <option value="마케팅/광고">마케팅/광고</option>
-                <option value="경영/사무">경영/사무</option>
-                <option value="영업/판매">영업/판매</option>
-                <option value="생산/제조">생산/제조</option>
-                <option value="IT/정보통신">IT/정보통신</option>
-                <option value="교육/강사">교육/강사</option>
-                <option value="의료/보건">의료/보건</option>
-                <option value="서비스/관광">서비스/관광</option>
-        	</select>
-        	<select id="locationFilter">
-            	<option value="">지역</option>
-                <option value="서울">서울</option>
-                <option value="경기">경기</option>
-                <option value="인천">인천</option>
-                <option value="부산">부산</option>
-                <option value="대구">대구</option>
-                <option value="광주">광주</option>
-                <option value="대전">대전</option>
-                <option value="울산">울산</option>
-                <option value="강원도">강원도</option>
-                <option value="충청북도">충청북도</option>
-                <option value="충청남도">충청남도</option>
-                <option value="전라북도">전라북도</option>
-                <option value="전라남도">전라남도</option>
-                <option value="경상북도">경상북도</option>
-                <option value="경상남도">경상남도</option>
-                <option value="제주도">제주도</option>
-        	</select>
-        	 <select id="companyTypeFilter">
-                <option value="">기업형태</option>
-                <option value="대기업">대기업</option>
-                <option value="중소기업">중소기업</option>
-                <option value="스타트업">스타트업</option>
-                <option value="공기업">공기업</option>
-                <option value="비영리기관">공기업</option>
-                <option value="공공기관">공공기관</option>
-            </select>
-        	<button id="filterBnt" onclick="applyFilters()">filter</button>
-    	</div>
+        		<select id="jobTypeFilter">
+            		<option value="">직종</option>
+                	<option value="개발">개발/프로그래밍</option>
+                	<option value="디자인">디자인</option>
+                	<option value="마케팅/광고">마케팅/광고</option>
+                	<option value="경영/사무">경영/사무</option>
+                	<option value="영업/판매">영업/판매</option>
+                	<option value="생산/제조">생산/제조</option>
+                	<option value="IT/정보통신">IT/정보통신</option>
+                	<option value="교육/강사">교육/강사</option>
+                	<option value="의료/보건">의료/보건</option>
+                	<option value="서비스/관광">서비스/관광</option>
+        		</select>
+        		<select id="locationFilter">
+            		<option value="">지역</option>
+                	<option value="서울">서울</option>
+                	<option value="경기">경기</option>
+                	<option value="인천">인천</option>
+                	<option value="부산">부산</option>
+                	<option value="대구">대구</option>
+                	<option value="광주">광주</option>
+                	<option value="대전">대전</option>
+                	<option value="울산">울산</option>
+                	<option value="강원도">강원도</option>
+                	<option value="충청북도">충청북도</option>
+                	<option value="충청남도">충청남도</option>
+                	<option value="전라북도">전라북도</option>
+                	<option value="전라남도">전라남도</option>
+                	<option value="경상북도">경상북도</option>
+                	<option value="경상남도">경상남도</option>
+                	<option value="제주도">제주도</option>
+        		</select>
+        	 	<select id="companyTypeFilter">
+                	<option value="">기업형태</option>
+                	<option value="대기업">대기업</option>
+                	<option value="중소기업">중소기업</option>
+                	<option value="스타트업">스타트업</option>
+                	<option value="공기업">공기업</option>
+                	<option value="비영리기관">공기업</option>
+                	<option value="공공기관">공공기관</option>
+            	</select>
+        		<button id="filterBnt" onclick="applyFilters()">filter</button>
+    		</div>
+    	
 			<div class="search-container">
 				<input type="text" id="search-box" class="search-box" placeholder="기업 검색...">
 				<button id="search-button" class="search-button">검색</button>
@@ -191,6 +192,7 @@ main {
 	</footer>
 
 <script>
+//기업필터
 function applyFilters() {
     const sectors = $("#jobTypeFilter").val();
     const location = $("#locationFilter").val();
@@ -242,7 +244,7 @@ function renderCompanyList(data) {
         "</div>"
         );
     });
-
+	//관심기업등록 버튼
     $(".interest-button").on("click", function() {
         const com_no = $(this).data("com_no");
         const username = localStorage.getItem("username");
@@ -265,7 +267,7 @@ function renderCompanyList(data) {
         });
     });
 }
-
+//문서가 준비되면 실행
 $(document).ready(function() {
     $.ajax({
         url: "http://localhost:8888/api/company/companyList",
@@ -278,21 +280,26 @@ $(document).ready(function() {
             console.log("Error:", error);
         }
     });
-
+	//검색 
     $("#search-button").on("click", function() {
-        const searchQuery = $("#search-box").val();
+        const searchQuery = $("#search-box").val().trim();
+        if (!searchQuery) {
+            alert("검색어를 입력하세요");
+            return;
+        }
+        console.log(searchQuery);
         $.ajax({
             url: "http://localhost:8888/api/company/searchCompany",
             method: "GET",
             dataType: "json",
-            data: {
-                query: searchQuery
-            },
+            data: { query: searchQuery },
             success: function(data) {
                 renderCompanyList(data);
+                console.log(data);
             },
             error: function(error) {
                 console.log("Error:", error);
+                alert("검색 중 오류가 발생했습니다.");
             }
         });
     });

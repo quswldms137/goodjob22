@@ -21,5 +21,8 @@ public interface IRecruitListDao94 {
 													  @Param("location") String location,
 													  @Param("com_type") String com_type);
 	
+	//채용공고 검색창
+	public List<RecruitAllDto94> getSearchRecruit(@Param("query") String searchQuery);
+	
 }
 
