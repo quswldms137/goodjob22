@@ -52,11 +52,26 @@ public class ServiceQuestionService {
 	
 	public List<ServiceQuestionDto> getNoAnswerList(int page) {
 
-		int count = iServiceQuestionDao.count();
+		int noAnswerCount = iServiceQuestionDao.countNoAnswer();
+		int yesAnswerCount = iServiceQuestionDao.countYesAnswer();
 
 		List<ServiceQuestionDto> serviceQuestionDtoList = iServiceQuestionDao.getNoAnswerDtoList((page - 1) * 5);
 		
-		serviceQuestionDtoList.get(0).setTotal(count);
+		serviceQuestionDtoList.get(0).setNoAnswerTotal(noAnswerCount);
+		serviceQuestionDtoList.get(0).setYesAnswerTotal(yesAnswerCount);
+		return serviceQuestionDtoList;
+	}
+	
+
+	public List<ServiceQuestionDto> getAnswerList(int page) {
+
+		int yesAnswerCount = iServiceQuestionDao.countYesAnswer();
+		int noAnswerCount = iServiceQuestionDao.countNoAnswer();
+		
+		List<ServiceQuestionDto> serviceQuestionDtoList = iServiceQuestionDao.getYesAnswerDtoList((page - 1) * 5);
+		
+		serviceQuestionDtoList.get(0).setYesAnswerTotal(yesAnswerCount);
+		serviceQuestionDtoList.get(0).setNoAnswerTotal(noAnswerCount);
 		return serviceQuestionDtoList;
 	}
 	
@@ -79,6 +94,17 @@ public class ServiceQuestionService {
 		
 		if(result > 0) {
 			return "답변이 성공적으로 등록되었습니다.";
+		}
+		
+		return "";
+	}
+	
+	public String updateAnswer(Long cs_no, String answer) {
+		
+		int result = iServiceQuestionDao.writeAnswer(cs_no, answer);
+		
+		if(result > 0) {
+			return "답변이 성공적으로 수정되었습니다.";
 		}
 		
 		return "";

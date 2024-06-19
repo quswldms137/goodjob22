@@ -11,7 +11,7 @@
 		SELECT mem_no FROM member WHERE username = #{username};
 	</select>
 	<select id="getMemberDtoList" resultType="com.example.goodjob.dto.MemberDto">
-		SELECT * FROM member ORDER BY mem_name ASC LIMIT #{start}, 4;
+		SELECT * FROM member ORDER BY mem_name ASC LIMIT #{start}, 5;
 	</select>
 	<select id="count">
 		SELECT COUNT(mem_no) FROM member;

@@ -13,7 +13,7 @@
 		SELECT com_no FROM company ORDER BY money DESC;
 	</select>
 	<select id="getCompanyDtoList" resultType="com.example.goodjob.dto.CompanyDto_JYC">
-		SELECT * FROM company ORDER BY com_name ASC LIMIT #{start}, 4;
+		SELECT * FROM company ORDER BY com_name ASC LIMIT #{start}, 5;
 	</select>
 	<select id="count">
 		SELECT COUNT(com_no) FROM company;

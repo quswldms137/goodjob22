@@ -66,6 +66,7 @@ textarea{
 				dataType : "json",
 				success : function(response){
 					
+					
 					let str = '';
 						str += '<div id="detail"> ' + 
 							   '<p><b>작성자 : </b>' + response.username + ' <span></p> ' +
@@ -75,8 +76,12 @@ textarea{
 							   '<p><b>내용 : </b>' + response.content + '</p> ' + 
 							   '<p></p> ' + 
 							   '</div> ' + 
-							   '<div id="inputs"><textarea rows="20" cols="50" placeholder="답변을 입력하세요."></textarea> ' + 
-							   '<input type="button" value="답변작성" onclick="registAnswer(event)" id="answer' + response.cs_no + '"></div>';
+							   '<div id="inputs"><textarea rows="20" cols="50" placeholder="답변을 입력하세요.">' + response.answer + '</textarea> ';
+							   if(response.answer === null){
+									str +=	'<input type="button" value="답변작성" onclick="registAnswer(event)" id="answer' + response.cs_no + '"></div>';
+							   }else {
+								   str += '<input type="button" value="답변수정" onclick="updateAnswer(event)" id="answer' + response.cs_no + '"></div>';
+							   }
 							   
 						$("#detailForm").html(str);   
 					
@@ -99,6 +104,21 @@ textarea{
 				location.href="/admin/noanswer/list";
 			}
 			xhr.open("POST", "http://localhost:8888/api/qna/answer", true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			xhr.send(data);
+		}
+		
+		function updateAnswer(event){
+			const data = JSON.stringify({
+				cs_no : event.target.id.substring(6),
+				answer : $("textarea").val()
+			});
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				alert(this.responseText);
+				location.href="/admin/yesanswer/list";
+			}
+			xhr.open("PUT", "http://localhost:8888/api/qna/answer", true);
 			xhr.setRequestHeader("Content-type", "application/json");
 			xhr.send(data);
 		}

@@ -34,6 +34,12 @@ public class AdminController_JYC {
 		return "/admin/noAnswerList";
 	}
 	
+	@GetMapping("/yesanswer/list")
+	public String getAnswerList() {
+		return "/admin/yesAnswerList";
+	}
+	
+	
 	// 문의사항 작성 페이지로 이동한다.
 	@GetMapping("/noanswer/answer/{cs_no}")
 	public String getNoAnswerForm(@PathVariable("cs_no") Long cs_no, Model model) {

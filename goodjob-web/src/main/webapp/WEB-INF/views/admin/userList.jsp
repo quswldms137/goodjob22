@@ -140,15 +140,13 @@ main {
 					
 					str += '<div id="pages">';
 					for(let i = 0; i < pages; i++){
-						str += '<input type="button" value="' + (i + 1) + '" onclick="pageMemberList(event)" class="memberListBtn">';
+						str += '<input type="button" id="memberPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="pageMemberList(event)" class="memberListBtn">';
 					}
 					str += '</div>';
 					
 					}
 				
 				str += '</div>';
-				
-				
 				
 				$("#memberUser").html(str);
 				
@@ -196,7 +194,7 @@ main {
 				str += '<div id="pages">';
 					
 				for(let i = 0; i < pages; i++){
-					str += '<input type="button" value="' + (i + 1) + '" onclick="pageCompanyList(event)" class="companyListBtn">';
+					str += '<input type="button" id="companyPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="pageCompanyList(event)" class="companyListBtn">';
 				}
 				str += '</div>';
 				}
@@ -214,6 +212,8 @@ main {
 	/* 개인회원 리스트 페이지 */
 	function pageMemberList(event){
 		const page = event.target.value;
+		
+	
 		
 		const xhr = new XMLHttpRequest();
 		xhr.onload = function(){
@@ -247,10 +247,15 @@ main {
 				
 			str += '<div id="pages">';
 			for(let i = 0; i < pages; i++){
-				str += '<input type="button" value="' + (i + 1) + '" onclick="pageMemberList(event)" class="memberListBtn">';
+				str += '<input type="button" id="memberPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="pageMemberList(event)" class="memberListBtn">';
+				if((i + 1) === page){
+					str += '<input type="button" style="background=#FB8500" id="memberPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="pageMemberList(event)" class="memberListBtn">';
+					console.log("aaaa");
+				}
 			}
 			str += '</div>';
 			}
+			
 			
 			$("#memberUser").html(str);
 			
@@ -262,6 +267,8 @@ main {
 	/* 기업회원 리스트 페이지 */
 	function pageCompanyList(event){
 		const page = event.target.value;
+		
+		
 		
 		const xhr = new XMLHttpRequest();
 		xhr.onload = function(){
@@ -297,7 +304,7 @@ main {
 				
 			str += '<div id="pages">';
 			for(let i = 0; i < pages; i++){
-				str += '<input type="button" value="' + (i + 1) + '" onclick="pageCompanyList(event)" class="companyListBtn">';
+				str += '<input type="button" id="companyPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="pageCompanyList(event)" class="companyListBtn">';
 			}
 			str += '</div>';
 			}

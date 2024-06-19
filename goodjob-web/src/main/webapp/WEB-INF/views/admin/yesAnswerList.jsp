@@ -50,10 +50,6 @@ main {
 #changePageInputs input[type=button]{
 	padding: 5px 7px;
 }
-
-#changePageInputs input[type=button]:nth{
-	padding: 5px 7px;
-}
 </style>
 </head>
 <body>
@@ -63,7 +59,7 @@ main {
 
 	<main>
 		
-		<div id="noAnswer">
+		<div id="yesAnswer">
 		
 		</div>
 		
@@ -79,15 +75,13 @@ main {
 			
 			
 			$.ajax({
-				url : "http://localhost:8888/api/qna/noanswer/list/1",
+				url : "http://localhost:8888/api/qna/answer/list/1",
 				method : "GET",
 				dataType : "json",
 				success : function(response){
 					
-					const totalItem = response[0].noAnswerTotal;
+					const totalItem = response[0].yesAnswerTotal;
 					let pages = 0;
-					
-					
 					
 					if(totalItem % 5 > 0){
 						pages = Math.ceil(totalItem / 5);
@@ -95,11 +89,12 @@ main {
 					if(totalItem % 5 === 0){
 						pages = totalItem / 5;
 					}
-
+					
+					
 					let str = '<div id="changePageInputs"><input type="button" value="답변안한문의(' + response[0].noAnswerTotal + ')" onclick="moveToNoAnswer()"> ' + 
 					
 				      '<input type="button" value="답변한문의(' + response[0].yesAnswerTotal + ')" onclick="moveToYesAnswer()"></div>';
-					
+				      
 					response.forEach(qna => {
 						 str += '<div class="item" id="item' + qna.cs_no + '"> ' + 
 							'<a href="#"> ' +
@@ -111,7 +106,7 @@ main {
 					}else{
 						str += '<div class="answer" style="color:blue"><b>답변 : </b>O</div></a> ';
 					}
-					str += '<input type="button" value="답변작성" onclick="answerToQna(event)" id="answer' + qna.cs_no + '"> ' +
+					str += '<input type="button" value="답변수정" onclick="answerToQna(event)" id="answer' + qna.cs_no + '"> ' +
 							'</div>';
 					});
 					
@@ -125,7 +120,7 @@ main {
 						
 					}
 					
-					$("#noAnswer").html(str);
+					$("#yesAnswer").html(str);
 				},
 				error : function(xhr, status, error){
 					console.log(error);
@@ -142,11 +137,10 @@ main {
 				
 				const response = JSON.parse(this.responseText);
 				
-				console.log(response);
-				
-				const totalItem = response[0].noAnswerTotal;
+				const totalItem = response[0].yesAnswerTotal;
 				let pages = 0;
 
+				 
 				if(totalItem % 5 > 0){
 					pages = Math.ceil(totalItem / 5);
 				}
@@ -154,11 +148,10 @@ main {
 					pages = totalItem / 5;
 				}
 
-
 				let str = '<div id="changePageInputs"><input type="button" value="답변안한문의(' + response[0].noAnswerTotal + ')" onclick="moveToNoAnswer()"> ' + 
 				
 			      '<input type="button" value="답변한문의(' + response[0].yesAnswerTotal + ')" onclick="moveToYesAnswer()"></div>';
-					      
+				
 				response.forEach(qna => {
 					 str += '<div class="item" id="item' + qna.cs_no + '"> ' + 
 						'<a href="#"> ' +
@@ -184,10 +177,10 @@ main {
 					
 				}
 				
-				$("#noAnswer").html(str);
+				$("#yesAnswer").html(str);
 				
 			}
-			xhr.open("GET", "http://localhost:8888/api/qna/noanswer/list/"+ page, true);
+			xhr.open("GET", "http://localhost:8888/api/qna/answer/list/"+ page, true);
 			xhr.send();
 		}
 		
