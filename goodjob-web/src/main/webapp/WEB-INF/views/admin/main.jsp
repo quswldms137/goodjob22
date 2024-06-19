@@ -107,19 +107,28 @@ main #container {
 .sidebar-box2 p:nth-child(2) a {
 	color: #FB8500 !important;
 }
-h3:nth-child(3){
+
+h3:nth-child(3) {
 	margin-top: 50px;
 }
-#monthlyUser{
-	width: 300px;
-	height: 300px;
+
+#dashboards {
+	margin: 20px 0; display : flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	display: flex;
+}
+
+#dashMonthlyUser {
+	width: 1100px;
+	margin-bottom: 50px;
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 <body>
-	<header> 
+	<header>
 		<%@ include file="../front/admin-header.jsp"%>
 	</header>
 	<main>
@@ -127,10 +136,20 @@ h3:nth-child(3){
 			<%@ include file="../front/admin-sidebar-all.jsp"%>
 		</div>
 		<div id="container">
-			<h3>월별 가입자 수</h3>
-			<canvas id="monthlyUser"></canvas>
-			<h3>후원자금 순위</h3>
-			<canvas id="sponsorshipChart"></canvas>
+			<div id="dashboards">
+				<div id="dashMonthlyUser">
+					<h3>월별 가입자 수</h3>
+					<canvas id="monthlyUser"></canvas>
+				</div>
+				<div>
+					<h3>후원자금 순위</h3>
+					<canvas id="sponsorshipChart"></canvas>
+				</div>
+				<div>
+					<h3>기업에서 선호하는 스킬</h3>
+					<canvas id="companySkill"></canvas>
+				</div>
+			</div>
 		</div>
 	</main>
 
@@ -138,112 +157,168 @@ h3:nth-child(3){
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			
-			$.ajax({
-				url : "http://localhost:8888/api/dashboard/user",
-				method : "GET",
-				dataType : "json",
-				success : function(response){
-					
-					const keys = Object.keys(response);
-					const values = Object.values(response);
-					
-					const monthNames = keys[0].substring(1, keys[0].length - 1).split(", ");
-					const count = values[0];
-					
-					const ctx = document.getElementById('monthlyUser');
-					 new Chart(ctx, {
-					    type: 'bar',
-					    data: {
-					      labels: monthNames,
-					      datasets: [{
-					        label: '월별 가입자수',
-					        data: count,
-					        borderWidth: 1
-					      }]
-					    },
-					    options: {
-					      scales: {
-					        y: {
-					          beginAtZero: true
-					        }
-					      }
-					    }
-					  });
-				},
-				error : function(xhr, status, error){
-					console.log(error);
-				}
-				
-				
-				
-			});
-			
-			$.ajax({
-				url : "http://localhost:8888/api/dashboard/money",
-				method : "GET",
-				dataType : "json",
-				success : function(response){
-					
-					const keys = Object.keys(response);
-					const values = Object.values(response);
-					
-					const companyNames = keys[0].substring(1, keys[0].length - 1).split(", ");
-					const money = values[0];
-					
-					const ctx = document.getElementById('sponsorshipChart');
-					 new Chart(ctx, {
-					    type: 'doughnut',
-					    data: {
-					      labels: companyNames,
-					      datasets: [{
-					        label: '월별 가입자수',
-					        data: money,
-					        borderWidth: 1
-					      }]
-					    },
-					    options: {
-					      scales: {
-					        y: {
-					          beginAtZero: true
-					        }
-					      }
-					    }
-					  });
-				},
-				error : function(xhr, status, error){
-					console.log(error);
-				}
-				
-				
-				
-			});
-			
-		});
-	
-	/*
-	const ctx = document.getElementById('myChart');
+		$(document)
+				.ready(
+						function() {
 
-	 new Chart(ctx, {
-	    type: 'bar',
-	    data: {
-	      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-	      datasets: [{
-	        label: '# of Votes',
-	        data: [12, 19, 3, 5, 2, 3],
-	        borderWidth: 1
-	      }]
-	    },
-	    options: {
-	      scales: {
-	        y: {
-	          beginAtZero: true
-	        }
-	      }
-	    }
-	  });
-	 */
+							$
+									.ajax({
+										url : "http://localhost:8888/api/dashboard/user",
+										method : "GET",
+										dataType : "json",
+										success : function(response) {
+
+											const keys = Object.keys(response);
+											const values = Object
+													.values(response);
+
+											const monthNames = keys[0]
+													.substring(1,
+															keys[0].length - 1)
+													.split(", ");
+											const count = values[0];
+
+											const ctx = document
+													.getElementById('monthlyUser');
+											new Chart(ctx, {
+												type : 'bar',
+												data : {
+													labels : monthNames,
+													datasets : [ {
+														label : '월별 가입자 수',
+														data : count,
+														borderWidth : 1
+													} ]
+												},
+												options : {
+													scales : {
+														y : {
+															beginAtZero : true
+														}
+													}
+												}
+											});
+										},
+										error : function(xhr, status, error) {
+											console.log(error);
+										}
+
+									});
+
+							$
+									.ajax({
+										url : "http://localhost:8888/api/dashboard/money",
+										method : "GET",
+										dataType : "json",
+										success : function(response) {
+
+											const keys = Object.keys(response);
+											const values = Object
+													.values(response);
+
+											const companyNames = keys[0]
+													.substring(1,
+															keys[0].length - 1)
+													.split(", ");
+											const money = values[0];
+
+											const ctx = document
+													.getElementById('sponsorshipChart');
+											new Chart(ctx, {
+												type : 'doughnut',
+												data : {
+													labels : companyNames,
+													datasets : [ {
+														label : '월별 가입자수',
+														data : money,
+														borderWidth : 1
+													} ]
+												},
+												options : {
+													scales : {
+														y : {
+															beginAtZero : true
+														}
+													}
+												}
+											});
+										},
+										error : function(xhr, status, error) {
+											console.log(error);
+										}
+
+									});
+
+							$
+									.ajax({
+										url : "http://localhost:8888/api/dashboard/skill",
+										method : "GET",
+										dataType : "json",
+										success : function(response) {
+
+											const keys = Object.keys(response);
+											const values = Object
+													.values(response);
+
+											const skillNames = keys[0]
+													.substring(1,
+															keys[0].length - 1)
+													.split(", ");
+											const count = values[0];
+
+											const ctx = document
+													.getElementById('companySkill');
+											new Chart(
+													ctx,
+													{
+														type : 'doughnut',
+														data : {
+															labels : skillNames,
+															datasets : [ {
+																label : '기업이 선호하는 스킬 순위',
+																data : count,
+																borderWidth : 1
+															} ]
+														},
+														options : {
+															scales : {
+																y : {
+																	beginAtZero : true
+																}
+															}
+														}
+													});
+										},
+										error : function(xhr, status, error) {
+											console.log(error);
+										}
+
+									});
+
+						});
+
+		/*
+		const ctx = document.getElementById('myChart');
+
+		 new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+		      datasets: [{
+		        label: '# of Votes',
+		        data: [12, 19, 3, 5, 2, 3],
+		        borderWidth: 1
+		      }]
+		    },
+		    options: {
+		      scales: {
+		        y: {
+		          beginAtZero: true
+		        }
+		      }
+		    }
+		  });
+		 */
 	</script>
 </body>
 </html>
