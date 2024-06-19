@@ -39,4 +39,6 @@ public class CompanyDto_JYC {
 	private String url;
 	private int total;
 	
+	private Long money;
+	
 }

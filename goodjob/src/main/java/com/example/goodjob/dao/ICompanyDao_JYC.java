@@ -16,4 +16,5 @@ public interface ICompanyDao_JYC {
 	public List<CompanyDto_JYC> getCompanyDtoList(@Param("start") int start);
 	public int count();
 	public int deleteByUsername(@Param("username") String username);
+	public List<CompanyDto_JYC> getCompanyMoney();
 }

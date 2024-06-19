@@ -41,6 +41,8 @@ header {
 }
 
 #head {
+	display: flex;
+	justify-content: space-evenly;
 	padding: 15px 0 10px;
 	max-width: 1100px;
 	height: 100%;
@@ -135,6 +137,9 @@ header {
 	border-radius: 8px;
 	font-weight:400;
 }
+#adminLogin{
+	color: white;
+}
 </style>
 </head>
 <body>
@@ -145,27 +150,6 @@ header {
 				<a href="/"><img src="/resource/img/logo.png"></a>
 			</div>
 			<div class="head-bottom">
-				<div class="nav">
-					<ul>
-						<li><a href="#">채용정보</a></li>
-						<li><a href="#">기업정보</a></li>
-						<li><a href="#">커뮤니티</a></li>
-						<li><a href="#">스킬매칭</a></li>
-						<li><a href="#">이벤트</a></li>
-						<li><a href="#">공지사항</a></li>
-					</ul>
-				</div>
-				<div class="search-bar-area">
-					<div class="search-bar">
-						<form action="" method="">
-							<input type="text" name="head-search" id="head-search"> <label
-								for="search-submit"> <input type="submit" value=""
-								id="search-submit"> <img
-								src="/resource/img/search-icon.png">
-							</label>
-						</form>
-					</div>
-				</div>
 				<div class="user-area" id="notLogin" style="display: block;">
 				<ul>
 					<li><a href="/common99/login">로그인</a></li>
@@ -178,6 +162,7 @@ header {
 					<div></div>
 				</div>
 			</div>
+			<span><a href="/" id="adminLogin">.</a></span>
 		</div>
 	</header>
 <script>

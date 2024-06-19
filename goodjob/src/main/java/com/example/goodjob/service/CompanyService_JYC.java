@@ -1,6 +1,9 @@
 package com.example.goodjob.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,7 @@ import com.example.goodjob.dao.IMemRecruitDao_JYC;
 import com.example.goodjob.dao.IRecruitDao_JYC;
 import com.example.goodjob.dao.IScrapRecruitDao;
 import com.example.goodjob.dao.IUserDao;
+import com.example.goodjob.dto.CompanyDto;
 import com.example.goodjob.dto.CompanyDto_JYC;
 
 @Service
@@ -111,5 +115,32 @@ public class CompanyService_JYC {
 		
 		
 		return "회원 삭제 실패.";
+	}
+	
+	public Map<List<String>, List<Long>> getCompanyMoney() {
+		
+		List<CompanyDto_JYC> companyDtoList =  iCompanyDao.getCompanyMoney();
+		
+		Map<List<String>, List<Long>> map = new HashMap<>();
+		
+		List<String> companyNames = new ArrayList<>();
+		List<Long> money = new ArrayList<>();
+		
+		for(int i = 0; i < 4; i++) {
+			companyNames.add(companyDtoList.get(i).getCom_name());
+			money.add(companyDtoList.get(i).getMoney());
+		}
+		
+		Long totalMoney = 0L;
+		
+		for(int i = 4; i < companyDtoList.size(); i++) {
+			totalMoney += companyDtoList.get(i).getMoney();
+		}
+		
+		money.add(totalMoney);
+		companyNames.add("기타");
+		
+		map.put(companyNames, money);
+		return map;
 	}
 }
