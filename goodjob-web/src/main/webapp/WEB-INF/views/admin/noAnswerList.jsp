@@ -51,8 +51,9 @@ main {
 	padding: 5px 7px;
 }
 
-#changePageInputs input[type=button]:nth{
-	padding: 5px 7px;
+#changePageInputs input[type=button]:nth-child(1){
+	background: #FB8500 !important;
+	border: 1px solid black;
 }
 </style>
 </head>

@@ -45,10 +45,15 @@ main {
 }
 #changePageInputs{
 	text-align: center;
-	margin: 10px;
+	margin: 10px 0;
 }
 #changePageInputs input[type=button]{
 	padding: 5px 7px;
+}
+
+#changePageInputs input[type=button]:nth-child(2){
+	background: #FB8500 !important;
+	border: 1px solid black;
 }
 </style>
 </head>
