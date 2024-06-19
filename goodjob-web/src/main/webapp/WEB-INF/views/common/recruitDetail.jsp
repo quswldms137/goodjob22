@@ -160,20 +160,11 @@ main {
 		$(document).ready(function() {
 			// 페이지 로드 시 URL에서 mem_no와 resume_no 가져오기
 			const urlParams = new URLSearchParams(window.location.search);
-			let recruit_no = urlParams.get('recruit_no');
-			let com_no = urlParams.get('com_no');
-			let com_detail_no = urlParams.get('com_detail_no');
+			let recruit_no = "${recruit_no}";
+			let com_no = "${com_no}";
+			let com_detail_no = "${com_detail_no}";
 
 			// recruit_no와 com_no가 없으면 임의의 값을 설정
-			if (!recruit_no) {
-				recruit_no = 1;
-			}
-			if (!com_no) {
-				com_no = 1;
-			}
-			if (!com_detail_no) {
-				com_detail_no = 1;
-			}
 
 			// resume_no를 이용하여 상세 정보 가져오기
 			function getRecruitDetail(recruit_no, com_no, com_detail_no) {
@@ -233,7 +224,6 @@ main {
 
 			// resume_no가 있으면 상세 정보 요청
 			if (recruit_no && com_no && com_detail_no) {
-				let recruit_no = 1;
 				let com_no = 1;
 				let com_detail_no = 1;
 				getRecruitDetail(recruit_no, com_no, com_detail_no);

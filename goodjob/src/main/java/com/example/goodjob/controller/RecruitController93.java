@@ -40,8 +40,7 @@ public class RecruitController93 {
 	
 	@GetMapping("/detail")
 	public RecruitDetailDto recruitDetail(@RequestParam("recruit_no") Long recruit_no,
-			@RequestParam("com_no") Long com_no,
-			@RequestParam("com_detail_no") Long com_detail_no) {
+			@RequestParam("com_no") Long com_no, @RequestParam("com_detail_no") Long com_detail_no) {
 		
 		RecruitDto recruitDto = recruitService.recruitDetailService(recruit_no, com_no);
 		CompanyDto companyDto = companyDetailService.getCompanyService(com_no);
