@@ -16,5 +16,10 @@ public interface IRecruitListDao94 {
 	//전체채용공고리스트
 	public List<RecruitAllDto94> getAllRecruitDto();
 	
+	//채용공고리스트페이지 - 필터(직무/지역/기업형태)
+	public List<RecruitAllDto94> getFilterRecruitList(@Param("sectors") String sectors,
+													  @Param("location") String location,
+													  @Param("com_type") String com_type);
+	
 }
 

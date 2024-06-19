@@ -28,5 +28,6 @@ public class CompanyDetailDto94 {
 	private String com_ceo; 
 	private String com_addr;  
 	
+	private String location;
 	
 }
