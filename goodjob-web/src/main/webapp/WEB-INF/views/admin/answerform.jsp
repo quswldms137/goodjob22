@@ -8,6 +8,8 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js"
 	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
 	crossorigin="anonymous"></script>
+<link rel="stylesheet" as="style" crossorigin
+	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -15,28 +17,68 @@ main {
 	width: 1100px;
 	margin: 80px auto;
 	min-height: 700px;
-	border:1px solid #eee;
 }
+
 #detailForm{
-	border: 1px solid #eee;
-	
+	width:800px;
+	margin:0 auto;
+	border-top:2px solid #333;
 }
-#detailForm p{
-	margin: 20px;
-	text-align: center;
+
+#detail{
+	border:1px solid #eee;
+	padding:20px;
+	padding-bottom:50px;
+	box-sizing:border-box;
 }
-textarea{
-	margin: 0 auto;
+#detail .category{
+	display:inline-block;
+	font-size:10px;
+	padding:5px 10px;
+	border:1px solid #FB8500;
+	color:#FB8500;
+	margin-bottom:10px;
 }
+#detail h1{
+	font-size:24px;
+}
+#detail .answer-writer-info{
+	padding:15px 0;
+	border-bottom:1px solid #eee;
+	margin-bottom:20px;
+}
+#detail .answer-writer-info span{
+	font-size:14px;
+	margin-right:20px;
+}
+#detail .answer-writer-info span:nth-child(2){
+	color:#999;
+}
+
+hr{
+	margin:40px 0 15px;
+}
+
 #inputs{
-	display: flex;
-	align-items: center;
-	width: fit-content;
-	margin: 0 auto;
+	width:800px;
+	text-align:center;
 }
-#inputs input[type=button]{
-	padding: 3px 7px;
-	margin: 0 10px;
+#inputs textarea{
+	width:100%;
+	height:100px;
+	border:1px solid #ccc;
+	padding:5px;
+	resize: none;
+	box-sizing:border-box;
+}
+#inputs input[type="button"]{
+	color:#fff;
+	background:#FB8500;
+	border:1px solid #FB8500;
+	padding:15px 30px;
+	font-family: "Pretendard Variable", Pretendard;
+	font-size:16px;
+	margin-top:20px;
 }
 </style>
 </head>
@@ -69,14 +111,16 @@ textarea{
 					
 					let str = '';
 						str += '<div id="detail"> ' + 
-							   '<p><b>작성자 : </b>' + response.username + ' <span></p> ' +
-							   '<p><b>작성날짜 : </b>' + response.reg_date + '</span></p> ' + 
-							   '<p><b>제목 : </b>' + response.title + '<span></p> ' +
-							   '<p><b>카테고리 : </b>' + response.category + '</span></p> ' + 
-							   '<p><b>내용 : </b>' + response.content + '</p> ' + 
-							   '<p></p> ' + 
+							   '<p class="category">' + response.category + '</p>' +
+							   '<h1 class="answer-title">' + response.title + '</h1> ' +
+							   '<div class="answer-writer-info">' +
+							   '<span>' + response.username + '</span>' +
+							   '<span>' + response.reg_date + '</span>' + 
+							   '</div>' +
+							   '<div class="answer-content">' + response.content + '</div>' + 
 							   '</div> ' + 
-							   '<div id="inputs"><textarea rows="20" cols="50" placeholder="답변을 입력하세요.">' + response.answer + '</textarea> ';
+							   '<hr>' +
+							   '<div id="inputs"><textarea placeholder="답변을 입력하세요.">' + response.answer + '</textarea> ';
 							   if(response.answer === null){
 									str +=	'<input type="button" value="답변작성" onclick="registAnswer(event)" id="answer' + response.cs_no + '"></div>';
 							   }else {
