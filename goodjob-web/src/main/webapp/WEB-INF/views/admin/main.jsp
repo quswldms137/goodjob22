@@ -102,24 +102,94 @@ main #container {
 
 
 </style>
+		<%@ include file="../front/admin-header.jsp"%>
 </head>
 <body>
 	<header>
-		<%@ include file="../front/admin-header.jsp"%>
 	</header>
 	<main>
 		<div class="sidebar-container">
 			<%@ include file="../front/admin-sidebar-all.jsp"%>
 		</div>
-		<div id="container">
-		
-		</div>
+		 <div class="container">
+        <h1>Monthly Dashboard</h1>
+        <canvas id="userChart"></canvas>
+        <canvas id="sponsorshipChart"></canvas>
+    </div>
 	</main>
 
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
+	<script type="text/javascript">
+	const userChart = document.getElementById('userChart').getContext('2d');
+	const sponsorshipChart = document.getElementById('sponsorshipChart').getContext('2d');
+
+	const userData = {
+	    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	    datasets: [
+	        {
+	            label: 'Individual Users',
+	            data: [120, 150, 180, 200, 230, 250, 300, 320, 310, 400, 420, 500],
+	            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+	            borderColor: 'rgba(75, 192, 192, 1)',
+	            borderWidth: 1
+	        },
+	        {
+	            label: 'Corporate Users',
+	            data: [30, 50, 70, 80, 90, 100, 120, 140, 150, 160, 180, 200],
+	            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+	            borderColor: 'rgba(153, 102, 255, 1)',
+	            borderWidth: 1
+	        }
+	    ]
+	};
+
+	const sponsorshipData = {
+	    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	    datasets: [
+	        {
+	            label: 'Corporate Sponsorship',
+	            data: [1000, 2000, 1500, 2500, 3000, 3500, 4000, 4500, 5000, 5500, 6000, 6500],
+	            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+	            borderColor: 'rgba(255, 159, 64, 1)',
+	            borderWidth: 1
+	        }
+	    ]
+	};
+
+	const userChartConfig = {
+	    type: 'line',
+	    data: userData,
+	    options: {
+	        responsive: true,
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }
+	        }
+	    }
+	};
+
+	const sponsorshipChartConfig = {
+	    type: 'bar',
+	    data: sponsorshipData,
+	    options: {
+	        responsive: true,
+	        scales: {
+	            y: {
+	                beginAtZero: true
+	            }
+	        }
+	    }
+	};
+
+	Chart chart = new Chart(userChart, userChartConfig);
+	Chart chart2 = new Chart(sponsorshipChart, sponsorshipChartConfig);
+	</script>
 </body>
 </html>
+
+
 
 
