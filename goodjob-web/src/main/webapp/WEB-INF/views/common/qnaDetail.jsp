@@ -51,7 +51,9 @@ main #container {
 	<a href="/qna99/qnaWrite">수정하기</a>
 	</div>
 	<!-- 문의 상세내용 -->
-	
+	<div id="answer" style="display:none;">
+		<input type="text" name="answer"><br>
+	</div>
 
 	</main>
 	<footer>
@@ -78,6 +80,10 @@ main #container {
 	$(document).ready(function(){
 		const urlParams = new URLSearchParams(window.location.search);
 		let cs_no = urlParams.get('cs_no');
+		const username = localStorage.getItem("username");
+		console.log(username);
+		const role = localStorage.getItem("role");
+		console.log(role);
 		
 		if(cs_no){
 			$('a[href="/qna99/qnaWrite"]').attr('href', function(){

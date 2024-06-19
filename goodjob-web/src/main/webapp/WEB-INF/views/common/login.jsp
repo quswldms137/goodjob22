@@ -69,6 +69,7 @@ main {
 
 		    const username2 = document.querySelector("Input[name='username1']");
 		    const password2 = document.querySelector("Input[name='password1']");
+		    
 		    var memberForm = document.getElementById('memberForm');
 			var companyForm = document.getElementById('companyForm');
 		    
@@ -84,7 +85,7 @@ main {
 			    	password1.focus();
 			    	return ;
 			    } 
-		    } else if(formActice === 'company'){
+		    } else if(formActive === 'company'){
 		    	if(username2.value == ''){
 			    	alert("아이디를 입력해주세요.");
 			    	username2.focus();
