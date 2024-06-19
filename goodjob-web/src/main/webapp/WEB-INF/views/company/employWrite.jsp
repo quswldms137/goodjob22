@@ -50,12 +50,18 @@ main #container {
 	margin: 0;
 	position: absolute;
 	background-color: white;
-	border: 1px solid #ccc;
 	width: 200px; /* Adjust based on your needs */
 }
 #searchResults li {
 	padding: 5px;
 	cursor: pointer;
+	border-right:1px solid #dadada;
+	border-left:1px solid #dadada;
+}
+#searchResults li:last-child{
+	border-left:1px solid #dadada;
+	border-right:1px solid #dadada;
+	border-bottom:1px solid #dadada;
 }
 #searchResults li:hover {
 	background-color: #f0f0f0;
@@ -68,12 +74,14 @@ main #container {
 	align-content: center;
 	width: 95%;
 	height: 45px;
-	font-size: 19px;
+	font-size: 17px;
 	padding-left: 10px;
+	color:#333;
 }
 .section-title {
 	font-size: 20px;
 	margin-top: 20px;
+	margin-bottom:30px;
 	font-weight: bold;
 }
 .form-group {
@@ -87,18 +95,21 @@ main #container {
 .form-group input[type="date"],
 .form-group select {
 	width: 100%;
-	padding: 10px;
+	height:45px;
+	border:1px solid #dadada;
+	padding-left:5px;
 	box-sizing: border-box;
 }
 .btn {
-	background-color: orange;
-	border-color: white;
-	border-radius: 10px;
+	background-color: #FB8500;
+	border:0;
+	color:#fff;
 	width: 100px;
 	height: 40px;
 	transition: background-color 0.2s ease;
 	padding: auto;
 	margin-left: 30px;
+	cursor:pointer;
 }
 .btn:hover {
 	background-color: skyblue;
@@ -213,7 +224,7 @@ main #container {
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
 	<script>
-		
+	
 		// 미리 변수 생성후 페이지 로드후 ajax 통신해서 com_no를 변수에 저장
 		let com_no1;
 		
