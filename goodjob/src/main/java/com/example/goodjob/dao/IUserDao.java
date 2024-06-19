@@ -1,5 +1,7 @@
 package com.example.goodjob.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +15,5 @@ public interface IUserDao {
 	public int update(@Param("memberDto") MemberDto memberDto);
 	public int deleteUser(@Param("username") String username);
 	public int checkId(@Param("username") String username);
+	public List<UserDto> getUserList();
 }
