@@ -23,8 +23,6 @@ main {
 main #container {
 	width: 900px;
 	min-height: 700px;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
 }
 #detailForm{
 	width:800px;
