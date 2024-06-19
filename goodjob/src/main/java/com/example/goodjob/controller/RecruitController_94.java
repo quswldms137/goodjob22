@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dao.IRecruitListDao94;
+import com.example.goodjob.dto.CompanyDetailDto94;
 import com.example.goodjob.dto.RecruitAllDto94;
 import com.example.goodjob.dto.RecruitDto;
 
@@ -41,5 +42,12 @@ public class RecruitController_94 {
 													  @RequestParam(value = "com_type", required = false) String com_type){
 		System.out.println("필터채용공고리스트:" + recuListDao.getFilterRecruitList(sectors, location, com_type));
 		return recuListDao.getFilterRecruitList(sectors, location, com_type);
+	}
+	
+	//채용공고 검색창 
+	@GetMapping("/searchRecruit")
+	public List<RecruitAllDto94> getSearchRecruit(@RequestParam("query") String searchQuery) {
+		System.out.println(recuListDao.getSearchRecruit(searchQuery));
+		return recuListDao.getSearchRecruit(searchQuery);
 	}
 }
