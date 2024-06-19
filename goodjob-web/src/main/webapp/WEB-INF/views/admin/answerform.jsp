@@ -16,9 +16,16 @@
 main {
 	width: 1100px;
 	margin: 80px auto;
-	min-height: 700px;
+	display: flex;
+	justify-content: space-between;
 }
 
+main #container {
+	width: 900px;
+	min-height: 700px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
 #detailForm{
 	width:800px;
 	margin:0 auto;
@@ -84,15 +91,16 @@ hr{
 </head>
 <body>
 	<header>
-		<%@ include file="../front/header.jsp"%>
+		<%@ include file="../front/admin-header.jsp"%>
 	</header>
-
 	<main>
-		<div id="detailForm">
-		
+		<div class="sidebar-container">
+			<%@ include file="../front/admin-sidebar-all.jsp"%>
+		</div>
+		<div id="container">
+			<div id="detailForm"></div>
 		</div>
 	</main>
-
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
