@@ -61,8 +61,6 @@ public class QnaController {
 		
 		List<ServiceQuestionDto> serviceQuestionDtoList = serviceQuestionService.getNoAnswerList(page);
 		
-		System.out.println("Result : " + serviceQuestionDtoList);
-		
 		if(serviceQuestionDtoList == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(null);
@@ -76,8 +74,6 @@ public class QnaController {
 	public ResponseEntity<List<ServiceQuestionDto>> getAnswerList(@PathVariable("page") int page){
 		
 		List<ServiceQuestionDto> serviceQuestionDtoList = serviceQuestionService.getAnswerList(page);
-		
-		System.out.println("Result : " + serviceQuestionDtoList);
 		
 		if(serviceQuestionDtoList == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -115,7 +111,6 @@ public class QnaController {
 	public ResponseEntity<String> updateAnswer(@RequestBody ServiceQuestionDto serviceQuestionDto){
 
 		String result = serviceQuestionService.updateAnswer(serviceQuestionDto.getCs_no(), serviceQuestionDto.getAnswer());
-		
 		
 		if(!result.equals("답변이 성공적으로 수정되었습니다.")) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
