@@ -147,8 +147,8 @@ header {
 			<div class="head-bottom">
 				<div class="nav">
 					<ul>
-						<li><a href="#">채용정보</a></li>
-						<li><a href="#">기업정보</a></li>
+						<li><a href="/company94/employList">채용정보</a></li>
+						<li><a href="/company94/companyList">기업정보</a></li>
 						<li><a href="#">커뮤니티</a></li>
 						<li><a href="#">스킬매칭</a></li>
 						<li><a href="#">이벤트</a></li>
