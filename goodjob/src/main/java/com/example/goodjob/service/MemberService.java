@@ -131,7 +131,7 @@ public class MemberService {
 	
 	public List<MemberDto> getMemberList(int page) {
 		
-		List<MemberDto> memberList =  iMemberDao.getMemberDtoList((page - 1) * 4);
+		List<MemberDto> memberList =  iMemberDao.getMemberDtoList((page - 1) * 5);
 		
 		
 		int count = iMemberDao.count();

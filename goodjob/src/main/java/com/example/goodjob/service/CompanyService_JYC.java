@@ -49,7 +49,7 @@ public class CompanyService_JYC {
 	
 	public List<CompanyDto_JYC> getCompanyList(int page){
 		
-		List<CompanyDto_JYC> companyList = iCompanyDao.getCompanyDtoList((page - 1) * 4);
+		List<CompanyDto_JYC> companyList = iCompanyDao.getCompanyDtoList((page - 1) * 5);
 		int count = iCompanyDao.count();
 		companyList.get(0).setTotal(count);
 		

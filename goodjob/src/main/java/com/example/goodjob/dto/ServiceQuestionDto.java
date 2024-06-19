@@ -24,4 +24,6 @@ public class ServiceQuestionDto {
 	private String answer;
 
 	private int total;
+	private int yesAnswerTotal;
+	private int noAnswerTotal;
 }

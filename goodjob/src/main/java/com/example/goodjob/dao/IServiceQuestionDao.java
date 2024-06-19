@@ -17,7 +17,9 @@ public interface IServiceQuestionDao {
 	public int deleteQna(@Param("cs_no") Long cs_no);
 	public int deleteByMem_no(@Param("mem_no") Long mem_no);
 	public List<ServiceQuestionDto> getNoAnswerDtoList(@Param("start") int start);
-	public int count();
+	public List<ServiceQuestionDto> getYesAnswerDtoList(@Param("start") int start);
+	public int countNoAnswer();
+	public int countYesAnswer();
 	public int writeAnswer(@Param("cs_no") Long cs_no, @Param("answer") String answer);
 
 }
