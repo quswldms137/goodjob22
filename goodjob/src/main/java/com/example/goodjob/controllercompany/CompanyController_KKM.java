@@ -3,9 +3,11 @@ package com.example.goodjob.controllercompany;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.goodjob.dao.ICompany97;
+import com.example.goodjob.dao.IRecruitListDao94;
 import com.example.goodjob.dto.CompanyDetailDto97;
 import com.example.goodjob.dto.MemRecruitDto;
+import com.example.goodjob.dto.MemRecruitJoinDto;
 import com.example.goodjob.dto.RecruitDto;
 import com.example.goodjob.service.CompanyService97;
 import com.example.goodjob.service.QnaService99;
@@ -156,18 +160,22 @@ public class CompanyController_KKM {
 
 		    return ResponseEntity.ok("기업 정보 업데이트 성공");
 		}
-	 /*
+	 
 	 //지원받은 이력서 목록페이지(조회만 하면된다)
-	 @GetMapping("/receiveResume")
-	 public MemRecruitDto getreceiveResume(@RequestParam("recruit_no") Long recruit_no) {
+	 @GetMapping("/receiveResume/{com_no}")
+	 public ResponseEntity<List<MemRecruitJoinDto>> getreceiveResume(@PathVariable("com_no") Long com_no) {
 		 
-		 RecruitDto memrecruit = icompany.findByRecruit_no(recruit_no);
-		 List<MemRecruitDto> list = icompany.findrecruit_no(recruit_no);
-		 memrecruit.setRecruit_no(recruit_no);
+		 List<MemRecruitJoinDto> resumeList = comService.getReceiveResumeList(com_no);
 		 
-		 return memrecruit;
+		 if(resumeList == null) {
+			 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					 .body(null);
+		 }
+		 
+		 return ResponseEntity.status(HttpStatus.OK)
+				 .body(resumeList);
 	 }
-	 */
+	 
 	 //지원자 및 관심 구직자 이력서 상세보기 페이지(이것도 조회인데 합격 불합격 여부는 수정을 통해 이루어진다.)
 	 
 	 
