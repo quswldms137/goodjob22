@@ -14,7 +14,7 @@ public interface IMemberDao {
 	public Long getMem_no(@Param("username") String username);
 	public void update(@Param("memberDto") MemberDto memberDto);
 	public void deleteInformation(@Param("mem_no") Long mem_no);
-	
+	// mem_no 로 member 테이블을 조회해서 mem_name 을 얻는 메서드
 	public String findMem_nameWithMem_no(@Param("mem_no") Long mem_no);
 	
 	public List<MemberDto> getMemberDtoList(@Param("start") int start);
