@@ -35,4 +35,29 @@
 	JOIN
     	company c ON r.com_no = c.com_no
   </select>
+  
+   <select id="getFilterRecruitList" resultType="com.example.goodjob.dto.RecruitAllDto94">
+    SELECT
+    	r.*,  
+    	cd.*, 
+    	c.*   
+	FROM
+    	recruit r
+	JOIN
+    	company_detail cd ON r.com_no = cd.com_no
+	JOIN
+    	company c ON r.com_no = c.com_no
+    WHERE 
+    1=1
+            <if test="sectors != null and sectors != ''">
+                AND cd.sectors = #{sectors}
+            </if>
+            <if test="location != null and location != ''">
+                AND r.location = #{location}
+            </if>
+            <if test="com_type != null and com_type != ''">
+                AND c.com_type = #{com_type}
+            </if>
+  </select>
+  
 </mapper>
