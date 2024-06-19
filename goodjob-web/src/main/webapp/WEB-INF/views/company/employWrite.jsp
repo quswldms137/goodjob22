@@ -28,38 +28,48 @@ main #container {
 }
 
 .skill-container {
-            margin-top: 5px;
-        }
-        .skill {
-            display: inline-block;
-            margin: 5px;
-            padding: 5px 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .remove-skill {
-            margin-left: 10px;
-            color: red;
-            cursor: pointer;
-        }
-        #searchResults {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            position: absolute;
-            background-color: white;
-            border: 1px solid #ccc;
-            width: 200px; /* Adjust based on your needs */
-        }
-        #searchResults li {
-            padding: 5px;
-            cursor: pointer;
-        }
-        #searchResults li:hover {
-            background-color: #f0f0f0;
-        }
-
+	margin-top: 5px;
+}
+.skill {
+	display: inline-block;
+	margin: 5px;
+	padding: 5px 10px;
+	background-color: #f0f0f0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+.remove-skill {
+	margin-left: 10px;
+	color: red;
+	cursor: pointer;
+}
+#searchResults {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	position: absolute;
+	background-color: white;
+	border: 1px solid #ccc;
+	width: 200px; /* Adjust based on your needs */
+}
+#searchResults li {
+	padding: 5px;
+	cursor: pointer;
+}
+#searchResults li:hover {
+	background-color: #f0f0f0;
+}
+.h1 {
+	text-align: center;
+	margin: 75px 0 100px;
+}
+.title input[type="text"] {
+	align-content: center;
+	width: 85%;
+	height: 45px;
+	font-size: 19px;
+	padding-left: 10px;
+}
 </style>
 </head>
 <body>
@@ -71,12 +81,7 @@ main #container {
 			<%@ include file="../front/company-sidebar-all.jsp"%>
 		</div>
 		<div id="container">
-			<c:if test="${recruit.recruit_no == null}">
-				<h2 class="h2">채용공고 작성</h2>
-			</c:if>
-			<c:if test="${recruit.recruit_no != null}">
-				<h2 class="h2">채용공고 수정</h2>
-			</c:if>
+			<h1 class="h1">채용공고 작성</h1>
 			<form name="frm">
 				<div class="title">
 					<input type="hidden" name="recruit_no" value="${recruit_no }">
