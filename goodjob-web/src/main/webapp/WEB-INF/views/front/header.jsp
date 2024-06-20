@@ -199,7 +199,7 @@ window.onload = function(){
 		if(role === 'ROLE_COMPANY'){
 			parentLink.href = "/company";
 		} else{
-			parentLink.href = "/resume/resumeManager";
+			parentLink.href = "/resume/resumeManage";
 		}
 	} 
 	
