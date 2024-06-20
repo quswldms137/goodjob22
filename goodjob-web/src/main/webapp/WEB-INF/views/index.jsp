@@ -221,6 +221,8 @@ label:hover {
 				dataType : "json",
 				success : function(response) {
 					
+					console.log(response);
+					
 					let str = '';
 					if(response.length > 0){
 						
@@ -235,7 +237,7 @@ label:hover {
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						str += '<div class="skill"> ' + 
 						'<a href="/employ/detail/' + response[i].recruit_no + '/' + response[i].com_no + '/' + response[i].com_detail_no + '" >' +
-						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/coupang.jpg"></div>' +
+						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/' + response[i].img_url + '"></div>' +
 						'<p>' + response[i].com_name + '</p> ' +
 						'<p><b>' + response[i].title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
@@ -265,7 +267,6 @@ label:hover {
 				success : function(response){
 
 					let str = '';
-					console.log(response);
 					
 					response.forEach(item => {
 						
@@ -278,7 +279,7 @@ label:hover {
 						
 						str += '<div class="vip"> ' + 
 						'<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" >' +
-						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/coupang.jpg"></div>' +
+						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/' + item.img_url + '"></div>' +
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
@@ -300,7 +301,6 @@ label:hover {
 				dataType : "json",
 				success : function(response){
 					let str = '';
-
 					const totalPage = (response.length)
 					response.forEach(item =>{
 						
@@ -312,7 +312,7 @@ label:hover {
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						str += '<div class="all"> ' + 
 						'<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" ><div> ' +
-						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/coupang.jpg"></div>' +
+						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/' + item.img_url + '"></div>' +
 						'</div> ' + 
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
@@ -339,7 +339,6 @@ label:hover {
 			const username = localStorage.getItem("username");
 			
 			recruit_no = event.target.className.split(" ")[1].substring(5);
-			
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function(){
 				

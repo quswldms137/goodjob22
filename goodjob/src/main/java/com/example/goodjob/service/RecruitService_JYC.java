@@ -39,6 +39,7 @@ public class RecruitService_JYC {
 		vipList.forEach(vip -> {
 			vip.setCom_name(iCompanyDao.getCom_name(vip.getCom_no()));
 			vip.setCom_detail_no(iCompanyDetailDao.getCom_detail_no(vip.getCom_no()));
+			vip.setImg_url(iCompanyDetailDao.getImg_url(vip.getCom_no()));
 		});
 		
 		return vipList;
@@ -52,6 +53,7 @@ public class RecruitService_JYC {
 		result.forEach(item -> {
 			item.setCom_name(iCompanyDao.getCom_name(item.getCom_no()));
 			item.setCom_detail_no(iCompanyDetailDao.getCom_detail_no(item.getCom_no()));
+			item.setImg_url(iCompanyDetailDao.getImg_url(item.getCom_no()));
 		});
 
 		return result;

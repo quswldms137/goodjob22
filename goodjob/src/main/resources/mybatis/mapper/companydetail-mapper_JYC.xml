@@ -9,6 +9,9 @@
 	<select id="getCom_detail_no">
 		SELECT com_detail_no FROM company_detail WHERE com_no = #{com_no};
 	</select>
+	<select id="getImg_url">
+		SELECT img_url FROM company_detail WHERE com_no = #{com_no};
+	</select>
 	<delete id="deleteByCom_no">
 		DELETE FROM company_detail WHERE com_no = #{com_no};
 	</delete>

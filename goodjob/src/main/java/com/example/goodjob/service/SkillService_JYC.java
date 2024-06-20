@@ -70,7 +70,6 @@ public class SkillService_JYC {
 				mySkillName.forEach(skillName -> {
 					if (skillName.equals(cskill.getSkill_name())) {
 						recruit_noList.add(cskill.getRecruit_no());
-						System.out.println(cskill);
 					}
 				});
 
@@ -86,6 +85,7 @@ public class SkillService_JYC {
 		recruitDtoList.forEach(recruitDto ->{
 			recruitDto.setCom_name(iCompanyDao.getCom_name(recruitDto.getCom_no()));
 			recruitDto.setCom_detail_no(iCompanyDetailDao.getCom_detail_no(recruitDto.getCom_no()));
+			recruitDto.setImg_url(iCompanyDetailDao.getImg_url(recruitDto.getCom_no()));
 		});
 		
 		return recruitDtoList;
