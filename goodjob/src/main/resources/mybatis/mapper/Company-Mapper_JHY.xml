@@ -52,7 +52,13 @@
 	
 	<!-- 로그인시 저장된 회사번호로 채용공고 조회 -->
 	<select id="findRecruitList">
-		select * from recruit where com_no = #{com_no}
+		SELECT r.title, r.career, r.education, r.location, 
+		r.FIELD, r.RANK, r.pay, r.deadline_date, 
+		r.recruit_no, r.com_no, cd.com_detail_no 
+		FROM recruit r
+		LEFT JOIN company_detail cd
+		ON r.com_no = cd.com_no 
+		WHERE r.com_no = #{com_no}
 	</select>
 	
 	

@@ -32,4 +32,5 @@ public class RecruitDto {
 	private String p_number;
 	private String recruit_intro;
 	private List<String> skill;
+	private Long com_detail_no;
 }
