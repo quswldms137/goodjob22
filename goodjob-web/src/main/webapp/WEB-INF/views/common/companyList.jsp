@@ -31,7 +31,7 @@ main {
 	padding: 10px;
 	font-size: 16px;
 	width: 115px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	border-radius: 5px
 }
 .search-container {
@@ -44,7 +44,7 @@ main {
 	padding: 10px;
 	font-size: 16px;
 	width: 200px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	border-radius: 5px;
 }
 
@@ -66,12 +66,14 @@ main {
 }
 .company-info {
     border: 1px solid #eee;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.12); /* 우하단에 그림자 추가 */
     width: 1100px;
     height: auto;
     padding: 10px;
     box-sizing: border-box;
     display: flex;
-    margin-top: 12px;
+    margin-top: 13px;
+    margin-bottom: 20px;
     align-items: center;
     justify-content: flex-start;
 }
