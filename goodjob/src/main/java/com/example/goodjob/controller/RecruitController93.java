@@ -16,10 +16,12 @@ import com.example.goodjob.dto.CompanyDto;
 import com.example.goodjob.dto.MemRecruitDto;
 import com.example.goodjob.dto.RecruitDetailDto;
 import com.example.goodjob.dto.RecruitDto;
+import com.example.goodjob.dto.ScrapRecruitDto;
 import com.example.goodjob.service.MemRecruitService;
 import com.example.goodjob.service.QnaService99;
 import com.example.goodjob.service.RecruitCompanyDetailService;
 import com.example.goodjob.service.RecruitService93;
+import com.example.goodjob.service.ScrapRecruitService93;
 
 @CrossOrigin("*")
 @RestController
@@ -38,6 +40,9 @@ public class RecruitController93 {
 	@Autowired
 	private QnaService99 qnaService99;
 	
+	@Autowired
+	private ScrapRecruitService93 scrapRecruitService;
+	
 	@GetMapping("/detail")
 	public RecruitDetailDto recruitDetail(@RequestParam("recruit_no") Long recruit_no,
 			@RequestParam("com_no") Long com_no, @RequestParam("com_detail_no") Long com_detail_no) {
@@ -50,14 +55,31 @@ public class RecruitController93 {
 	}
 	
 	@PostMapping("/nowApply")
-    public ResponseEntity<String> nowApply(@RequestBody MemRecruitDto memRecruitDto, @RequestHeader("username") String username) {
+    public ResponseEntity<String> nowApply(@RequestBody MemRecruitDto memRecruitDto,
+    		@RequestHeader("username") String username) {
 		
 		Long mem_no = qnaService99.getMem_no(username);
 		
-		memRecruitDto.setMem_no(mem_no);
-		
-        memRecruitService.nowApplyService(memRecruitDto);
-        return ResponseEntity.ok("즉시지원 완료");
+        int result = memRecruitService.nowApplyService(memRecruitDto.getRecruit_no(), mem_no);
+        if(result > 0) {
+        	return ResponseEntity.ok("즉시지원 완료"); 
+        }
+        
+        return ResponseEntity.ok("즉시지원 실패");
     }
+	
+	@PostMapping("/nowScrap")
+	public ResponseEntity<String> nowScrap(@RequestBody ScrapRecruitDto scrapRecruitDto,
+			@RequestHeader("username") String username){
+		
+		Long mem_no = qnaService99.getMem_no(username);
+		
+		scrapRecruitDto.setMem_no(mem_no);
+		
+		scrapRecruitService.scrapRecruitRegService(scrapRecruitDto);
+		
+		return ResponseEntity.ok("공고 스크랩 성공");
+		
+	}
 	
 }

@@ -9,10 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MemRecruitDto {
 	private Long mem_recruit_no;
-	private Long mem_no;
+	private Long resume_no;
 	private Long recruit_no;
 	private int resume_pass;
 	private boolean view;
-	private Long resume_no;
 	private int interview_pass;
 }
