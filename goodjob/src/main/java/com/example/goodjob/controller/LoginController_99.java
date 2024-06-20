@@ -111,7 +111,7 @@ public class LoginController_99 {
     	System.out.println(session.getId());
     	if(session != null) {
     		session.invalidate();
-    		return ResponseEntity.ok("{\"redirectUrl\": \"http://localhost:9991/common99\"}");
+    		return ResponseEntity.ok("{\"redirectUrl\": \"http://localhost:9991/\"}");
     	} else {
     		return ResponseEntity.badRequest().body("다시 시도해주세요.");
     	}

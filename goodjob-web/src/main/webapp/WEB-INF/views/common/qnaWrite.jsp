@@ -322,7 +322,6 @@ table, tr, th, td{
 			$('body').on('click', '#submitUpdate', submitUpdate);
 			$('body').on('click', '#deleteQna', deleteQnaFunction);
 			// 초기 상태 설정
-	       
 	        
 	        homeTab.classList.add("active");
 	        homeTab.classList.remove("inactive");
@@ -330,7 +329,6 @@ table, tr, th, td{
 	        profileTab.classList.add("inactive");
 	        homeTab.setAttribute('aria-selected', 'true');
 	        profileTab.setAttribute('aria-selected', 'false');
-
 		});
 
 		function deleteQnaFunction(event){
@@ -463,7 +461,6 @@ table, tr, th, td{
 					alert("목록을 불러올 수 없습니다. 다시 시도해주세요.");
 				}
 			}
-
 			const username = localStorage.getItem("username");
 			const role = localStorage.getItem("role");
 
