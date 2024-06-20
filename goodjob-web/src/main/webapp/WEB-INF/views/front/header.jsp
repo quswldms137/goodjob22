@@ -135,6 +135,11 @@ header {
 	border-radius: 8px;
 	font-weight:400;
 }
+.hairImg{
+	opacity: 0.1;
+	position:absolute;
+	top:20px;
+}
 </style>
 </head>
 <body>
@@ -177,6 +182,7 @@ header {
 					<div><a href="/resume/resumeManage"><span id="username"></span></a> <a href="#" onclick="logout()" class="logout-btn"> 로그아웃</a></div>
 					<div></div>
 				</div>
+				<span><a href="/admin/login" id="adminLogin"><img alt="머리카락 사진" class="hairImg" src="/resource/img/hair.png"></a></span>
 			</div>
 		</div>
 	</header>

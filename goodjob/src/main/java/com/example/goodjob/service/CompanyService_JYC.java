@@ -38,7 +38,7 @@ public class CompanyService_JYC {
 	
 	public CompanyService_JYC(ICompanyDao_JYC iCompanyDao, ICompanyDetailDao_JYC iCompanyDetailDao, IRecruitDao_JYC iRecruitDao, ICSkillDao_JYC iCSkillDao
 			, IMemRecruitDao_JYC iMemRecruitDao, IScrapRecruitDao iScrapRecruitDao, IComCommunityDao_JYC iComCommunityDao, IComReplyDao_JYC iComReplyDao
-			, IMemInterestDao iMemInterestDao, IUserDao iUserDao) {
+			, IComInterestDao_JYC iComInterestDao, IMemInterestDao iMemInterestDao, IUserDao iUserDao) {
 		this.iCompanyDao = iCompanyDao;
 		this.iCompanyDetailDao = iCompanyDetailDao;
 		this.iRecruitDao = iRecruitDao;
@@ -47,6 +47,7 @@ public class CompanyService_JYC {
 		this.iScrapRecruitDao = iScrapRecruitDao;
 		this.iComCommunityDao = iComCommunityDao;
 		this.iComReplyDao = iComReplyDao;
+		this.iComInterestDao = iComInterestDao;
 		this.iMemInterestDao = iMemInterestDao;
 		this.iUserDao = iUserDao;
 	}

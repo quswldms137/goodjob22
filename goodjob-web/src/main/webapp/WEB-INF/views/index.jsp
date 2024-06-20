@@ -171,7 +171,6 @@ body::-webkit-scrollbar {
 		$(document).ready(function(){
 			
 			const username = localStorage.getItem("username");
-			
 			$.ajax({
 				url : "http://localhost:8888/api/recruit/skill/" + username,
 				method : "GET",
@@ -197,7 +196,7 @@ body::-webkit-scrollbar {
 						'<p>' + response[i].com_name + '</p> ' +
 						'<p><b>' + response[i].title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
+						'<p class="last"><span class="applyBtn apply' + response[i].recruit_no + '" onclick="applyRecruit(event)">즉시지원</span><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + response[i].recruit_no + '"></span></p> ' +
 						'</div> ';
 						
@@ -239,7 +238,7 @@ body::-webkit-scrollbar {
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
+						'<p class="last"><span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
 						'</div> ';
 					});
@@ -273,7 +272,7 @@ body::-webkit-scrollbar {
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
+						'<p class="last"><span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
 						'</div> ';
 					});
@@ -341,6 +340,37 @@ body::-webkit-scrollbar {
 			});
 		*/
 		
+		function applyRecruit(event){
+		       event.preventDefault(); // 폼 기본 제출 방지	
+		       const username = localStorage.getItem("username");
+		       const recruit_no = event.target.className.split(" ")[1].substring(5);
+		       //const role = localStorage.getItem("role");
+
+		       console.log(recruit_no);
+		       
+		       // 필요한 데이터를 객체로 수집
+		            const data = {
+		                recruit_no: recruit_no
+		            };
+		            
+		            $.ajax({
+		                type: 'POST',
+		                beforeSend: function(xhr) {
+							// 요청 헤더에 사용자 이름을 설정
+							xhr.setRequestHeader("username", username);
+						},
+		                url: 'http://localhost:8888/api/recruit/nowApply',
+		                data: JSON.stringify(data),      	
+		                contentType: "application/json",
+		                success: function (response) {
+		                    alert('즉시지원 성공!!');
+		                },
+		                error: function (error) {
+		                    alert('즉시지원에 실패 하셨습니다.ㅜ');
+		                    console.error('Error:', error);
+		                }
+		            });
+			}
 		
 		
 	</script>

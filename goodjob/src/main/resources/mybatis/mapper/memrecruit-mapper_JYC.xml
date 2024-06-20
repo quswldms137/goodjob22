@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.goodjob.dao.IMemRecruitDao_JYC">
-	<delete id="deleteByMem_no">
-		DELETE FROM mem_recruit WHERE mem_no = #{mem_no};
+	<delete id="deleteByResume_no">
+		DELETE FROM mem_recruit WHERE resume_no = #{resume_no};
 	</delete>
 	<delete id="deleteByRecruit_no">
 		DELETE FROM mem_recruit WHERE recruit_no = #{recruit_no};

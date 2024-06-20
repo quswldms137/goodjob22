@@ -48,6 +48,7 @@ public class SkillService_JYC {
 
 		Set<String> mySkillName = new HashSet<>();
 
+		
 		resume_noList.forEach(resume_no -> {
 
 			List<SkillDto> skillList = iSkillDao.findByResume_no(resume_no);
@@ -60,7 +61,6 @@ public class SkillService_JYC {
 		
 		List<CSkillDto> cSkillDtos = iCSkillDao.findAll();
 
-		
 		Set<Long> recruit_noList = new HashSet<>();
 		
 		if (cSkillDtos != null) {
@@ -70,6 +70,7 @@ public class SkillService_JYC {
 				mySkillName.forEach(skillName -> {
 					if (skillName.equals(cskill.getSkill_name())) {
 						recruit_noList.add(cskill.getRecruit_no());
+						System.out.println(cskill);
 					}
 				});
 

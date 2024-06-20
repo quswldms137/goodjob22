@@ -78,6 +78,9 @@ main #container {
 .sidebar-box5 p:nth-child(3) a{
 	color:#FB8500 !important;
 }
+.interest{
+	height: fit-content;
+}
 </style>
 </head>
 <body>
@@ -100,7 +103,6 @@ main #container {
 		$(document).ready(
 				function() {
 					const username = localStorage.getItem("username");
-
 					$.ajax({
 						url : "http://localhost:8888/api/subscrap/subscribe/1/"
 								+ username,
@@ -190,7 +192,6 @@ main #container {
 			xhr.onload = function(){
 				
 				const response = JSON.parse(this.responseText);
-				
 				const totalItem = response[0].total;
 				let pages = 0;
 				
