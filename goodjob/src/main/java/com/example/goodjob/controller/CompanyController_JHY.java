@@ -19,6 +19,7 @@ import com.example.goodjob.dao.ICompanyDao_JHY;
 import com.example.goodjob.dao.ICompanyDetailDao_JYC;
 import com.example.goodjob.dao.IMemberDao;
 import com.example.goodjob.dao.IResumeDao_JHY;
+import com.example.goodjob.dto.ComInterestDto;
 import com.example.goodjob.dto.CompanyDto_JYC;
 import com.example.goodjob.dto.RecruitDto;
 import com.example.goodjob.dto.ResumeAndSkillDto;
@@ -46,6 +47,7 @@ public class CompanyController_JHY {
 	
 	@Autowired
 	private ICompanyDetailDao_JYC companyDetailDao;
+	
 	
 	// 기업 메인페이지 내가 쓴 채용공고 목록 조회 (로그인 연동전이라 모든 목록 불러오게 설정해둠)
 	@GetMapping("/index")
@@ -136,18 +138,24 @@ public class CompanyController_JHY {
 		Long com_no = qnaService.getCom_no(username);
 		List<Long> list = comInterestDao.findMem_no(com_no); // mem_no List (com_no)로 mem_no 받기
 		List<ResumeAndSkillDto> resumeList = new ArrayList<>();
+		
 		System.out.println("------------------");
 		System.out.println(list);
+		
 		for(int i = 0; i < list.size(); i++) {
 			ResumeAndSkillDto resume = resumeDao.findByMem_no(list.get(i)); // mem_no 값을 넣고 매퍼에서 mem_no 랑 대표이력서 여부 main = 1 인 이력서 받아오기
 			System.out.println(resume);
 			System.out.println("--------------");
+			
 			String mem_name = memberDao.findMem_nameWithMem_no(list.get(i)); // mem_no 값으로 mem_name 받아오기
 			resume.setMem_name(mem_name); // 받아온 mem_name 을 resume 에 저장
 			List<String> sk_name = resumeDao.findSk_nameWithResume_no(resume.getResume_no()); // resume_no 로 skill 테이블에서 sk_name 을 조회
+			
+			resume.setCom_no(companyDao.findByUsername(username)); // username 으로 com_no 를 받아와서 변수에 넣기
 			resume.setSk_name(sk_name); // 받아온 sk_name 을 resume 에 저장
 			resumeList.add(resume); // resumeList 에 resume 를 저장 -> 반복
 		}
+		
 		return resumeList;
 	}
 	
@@ -159,6 +167,19 @@ public class CompanyController_JHY {
 		return "" + com_no;
 	}
 	
-	
+	@PutMapping("/interestMember")
+	public String interestMember(@RequestBody ComInterestDto comInterestDto) {
+		int count = comInterestDao.findByMem_noAndCom_no(comInterestDto.getCom_no(), comInterestDto.getMem_no());
+		String str = "";
+		if(count == 0) {
+			comInterestDao.regInterestMember(comInterestDto.getCom_no(), comInterestDto.getMem_no());
+			str = "관심 구직자로 등록되었습니다.";
+		}else if(count == 1) {
+			comInterestDao.deleteInterestMember(comInterestDto.getCom_no(), comInterestDto.getMem_no());
+			str = "관심 구직자에서 해제되었습니다.";
+		}
+		
+		return str;
+	}
 	
 }

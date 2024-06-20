@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
 
@@ -178,16 +179,18 @@ main #container {
 					+	'<div class="list-mid">'
 						+	'<div class="list-mid-top">'
 							+	'<h3 class="list-title">' + '<a href=/resume/resumeDetail?resume_no=' + resume.resume_no +'&mem_no=' + resume.mem_no + '>' + resume.title + '</a>' + '</h3>'
+							+	'<input type="hidden" name="mem_no" value="' + resume.mem_no + '">'	
+							+	'<input type="hidden" name="com_no" value="' + resume.com_no + '">'	
 						+	'</div>'
 						+	'<div class="list-mid-bot">'
 							+	'<p class="hope_job">' + resume.hope_job + '</p>'
 							+	'<p class="hope_city">' + resume.hope_city + '</p>'
 							+	'<p class="hope_pay">' + resume.hope_pay + '</p>'
-							+	'<p class="sk_name">' + resume.sk_name.sk_name + '</p>'
+							+	'<p class="sk_name">' + resume.sk_name.map(sk => sk).join(', ') + '</p>'
 						+	'</div>'
 					+	'</div>'
 					+	'<div class="list-right">'
-						+	'<button class="interestBtn" onclick="interest()">관심</button> <button class="propositionBtn" onclick="proposition()">포지션 제안</button>'
+						+	'<button class="interestBtn" onclick="interest(event)">관심</button> <button class="propositionBtn" onclick="proposition(event)">포지션 제안</button>'
 					+	'</div>'
 				+	'</div>';
 		})
@@ -196,6 +199,32 @@ main #container {
 	}
 	
 	comInterestList();
+	
+	function interest(event){
+		const mem_no1 = event.target.closest(".list-area").querySelector("input[name='mem_no']");
+		const com_no1 = event.target.closest(".list-area").querySelector("input[name='com_no']");
+		
+		let sendData = {
+				mem_no : mem_no1.value,
+				com_no : com_no1.value
+		}
+		
+		$.ajax({
+			url: "http://localhost:8888/api/company/interestMember",
+			type: "PUT",
+			data: JSON.stringify(sendData),
+			contentType: "application/json",
+			success: function(data){
+				console.log(data);
+				alert(data);
+			},
+			error: function(){
+				console.log("Error : ", error);
+			}
+		})
+		
+	}
+	
 </script>
 </body>
 </html>
