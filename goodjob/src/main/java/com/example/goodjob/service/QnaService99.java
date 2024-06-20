@@ -21,32 +21,29 @@ public class QnaService99 {
 		int result = iQnaDao.regQuestion(serviceQuestionDto);
 		return result;
 	}
-	
 	public Long getMem_no(String username) {
 		Long mem_no = iQnaDao.getMem_no(username);
 		return mem_no;
 	}
-	
 	public Long getCom_no(String username) {
 		Long com_no = iQnaDao.getCom_no(username);
 		return com_no;
 	}
-	
 	public List<ServiceQuestionDto> getMemQnaList(Long mem_no){
 		return iQnaDao.getMemQnaList(mem_no);
 	}
-	
 	public List<ServiceQuestionDto> getComQnaList(Long com_no){
 		return iQnaDao.getComQnaList(com_no);
 	}
-	
 	public ServiceQuestionDto getQuestionDetail(Long cs_no) {
 		return iQnaDao.getQuestionDetail(cs_no);
 	}
-	
 	public int modifyQuestion(ServiceQuestionDto serviceQuestionDto) {
 		int result = iQnaDao.modifyQuestion(serviceQuestionDto);
 		return result;
+	}
+	public int deleteQuestion(Long cs_no) {
+		return iQnaDao.deleteQuestion(cs_no);
 	}
 	
 }

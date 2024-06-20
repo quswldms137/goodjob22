@@ -25,4 +25,7 @@
 	<update id="modifyQuestion">
 		update service_question set title = #{title}, content = #{content}, category = #{category} where cs_no = #{cs_no}
 	</update>
+	<delete id="deleteQuestion">
+		DELETE FROM service_question WHERE cs_no = #{cs_no}
+	</delete>
 </mapper>

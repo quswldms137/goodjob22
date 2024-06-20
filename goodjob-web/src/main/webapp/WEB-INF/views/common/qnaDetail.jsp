@@ -157,7 +157,7 @@ main #container {
 			
 			<div class="doModify">
 				<a href="#">돌아가기</a>
-				<a href="/qna99/qnaWrite">수정하기</a>
+				<a href="/qna99/qnaWrite">수정/삭제하기</a>
 			</div>
 		</div>
 		<!-- 문의 상세내용 -->
