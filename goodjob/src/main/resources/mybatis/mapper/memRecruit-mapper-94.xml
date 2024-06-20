@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.example.goodjob.dao.IMemRecruitDao_94">
+	<insert id="nowApply">
+		INSERT INTO mem_recruit (mem_recruit_no, resume_no, recruit_no, resume_pass, view, interview_pass) 
+		VALUES(NULL, #{resume_no}, #{recruit_no},0,0,0)
+	</insert>
+	
+	<select id="getResumeNum">
+		SELECT resume_no FROM resume WHERE mem_no = #{mem_no} AND main = 1
+	</select>
+</mapper>  

@@ -7,14 +7,8 @@
   <!-- 해당기업상세페이지의 채용공고목록 -->
   <select id="getRecruitListDto" resultType="com.example.goodjob.dto.RecruitDto">
     SELECT
-			c.com_name,
-			c.com_no,
-			r.title,
-			r.qualification,
-			r.career,
-			r.deadline_date,
-			r.location,
-			r.pay
+			c.*,
+			r.*
 		FROM
 			recruit r JOIN company c 
 		ON 
