@@ -139,15 +139,10 @@ label:hover {
 .last {
 	display: flex;
 	justify-content: space-between;
-	align-items:center;
 	padding: 5px;
 }
 .last img{
 	width:30px;
-}
-
-.last .d-day{
-	color:#aaa;
 }
 
 .applyBtn:hover {
@@ -202,12 +197,12 @@ label:hover {
 
 
 	<main>
-		<h3 class="skillMatchingH3">🛠 스킬매칭 🛠</h3>
+		<h3 class="skillMatchingH3">스킬 매칭</h3>
 		<div id="skillRecommendation"></div>
-		<h3 class="vip-title">💰 VIP 채용공고 💰</h3>
+		<h3 class="vip-title">VIP 채용공고</h3>
 		<div id="vip"></div>
 
-		<h3 class="all-area-title">✨ 채용공고 ✨</h3>
+		<h3 class="all-area-title">채용공고</h3>
 		<div id="everyRecruit"></div>
 
 
@@ -246,7 +241,7 @@ label:hover {
 						'<p>' + response[i].com_name + '</p> ' +
 						'<p><b>' + response[i].title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="d-day">D-' + diff + '</span> ' + 
+						'<p class="last"><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + response[i].recruit_no + '"></span>' +
 						'</p>' + 
 						'<span class="applyBtn apply' + response[i].recruit_no + '" onclick="applyRecruit(event)">즉시지원</span>' + 
@@ -288,7 +283,7 @@ label:hover {
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="d-day">D-' + diff + '</span> ' + 
+						'<p class="last"><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
 						'<span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span>' +
 						'</div> ';
@@ -322,7 +317,7 @@ label:hover {
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="d-day">D-' + diff + '</span> ' + 
+						'<p class="last"><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
 						'<span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span>' +
 						'</div> ';
