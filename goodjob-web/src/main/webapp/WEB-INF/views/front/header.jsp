@@ -183,7 +183,13 @@ header {
 <script>
 window.onload = function(){
 	const username = localStorage.getItem("username");
+	const role = localStorage.getItem("role");
 	console.log(username);
+	console.log(role);
+	
+	if(role.equals('company')){
+		
+	}
 	
 	if(username){
 		notLogin.style.display = "none";
