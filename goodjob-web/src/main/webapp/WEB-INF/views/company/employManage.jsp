@@ -54,10 +54,6 @@ main #container {
 	background-color: #f9f9f9;
 }
 
-.recruit-area:hover {
-	border-top: 1px solid #FB8500;
-}
-
 .recruit-left {
 	border-right: 1px solid #eee;
 	padding-right: 30px;
