@@ -118,6 +118,19 @@ th {
 .pay-containger span, #averageSalary, money-container vertical, #entrySalary {
 	margin:0 auto;
 }
+.interest-button {
+    padding: 10px 10px;
+    font-size: 16px;
+    background-color: #FF9900;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 20px; /* 추가: 버튼을 왼쪽으로 이동 */
+}
+
+.interest-button:hover {
+    background-color: #CC7A00;
+}
 </style>
 </head>
 <body>
@@ -132,6 +145,7 @@ th {
         <div id="companyName">
             기업이름
         </div>
+        <button class='interest-button' data-com_no='" + company.com_no + "'>관심기업 등록</button>
     </div>
     <main>
         <div class="info" id="companyInfo">
@@ -173,7 +187,7 @@ th {
             </div>
         </div>
         <div class="info" id="letterInfo">
-            합격후기
+            합격 인재상
             <div id="review">
                 <div class="postingList">합격후기1</div>
                 <div class="postingList">합격후기2</div>
