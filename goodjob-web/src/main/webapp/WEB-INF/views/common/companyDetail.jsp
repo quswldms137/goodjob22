@@ -28,9 +28,9 @@ main {
     gap: 10px;
 }
 #mainCompanyInfo {
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     width: 1100px;
-    height: 200px;
+    height: 215px;
     padding: 10px;
     box-sizing: border-box;
     margin: 80px auto;
@@ -38,10 +38,11 @@ main {
     align-items: center;
 }
 #companyImg_url {
-    border: 2px solid #eee;
+    border: 2px solid #ddd;
     width: 300px;
     height: 177px;
     box-sizing: border-box;
+    margin-left: 10px;
 }
 #companyImg_url img{
 	width: 100%;
@@ -50,13 +51,16 @@ main {
     box-sizing: border-box; 
 }
 #companyName {
-    font-size: 40px;
+    font-size: 43px;
     text-align: left;
     padding-left: 20px;
+    margin-left: 8px;
     flex-grow: 1;
 }
 .info {
-    border: 1px solid #eee;
+	width: 545px;  /* 고정 너비 */
+    height: 400px; /* 고정 높이 */
+    border: 1px solid #ddd;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -64,25 +68,28 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
+    
+    border-collapse: separate;
+    border-spacing: 2px 2px; /* 수평 간격과 수직 간격 설정 */
 }
+
 th, td {
     padding: 10px;
     text-align: left;
     font-size: 14px;
+    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
 }
-th {
-    padding-right: 20px;
-}
+
 .postingList {
     margin-top: 20px;
     padding: 20px;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
 }
 #companyName2 {
     margin-top: 25px;
     font-size: 20px;
     padding: 20px;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     width: 458px;
     height: 200px;
     position: relative;
@@ -145,8 +152,8 @@ th {
         <div id="companyName">
             기업이름
         </div>
-        <button class='interest-button' data-com_no='" + company.com_no + "'>관심기업 등록</button>
     </div>
+    
     <main>
         <div class="info" id="companyInfo">
             기업정보
@@ -219,12 +226,16 @@ $(document).ready(function() {
 			//console.log("detail:", detail);
 			// DOM에 데이터 삽입
 			$("#companyImage").attr("src", "/resource/img/" + data.img_url);
-			$("#companyName").text(data.com_name);
+			$("#companyName").text(data.com_name + " 👍");
 			$("#companyDetailsTable").html(
-				"<tr><th>산업</th><td>" + data.sectors + "</td><th>사원수</th><td>" + data.amount + "</td></tr>" +
-				"<tr><th>기업형태</th><td>" + data.com_type + "</td><th>설립일</th><td>" + data.foundation + "</td></tr>" + 
-				"<tr><th>대표자</th><td>" + data.com_ceo + "</td><th>연금/보험</th><td>" + data.pension + "</td></tr>" +
-				"<tr><th>주소</th><td>" + data.com_addr + "</td><th>기업사이트</th><td><a href='" + data.url + "'>" + data.url + "</a></td></tr>"
+				"<tr><th>산업</th><td>" + data.sectors + "</td><tr>" +
+				"<tr><th>사원수</th><td>" + data.amount + "</td></tr>" +
+				"<tr><th>기업형태</th><td>" + data.com_type + "</td><tr>" +
+				"<tr><th>설립일</th><td>" + data.foundation + "</td></tr>" + 
+				"<tr><th>대표자</th><td>" + data.com_ceo + "</td><tr>" +
+				"<tr><th>연금/보험</th><td>" + data.pension + "</td></tr>" +
+				"<tr><th>주소</th><td>" + data.com_addr + "</td><tr>" +
+				"<tr><th>기업사이트</th><td><a href='" + data.url + "'>" + data.url + "</a></td></tr>"
 			);
 		},
 		error: function(error) {

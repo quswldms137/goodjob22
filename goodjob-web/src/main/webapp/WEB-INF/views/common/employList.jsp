@@ -31,7 +31,7 @@ main {
 	padding: 10px;
 	font-size: 16px;
 	width: 115px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	border-radius: 5px
 }
 .search-container {
@@ -44,7 +44,7 @@ main {
 	padding: 10px;
 	font-size: 16px;
 	width: 200px;
-	border: 1px solid #ccc;
+	border: 1px solid #ddd;
 	border-radius: 5px;
 }
 
@@ -70,6 +70,7 @@ main {
 }
 .company-info {
     border: 1px solid #eee;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.11); /* 우하단에 그림자 추가 */
     width: 1030px;
     height: auto;
     padding: 10px;
@@ -118,7 +119,7 @@ main {
 .posting-button {
     padding: 10px 10px;
     font-size: 16px;
-    background-color: #007BFF;
+    background-color: #4DAAFF;
     color: white;
     border: none;
     cursor: pointer;
