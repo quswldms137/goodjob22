@@ -14,4 +14,7 @@ public class MemRecruitDto {
 	private int resume_pass;
 	private boolean view;
 	private int interview_pass;
+	
+	private ResumeDto resumeDto;
+	private RecruitDto_JYC recruitDto;
 }
