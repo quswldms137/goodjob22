@@ -54,7 +54,7 @@ public class JoinController_99 {
 		if(result == 1 && result2 == 1) {
 			return ResponseEntity.ok("성공적으로 가입이 완료되었습니다~! \n취뽀!!");
 		} else {
-			return ResponseEntity.badRequest().body("가입실패");
+			return ResponseEntity.ok("가입실패");
 		}
 	}
 	
