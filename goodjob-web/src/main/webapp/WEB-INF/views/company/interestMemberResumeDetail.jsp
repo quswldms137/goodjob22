@@ -165,6 +165,32 @@ input[type="button"] {
 	padding:15px 25px;
 	background:#FB8500;
 }
+#ok{
+	width: 160px;
+	color: blue;
+	background: #fff;
+	border: 1px solid blue;
+	padding: 15px 0;
+	font-size: 18px;
+	cursor: pointer;
+}
+#no{
+	width: 160px;
+	color: red;
+	background: #fff;
+	border: 1px solid red;
+	padding: 15px 0;
+	font-size: 18px;
+	cursor: pointer;
+}
+#ok:hover{
+	background-color:blue;
+	color: #fff;
+}
+#no:hover{
+	background-color:red;
+	color: #fff;
+}
 </style>
 
 
@@ -182,7 +208,7 @@ input[type="button"] {
 				<!-- 이부분에 이력서 상세내용이 들어갑니다 -->
 			</div>
 			<div id="gobutton">
-				<input type="button" value="목록보기" onclick="location.href='/company/receiveResume'">
+			<input type="button" id="ok" value="합격" onclick="passClick()">  <input type="button" id="no" value="불합격" onclick="failClick()">	<input type="button"  value="목록보기" onclick="location.href='/company/receiveResume'">
 			</div>
 		</div>
 	</main>
@@ -195,6 +221,26 @@ input[type="button"] {
 
 
 <script>
+	function passClick() {
+	   	const result = confirm('합격시키시겠습니까?');
+	   	
+	   	if(result){
+	   		alert("합격시키셨습니다 구직자에게 연락부탁드립니다~");
+	   		window.location.href = '/company';
+	   	}else{
+	   		alert("합격을 보류하셨습니다");
+	   	}
+	}
+	function failClick() {
+		const result = confirm('불합격시키시겠습니까?');
+	   	
+	   	if(result){
+	   		alert('불합격 시키겼습니다 메인화면으로 돌아가겠습니다.')
+	   		window.location.href = '/company';
+	   	}else{
+	   		alert('신중하게 생각해주세요~');
+	   	}
+	}	
 	
 	
 	$(document).ready(function () {

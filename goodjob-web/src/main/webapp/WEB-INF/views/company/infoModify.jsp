@@ -207,10 +207,12 @@ input[type="button"] {
 						$('#ideal_talent').val(data.ideal_talent);
 						$('#foundation').val(data.foundation);
 						$('#amount').val(data.amount);
-						$('#url').val(data.url);
+						//$('#url').val(data.url);
+						var photoFrame = document.getElementById('photoFrame');
+						photoFrame.src = $('#url').val(data.url);
 						
 						if (data.img_url) {
-							$('#photoFrame').attr('src', data.img_url);
+							$('#photoFrame').attr('src','/static/imgsrc/' + data.img_url);
 							$('#photoFrame').css('visibility', 'visible');
 						}
 					},

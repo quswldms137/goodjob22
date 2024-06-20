@@ -125,6 +125,9 @@ h1, h2 {
 	margin-right: 20px;
     font-size: 18px;
 }
+#nameof:hover{
+	color:#FB8500
+}
 </style>
 </head>
 <body>
@@ -171,7 +174,7 @@ h1, h2 {
 						str += '<h2>구직중</h2>';
 						str += '</div>';
 						str += '<div class="recruit-right-top">';
-						str += '<h2 class="recruit_title"><a href="/company/interestMemberResumeDetail/'+ item.resume_no + '">' + item.title +'</a></h2>';
+						str += '<h2 class="recruit_title"><a id="nameof" href="/company/interestMemberResumeDetail/'+ item.resume_no + '">' + item.title +'</a></h2>';
 						str += '</div>';
 						str += '<div class="recruit-right-bot">';
 						str += '<p class="recruit_career">희망직무 | ' + item.hope_job + '</p>';
@@ -213,7 +216,7 @@ h1, h2 {
     var player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
-            height: '390',
+            height: '500',
             width: '860',
             videoId: 'OfQuTmDGY8A', // 표시할 YouTube 비디오 ID
             events: {
