@@ -19,7 +19,6 @@ public class UserService99 {
 		this.iUserDao = iUserDao;
 		this.iNewPasswordDao = iNewPasswordDao;
 	}
-	
 	//기업회원가입
 	public int regUser(CompanyDto companyDto) {
 		UserDto user = new UserDto();

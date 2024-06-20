@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -112,6 +113,18 @@ public class QnAController_99 {
 		} else {
 			return ResponseEntity.badRequest().body("다시 시도해주세요.");
 		}
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<String> deleteQuestion(@RequestParam("cs_no") Long cs_no){
+		int result = qnaService.deleteQuestion(cs_no);
+		
+		if(result == 1) {
+			return ResponseEntity.ok("성공적으로 삭제되었습니다.");
+		} else {
+			return ResponseEntity.badRequest().body("다시 시도해주세요.");
+		}
+		
 	}
 	
 	

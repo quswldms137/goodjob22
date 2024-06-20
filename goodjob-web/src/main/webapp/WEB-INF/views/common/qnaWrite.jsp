@@ -255,6 +255,7 @@ table, tr, th, td{
 						<button type="button" id="submitUpdate" class=""
 							onclick="submitUpdate(event)">수정하기</button>
 						<button type="reset" class="cancel-btn">취소</button>
+						<button type="button" id="deleteQna" onclick="deleteQna(event)">삭제하기</button>
 					</div>
 				</form>
 			</div>
@@ -271,22 +272,34 @@ table, tr, th, td{
 		$(document).ready(function() {
 			const urlParams = new URLSearchParams(window.location.search);
 			let cs_no = urlParams.get('cs_no');
+			let test = urlParams.get('test');
+			
 			var writeForm = $('#submitWrite');
 			var modifyForm = $('#submitUpdate');
+			var cancelBtn = $(".cancel-btn");
+			var deleteQna = $("#deleteQna");
+			
 			console.log(cs_no);
+			if(test){
+				getQnaList();
+			}
 			if (cs_no) {
 				modifyContent(cs_no);
 				writeForm.hide();
 				modifyForm.show();
+				cancelBtn.hide();
+				deleteQna.show();
 			} else {
 				writeForm.show();
 				modifyForm.hide();
+				deleteQna.hide();
+				cancelBtn.show();
 			}
 
 			// 이벤트 리스너 설정
 			$('#submitWrite').on('click', submitQuestion);
 			$('#submitUpdate').on('click', submitUpdate);
-			
+			$('#deleteQna').on('click', deleteQna);
 			// 초기 상태 설정
 	        var homeTab = document.getElementById('home-tab');
 	        var profileTab = document.getElementById('profile-tab');
@@ -300,6 +313,28 @@ table, tr, th, td{
 
 		});
 
+		function deleteQna(event){
+			alert("삭제");
+			const urlParams = new URLSearchParams(window.location.search);
+			let cs_no = urlParams.get('cs_no');
+			console.log(cs_no);
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function() {
+				if (this.status === 200) {
+					alert(this.responseText);
+					window.location.href = "/qna99/qnaWrite?test=1";
+				} else {
+					alert(this.responseText);
+				}
+			};
+			xhttp.open("DELETE", "http://localhost:8888/api/qna-99?cs_no="+cs_no);
+// 			const username = localStorage.getItem("username");
+// 			const role = localStorage.getItem("role");
+// 			xhttp.setRequestHeader("username", username);
+// 			xhttp.setRequestHeader("role", role);
+			xhttp.send();
+		}
+		
 		function show() {
 			var writeForm = document.getElementById('qnaWrite');
 			var qnaList = document.getElementById('qnaListContainer');
