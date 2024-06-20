@@ -25,4 +25,6 @@ public interface IQnaDao99 {
 	public int modifyQuestion(ServiceQuestionDto serviceQuestionDto);
 	//문의글 삭제
 	public int deleteQuestion(Long cs_no);
+	//답변달린 문의글
+	public ServiceQuestionDto getAnswer(Long cs_no);
 }
