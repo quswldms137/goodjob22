@@ -115,41 +115,53 @@ main #container {
     }
 
     function submitQuestion(event){
-        alert("등록코드");
         event.preventDefault();
         const category1 = document.querySelector("select[name='category']");
         const title1 = document.querySelector("Input[name='title']");
         const content1 = document.querySelector("textarea[name='content']");
         
-        const qna = {
-                category : category1.value,
-                title : title1.value,
-                content : content1.value
-        }
-        console.log("qna", qna);
-        
-        const sendData = JSON.stringify(qna);
-        console.log("sendData: " + sendData);
-        
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function(){
-            if(this.status === 200){
-                alert(this.responseText);
-                window.location.href="http://localhost:9991/common99"
-            } else{
-                alert("다시 입력해주세요.");
+        if(category1.value === ""){
+        	alert("카테고리를 선택해주세요.");
+        	return ;
+        } else if(title1.value === ""){
+        	alert("문의 제목을 입력해주세요.");
+        	title1.focus();
+        	return ;
+        } else if(content1.value === ""){
+        	alert("문의 내용을 입력해주세요.");
+        	content1.focus();
+        	return ;
+        } else{
+        	const qna = {
+                    category : category1.value,
+                    title : title1.value,
+                    content : content1.value
             }
-        };
-        xhttp.open("POST", "http://localhost:8888/api/qna-99/insert");
-        xhttp.setRequestHeader("Content-type", "application/json");
-        
-        const username = localStorage.getItem("username");
-        const role = localStorage.getItem("role");
+            console.log("qna", qna);
+            
+            const sendData = JSON.stringify(qna);
+            console.log("sendData: " + sendData);
+            
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                if(this.status === 200){
+                    alert(this.responseText);
+                    window.location.href="http://localhost:9991/common99"
+                } else{
+                    alert("다시 입력해주세요.");
+                }
+            };
+            xhttp.open("POST", "http://localhost:8888/api/qna-99/insert");
+            xhttp.setRequestHeader("Content-type", "application/json");
+            
+            const username = localStorage.getItem("username");
+            const role = localStorage.getItem("role");
 
-        xhttp.setRequestHeader("username", username);
-        xhttp.setRequestHeader("role", role);
-        
-        xhttp.send(sendData);
+            xhttp.setRequestHeader("username", username);
+            xhttp.setRequestHeader("role", role);
+            
+            xhttp.send(sendData);
+        }
     }
 
     function getQnaList(){
@@ -221,42 +233,49 @@ main #container {
     }
 
     function submitUpdate(event){
-        alert("수정!");
         event.preventDefault();
-        const title1 = document.querySelector("input[name='title']").value;
-        const content1 = document.querySelector("textarea[name='content']").value;
-        const category1 = document.querySelector("select[name='category']").value;
+        const title1 = document.querySelector("input[name='title']");
+        const content1 = document.querySelector("textarea[name='content']");
+        const category1 = document.querySelector("select[name='category']");
         
-        const urlParams = new URLSearchParams(window.location.search);
-        let cs_no = urlParams.get('cs_no');
-        
-        const qna = {
-            cs_no: cs_no,
-            title: title1,
-            content: content1,
-            category: category1
-        }
-        console.log("수정하기 qna: " + qna);
-        
-        const sendData = JSON.stringify(qna);
-        console.log("수정하기 sendData : " + sendData);
-        
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = function(){
-            if(this.status === 200){
-                alert(this.responseText);
-                // getQnaList(); // 필요한 경우 이 줄의 주석을 제거합니다.
-            } else{
-                alert("다시 입력해주세요.");
+        if(title1.value === ""){
+        	alert("문의 제목을 입력해주세요.");
+        	title1.focus();
+        	return ;
+        } else if(content1.value === ""){
+        	alert("문의 내용을 입력해주세요.");
+        	content1.focus();
+        	return ;
+        } else if(category1 === ""){
+        	alert("카테고리를 선택해주세요");
+        	category1.focus();
+        	return ;
+        } else{
+        	const urlParams = new URLSearchParams(window.location.search);
+            let cs_no = urlParams.get('cs_no');
+            const qna = {
+                cs_no: cs_no,
+                title: title1.value,
+                content: content1.value,
+                category: category1.value
             }
-        };
-        xhttp.open("PUT", "http://localhost:8888/api/qna-99/modify");
-        xhttp.setRequestHeader("Content-type", "application/json");
-        
-        const username = localStorage.getItem("username");
-        xhttp.setRequestHeader("username", username);
-        
-        xhttp.send(sendData);
+            const sendData = JSON.stringify(qna);
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function(){
+                if(this.status === 200){
+                    alert(this.responseText);
+                    window.location.href="/qna99/qnaDetail";
+                    // getQnaList(); // 필요한 경우 이 줄의 주석을 제거합니다.
+                } else{
+                    alert("다시 입력해주세요.");
+                }
+            };
+            xhttp.open("PUT", "http://localhost:8888/api/qna-99/modify");
+            xhttp.setRequestHeader("Content-type", "application/json");
+            const username = localStorage.getItem("username");
+            xhttp.setRequestHeader("username", username);
+            xhttp.send(sendData);
+        }
     }
     </script>
 </body>

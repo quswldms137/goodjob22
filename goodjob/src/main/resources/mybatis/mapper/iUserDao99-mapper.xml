@@ -23,13 +23,24 @@
 	<select id="getMemUername">
 		select username from member where mem_name = #{mem_name} and mem_tel = #{mem_tel}
 	</select>
+	<select id="getMemUsernameCount">
+		select count(*) from member where mem_name = #{mem_name} and mem_tel = #{mem_tel}
+	</select>
+	<select id="getMemPassword">
+		select password from user where username = ${username}
+	</select>
+	<!-- 비밀번호 재설정 -->
 	<select id="memCheck">
 		select count(*) from member where username = #{username} and mem_name = #{mem_name} and mem_tel = #{mem_tel}
 	</select>
-	<select id="getMemPassword">
-		select password from user where username = #{username}
+	<select id="comCheck">
+		select count(*) from company where username = #{username} and com_name = #{com_name} and com_tel = #{com_tel}
+	</select>
+	<select id="modifyPassword">
+		UPDATE user SET password = #{password} WHERE username = #{username}
 	</select>
 	<select id="getComUsername">
 		select username from company where com_name = 'com_name' and com_companynum = #{com_companynum}
 	</select>
+	
 </mapper>

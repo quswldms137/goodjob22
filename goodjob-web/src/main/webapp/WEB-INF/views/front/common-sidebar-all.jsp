@@ -84,19 +84,13 @@ margin-bottom: 0;
 		<div class="sidebar-box sidebar-box4">
 			<h3>고객센터</h3>
 		</div>
-		<div class="sidebar-box sidebar-box3">
-			<h3>FAQ</h3>
-			<p><a href="#">·개인회원</a></p>
-			<p><a href="#">·기업회원</a></p>
-		</div>
 		<div class="sidebar-box sidebar-box4">
-			<h3>문의·신고</h3>
+			<a href="/qna99/qnaWrite"><h3>문의·신고</h3></a>
 		</div>
 		<div class="sidebar-box sidebar-box5">
-			<h3>공지사항</h3>
-		</div>
-		<div class="sidebar-box sidebar-box4">
 			<h3>아이디·비밀번호 찾기</h3>
+			<p><a href="/common99/findUsername">· 아이디 찾기</a></p>
+			<p><a href="/common99/findPassword">· 비밀번호 찾기</a></p>
 		</div>
 	</div>
 

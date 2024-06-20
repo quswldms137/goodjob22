@@ -42,9 +42,6 @@ public class JoinController_99 {
 		if(memberDto.getUsername().equals("manager")) {
 			memberDto.setRole("ROLE_MANAGER");
 		}
-		//가입일자
-		LocalDate today = LocalDate.now();
-		memberDto.setMake_date(today);
 		//비밀번호 암호화
 		String password = memberDto.getPassword();
 		String hashedPassword = passwordService.hashPassword(password);

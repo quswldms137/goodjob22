@@ -3,12 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.goodjob.dao.IMemberDao99">
-	<insert id="regMember2">
-		INSERT INTO member (username, mem_name, mem_tel, mem_email, mem_gender, make_date, mem_birth, mem_addr) 
-		VALUES(#{memberDto.username}, #{memberDto.mem_name}, #{memberDto.mem_tel}, #{memberDto.mem_email}, #{memberDto.mem_gender}, #{memberDto.make_date}, #{memberDto.mem_birth}, #{memberDto.mem_addr})
-	</insert>
 	<insert id="regMember">
-		INSERT INTO member (username, mem_name, mem_tel, mem_email, mem_gender, make_date, mem_birth, mem_addr) 
-		VALUES(#{username}, #{mem_name}, #{mem_tel}, #{mem_email}, #{mem_gender}, #{make_date}, #{mem_birth}, #{mem_addr})
+		INSERT INTO member (username, mem_name, mem_tel, mem_email, mem_gender, mem_birth, mem_addr) 
+		VALUES(#{username}, #{mem_name}, #{mem_tel}, #{mem_email}, #{mem_gender}, #{mem_birth}, #{mem_addr})
 	</insert>
 </mapper>
