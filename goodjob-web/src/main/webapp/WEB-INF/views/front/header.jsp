@@ -152,7 +152,7 @@ header {
 						<li><a href="#">커뮤니티</a></li>
 						<li><a href="#">스킬매칭</a></li>
 						<li><a href="#">이벤트</a></li>
-						<li><a href="#">공지사항</a></li>
+						<li><a href="/qna99/qnaWrite">공지사항</a></li>
 					</ul>
 				</div>
 				<div class="search-bar-area">
