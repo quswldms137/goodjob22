@@ -291,8 +291,11 @@ font-size: 20px;
 	        method: "GET",
 	        dataType: "json",
 	        success: function(response){
+	        	
+	        	console.log(response);
+	        	
 	            const totalItem = response[0].total;
-	            let pages = Math.ceil(totalItem / 4);
+	            let pages = Math.ceil(totalItem / 5);
 	            let str = '<div class="userList-area"><ul class="userList-title"><li>이름</li><li>사업자번호</li><li>아이디</li><li>연락처</li></ul>';
 	            response.forEach(company => {
 	                str += '<a href="/admin/company/detail/' + company.com_no + '">';
