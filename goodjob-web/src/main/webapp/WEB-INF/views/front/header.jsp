@@ -203,14 +203,6 @@ window.onload = function(){
 		}
 	} 
 	
-	
-	
-	
-	
-// 	if(role === "ROLE_COMPANY"){
-// 		parentLink.href="/company/";
-// 	} 
-	
 }
 
 function logout(){
