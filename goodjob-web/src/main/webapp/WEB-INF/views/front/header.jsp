@@ -187,15 +187,22 @@ window.onload = function(){
 	console.log(username);
 	console.log(role);
 	
-	if(role.equals('company')){
-		
-	}
-	
 	if(username){
 		notLogin.style.display = "none";
 		login.style.display = "block";
-		document.getElementById("username").innerText = username + ' 님';
-	}
+		
+		const usernameElement = document.getElementById("username");
+		usernameElement.innerText = username + ' 님';
+		
+		const parentLink = usernameElement.closest('a');
+		
+		if(role === 'ROLE_COMPANY'){
+			parentLink.href = "/company";
+		} else{
+			parentLink.href = "/resume/resumeManager";
+		}
+	} 
+	
 }
 
 function logout(){
