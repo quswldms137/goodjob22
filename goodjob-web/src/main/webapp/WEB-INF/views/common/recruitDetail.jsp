@@ -164,8 +164,6 @@ main {
 			let com_no = "${com_no}";
 			let com_detail_no = "${com_detail_no}";
 
-			// recruit_no와 com_no가 없으면 임의의 값을 설정
-
 			// resume_no를 이용하여 상세 정보 가져오기
 			function getRecruitDetail(recruit_no, com_no, com_detail_no) {
 				$.ajax({
@@ -224,8 +222,6 @@ main {
 
 			// resume_no가 있으면 상세 정보 요청
 			if (recruit_no && com_no && com_detail_no) {
-				let com_no = 1;
-				let com_detail_no = 1;
 				getRecruitDetail(recruit_no, com_no, com_detail_no);
 				console.log(recruit_no + ", " + com_no, ", " + com_detail_no);
 			} else {
