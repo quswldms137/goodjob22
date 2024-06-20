@@ -226,7 +226,7 @@ $(document).ready(function() {
 			//console.log("detail:", detail);
 			// DOM에 데이터 삽입
 			$("#companyImage").attr("src", "/resource/img/" + data.img_url);
-			$("#companyName").text(data.com_name + " 👍");
+			$("#companyName").text(data.com_name + " 👍");  
 			$("#companyDetailsTable").html(
 				"<tr><th>산업</th><td>" + data.sectors + "</td><tr>" +
 				"<tr><th>사원수</th><td>" + data.amount + "</td></tr>" +
