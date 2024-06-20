@@ -41,7 +41,7 @@ main {
 }
 .info-area-leftTop p a{
 	display:inline-block;
-	margin-left:30px;
+	margin-left:15px;
 	font-size:13px;
 	color:#aaa;
 	padding:5px 12px;
@@ -179,7 +179,7 @@ main {
 						
 						let output = '<div class="info-area-left">';
 						output += '<div class="info-area-leftTop">';
-						output += '<p>'+ data.company.username +'<a href="#">🤍 관심기업</a></p>';
+						output += '<p>'+ data.company.username +'<a href="#">❤ 관심기업</a></p>';
 						output += '<h1>'+ data.recruit.title +'</h1>';
 						output += '</div>';
 						output += '<div class="info-area-leftBot">';
@@ -208,8 +208,8 @@ main {
 						output += '<p><span>설립년도</span>'+ data.company2.foundation +'</p>';
 						output += '<p><span>기업형태</span>'+ data.company.com_type +'</p>';
 						output += '<p><span>홈페이지</span>'+ data.company2.url +'</p>';
-						output += '<a href="#">기업정보 > </a>';
-						output += '<a href="#">진행중인 채용보기 > </a>';
+						output += '<a href="/company94/companyDetail?com_no='+ data.company2.com_no +'">기업정보 > </a>';
+						output += '<a href="">진행중인 채용보기 > </a>';
 						output += '</div>';
 
 						$('#recruitDetail-area').html(output);
