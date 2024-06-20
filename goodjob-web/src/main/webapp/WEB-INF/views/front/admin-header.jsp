@@ -173,12 +173,19 @@ header {
 <script>
 window.onload = function(){
 	const username = localStorage.getItem("username");
-	console.log(username);
+	const role = localStorage.getItem("role");
 	
 	if(username){
 		notLogin.style.display = "none";
 		login.style.display = "block";
-		document.getElementById("username").innerText = username + ' 님';
+		const usernameElement = document.getElementById("username");
+		usernameElement.innerText = username + ' 님';
+		
+		const parentLink = usernameElement.closest('a');
+		
+		if(role === 'ROLE_MANAGER'){
+			parentLink.href = "/admin";
+		} 
 	}
 }
 
