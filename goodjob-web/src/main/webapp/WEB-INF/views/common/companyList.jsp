@@ -83,6 +83,7 @@ main {
     width: 280px;
     height: 130px;
     box-sizing: border-box;
+    margin-left: 3px;
 }
 .company-info img {
     width: 100%;
@@ -171,7 +172,7 @@ main {
                 	<option value="중소기업">중소기업</option>
                 	<option value="스타트업">스타트업</option>
                 	<option value="공기업">공기업</option>
-                	<option value="비영리기관">공기업</option>
+                	<option value="비영리기관">비영리기관</option>
                 	<option value="공공기관">공공기관</option>
             	</select>
         		<button id="filterBnt" onclick="applyFilters()">filter</button>
