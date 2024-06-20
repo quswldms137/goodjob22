@@ -33,7 +33,6 @@ public class RecruitController_JYC {
 		
 		List<RecruitDto_JYC> result = skillService.getSkillMatching(username);
 		
-		
 		if(result == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body(null);

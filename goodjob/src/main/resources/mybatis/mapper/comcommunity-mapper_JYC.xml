@@ -4,9 +4,9 @@
   
 <mapper namespace="com.example.goodjob.dao.IComCommunityDao_JYC">
 	<select id="getComCommunity_no">
-		SELECT com_community_no FROM com_community WHERE com_no = #{com_no};
+		SELECT com_community__no FROM com_community WHERE com_no = #{com_no};
 	</select>
 	<delete id="deleteByComCommunity_no">
-		DELETE FROM com_community WHERE com_community_no = #{comCommunity_no};
+		DELETE FROM com_community WHERE com_community__no = #{comCommunity_no};
 	</delete>
 </mapper>

@@ -52,5 +52,10 @@ public class AdminController_JYC {
 		return "/admin/answerform";
 	}
 	
+	@GetMapping("/login")
+	public String loginForm() {
+		return "/admin/loginForm";
+	}
+	
 }
 

@@ -140,7 +140,7 @@ input[type=button]:hover{
 									   item.location + ', </span><span>' + item.rank + ', </span><span>' + item.pay + '</span></p>' + 
 									   '</a> ' + 
 									   '<div class="deadline_date"><span>' + item.deadline_date + '</span></div> ' +
-									   '<input type="button" value="지원하기" onclick="apply()">' + 
+									   '<input type="button" value="지원하기" onclick="applyRecruit(event)" id="apply' + item.recruit_no + '">' + 
 									   '<a href="#" class="interest" onclick="changeScrap(event)"> <img alt="관심 기업" id="scrap' + item.recruit_no + '" src="/resource/img/yesscrap.png" class="starImg"></a> ' +
 						 			   '</div> ';
 							});
@@ -176,13 +176,18 @@ input[type=button]:hover{
 			
 			const xhr = new XMLHttpRequest();
 			xhr.onload = function(){
-				if(childElement.src === "http://localhost:9991/resource/img/yesscrap.png"){
-					childElement.src = "http://localhost:9991/resource/img/noscrap.png";
-				}else {
-					childElement.src = "http://localhost:9991/resource/img/yesscrap.png";
-				}
+				if(this.responseText !== ""){
+					
+					if(childElement.src === "http://localhost:9991/resource/img/yesscrap.png"){
+						childElement.src = "http://localhost:9991/resource/img/noscrap.png";
+					}else {
+						childElement.src = "http://localhost:9991/resource/img/yesscrap.png";
+					}
 				
-				alert(this.responseText);
+					alert(this.responseText);
+				}else{
+					alert("로그인이 필요한 기능입니다.");
+				}
 		
 			}
 			
@@ -196,8 +201,34 @@ input[type=button]:hover{
 			
 		}
 		
-		function apply(){
-			 
+		function applyRecruit(event){
+	       event.preventDefault(); // 폼 기본 제출 방지	
+	       const username = localStorage.getItem("username");
+	       const recruit_no = event.target.id.substring(5);
+	       //const role = localStorage.getItem("role");
+
+	       // 필요한 데이터를 객체로 수집
+	            const data = {
+	                recruit_no: recruit_no
+	            };
+	            
+	            $.ajax({
+	                type: 'POST',
+	                beforeSend: function(xhr) {
+						// 요청 헤더에 사용자 이름을 설정
+						xhr.setRequestHeader("username", username);
+					},
+	                url: 'http://localhost:8888/api/recruit/nowApply',
+	                data: JSON.stringify(data),      	
+	                contentType: "application/json",
+	                success: function (response) {
+	                    alert('즉시지원 성공!!');
+	                },
+	                error: function (error) {
+	                    alert('즉시지원에 실패 하셨습니다.ㅜ');
+	                    console.error('Error:', error);
+	                }
+	            });
 		}
 		
 		function pageChange(event){

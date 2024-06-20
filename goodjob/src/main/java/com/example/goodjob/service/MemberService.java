@@ -98,6 +98,7 @@ public class MemberService {
 			iLicenseDao.deleteByResume_no(resume_no);
 			iSkillDao.deleteByResume_no(resume_no);
 			iResumeDao.deleteByResume_no(resume_no);
+			iMemRecruitDao.deleteByResume_no(resume_no);
 		});
 		
 		List<Long> cs_noList = iServiceQuestionDao.getCs_no(mem_no);
@@ -108,7 +109,6 @@ public class MemberService {
 		iComInterestDao.deleteByMem_no(mem_no);
 		iMemCommunityDao.deleteByMem_no(mem_no);
 		iMemInterestDao.deleteByMem_no(mem_no);
-		iMemRecruitDao.deleteByMem_no(mem_no);
 		iMemReplyDao.deleteByMem_no(mem_no);
 		iNoticeDao.deleteByMem_no(mem_no);
 		iScrapRecruitDao.deleteByMem_no(mem_no);

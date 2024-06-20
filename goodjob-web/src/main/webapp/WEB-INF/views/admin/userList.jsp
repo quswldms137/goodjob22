@@ -169,7 +169,7 @@ font-size: 20px;
 					
 					str += '<div id="pages">';
 					for(let i = 0; i < pages; i++){
-						str += '<input type="button" id="memberPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="pageMemberList(event)" class="memberListBtn">';
+						str += '<input type="button" id="memberPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="loadMemberList(event)" class="memberListBtn">';
 					}
 					str += '</div>';
 					
@@ -225,7 +225,7 @@ font-size: 20px;
 				str += '<div id="pages">';
 					
 				for(let i = 0; i < pages; i++){
-					str += '<input type="button" id="companyPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="pageCompanyList(event)" class="companyListBtn">';
+					str += '<input type="button" id="companyPage' + (i + 1) + '" value="' + (i + 1) + '" onclick="loadCompanyList(event)" class="companyListBtn">';
 				}
 				str += '</div>';
 				}

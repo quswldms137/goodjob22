@@ -132,7 +132,7 @@ main #container {
 		const array = event.target.className.split(" ");
 		const mem_no = array[1].substring(6);
 		const username = array[0];
-			
+		
 		const xhr = new XMLHttpRequest();
 		xhr.onload = function(){
 			alert(this.responseText);

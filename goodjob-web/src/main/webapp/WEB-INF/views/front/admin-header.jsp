@@ -140,6 +140,11 @@ header {
 #adminLogin{
 	color: white;
 }
+.hairImg{
+	opacity: 0.1;
+	position:absolute;
+	top:20px;
+}
 </style>
 </head>
 <body>
@@ -162,7 +167,7 @@ header {
 					<div></div>
 				</div>
 			</div>
-			<span><a href="/" id="adminLogin">.</a></span>
+			<span><a href="/admin/login" id="adminLogin"><img alt="머리카락 사진" class="hairImg" src="/resource/img/hair.png"></a></span>
 		</div>
 	</header>
 <script>
