@@ -23,6 +23,7 @@ import com.example.goodjob.dto.ComInterestDto;
 import com.example.goodjob.dto.CompanyDto_JYC;
 import com.example.goodjob.dto.RecruitDto;
 import com.example.goodjob.dto.ResumeAndSkillDto;
+import com.example.goodjob.dto.ResumeDto;
 import com.example.goodjob.service.QnaService99;
 
 @CrossOrigin("http://localhost:9991/")
@@ -182,6 +183,32 @@ public class CompanyController_JHY {
 		return str;
 	}
 	
+	@GetMapping("/recommendedMemberRecruitInfo")
+	public List<RecruitDto> recommendedMemberRecruitInfo(@RequestParam("username") String username) {
+		
+		Long com_no = companyDao.findByUsername(username);
+		List<RecruitDto> list = companyDao.findByCom_no(com_no); // com_no 로 채용공고(recruit) 조회
+		List<Long> com_noList = new ArrayList<>();
+		for(int i = 0; i < list.size(); i++) {
+			List<String> sk_nameList = companyDao.findSkillListByRecruit_no(list.get(i).getRecruit_no()); // recruit_no 로 채용공고 요구스킬(c_skill) 조회
+			list.get(i).setSkill(sk_nameList);
+		}
+		System.out.println(list);
+		
+		return list;
+	}
+	
+	@GetMapping("/recommendedMemberResumeInfo")
+	public List<ResumeDto> recommendedMemberResumeInfo() {
+		
+		List<ResumeDto> mainResumeList = resumeDao.findMainResume();
+		for(int i = 0; i < mainResumeList.size(); i++) {
+			List<String> sk_nameList = companyDao.findByResume_no(mainResumeList.get(i).getResume_no());
+			mainResumeList.get(i).setSkill(sk_nameList);
+		}
+		
+		return mainResumeList;
+	}
 	
 	
 }

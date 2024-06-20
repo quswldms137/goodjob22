@@ -10,8 +10,13 @@
 		select * from recruit
 	</select>
 	
-	<!-- 내가 쓴 채용공고 목록 조회하기 -->
+	<!-- com_no 로 받아서 내가 쓴 채용공고 목록 조회용 -->
 	<select id="findByCom_no">
+		select * from recruit where com_no = #{com_no}
+	</select>
+	
+	<!-- 내가 쓴 채용공고 목록 조회하기 -->
+	<select id="findMyRecruit">
 		SELECT title, career, education, location, RANK, pay, DATEDIFF(deadline_date, NOW()) 'deadline_date' from recruit
 	</select>
 	
@@ -34,6 +39,23 @@
 	<select id="findByUsername">
 		select com_no from company where username = #{username}
 	</select>
+	
+	<!-- 로그인시 저장된 회사번호로 채용공고 조회 -->
+	<select id="findRecruitList">
+		SELECT r.title, r.career, r.education, r.location, 
+				r.FIELD, r.RANK, r.pay, r.deadline_date, 
+				r.recruit_no, r.com_no, cd.com_detail_no 
+				FROM recruit r
+		LEFT JOIN company_detail cd
+		ON r.com_no = cd.com_no 
+		WHERE r.com_no = #{com_no}
+	</select>
+	
+	<!-- 이력서 번호로 이력서에 등록된 스킬을 조회해서 스킬 이름 받아오기 -->
+	<select id="findByResume_no">
+		select sk_name from skill where resume_no = #{resume_no}
+	</select>
+	
 	
 	<!-- 채용공고 등록하기 -->
 	<insert id="recruitWrite">
@@ -60,16 +82,6 @@
 							where recruit_no = #{recruit.recruit_no}
 	</update>
 	
-	<!-- 로그인시 저장된 회사번호로 채용공고 조회 -->
-	<select id="findRecruitList">
-		SELECT r.title, r.career, r.education, r.location, 
-				r.FIELD, r.RANK, r.pay, r.deadline_date, 
-				r.recruit_no, r.com_no, cd.com_detail_no 
-				FROM recruit r
-		LEFT JOIN company_detail cd
-		ON r.com_no = cd.com_no 
-		WHERE r.com_no = #{com_no}
-	</select>
 	
 	
 	<!-- 특정 채용공고 삭제 -->

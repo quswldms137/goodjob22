@@ -24,4 +24,5 @@ public class ResumeDto {
 	private String motive;
 	private String personality;
 	private String mem_name;
+	private List<String> skill;
 }
