@@ -18,9 +18,12 @@
 	display: flex;
 	padding: 25px;
 	border: 1px solid #ddd;
-	border-top: 2px solid #FB8500;
 	border-radius: 10px;
 	background-color: #f9f9f9;
+}
+
+.recruit-area:hover {
+	border-top: 1px solid #FB8500;
 }
 
 .recruit-left {
@@ -36,6 +39,10 @@
 
 .recruit-right-top {
 	padding-bottom: 20px;
+}
+
+.recruit_title:hover{
+	color: #FB8500;
 }
 
 .recruit-right-bot {
