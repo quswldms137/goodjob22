@@ -15,6 +15,7 @@ public class RecruitDto_JYC {
 
 	private Long recruit_no;
 	private Long com_no;
+	private String img_url;
 	private Long com_detail_no;
 	private String com_name;
 	private String username;
