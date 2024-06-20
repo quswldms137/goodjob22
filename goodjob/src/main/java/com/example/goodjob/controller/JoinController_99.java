@@ -84,7 +84,8 @@ public class JoinController_99 {
     	if(result != 1) {
     		return ResponseEntity.ok("사용 가능한 아이디입니다.");
     	} else {
-    		return ResponseEntity.badRequest().body("이미 존재하는 아이디입니다.");
+    		return ResponseEntity.ok("이미 존재하는 아이디입니다.");
+    		//return ResponseEntity.badRequest().body("이미 존재하는 아이디입니다.");
     	}
     	
     }
