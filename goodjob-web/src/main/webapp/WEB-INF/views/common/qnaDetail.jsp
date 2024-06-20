@@ -125,6 +125,22 @@ main #container {
 	border-radius:5px;
 	font-size:14px;
 }
+#answer .title{
+	font-size:18px;
+	border-bottom:1px solid #eee;
+	margin-bottom:10px;
+	padding:10px;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	background: #FDFDFD;
+}
+#answer .content{
+	min-height:100px;
+	border-bottom:1px solid #ccc;
+	padding:10px;
+	box-sizing:border-box;
+}
 </style>
 </head>
 <body>
@@ -153,14 +169,17 @@ main #container {
 					</li>
 				</ul>
 			</div>
-			<div id="detail"></div>
+			<div>
 			
+			</div>
+			<div id="detail"></div>
+			<div id="answer"></div>
 			<div class="doModify">
 				<a href="/qna99/qnaWrite?test=1">돌아가기</a>
 				<a href="/qna99/qnaWrite">수정/삭제하기</a>
 			</div>
 			
-			<div id="answer"></div>
+			
 		</div>
 		
 
@@ -224,8 +243,8 @@ main #container {
 							detail += '<div class="content">' + data.content + '</div>';
 							$('#detail').html(detail);
 							// 답변 내역
-							let answer = '<div>문의 답변</div>';
-							answer += '<div>'+ data.answer +'</div>';
+							let answer = '<div class="title">문의 답변</div>';
+							answer += '<div class="content">'+ data.answer +'</div>';
 							$('#answer').html(answer);
 							
 						} else {
