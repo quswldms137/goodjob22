@@ -166,7 +166,6 @@ input[type=button]:hover{
 		
 		function changeScrap(event){
 			const id = event;
-			const childElement = id.srcElement;
 
 			const username = localStorage.getItem("username");
 			

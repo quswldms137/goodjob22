@@ -10,7 +10,7 @@
 		SELECT com_name FROM company WHERE com_no = #{com_no};
 	</select>
 	<select id="getCom_noOrderByVip">
-		SELECT com_no FROM company ORDER BY money DESC;
+		SELECT com_no FROM company ORDER BY money DESC LIMIT 0, 4;
 	</select>
 	<select id="getCompanyDtoList" resultType="com.example.goodjob.dto.CompanyDto_JYC">
 		SELECT * FROM company ORDER BY com_name ASC LIMIT #{start}, 5;
