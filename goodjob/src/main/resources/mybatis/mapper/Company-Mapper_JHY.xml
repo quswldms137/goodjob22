@@ -4,25 +4,35 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.example.goodjob.dao.ICompanyDao_JHY">
+	
 	<!-- 내가 쓴 채용공고 목록 조회하기 (지금은 로그인 연동 X -> 등록된 채용공고 전부다 불러옴)-->
 	<select id="findAll">
 		select * from recruit
 	</select>
+	
 	<!-- 내가 쓴 채용공고 목록 조회하기 -->
 	<select id="findByCom_no">
 		SELECT title, career, education, location, RANK, pay, DATEDIFF(deadline_date, NOW()) 'deadline_date' from recruit
 	</select>
+	
 	<!-- 제일 최근에 등록한 채용공고 조회 -->
 	<select id="findLatest">
 		select * from recruit where com_no = #{com_no} order by reg_date desc
 	</select>
+	
 	<!-- 채용공고에 등록된 요구스킬 조회 -->
 	<select id="findSkillListByRecruit_no">
 		select skill_name from c_skill where recruit_no = #{recruit_no}
 	</select>
+	
 	<!-- 채용공고 번호로 특정 채용공고 정보 조회 -->
 	<select id="findByRecruit_no">
 		select * from recruit where recruit_no = #{recruit_no}
+	</select>
+	
+	<!-- username 으로 com_no 받아오기 -->
+	<select id="findByUsername">
+		select com_no from company where username = #{username}
 	</select>
 	
 	<!-- 채용공고 등록하기 -->

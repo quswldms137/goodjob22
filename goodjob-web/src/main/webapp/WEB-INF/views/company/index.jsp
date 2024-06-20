@@ -63,7 +63,7 @@
 .updateBtn,
 .deleteBtn {
 	color: white;
-	background-color: orange;
+	background-color: #FB8500;
 	width: 60px;
 	height: 40px;
 	text-align: center;

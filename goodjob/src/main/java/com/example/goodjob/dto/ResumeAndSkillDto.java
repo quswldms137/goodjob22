@@ -25,4 +25,5 @@ public class ResumeAndSkillDto {
 	private String personality;
 	private String mem_name;
 	private List<String> sk_name;
+	private Long com_no;
 }

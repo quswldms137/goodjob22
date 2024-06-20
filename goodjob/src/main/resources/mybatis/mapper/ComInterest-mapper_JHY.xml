@@ -4,8 +4,24 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.goodjob.dao.IComInterestDao_JHY">
 	
+	<!-- 로그인된 회사의 관심 구직자 목록 조회 -->
 	<select id="findMem_no">
 		select mem_no from com_interest where com_no = #{com_no}
 	</select>
 	
+	<!-- 관심 구직자 등록인지 해제인지 판별을 위한 관심 구직자 조회 -->
+	<select id="findByMem_noAndCom_no">
+		select count(mem_no) from com_interest where mem_no = #{mem_no} and com_no = #{com_no}
+	</select>
+	
+	
+	<!-- 기업 관심 구직자 등록 -->
+	<insert id="regInterestMember">
+		insert into com_interest values (null, #{mem_no}, #{com_no})
+	</insert>
+	
+	<!-- 기업 관심 구직자 해제 -->
+	<delete id="deleteInterestMember">
+		delete from com_interest where mem_no = #{mem_no} and com_no = #{com_no}
+	</delete>
 </mapper>

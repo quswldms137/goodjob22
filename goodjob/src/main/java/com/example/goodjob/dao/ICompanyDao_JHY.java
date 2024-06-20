@@ -31,5 +31,6 @@ public interface ICompanyDao_JHY {
 	public List<String> findSkillListByRecruit_no(@Param("recruit_no") Long recruit_no);
 	// 채용공고 수정
 	public boolean updateRecruit(@Param("recruit") RecruitDto recruit);
-	
+	// username 으로 com_no 를 받아오기
+	public Long findByUsername(@Param("username") String username);
 }
