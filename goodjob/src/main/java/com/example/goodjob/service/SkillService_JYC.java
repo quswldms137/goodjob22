@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.goodjob.dao.ICSkillDao_JYC;
 import com.example.goodjob.dao.ICompanyDao_JYC;
+import com.example.goodjob.dao.ICompanyDetailDao_JYC;
 import com.example.goodjob.dao.IMemberDao;
 import com.example.goodjob.dao.IRecruitDao_JYC;
 import com.example.goodjob.dao.IResumeDao_JYC;
@@ -26,15 +27,17 @@ public class SkillService_JYC {
 	private ICSkillDao_JYC iCSkillDao;
 	private IRecruitDao_JYC iRecruitDao;
 	private ICompanyDao_JYC iCompanyDao;
+	private ICompanyDetailDao_JYC iCompanyDetailDao;
 
 	public SkillService_JYC(IMemberDao iMemberDao, IResumeDao_JYC iResumeDao, ISkillDao_JYC iSkillDao, ICSkillDao_JYC iCSkillDao, 
-			IRecruitDao_JYC iRecruitDao, ICompanyDao_JYC iCompanyDao) {
+			IRecruitDao_JYC iRecruitDao, ICompanyDao_JYC iCompanyDao, ICompanyDetailDao_JYC iCompanyDetailDao) {
 		this.iMemberDao = iMemberDao;
 		this.iResumeDao = iResumeDao;
 		this.iSkillDao = iSkillDao;
 		this.iCSkillDao = iCSkillDao;
 		this.iRecruitDao = iRecruitDao;
 		this.iCompanyDao = iCompanyDao;
+		this.iCompanyDetailDao = iCompanyDetailDao;
 	}
 
 	public List<RecruitDto_JYC> getSkillMatching(String username) {
@@ -81,7 +84,7 @@ public class SkillService_JYC {
 		
 		recruitDtoList.forEach(recruitDto ->{
 			recruitDto.setCom_name(iCompanyDao.getCom_name(recruitDto.getCom_no()));
-			
+			recruitDto.setCom_detail_no(iCompanyDetailDao.getCom_detail_no(recruitDto.getCom_no()));
 		});
 		
 		return recruitDtoList;

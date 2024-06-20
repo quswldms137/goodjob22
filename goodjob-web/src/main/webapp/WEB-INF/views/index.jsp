@@ -16,10 +16,12 @@ main {
 	margin: 80px auto;
 	border: 1px solid #eee;
 }
-.slide{
+
+.slide {
 	display: flex;
 }
-#vip, #everyRecruit{
+
+#vip {
 	margin: 20px 0;
 	width: 1100px;
 	height: 300px;
@@ -28,24 +30,26 @@ main {
 	flex-wrap: nowrap;
 	position: relative;
 }
-#skillRecommendation{
+
+#skillRecommendation {
 	margin: 20px 0;
-	height: 300px;
+	height: 330px;
 	overflow: hidden;
 	transition: all 1s ease-out;
 	display: flex;
 }
-#vip{
+
+#vip {
 	width: 300vw;
 	margin: 20px 0;
-	height: 300px;
+	height: 330px;
 	overflow: hidden;
 	display: flex;
 	flex-wrap: nowrap;
 	position: relative;
 }
 
-#all{
+#all {
 	width: 100%;
 	margin: 20px 0;
 	overflow: hidden;
@@ -60,7 +64,7 @@ label:hover {
 
 .skill, .all {
 	width: 275px;
-	height: 300px;
+	height: 330px;
 	border: 1px solid black;
 	box-sizing: border-box;
 }
@@ -72,7 +76,7 @@ label:hover {
 	box-sizing: border-box;
 }
 
-.skill p, .vip p, .all p{
+.skill p, .vip p, .all p {
 	margin: 5px 0;
 }
 
@@ -105,29 +109,42 @@ label:hover {
 	cursor: pointer;
 }
 
-#prev{
-	left:150px;
-	top:100px;
-	font-size:50px;
-	cursor:pointer;
+#prev {
+	left: 150px;
+	top: 100px;
+	font-size: 50px;
+	cursor: pointer;
 }
 
-#next{
-	left:1400px;
-	top:100px;
-	font-size:50px;
-	cursor:pointer;
+#next {
+	left: 1400px;
+	top: 100px;
+	font-size: 50px;
+	cursor: pointer;
 }
-.page{
+
+.page {
 	width: 1100px;
 	margin: 20px;
 }
-body::-webkit-scrollbar{
-  display:none;
+
+body::-webkit-scrollbar {
+	display: none;
 }
-출처: https://wooaoe.tistory.com/49 [개발개발 울었다:티스토리]
+#everyRecruit{
+	width: 1100px;
+	height: fit-content;
+	display: flex;
+	flex-wrap: wrap;
+	row-gap: 20px;
+	position: relative;
+}
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
 </head>
 <body>
 	<header>
@@ -136,12 +153,12 @@ body::-webkit-scrollbar{
 
 
 	<main>
-		
-		<div id="skillRecommendation">
-		
-		</div>
-
+		<h3 class="skillMatchingH3">스킬 매칭</h3>
+		<div id="skillRecommendation"></div>
+		<h3>VIP 채용공고</h3>
 		<div id="vip"></div>
+
+		<h3>채용공고</h3>
 		<div id="everyRecruit"></div>
 
 
@@ -161,46 +178,36 @@ body::-webkit-scrollbar{
 				dataType : "json",
 				success : function(response) {
 					
-					let str = "";
-					let index = 0;
-					let slide = 1;
-					 
-					response.forEach(item =>{
+					let str = '';
+					if(response.length > 0){
 						
-						if(index % 4 === 0){
-							str += '<div class="slide" id="slide' + slide + '">';
-							slide++;
-						}
+					
+						for(let i = 0; i < 4; i++){
+							
+						const location = response[i].location;
 						
-						const array = item.location.split(" ");
-						const location = array[0] + " " + array[1];
-						
-						const oldDate = new Date(item.deadline_date);
+						const oldDate = new Date(response[i].deadline_date);
 						const newDate = new Date();
 						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						str += '<div class="skill"> ' + 
-						'<a href=#><div> ' +
+						'<a href="/employ/detail/' + response[i].recruit_no + '/' + response[i].com_no + '/' + response[i].com_detail_no + '" ><div> ' +
 						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
 						'</div> ' + 
-						'<p>' + item.com_name + '</p> ' +
-						'<p><b>' + item.title + '</b></p> ' +
+						'<p>' + response[i].com_name + '</p> ' +
+						'<p><b>' + response[i].title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
 						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
-						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
+						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + response[i].recruit_no + '"></span></p> ' +
 						'</div> ';
-						if(index % 4 === 3){
-							str += '</div>';
-						}
 						
-						index++;
-					});
+						}						
 					
-					let width = slide * 1300;
-						console.log(str);
 					$("#skillRecommendation").html(str);
-					$("#skillRecommendation").css("width", width + "px");
-					$("#slide" + (slide - 1)).css("display", "none");
+					}else{
+						$("#skillRecommendation").css("display", "none");
+						$(".skillMatchingH3").css("display", "none");
+					}
 					
 				},
 				error : function(xhr, status, error) {
@@ -214,9 +221,11 @@ body::-webkit-scrollbar{
 				success : function(response){
 
 					let str = '';
-					response.forEach(item =>{
-						const array = item.location.split(" ");
-						const location = array[0] + " " + array[1];
+					console.log(response);
+					
+					response.forEach(item => {
+						
+						const location = item.location;
 						
 						const oldDate = new Date(item.deadline_date);
 						const newDate = new Date();
@@ -224,17 +233,17 @@ body::-webkit-scrollbar{
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						
 						str += '<div class="vip"> ' + 
-						'<a href=#><div> ' +
+						'<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" ><div> ' +
 						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
 						'</div> ' + 
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
 						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
-						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
+						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
 						'</div> ';
 					});
-					$("#vip").css("width",  300 + "vw");
+					
 					$("#vip").html(str);
 				},
 				error : function(xhr, status, error){
@@ -249,16 +258,8 @@ body::-webkit-scrollbar{
 					let str = '';
 
 					const totalPage = (response.length)
-					let index = 0;
-					let count = 0;
 					response.forEach(item =>{
 						
-						index++;
-						count++;
-						
-						if(index = 0) {
-							str += '<div class="page" id="page' + index + '">';
-						}
 						const array = item.location.split(" ");
 						const location = array[0] + " " + array[1];
 						const oldDate = new Date(item.deadline_date);
@@ -266,19 +267,15 @@ body::-webkit-scrollbar{
 						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						str += '<div class="all"> ' + 
-						'<a href=#><div> ' +
+						'<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" ><div> ' +
 						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
 						'</div> ' + 
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
 						'<p class="last"><span class="applyBtn">즉시지원</span><span>D-' + diff + '</span> ' + 
-						'<span><img alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg"></span></p> ' +
+						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
 						'</div> ';
-						if(count === 4){
-							count = 0;
-							str += "</div>";
-						}
 					});
 					
 					$("#everyRecruit").html(str);
@@ -291,11 +288,46 @@ body::-webkit-scrollbar{
 			
 		});
 		
+
+		function changeScrap(event){
+			const img = event.target;
+			const username = localStorage.getItem("username");
+			
+			recruit_no = event.target.className.split(" ")[1].substring(5);
+			
+			const xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				
+				if(this.responseText === "공고 스크랩이 등록되었습니다." || this.responseText === "공고 스크랩이 취소되었습니다."){
+					
+					if(img.src === "http://localhost:9991/resource/img/yesscrap.png"){
+						img.src = "http://localhost:9991/resource/img/noscrap.png";
+					}else {
+						img.src = "http://localhost:9991/resource/img/yesscrap.png";
+					}
+				
+					alert(this.responseText);
+				}else{
+					alert("로그인 되어있어야 사용 가능한 기능입니다.");
+				}
+						
+			}
+			
+			xhr.open("POST", "http://localhost:8888/api/subscrap/scrap", true);
+			xhr.setRequestHeader("Content-type", "application/json");
+			const data = JSON.stringify({
+				username : username,
+				recruit_no : recruit_no
+			});
+			xhr.send(data);
+			
+		}
+		
+		/*
 		let currentPage = 0;
 		let startPage = 0;
 		let totalPage = document.querySelectorAll(".skill");
 		console.log(totalPage);
-		
 		$('#prevSkill').on('click', function() {
 			currentPage++;
 			  $('#vip').css('transform', 'translateX(' + (-100) + 'vw)');
@@ -307,11 +339,15 @@ body::-webkit-scrollbar{
 			  $('#vip').css('transform', 'translateX(' + (+100) + 'vw)');
 			  $('#vip').css('transition', 'transform 0.5s ease');
 			});
+		*/
 		
 		
 		
 	</script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
 
 </body>
 </html>
