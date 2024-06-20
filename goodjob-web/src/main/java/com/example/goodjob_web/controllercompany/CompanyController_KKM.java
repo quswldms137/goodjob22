@@ -36,4 +36,10 @@ public class CompanyController_KKM {
 		
 		return"company/interestMemberResumeDetail";
 	}
+	@RequestMapping("event")
+	public String errorpage() {
+		
+		return"company/event";
+	}
+	
 }

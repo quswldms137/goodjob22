@@ -13,8 +13,7 @@ public class RecruitService93 {
 	@Autowired
 	private IRecruitDao93 dao93;
 	
-	public RecruitDto recruitDetailService(@RequestParam("recruit_no") Long recruit_no,
-			@RequestParam("com_no") Long com_no) {
+	public RecruitDto recruitDetailService(Long recruit_no, Long com_no) {
 		
 		return dao93.recruitDetail(recruit_no, com_no);
 	}

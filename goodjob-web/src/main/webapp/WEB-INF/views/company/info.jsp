@@ -142,7 +142,7 @@ input[type="button"] {
 					<div class="personal_info_photo">
 						<label for="photo" class="photolabel">
 							<div class="photoFrame-box">
-								<img id="photoFrame" title="photo" width="800" height="200"
+								<img id="photoFrame" title="photo" width="558" height="200"
 									src="" alt="Photo Preview" style="visibility: hidden;">
 							</div> <input type="file" class="file" id="photo" name="img_url"
 							accept="image/*" onchange="previewImage(event)">

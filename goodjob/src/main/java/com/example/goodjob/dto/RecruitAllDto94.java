@@ -20,6 +20,8 @@ public class RecruitAllDto94 {
 	
 	private Long recruit_no;
 	private Long com_no;
+	private Long com_detail_no;
+	
 	private String username;
 	private String career;
 	private String education;

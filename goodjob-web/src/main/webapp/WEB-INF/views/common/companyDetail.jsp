@@ -231,15 +231,17 @@ $(document).ready(function() {
 			// 반복문을 통해 데이터 삽입
 			data.forEach(function(recruit) {
 				postingDetail.append(
-					"<div class='postingList'>" +
-						"<h4>" + recruit.title + "</h4>" +
-						"<p>" + 
-						recruit.career + " | " +
-						recruit.location + " | " +
-						recruit.qualification + " | " +
-						recruit.deadline_date + 
-						"</p>" +
-					"</div>"
+					"<a href='/employ/detail/"  + recruit.recruit_no + "/" + recruit.com_no + "/" + recruit.com_detail_no + "'>" +
+						"<div class='postingList'>" +
+							"<h4>" + recruit.title + "</h4>" +
+							"<p>" + 
+							recruit.career + " | " +
+							recruit.location + " | " +
+							recruit.qualification + " | " +
+							recruit.deadline_date + 
+							"</p>" +
+						"</div>" +
+					"</a>"
 				);
 			});
 		},

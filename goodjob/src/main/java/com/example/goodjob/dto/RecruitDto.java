@@ -14,6 +14,8 @@ public class RecruitDto {
 
 	private Long recruit_no;
 	private Long com_no;
+	private Long com_detail_no;
+	
 	private String username;
 	private String career;
 	private String education;
@@ -32,4 +34,5 @@ public class RecruitDto {
 	private String p_number;
 	private String recruit_intro;
 	private List<String> skill;
+	
 }

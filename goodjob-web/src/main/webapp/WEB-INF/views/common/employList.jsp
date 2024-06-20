@@ -293,7 +293,7 @@ function renderRecruitList(data) {
         mainContent.append(
             "<div class='company-info'>" +
                 "<div class='company-img'>" +
-                    "<a href='/employ/detail/" + recruit.recruit_no + "'>" +
+                    "<a href='/employ/detail/" + recruit.recruit_no + "/" + recruit.com_no + "/" + recruit.com_detail_no + "'>" +
                         "<img src='/resource/img/" + recruit.img_url + "' alt='기업사진'>" +
                     "</a>" +
                 "</div>" +
@@ -302,15 +302,15 @@ function renderRecruitList(data) {
                         "<div id='comname'>" + recruit.com_name + "</div>" +
                     "</a>" +
                     "<div class='company-name'>" +
-                        "<a href='/employ/detail/" + recruit.recruit_no + "'>" +
+                        "<a href='/employ/detail/" + recruit.recruit_no + "/" + recruit.com_no + "/" + recruit.com_detail_no + "'>" +
                             recruit.title +
                         "</a>" +
                     "</div>" +
                     "<p>" +
                         recruit.sectors + " | " +
+                        recruit.location + " | " +
                         recruit.com_type + " | " +
                         recruit.career + " | " +
-                        recruit.qualification + " | " +
                         "공고마감일 : " + recruit.deadline_date +
                     "</p>" +
                 "</div>" +
@@ -346,7 +346,36 @@ function renderRecruitList(data) {
             }
         });
     });
+  	//지원하기 버튼 
+    $('.apply-button').click(function () {
+    	const recruit_no = $(this).data("recruit_no");
+        console.log(recruit_no);
+    	
+    	const username = localStorage.getItem("username");
+    	console.log(username);
+
+        $.ajax({
+            url: 'http://localhost:8888/api/recruit94/nowApply',
+            method: "POST",
+            beforeSend: function(xhr) {
+				// 요청 헤더에 사용자 이름을 설정
+				xhr.setRequestHeader("username", username);
+			},
+            data: {
+            	recruit_no: recruit_no      	
+            },
+            success: function (response) {
+                alert("해당 공고에 지원 성공하셨습니다😎");
+            },
+            error: function (error) {
+                alert("지원에 실패 하셨습니다😵");
+                console.error('Error:', error);
+            }
+        });
+    });
 }
+
+
 </script>
 </body>
 </html>

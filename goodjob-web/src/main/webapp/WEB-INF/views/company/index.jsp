@@ -18,9 +18,12 @@
 	display: flex;
 	padding: 25px;
 	border: 1px solid #ddd;
-	border-top: 2px solid #FB8500;
 	border-radius: 10px;
 	background-color: #f9f9f9;
+}
+
+.recruit-area:hover {
+	border-top: 1px solid #FB8500;
 }
 
 .recruit-left {
@@ -36,6 +39,10 @@
 
 .recruit-right-top {
 	padding-bottom: 20px;
+}
+
+.recruit_title:hover{
+	color: #FB8500;
 }
 
 .recruit-right-bot {
@@ -118,7 +125,7 @@
 								+ '</div> '
 								+ '<div class="recruit-mid"> '
 									+ '<div class="recruit-right-top"> '
-										+ '<h2><a class="recruit_title" href="/employ/detail/' + item.recruit_no + '">공고 제목이 들어가는 부분 입니다.</a></h2> '
+										+ '<h2><a class="recruit_title" href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '">공고 제목이 들어가는 부분 입니다.</a></h2> '
 									+ '</div> '
 									+ '<div class="recruit-right-bot"> '
 										+ '<p class="recruit_career">요구 경력</p> '
