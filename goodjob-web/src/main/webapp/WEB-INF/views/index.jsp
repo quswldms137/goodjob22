@@ -111,11 +111,15 @@ label:hover {
 	height:120px;
 	border-bottom:1px solid #eee;
 	overflow:hidden;
+	padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 .skill img, .vip img, .all img {
 	max-width: 100%;
 	padding:5px;
 	box-sizing:border-box;
+	object-fit: contain;
 }
 
 .scrapImg {
@@ -269,7 +273,6 @@ label:hover {
 					let str = '';
 					
 					response.forEach(item => {
-						
 						const location = item.location;
 						
 						const oldDate = new Date(item.deadline_date);
@@ -303,9 +306,8 @@ label:hover {
 					let str = '';
 					const totalPage = (response.length)
 					response.forEach(item =>{
-						
 						const array = item.location.split(" ");
-						const location = array[0] + " " + array[1];
+						const location = array[0];
 						const oldDate = new Date(item.deadline_date);
 						const newDate = new Date();
 						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
