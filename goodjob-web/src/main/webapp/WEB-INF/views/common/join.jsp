@@ -200,6 +200,14 @@ main {
 	border-top:1px solid #dadada;
 	border-radius:0 0 5px 5px;
 }
+#idcheckok{
+color:green
+}
+#idcheckno{
+color:red
+}
+
+
 </style>
 </head>
 <body>
@@ -216,6 +224,7 @@ main {
 			<form name="frm_memJoin">
 				<div class="memberJoinform">
 					<input type="text" name="username" placeholder="아이디">
+					<span id="idcheckok"></span><span id="idcheckno"></span>
 					<button onclick="checkUsername(event)" class="id-dupl-chk">ID 중복 확인</button>
 					<input type="password" name="password" placeholder="비밀번호">
 					<input type="hidden" name="role" value="ROLE_MEMBER">
@@ -280,15 +289,27 @@ main {
 			
 			const sendData = JSON.stringify(username);
 			const xhttp = new XMLHttpRequest();
+			const idcheckok = document.querySelector("#idcheckok");
+			const idcheckno = document.querySelector("#idcheckno");
+			const inpusername = document.querySelector(".username");
 			
 			xhttp.onload = function() {
 				if (this.status === 200) {
-					
+					if(this.responseText == "사용 가능한 아이디입니다."){
+						idcheckno.innerHTML="";
+						idcheckok.innerHTML=this.responseText;	
+						inputUsername.style.border = '1px solid green';
+							
+					}else{
+						idcheckok.innerHTML="";
+						idcheckno.innerHTML=this.responseText;
+						inputUsername.style.border = '1px solid red';
+					}		
 					alert(this.responseText);
 				} else {
-					alert(this.responseText);
+					//alert(this.responseText);
 				}
-				inputUsername.focus();
+				//inputUsername.focus();
 			};
 			xhttp.onerror = function() {
 				alert("네트워크 오류가 발생했습니다.");
