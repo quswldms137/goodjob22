@@ -42,8 +42,8 @@ header {
 
 #head {
 	display: flex;
-	justify-content: space-evenly;
-	padding: 15px 0 10px;
+	justify-content: space-between;
+	align-items:center;
 	max-width: 1100px;
 	height: 100%;
 	margin: 0 auto;
@@ -57,46 +57,19 @@ header {
 
 #head .logo{
 	text-align:center;
-	padding-bottom:15px;
 	line-height:normal;
 }
 #head .logo img {
+	display:inline-block;
 	width: 150px;
 }
 
-#head .nav ul {
-	display: flex;
-	gap: 30px;
-	padding-right: 65px;
-}
-
-#head .nav ul li a {
-	font-size: 15px;
-	font-weight: bold;
-}
-
-#head .search-bar #head-search {
-	width: 250px;
-	height: 30px;
-	border: 1px solid #FB8500;
-	border-radius: 8px;
-	padding-left: 10px;
-	box-sizing: border-box;
-}
-
-.search-bar-area {
-	position: relative;
-}
 
 #head label {
 	cursor: pointer;
 	position: absolute;
 	right: 10px;
 	top: 7px;
-}
-
-#search-submit {
-	display: none;
 }
 
 #head .user-area ul {
@@ -141,9 +114,10 @@ header {
 	color: white;
 }
 .hairImg{
-	opacity: 0.1;
+	opacity: 0.5;
 	position:absolute;
-	top:20px;
+	top:10px;
+	right:1000px;
 }
 </style>
 </head>
@@ -166,19 +140,26 @@ header {
 					<div><a href="/resume/resumeManage"><span id="username"></span></a> <a href="#" onclick="logout()" class="logout-btn"> 로그아웃</a></div>
 					<div></div>
 				</div>
-			</div>
 			<span><a href="/admin/login" id="adminLogin"><img alt="머리카락 사진" class="hairImg" src="/resource/img/hair.png"></a></span>
+			</div>
 		</div>
 	</header>
 <script>
 window.onload = function(){
 	const username = localStorage.getItem("username");
-	console.log(username);
+	const role = localStorage.getItem("role");
 	
 	if(username){
 		notLogin.style.display = "none";
 		login.style.display = "block";
-		document.getElementById("username").innerText = username + ' 님';
+		const usernameElement = document.getElementById("username");
+		usernameElement.innerText = username + ' 님';
+		
+		const parentLink = usernameElement.closest('a');
+		
+		if(role === 'ROLE_MANAGER'){
+			parentLink.href = "/admin";
+		} 
 	}
 }
 

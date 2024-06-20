@@ -187,7 +187,7 @@ h1, h2 {
 					});
 				} else {
 					str += '<p>지원받은 이력서가 없습니다</p>';
-					str += '<p>노래듣고가세요~</p>'
+					str += '<p>쉬었다 가세요~~</p>'
 					str += '<div id="player"></div>';
 				}
 				
@@ -215,7 +215,7 @@ h1, h2 {
         player = new YT.Player('player', {
             height: '390',
             width: '860',
-            videoId: 'ebPTIftheTw', // 표시할 YouTube 비디오 ID
+            videoId: 'OfQuTmDGY8A', // 표시할 YouTube 비디오 ID
             events: {
                 'onReady': onPlayerReady,
                 'onStateChange': onPlayerStateChange

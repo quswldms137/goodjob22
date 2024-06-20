@@ -7,6 +7,12 @@
 	<select id="findByMem_no" resultType="com.example.goodjob.dto.ResumeDto">
 		SELECT * FROM resume WHERE mem_no = #{mem_no};
 	</select>
+	<select id="findByResume_no" resultType="com.example.goodjob.dto.ResumeDto">
+		SELECT * FROM resume WHERE resume_no = #{resume_no};
+	</select>
+	<select id="findByMem_noMain" resultType="com.example.goodjob.dto.ResumeDto">
+		SELECT * FROM resume WHERE mem_no = #{mem_no} AND main = 1;
+	</select>
 	<select id="getResume_no">
 		SELECT resume_no FROM resume WHERE mem_no = #{mem_no};
 	</select>

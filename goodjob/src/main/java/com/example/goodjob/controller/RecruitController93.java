@@ -82,4 +82,23 @@ public class RecruitController93 {
 		
 	}
 	
+	@GetMapping("/applyChk")
+	public ResponseEntity<String> applyChk(@RequestParam("resume_no") Long resume_no, @RequestParam("recruit_no") Long recruit_no){
+		
+		int result = memRecruitService.applyChkService(resume_no, recruit_no);
+		
+		if(result == 1) {
+			return ResponseEntity.ok("지원한공고");
+		}
+		return ResponseEntity.ok("지원한공고 아님");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

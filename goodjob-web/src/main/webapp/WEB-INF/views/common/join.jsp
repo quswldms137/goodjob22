@@ -200,6 +200,14 @@ main {
 	border-top:1px solid #dadada;
 	border-radius:0 0 5px 5px;
 }
+#idcheckok{
+color:green
+}
+#idcheckno{
+color:red
+}
+
+
 </style>
 </head>
 <body>
@@ -216,6 +224,7 @@ main {
 			<form name="frm_memJoin">
 				<div class="memberJoinform">
 					<input type="text" name="username" placeholder="아이디">
+					<span id="idcheckok"></span><span id="idcheckno"></span>
 					<button onclick="checkUsername(event)" class="id-dupl-chk">ID 중복 확인</button>
 					<input type="password" name="password" placeholder="비밀번호">
 					<input type="hidden" name="role" value="ROLE_MEMBER">
@@ -258,6 +267,8 @@ main {
 			</form>
 		</div>
 		<script>
+		var isUsernameChecked = false;
+		var usernameCheckedNum = 0;
 		
 		function chkRadio(){
 			const nam = document.getElementById("nam");
@@ -280,15 +291,28 @@ main {
 			
 			const sendData = JSON.stringify(username);
 			const xhttp = new XMLHttpRequest();
+			const idcheckok = document.querySelector("#idcheckok");
+			const idcheckno = document.querySelector("#idcheckno");
+			const inpusername = document.querySelector(".username");
 			
 			xhttp.onload = function() {
 				if (this.status === 200) {
-					
-					alert(this.responseText);
+					if(this.responseText == "사용 가능한 아이디입니다."){
+						idcheckno.innerHTML="";
+						idcheckok.innerHTML=this.responseText;	
+						inputUsername.style.border = '1px solid green';
+						usernameCheckedNum = 1
+					}else{
+						idcheckok.innerHTML="";
+						idcheckno.innerHTML=this.responseText;
+						inputUsername.style.border = '1px solid red';
+						usernameCheckedNum = 2;
+						return ;
+					}		
 				} else {
-					alert(this.responseText);
+					//alert(this.responseText);
 				}
-				inputUsername.focus();
+				//inputUsername.focus();
 			};
 			xhttp.onerror = function() {
 				alert("네트워크 오류가 발생했습니다.");
@@ -318,86 +342,95 @@ main {
 
 		function memberSubmit(event) {
 			event.preventDefault();
+			if(usernameCheckedNum == 0){
+				alert("ID 중복 확인을 해주세요.");
+				return ;
+			} else if(usernameCheckedNum == 2){
+				alert("중복된 아이디 입니다. 다른 아이디를 입력해주세요.");
+				return ;
+			} else if(usernameCheckedNum == 1){
+				const username1 = document
+				.querySelector("Input[name='username']");
+		const password1 = document
+				.querySelector("Input[name='password']");
+		const role1 = document.querySelector("Input[name='role']");
+		const mem_name1 = document
+				.querySelector("Input[name='mem_name']");
+		const mem_tel1 = document
+				.querySelector("Input[name='mem_tel']");
+		const mem_email1 = document
+				.querySelector("Input[name='mem_email']");
+		const mem_gender1 = document
+				.querySelector("Input[name='mem_gender']:checked");
+		const mem_birth1 = document
+				.querySelector("Input[name='mem_birth']");
+		const mem_addr1 = document
+				.querySelector("Input[name='mem_addr']");
 
-			const username1 = document
-					.querySelector("Input[name='username']");
-			const password1 = document
-					.querySelector("Input[name='password']");
-			const role1 = document.querySelector("Input[name='role']");
-			const mem_name1 = document
-					.querySelector("Input[name='mem_name']");
-			const mem_tel1 = document
-					.querySelector("Input[name='mem_tel']");
-			const mem_email1 = document
-					.querySelector("Input[name='mem_email']");
-			const mem_gender1 = document
-					.querySelector("Input[name='mem_gender']:checked");
-			const mem_birth1 = document
-					.querySelector("Input[name='mem_birth']");
-			const mem_addr1 = document
-					.querySelector("Input[name='mem_addr']");
-
-			if (username1.value == '') {
-				alert("아이디를 입력해 주세요.");
-				username1.focus();
-				return;
-			} else if (password1.value == '') {
-				alert("비밀번호를 입력해 주세요.");
-				password1.focus();
-				return;
-			} else if (mem_name1.value == '') {
-				alert("이름을 입력해 주세요.");
-				mem_name1.focus();
-				return;
-			} else if (mem_tel1.value == '') {
-				alert("전화번호를 입력해 주세요.");
-				mem_tel1.focus();
-				return;
-			} else if (mem_tel1.value.match(/[^0-9]/g)) {
-				alert("전화번호는 숫자만 입력해주세요.");
-				return;
-			} else if (mem_email1.value == '') {
-				alert("이메일을 입력해 주세요.");
-				mem_email1.focus();
-				return;
-			} else if (!mem_gender1) {
-				alert("성별을 선택해 주세요.");
-				return;
-			} else if (mem_birth1.value == '') {
-				alert("생년월일을 선택해 주세요.");
-				mem_birth1.focus();
-				return;
-			} else if (mem_addr1.value == '') {
-				alert("주소를 입력해주세요.");
-				mem_addr1.focus();
-				return;
-			} else {
-				const member = {
-					username : username1.value,
-					password : password1.value,
-					role : role1.value,
-					mem_name : mem_name1.value,
-					mem_tel : mem_tel1.value,
-					mem_email : mem_email1.value,
-					mem_gender : mem_gender1.value,
-					mem_birth : mem_birth1.value,
-					mem_addr : mem_addr1.value
-				}
-				console.log(member);
-				const sendData = JSON.stringify(member);
-				const xhttp = new XMLHttpRequest();
-				xhttp.onload = function() {
-					if (this.status === 200) {
-						alert(this.responseText);
-						window.location.href = "http://localhost:9991/common99";
-					} else {
-						alert(this.responseText);
-					}
-				}
-				xhttp.open("POST", "http://localhost:8888/api/join/member");
-				xhttp.setRequestHeader("Content-type", "application/json");
-				xhttp.send(sendData);
+		if (username1.value == '') {
+			alert("아이디를 입력해 주세요.");
+			username1.focus();
+			return;
+		} else if (password1.value == '') {
+			alert("비밀번호를 입력해 주세요.");
+			password1.focus();
+			return;
+		} else if (mem_name1.value == '') {
+			alert("이름을 입력해 주세요.");
+			mem_name1.focus();
+			return;
+		} else if (mem_tel1.value == '') {
+			alert("전화번호를 입력해 주세요.");
+			mem_tel1.focus();
+			return;
+		} else if (mem_tel1.value.match(/[^0-9]/g)) {
+			alert("전화번호는 숫자만 입력해주세요.");
+			return;
+		} else if (mem_email1.value == '') {
+			alert("이메일을 입력해 주세요.");
+			mem_email1.focus();
+			return;
+		} else if (!mem_gender1) {
+			alert("성별을 선택해 주세요.");
+			return;
+		} else if (mem_birth1.value == '') {
+			alert("생년월일을 선택해 주세요.");
+			mem_birth1.focus();
+			return;
+		} else if (mem_addr1.value == '') {
+			alert("주소를 입력해주세요.");
+			mem_addr1.focus();
+			return;
+		} else {
+			const member = {
+				username : username1.value,
+				password : password1.value,
+				role : role1.value,
+				mem_name : mem_name1.value,
+				mem_tel : mem_tel1.value,
+				mem_email : mem_email1.value,
+				mem_gender : mem_gender1.value,
+				mem_birth : mem_birth1.value,
+				mem_addr : mem_addr1.value
 			}
+			console.log(member);
+			const sendData = JSON.stringify(member);
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function() {
+				if (this.status === 200) {
+					alert(this.responseText);
+					window.location.href = "http://localhost:9991/";
+				} else {
+					alert("가입실패");
+				}
+			}
+			xhttp.open("POST", "http://localhost:8888/api/join/member");
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(sendData);
+		}
+				
+			}
+			
 
 		}
 
@@ -488,7 +521,7 @@ main {
 				xhttp.onload = function() {
 					if (this.status === 200) {
 						alert(this.responseText);
-						window.location.href = "http://localhost:9991/common99";
+						window.location.href = "http://localhost:9991/";
 					} else {
 						alert("다시 가입을 시도해주시기 바랍니다.");
 					}

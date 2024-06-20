@@ -157,7 +157,7 @@ header {
 						<li><a href="#">커뮤니티</a></li>
 						<li><a href="#">스킬매칭</a></li>
 						<li><a href="#">이벤트</a></li>
-						<li><a href="/qna99/qnaWrite">공지사항</a></li>
+						<li><a href="/qna99/qnaWrite">고객센터</a></li>
 					</ul>
 				</div>
 				<div class="search-bar-area">
@@ -182,7 +182,7 @@ header {
 					<div><a href="/resume/resumeManage"><span id="username"></span></a> <a href="#" onclick="logout()" class="logout-btn"> 로그아웃</a></div>
 					<div></div>
 				</div>
-				<span><a href="/admin/login" id="adminLogin"><img alt="머리카락 사진" class="hairImg" src="/resource/img/hair.png"></a></span>
+				<span><a href="/admin/login" id="adminLogin"><img alt="머리카락 사진" class="hairImg" src="/resource/img/hair.png" onclick="adminLogin()"></a></span>
 			</div>
 		</div>
 	</header>
@@ -204,13 +204,18 @@ window.onload = function(){
 		
 		if(role === 'ROLE_COMPANY'){
 			parentLink.href = "/company";
-		} else{
+		} else if(role === 'ROLE_MEMBER'){
 			parentLink.href = "/resume/resumeManage";
+		} else {
+			parentLink.href = "/admin";
 		}
 	} 
 	
 }
 
+function adminLogin(){
+	window.location.href="/admin/login";
+}
 function logout(){
 	const username = localStorage.getItem("username");
 	console.log(username);

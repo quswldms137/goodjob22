@@ -59,9 +59,8 @@ public class QnAController_99 {
 	@GetMapping("/detail")
 	public ServiceQuestionDto getQuestionDetail(@RequestParam("cs_no") Long cs_no){
 		System.out.println("실행중....");
-		System.out.println(cs_no);
 		ServiceQuestionDto detail = qnaService.getQuestionDetail(cs_no);
-		System.out.println(detail);
+		System.out.println("answer: " + detail.getAnswer());
 		return detail;
 	}
 	

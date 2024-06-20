@@ -30,7 +30,7 @@ public class LoginController_99 {
     @Autowired
     private PasswordService99 passwordService;
     
-    @PostMapping
+    @PostMapping("/member")
     public ResponseEntity<String> loginMember(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
         //암호화된 비밀번호 찾기
         String password = userDto.getPassword();
@@ -42,38 +42,79 @@ public class LoginController_99 {
         //사용자가 입력한 비밀번호와 암호화된 비밀번호 비교
         boolean result = passwordService.checkPassword(password, hashedPassword);
         
-        if(result) {
+        if("ROLE_MEMBER".equals(role) && result) {
         	System.out.println(result);
-            if ("ROLE_MEMBER".equals(role) || "ROLE_MANAGER".equals(role) || "ROLE_COMPANY".equals(role)) {
-                session.setAttribute("user", userDto);
-                //Header에 저장
-                response.setHeader("username", userDto.getUsername());
-                response.setHeader("role", userDto.getRole());
-                response.addHeader("Access-Control-Expose-Headers", "username, role");
-                
-                if("ROLE_COMPANY".equals(role)) {
-                	return ResponseEntity.ok().body("{\"redirectUrl\": \"http://localhost:9991/company/index\"}");
-                } 
-            } 
-        	return ResponseEntity.ok().body("{\"redirectUrl\": \"http://localhost:9991/common99\"}");
-
+        	session.setAttribute("user", userDto);
+            //Header에 저장
+            response.setHeader("username", userDto.getUsername());
+            response.setHeader("role", userDto.getRole());
+            response.addHeader("Access-Control-Expose-Headers", "username, role");
+            return ResponseEntity.ok().body("{\"redirectUrl\": \"http://localhost:9991/\"}");
         } else {
-            return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 일치하지 않습니다.");
+        	 return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 일치하지 않습니다.");
+        }
+    }
+    
+    @PostMapping("/company")
+    public ResponseEntity<String> loginCompany(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
+        //암호화된 비밀번호 찾기
+        String password = userDto.getPassword();
+        String username = userDto.getUsername();
+        String hashedPassword = userService.getPassword(username);
+        userDto.setPassword(hashedPassword);
+        String role = userService.getRole(userDto);
+        userDto.setRole(role);
+        //사용자가 입력한 비밀번호와 암호화된 비밀번호 비교
+        boolean result = passwordService.checkPassword(password, hashedPassword);
         
+        if("ROLE_COMPANY".equals(role) && result) {
+        	System.out.println(result);
+        	session.setAttribute("user", userDto);
+            //Header에 저장
+            response.setHeader("username", userDto.getUsername());
+            response.setHeader("role", userDto.getRole());
+            response.addHeader("Access-Control-Expose-Headers", "username, role");
+            return ResponseEntity.ok().body("{\"redirectUrl\": \"http://localhost:9991/company\"}");
+        } else {
+        	 return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 일치하지 않습니다.");
         }
     }
 
+    @PostMapping("/admin")
+    public ResponseEntity<String> loginAdmin(@RequestBody UserDto userDto, HttpSession session, HttpServletResponse response) {
+        //암호화된 비밀번호 찾기
+        String password = userDto.getPassword();
+        String username = userDto.getUsername();
+        String hashedPassword = userService.getPassword(username);
+        userDto.setPassword(hashedPassword);
+        String role = userService.getRole(userDto);
+        userDto.setRole(role);
+        //사용자가 입력한 비밀번호와 암호화된 비밀번호 비교
+        boolean result = passwordService.checkPassword(password, hashedPassword);
+        
+        if("ROLE_MANAGER".equals(role) && result) {
+        	System.out.println(result);
+        	session.setAttribute("user", userDto);
+            //Header에 저장
+            response.setHeader("username", userDto.getUsername());
+            response.setHeader("role", userDto.getRole());
+            response.addHeader("Access-Control-Expose-Headers", "username, role");
+            return ResponseEntity.ok().body("{\"redirectUrl\": \"http://localhost:9991/admin\"}");
+        } else {
+        	 return ResponseEntity.badRequest().body("아이디 또는 비밀번호가 일치하지 않습니다.");
+        }
+    }
+    
     @PostMapping("/logout")
     public ResponseEntity<String> logout(HttpServletRequest request){
     	HttpSession session = request.getSession();
     	System.out.println(session.getId());
     	if(session != null) {
     		session.invalidate();
-    		return ResponseEntity.ok("{\"redirectUrl\": \"http://localhost:9991/common99\"}");
+    		return ResponseEntity.ok("{\"redirectUrl\": \"http://localhost:9991/\"}");
     	} else {
     		return ResponseEntity.badRequest().body("다시 시도해주세요.");
     	}
-    	
     }
     
     @PostMapping("/mem-username")

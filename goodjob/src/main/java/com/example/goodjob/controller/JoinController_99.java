@@ -54,7 +54,7 @@ public class JoinController_99 {
 		if(result == 1 && result2 == 1) {
 			return ResponseEntity.ok("성공적으로 가입이 완료되었습니다~! \n취뽀!!");
 		} else {
-			return ResponseEntity.badRequest().body("가입실패");
+			return ResponseEntity.ok("가입실패");
 		}
 	}
 	
@@ -84,7 +84,8 @@ public class JoinController_99 {
     	if(result != 1) {
     		return ResponseEntity.ok("사용 가능한 아이디입니다.");
     	} else {
-    		return ResponseEntity.badRequest().body("이미 존재하는 아이디입니다.");
+    		return ResponseEntity.ok("이미 존재하는 아이디입니다.");
+    		//return ResponseEntity.badRequest().body("이미 존재하는 아이디입니다.");
     	}
     	
     }

@@ -142,107 +142,41 @@ main {
 
 	</main>
 	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			// 페이지가 로드되면 개인회원 버튼을 기본으로 활성화 상태로 설정
-			var normalMemberBtn = document.getElementById('normal-member');
-			normalMemberBtn.classList.add('active-btn');
-
-			// 기본적으로 개인회원 폼을 보여줌
-			var memberForm = document.getElementById('memberForm');
-			var companyForm = document.getElementById('companyForm');
-			memberForm.style.display = 'block';
-			companyForm.style.display = 'none';
-		});
-
-		function showForm(type) {
-			var memberForm = document.getElementById('memberForm');
-			var companyForm = document.getElementById('companyForm');
-			var normalMemberBtn = document.getElementById('normal-member'); // 개인회원 버튼
-			var companyMemberBtn = document.getElementById('company-member'); // 기업회원 버튼
-
-			if (type === 'member') {
-				memberForm.style.display = 'block';
-				companyForm.style.display = 'none';
-
-				// 개인회원 버튼 활성화 스타일 적용
-				normalMemberBtn.classList.add('active-btn');
-				companyMemberBtn.classList.remove('active-btn');
-			} else {
-				memberForm.style.display = 'none';
-				companyForm.style.display = 'block';
-
-				// 기업회원 버튼 활성화 스타일 적용
-				normalMemberBtn.classList.remove('active-btn');
-				companyMemberBtn.classList.add('active-btn');
-			}
-		}
-
-		function submitLogin(event) {
-			event.preventDefault();
-
-			const username1 = document.querySelector("Input[name='username']");
-			const password1 = document.querySelector("Input[name='password']");
-
-			const username2 = document.querySelector("Input[name='username1']");
-			const password2 = document.querySelector("Input[name='password1']");
-
-			var memberForm = document.getElementById('memberForm');
-			var companyForm = document.getElementById('companyForm');
-
-			let formActive = memberForm.style.display !== 'none' ? 'member'
-					: 'company';
-
-			if (formActive === 'member') {
-				if (username1.value == '') {
-					alert("아이디를 입력해주세요.");
-					username1.focus();
-					return;
-				} else if (password1.value == '') {
-					alert("비밀번호를 입력해주세요.");
-					password1.focus();
-					return;
-				}
-			} else if (formActive === 'company') {
-				if (username2.value == '') {
-					alert("아이디를 입력해주세요.");
-					username2.focus();
-					return;
-				} else if (password2.value == '') {
-					alert("비밀번호를 입력해주세요.");
-					password2.focus();
-					return;
-				}
-			}
-			let user;
-			if (username1.value) {
-				console.log(username1.value);
-				user = {
-					username : username1.value,
-					password : password1.value
-				};
-			} else {
-				user = {
-					username : username2.value,
-					password : password2.value
-				};
-			}
-
-			console.log(user);
-			const sendData = JSON.stringify(user);
+	function submitLogin(event){
+		event.preventDefault();
+		
+		const username1 = document.querySelector("Input[name='username']");
+		const password1 = document.querySelector("Input[name='password']");
+		
+		if (username1.value == '') {
+			alert("아이디를 입력해주세요.");
+			username1.focus();
+			return;
+		} else if (password1.value == '') {
+			alert("비밀번호를 입력해주세요.");
+			password1.focus();
+			return;
+		} else{
+			const admin = {
+				username : username1.value,
+				password : password1.value
+			};
+			
+			const sendData = JSON.stringify(admin);
 			const xhttp = new XMLHttpRequest();
-			xhttp.withCredentials = true; // withCredentials 설정
+			
 			xhttp.onload = function() {
 				console.log(this.status); // 응답 상태 확인
 				console.log(this.responseText); // 응답 내용 확인
 				if (this.status === 200) {
-					const username3 = this.getResponseHeader("username");
-					const role3 = this.getResponseHeader("role");
+					const username2 = this.getResponseHeader("username");
+					const role2 = this.getResponseHeader("role");
 
-					console.log("username: ", username3);
-					console.log("role: ", role3);
+					console.log("username: ", username2);
+					console.log("role: ", role2);
 
-					localStorage.setItem("username", username3);
-					localStorage.setItem("role", role3);
+					localStorage.setItem("username", username2);
+					localStorage.setItem("role", role2);
 
 					console.log(localStorage.getItem("username"));
 
@@ -251,14 +185,14 @@ main {
 					const response = JSON.parse(this.responseText);
 					window.location.href = response.redirectUrl;
 				} else {
-					alert("아이디 또는 비밀번호가 일치하지 않습니다. \n다시 확인 후 입력해주시기 바랍니다.");
+					alert(this.responseText);
 				}
 			};
-			xhttp.open("POST", "http://localhost:8888/api/login");
+			xhttp.open("POST", "http://localhost:8888/api/login/admin");
 			xhttp.setRequestHeader("Content-type", "application/json");
 			xhttp.send(sendData);
-
-		};
+		}
+	}
 	</script>
 </body>
 </html>
