@@ -50,9 +50,11 @@ main #container {
 	display: flex;
 	padding: 25px;
 	border: 1px solid #ddd;
-	border-top: 2px solid #FB8500;
 	border-radius: 10px;
 	background-color: #f9f9f9;
+}
+.list-area:hover {
+	border-top: 1px solid #FB8500;
 }
 
 .list-left {
@@ -72,6 +74,10 @@ main #container {
 	padding-bottom: 20px;
 }
 
+.list-title a:hover {
+	color: #FB8500;
+}
+
 .list-mid-bot {
 	display: flex;
 }
@@ -89,7 +95,7 @@ main #container {
 }
 
 .interestBtn, .propositionBtn {
-	background-color: orange;
+	background-color: #FB8500;
 	width: 100px;
 	height: 30px;
 	color: white;
