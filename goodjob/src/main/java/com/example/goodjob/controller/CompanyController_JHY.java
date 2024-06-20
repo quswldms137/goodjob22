@@ -7,19 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.goodjob.dao.IComInterestDao_JHY;
 import com.example.goodjob.dao.ICompanyDao_JHY;
+import com.example.goodjob.dao.ICompanyDetailDao_JYC;
 import com.example.goodjob.dao.IMemberDao;
 import com.example.goodjob.dao.IResumeDao_JHY;
+import com.example.goodjob.dto.CompanyDto_JYC;
 import com.example.goodjob.dto.RecruitDto;
 import com.example.goodjob.dto.ResumeAndSkillDto;
 import com.example.goodjob.service.QnaService99;
@@ -44,14 +44,19 @@ public class CompanyController_JHY {
 	@Autowired
 	private QnaService99 qnaService;
 	
+	@Autowired
+	private ICompanyDetailDao_JYC companyDetailDao;
+	
 	// 기업 메인페이지 내가 쓴 채용공고 목록 조회 (로그인 연동전이라 모든 목록 불러오게 설정해둠)
 	@GetMapping("/index")
 	public List<RecruitDto> main(@RequestParam("username") String username) {
 		Long com_no = qnaService.getCom_no(username);
-		
+		CompanyDto_JYC com_detail_no_ = companyDetailDao.findByCom_no(com_no);
 		List<RecruitDto> list = companyDao.findRecruitList(com_no);
 		System.out.println(com_no);
 		System.out.println(list);
+		Long com_detail_no = com_detail_no_.getCom_detail_no();
+		
 		return list;
 	}
 	// 채용공고 작성
