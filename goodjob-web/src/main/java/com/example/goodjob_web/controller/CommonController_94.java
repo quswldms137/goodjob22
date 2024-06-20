@@ -27,4 +27,12 @@ public class CommonController_94 {
 	public String emplouList() {
 		return "common/employList";
 	}
+	
+	//검색결과페이지로 이동 / 키워드(파라미터)
+	@RequestMapping("/allSearch")
+	public String allSearch(@RequestParam("keyword") String keyword, Model model) {
+		model.addAttribute("keyword", keyword);
+		
+		return "common/allSearchPage";
+	}
 }

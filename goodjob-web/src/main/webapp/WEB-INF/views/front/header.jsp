@@ -157,8 +157,8 @@ header {
 				</div>
 				<div class="search-bar-area">
 					<div class="search-bar">
-						<form action="" method="">
-							<input type="text" name="head-search" id="head-search"> <label
+						<form action="/company94/allSearch" method="GET">
+							<input type="text" name="keyword" id="head-search"> <label
 								for="search-submit"> <input type="submit" value=""
 								id="search-submit"> <img
 								src="/resource/img/search-icon.png">
