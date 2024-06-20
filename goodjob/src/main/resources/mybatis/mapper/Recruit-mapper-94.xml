@@ -25,7 +25,7 @@
         	r.reg_date DESC
 
   </select>
-  <!-- 채용공고목록(최근등록순) -->
+  <!-- 전체채용공고목록(최근등록순) -->
   <select id="getAllRecruitDto" resultType="com.example.goodjob.dto.RecruitAllDto94">
     SELECT
     	r.*,  

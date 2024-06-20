@@ -293,7 +293,7 @@ function renderRecruitList(data) {
         mainContent.append(
             "<div class='company-info'>" +
                 "<div class='company-img'>" +
-                    "<a href='/employ/detail/" + recruit.recruit_no + "'>" +
+                    "<a href='/employ/detail/" + recruit.recruit_no + "/" + recruit.com_no + "/" + recruit.com_detail_no + "'>" +
                         "<img src='/resource/img/" + recruit.img_url + "' alt='기업사진'>" +
                     "</a>" +
                 "</div>" +
@@ -302,15 +302,15 @@ function renderRecruitList(data) {
                         "<div id='comname'>" + recruit.com_name + "</div>" +
                     "</a>" +
                     "<div class='company-name'>" +
-                        "<a href='/employ/detail/" + recruit.recruit_no + "'>" +
+                        "<a href='/employ/detail/" + recruit.recruit_no + "/" + recruit.com_no + "/" + recruit.com_detail_no + "'>" +
                             recruit.title +
                         "</a>" +
                     "</div>" +
                     "<p>" +
                         recruit.sectors + " | " +
+                        recruit.location + " | " +
                         recruit.com_type + " | " +
                         recruit.career + " | " +
-                        recruit.qualification + " | " +
                         "공고마감일 : " + recruit.deadline_date +
                     "</p>" +
                 "</div>" +
