@@ -53,17 +53,61 @@ main #container {
 	color: #FB8500 !important;
 }
 
+table, tr, th, td {
+	border-collapse: collapse;
+	border: 1px solid eee;
+	padding: 20px;
+	text-align: center;
+}
+
 table {
 	margin: 0 auto;
+	border-top: 2px solid #333;
+	border-right: 0;
+	border-left: 0;
 }
 
-table, th, td {
-	border: 1px solid black;
-	padding: 20px;
+tr {
+	border-bottom: 1px solid #eee;
+}
+tr:last-child{
+	border-bottom:0;
 }
 
-table {
-	border-collapse: collapse;
+td:nth-child(1) {
+	font-size: 14px;
+}
+
+td:nth-child(3) {
+	font-size: 14px;
+	color: #aaa;
+	font-weight: 400 !important;
+}
+
+td:nth-child(4) {
+	font-size: 14px;
+	color: #aaa;
+	font-weight: 400 !important;
+}
+
+td:nth-child(5) {
+	font-size: 14px;
+	color: #aaa;
+	font-weight: 400 !important;
+}
+
+td:nth-child(6) {
+	font-size: 14px;
+	color: #aaa;
+	font-weight: 400 !important;
+}
+
+span {
+	border: 1px solid #ccc;
+	background: #f7f7f7;
+	color: #666;
+	font-size: 14px;
+	padding: 8px;
 }
 
 .cancelBtn {
@@ -71,12 +115,7 @@ table {
 }
 
 .cancelBtn:hover {
-	background: gray;
-}
-
-span {
-	border: 1px solid black;
-	padding: 5px;
+	background: #eee;
 }
 
 #resumelist td:nth-child(3) {
@@ -105,9 +144,9 @@ span {
 							<th>회사명</th>
 							<th>채용공고 제목</th>
 							<th>마감일</th>
+							<th>면접 결과</th>
 							<th>서류 결과</th>
 							<th>열람/미열람</th>
-							<th>면접 결과</th>
 							<th>지원취소</th>
 						</tr>
 					</thead>
@@ -168,11 +207,31 @@ span {
 	            	
 	            	output += '<tr id="row' + memrecruit.mem_recruit_no + '"><td>' + memrecruit.recruitDto.com_name + '</td> ' + 
 	            	 '<td><a href="/employ/detail/' + memrecruit.recruitDto.recruit_no + '/' + memrecruit.recruitDto.com_no + '/' + memrecruit.recruitDto.com_detail_no + '">' + memrecruit.recruitDto.title + '</a></td> ' + 
-	            	'<td>' + deadline_date + '</td> ' + 
-	            	'<td>' + interview + '</td> ' + 
-	            	'<td>' + resume + '</td> ' +
-	            	'<td>' + view + '</td> ' +
-	            	'<td><span onclick="return cancelRecruit(event)" id="cancel' + memrecruit.mem_recruit_no + '" class="cancelBtn">지원 취소</span></td> ' +
+	            	'<td>' + deadline_date + '</td> ';
+	            	
+	            	if(interview === '심사중'){
+	            	output += '<td style="color:green">' + interview + '</td> ';
+	            	}else if(interview === '합격'){
+	            	output += '<td style="color:blue">' + interview + '</td> ';
+	            	}else if(interview === '불합격'){
+	            	output += '<td style="color:red">' + interview + '</td> ';
+	            	};
+	            	
+	            	if(resume === '심사중'){
+	            		output += '<td style="color:green">' + resume + '</td>';
+		            	}else if(resume === '합격'){
+		            		output += '<td style="color:blue">' + resume + '</td>';
+		            	}else if(resume === '불합격'){
+		            		output += '<td style="color:red">' + resume + '</td>';
+		            	};
+		            	
+	            	if(view === '열람'){
+	            		output += '<td style="color:blue">' + view + '</td>';
+	            	}else if(view === '미열람'){
+	            		output += '<td style="color:red">' + view + '</td>';
+	            	};
+	            	
+	            	output += '<td><span onclick="return cancelRecruit(event)" id="cancel' + memrecruit.mem_recruit_no + '" class="cancelBtn">지원 취소</span></td> ' +
 	           		'</tr>';
 				});
 	            
