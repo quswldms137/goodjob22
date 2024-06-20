@@ -20,6 +20,10 @@ body {
 	background:#fff;
 }
 
+.sidebar-box3 a:nth-child(1) {
+	font-weight: bold;
+}
+
 main {
 	width: 1100px;
 	margin: 80px auto;
@@ -53,9 +57,6 @@ main #container {
 	border: 1px solid #ddd;
 	border-radius: 10px;
 	background-color: #f9f9f9;
-}
-.list-area:hover {
-	border-top: 1px solid #FB8500;
 }
 
 .list-left {
@@ -225,6 +226,30 @@ main #container {
 		
 	}
 	
+	function proposition(event){
+		/*const mem_no1 = event.target.closest(".list-area").querySelector("input[name='mem_no']");
+		const com_no1 = event.target.closest(".list-area").querySelector("input[name='com_no']");
+		
+		let sendData = {
+				mem_no : mem_no1.value,
+				com_no : com_no1.value
+		}
+		
+		$.ajax({
+			url: "http://localhost:8888/api/company/interestMember",
+			type: "PUT",
+			data: JSON.stringify(sendData),
+			contentType: "application/json",
+			success: function(data){
+				console.log(data);
+				alert(data);
+			},
+			error: function(){
+				console.log("Error : ", error);
+			}
+		})
+		*/
+	}
 </script>
 </body>
 </html>

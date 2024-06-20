@@ -104,7 +104,7 @@ header {
 					<li><a href="/company">홈</a></li>
 					<li><a href="/company/employWrite">공고등록</a></li>
 					<li><a href="/company/employManage">공고·지원자 관리</a></li>
-					<li><a href="#">인재관리</a></li>
+					<li><a href="/company/interestMemberList">인재관리</a></li>
 					<li><a href="#">커뮤니티</a></li>
 					<li><a href="/company/event">이벤트</a></li>
 				</ul>
