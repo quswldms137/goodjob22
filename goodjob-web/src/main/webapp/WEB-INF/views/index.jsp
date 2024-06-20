@@ -11,6 +11,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+body::-webkit-scrollbar {
+	display: none;
+}
+
 main {
 	width: 1100px;
 	margin: 80px auto;
@@ -22,6 +26,8 @@ main {
 
 .skillMatchingH3{
 	font-size:20px;
+	border-bottom:1px solid #eee;
+	padding-bottom:20px;
 }
 #skillRecommendation {
 	margin: 20px 0;
@@ -36,9 +42,11 @@ main {
 .vip-title{
 	font-size:20px;
 	margin-top:100px;
+	border-bottom:1px solid #eee;
+	padding-bottom:20px;
 }
 #vip {
-	width: 300vw;
+	width: 100%;
 	margin: 20px 0;
 	height: auto;
 	overflow: hidden;
@@ -46,49 +54,45 @@ main {
 	gap:20px;
 	flex-wrap: nowrap;
 	position: relative;
+	padding:20px 0;
 }
 
 #all {
 	width: 100%;
+	height:auto;
 	margin: 20px 0;
 	overflow: hidden;
 	display: flex;
+	gap:20px;
 	flex-wrap: wrap;
 	position: relative;
+	padding:20px 0;
+	
 }
 
 label:hover {
 	cursor: pointer;
 }
 
-.skill, .all {
+.skill, .all, .vip {
 	width: 260px;
 	height: 100%;
-	border: 1px solid #ccc;
+	border: 1px solid #e1e1e1;
 	border-radius:5px;
 	box-sizing: border-box;
 	transition:all 0.3s
 }
-.skill:hover{
-	transform: translateY(-10px);
+.skill:hover,
+.vip:hover,
+.all:hover{
+	transform: translateY(-5px);
 }
 
-.vip {
-	width: 255px;
-	height: 100%;
-	border: 1px solid #ccc;
-	border-radius:5px;
-	box-sizing: border-box;
-}
-.vip .img-box{
-	height:120px;
-	border-bottom:1px solid #eee;
-	overflow:hidden;
-}
 
 .skill p, .vip p, .all p {
 	padding-top:5px;
 	padding-left:15px;
+	padding-right:15px;
 	margin-bottom:0;
 }
 .skill p:nth-child(2),
@@ -97,7 +101,13 @@ label:hover {
 	padding-top:15px;
 	font-size:14px;
 }
-.skill .img-box{
+
+.skill p:nth-child(3),
+.vip p:nth-child(3),
+.all p:nth-child(3){
+	height:55px;	
+}
+.img-box{
 	height:120px;
 	border-bottom:1px solid #eee;
 	overflow:hidden;
@@ -131,6 +141,9 @@ label:hover {
 	justify-content: space-between;
 	padding: 5px;
 }
+.last img{
+	width:30px;
+}
 
 .applyBtn:hover {
 	cursor: pointer;
@@ -155,16 +168,20 @@ label:hover {
 	margin: 20px;
 }
 
-body::-webkit-scrollbar {
-	display: none;
+.all-area-title{
+	font-size:20px;
+	margin-top:100px;
+	border-bottom:1px solid #eee;
+	padding-bottom:20px;
 }
 #everyRecruit{
-	width: 1100px;
-	height: fit-content;
+	width: 100%;
+	height: auto;
 	display: flex;
 	flex-wrap: wrap;
-	row-gap: 20px;
+	gap: 20px;
 	position: relative;
+	padding:20px 0;
 }
 </style>
 <link
@@ -185,7 +202,7 @@ body::-webkit-scrollbar {
 		<h3 class="vip-title">VIP 채용공고</h3>
 		<div id="vip"></div>
 
-		<h3>채용공고</h3>
+		<h3 class="all-area-title">채용공고</h3>
 		<div id="everyRecruit"></div>
 
 
@@ -223,7 +240,8 @@ body::-webkit-scrollbar {
 						'<p><b>' + response[i].title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
 						'<p class="last"><span>D-' + diff + '</span> ' + 
-						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + response[i].recruit_no + '"></span></p> ' +
+						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + response[i].recruit_no + '"></span>' +
+						'</p>' + 
 						'<span class="applyBtn apply' + response[i].recruit_no + '" onclick="applyRecruit(event)">즉시지원</span>' + 
 						'</div> ';
 						
@@ -294,7 +312,7 @@ body::-webkit-scrollbar {
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						str += '<div class="all"> ' + 
 						'<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" ><div> ' +
-						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
+						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/coupang.jpg"></div>' +
 						'</div> ' + 
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
