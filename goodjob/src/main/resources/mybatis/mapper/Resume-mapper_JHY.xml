@@ -12,4 +12,8 @@
 		select sk_name from skill where resume_no = #{resume_no}
 	</select>
 	
+	<select id="findMainResume">
+		select * from resume where main = 1
+	</select>
+	
 </mapper>

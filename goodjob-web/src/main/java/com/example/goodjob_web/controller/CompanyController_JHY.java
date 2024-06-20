@@ -48,7 +48,13 @@ public class CompanyController_JHY { // view
 		return "company/interestMemberList";
 	}
 	
-	
+	@RequestMapping("/recommendedMember")
+	public String recommendedMember() {
+		
+		
+		
+		return "company/recommendedMember";
+	}
 	
 	
 	
