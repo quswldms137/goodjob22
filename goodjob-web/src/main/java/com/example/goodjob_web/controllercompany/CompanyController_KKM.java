@@ -41,5 +41,10 @@ public class CompanyController_KKM {
 		
 		return"company/event";
 	}
+	@RequestMapping("/500error")
+	public String error500() {
+		
+		return"front/500error";
+	}
 	
 }

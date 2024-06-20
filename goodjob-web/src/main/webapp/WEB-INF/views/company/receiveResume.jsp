@@ -159,31 +159,37 @@ h1, h2 {
 				console.log(response);
 				
 				let str = '<h2 id="pagename">지원받은 이력서</h2>';
-				response.forEach(item =>{
-					str += '<div class="recruit-area"> '; 
-					str += '<div class="recruit-left"> ';
-					str += '<h2 class="recruit_number">' + item.rectitle + '</h2> ';
-					str += '</div> ';
-					str += '<div class="recruit-mid"> ';
-					str += '<div class="recruit-labels">';
-					str += '<h2>'+ item.mem_name +'</h2>';
-					str += '<h2>구직중</h2>';
-					str += '</div>';
-					str += '<div class="recruit-right-top">';
-					str += '<h2 class="recruit_title"><a href="/company/interestMemberResumeDetail/'+ item.resume_no + '">' +item.title +'</a></h2>';
-					str += '</div>';
-					str += '<div class="recruit-right-bot">';
-					str += '<p class="recruit_career">희망직무 | ' + item.hope_job + '</p>';
-					str += '<p class="recruit_location">희망지역 | ' + item.hope_city + '</p>';
-					str += '</div>';
-					str += '</div>';
-					str += '<div class="recruit-right-right">';
-					str += '<button class="updateBtn">관심</button>';
-					str += '<button class="deleteBtn">포지션 제안</button>';
-					str += '</div>';
-					str += '</div>';
-					str += '<div id="demo"></div>';
-				});
+				if (response && response.length > 0) {
+					response.forEach(item => {
+						str += '<div class="recruit-area"> '; 
+						str += '<div class="recruit-left"> ';
+						str += '<h2 class="recruit_number">' + item.rectitle + '</h2> ';
+						str += '</div> ';
+						str += '<div class="recruit-mid"> ';
+						str += '<div class="recruit-labels">';
+						str += '<h2>'+ item.mem_name +'</h2>';
+						str += '<h2>구직중</h2>';
+						str += '</div>';
+						str += '<div class="recruit-right-top">';
+						str += '<h2 class="recruit_title"><a href="/company/interestMemberResumeDetail/'+ item.resume_no + '">' + item.title +'</a></h2>';
+						str += '</div>';
+						str += '<div class="recruit-right-bot">';
+						str += '<p class="recruit_career">희망직무 | ' + item.hope_job + '</p>';
+						str += '<p class="recruit_location">희망지역 | ' + item.hope_city + '</p>';
+						str += '</div>';
+						str += '</div>';
+						str += '<div class="recruit-right-right">';
+						str += '<button class="updateBtn">관심</button>';
+						str += '<button class="deleteBtn">포지션 제안</button>';
+						str += '</div>';
+						str += '</div>';
+						str += '<div id="demo"></div>';
+					});
+				} else {
+					str += '<p>지원받은 이력서가 없습니다</p>';
+					str += '<p>노래듣고가세요~</p>'
+					str += '<div id="player"></div>';
+				}
 				
 				$("#container").html(str);
 			},
@@ -195,6 +201,42 @@ h1, h2 {
 		
 	});
 
+	
+	
+    // 1. API 코드 비동기적으로 로드
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // 2. API 코드 로드 완료 후 YouTube Player를 생성
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '390',
+            width: '860',
+            videoId: 'ebPTIftheTw', // 표시할 YouTube 비디오 ID
+            events: {
+                'onReady': onPlayerReady,
+                'onStateChange': onPlayerStateChange
+            }
+        });
+    }
+
+    // 3. 플레이어가 준비되면 호출되는 함수
+    function onPlayerReady(event) {
+        event.target.playVideo();
+    }
+
+    // 4. 플레이어 상태가 변경될 때 호출되는 함수
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.ENDED) {
+            alert('Video has ended');
+        }
+    }
+	
+	
+	
 </script>
 
 </body>
