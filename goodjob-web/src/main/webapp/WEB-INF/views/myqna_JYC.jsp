@@ -10,6 +10,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+body{
+	background:#fafafa;
+}
 main {
 	width: 1100px;
 	margin: 80px auto;
@@ -20,8 +23,13 @@ main {
 main #container {
 	width: 900px;
 	min-height: 700px;
-	border: 1px solid #ccc;
+	border: 1px solid #eee;
+	border-radius:5px;
 	box-sizing: border-box;
+	background:#fff;
+}
+#sidebar{
+	background:#fff;
 }
 
 #item_box{
@@ -30,10 +38,17 @@ main #container {
 	align-items: center;
 	width: 90%;
 	margin: 0 auto;
-	border: 1px solid #e0e0e0;
-	border-radius: 3px;
-	padding: 20px;
+	border-bottom: 1px solid #e0e0e0;
+	padding: 10px;
 }
+#item_box:first-child{
+	border-top:2px solid #333;
+}
+
+#item_box p{
+	padding:10px 0 5px;
+}
+
 .category{
 	margin-right: 10px;
 }
@@ -43,13 +58,37 @@ main #container {
 #item_box a{
 	width: 600px;
 }
+#item_box a p:nth-child(1){
+	font-size:16px;
+}
+#item_box a p:nth-child(2){
+	font-size:19px;
+}
+#item_box a p:nth-child(3){
+	font-size:15px;
+	height:40px;
+}
+
+#item_box .category{
+	font-size:14px;
+	color:#666;
+}
+#item_box .date{
+	font-size:14px;
+	padding-left:30px;
+	color:#999;
+}
+#item_box .public {
+	font-size:15px;
+	color:#666;
+}
 #item_box input[type=button]{
 	margin-left: 80px;
 	padding: 3px 10px;
-	padding: 10px;	
-	background: #FB8500;
-	color: white;
-	border: 1px solid #e0e0e0;
+	padding:10px 20px;	
+	background: #f7f7f7;
+	color: #666;
+	border: 1px solid #ccc;
 	border-radius: 3px;
 }
 #item_box input[type=button]:hover{
@@ -57,9 +96,7 @@ main #container {
 }
 #container h1{
 	font-size: 1.5rem;
-	margin-top: 20px;
-	margin-left: 20px;
-	margin-bottom: 30px;
+	padding:25px;
 }
 .content{
 	margin: 3px 0;
@@ -127,13 +164,13 @@ main #container {
 					response.forEach(item =>{
 						 str += '<div id="item_box" class="item' + item.cs_no + '"> ' + 
 								'<a href="#"> ' +
+ 								'<p><span class="category"><b></b>' + item.category + '</span><span class="date"><b></b>' + item.reg_date + '</span>' +
 						 		'<p><b>' + item.title + '</b></p> ' + 
-								'<p class="content">' + item.content + '</p> ' +
- 								'<p><span class="category"><b>카테고리 : </b>' + item.category + '</span><span><b>작성일 : </b>' + item.reg_date + '</span>';
+								'<p class="content">' + item.content + '</p> ';
  						if(item.ch_private === 0){
- 							str += '<span><b> 비공개</b></span></p></a>';
+ 							str += '<span class="public"><b> 비공개</b></span></p></a>';
  						}else{
- 							str += '<span><b> 공개</b></span></p></a>';
+ 							str += '<span class="public"><b> 공개</b></span></p></a>';
  						}
 						if(item.answer === "미답변"){
 							str += '<div class="answer" style="color:red">' + item.answer + '</div> ';
