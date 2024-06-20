@@ -30,21 +30,21 @@
 				<p class="personal_info_title">인적사항</p>
 				<div class="personal_info">
 					<div class="personal_info_content">
-						<input type="hidden" name="mem_no" value="1">
-						<input type="text" name="username" placeholder="이름" value="김태준">
-						<input type="text" name="mem_birth" placeholder="ex) 0000-00-00" value="1994-01-03">
+						<input type="hidden" name="mem_no" value="">
+						<input type="text" name="username" placeholder="이름" value="">
+						<input type="text" name="mem_birth" placeholder="ex) 0000-00-00" value="">
 						<select name="mem_gender">
 							<option value="m">남자</option>
 							<option value="f">여자</option>
 						</select> 
-						<input type="text" name="mem_tel" placeholder="휴대폰번호" value="010-8471-2165"> 
-						<input type="text" name="mem_email" placeholder="이메일" value="asxowns@naver.com"> 
+						<input type="text" name="mem_tel" placeholder="휴대폰번호" value=""> 
+						<input type="text" name="mem_email" placeholder="이메일" value=""> 
 						<select	name="military">
 							<option value="1">군필</option>
 							<option value="2">미필</option>
 							<option value="3">면제</option>
 							<option value="4">해당없음</option>
-						</select> <input type="text" name="mem_addr" placeholder="주소" value="부산시 중구">
+						</select> <input type="text" name="mem_addr" placeholder="주소" value="">
 					</div>
 					<div class="personal_info_photo">
 						<label for="photo" class="photolabel">
@@ -179,6 +179,8 @@
 	$(document).ready(function () {
         $('#resumeForm').submit(function (event) {
             event.preventDefault(); // 폼 기본 제출 방지
+            
+            const username = localStorage.getItem("username");
 
             var formData = new FormData(this);
 

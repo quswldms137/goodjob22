@@ -11,9 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +30,7 @@ import com.example.goodjob.service.EducationService;
 import com.example.goodjob.service.EtcService;
 import com.example.goodjob.service.LicenseService;
 import com.example.goodjob.service.MemberService93;
+import com.example.goodjob.service.QnaService99;
 import com.example.goodjob.service.ResumeService;
 import com.example.goodjob.service.SkillService;
 import com.example.goodjob.util.FileUploadUtil;
@@ -59,9 +60,12 @@ public class ResumeController {
 	
 	@Autowired
 	private MemberService93 memberService;
+	
+	@Autowired
+	private QnaService99 qnaService99;
 
 	@PostMapping("/write")
-	public ResponseEntity<String> write(@RequestParam("mem_no") Long mem_no,
+	public ResponseEntity<String> write(
 			@RequestParam("img_url") MultipartFile imgFile, @RequestParam("title") String title,
 			@RequestParam("hope_job") String hope_job, @RequestParam("hope_city") String hope_city,
 			@RequestParam("hope_pay") String hope_pay, @RequestParam("military") String military,
@@ -79,7 +83,8 @@ public class ResumeController {
 			@RequestParam("grades") String grades, @RequestParam("major") String major,
 			@RequestParam("username") String username, @RequestParam("mem_birth") String mem_birth,
 			@RequestParam("mem_gender") String mem_gender, @RequestParam("mem_email") String mem_email,
-			@RequestParam("mem_tel") String mem_tel) {
+			@RequestParam("mem_tel") String mem_tel,
+			@RequestHeader("username") String username2) {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -114,6 +119,9 @@ public class ResumeController {
 
 		// ResumeDto 설정
 		ResumeDto resumeDto = new ResumeDto();
+		
+		Long mem_no = qnaService99.getMem_no(username);
+		
 		resumeDto.setMem_no(mem_no);
 		resumeDto.setTitle(title);
 		resumeDto.setImg_url(imgFileName);
