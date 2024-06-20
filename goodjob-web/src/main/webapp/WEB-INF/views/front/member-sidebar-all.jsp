@@ -85,7 +85,7 @@ ul {
 		</div>
 		<div class="sidebar-box sidebar-box3">
 			<h3>입사지원·제안 관리</h3>
-			<p><a href="#">입사지원 현황</a></p>
+			<p><a href="/member/applyList">입사지원 현황</a></p>
 			<p><a href="#">받은 포지션 제안</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box4">

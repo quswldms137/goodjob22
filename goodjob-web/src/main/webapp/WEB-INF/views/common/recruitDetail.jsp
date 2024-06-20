@@ -252,11 +252,8 @@ main {
 	                data: JSON.stringify(data),      	
 	                contentType: "application/json",
 	                success: function (response) {
-	                    alert('즉시지원 성공!!');
-	                    if(response === "즉시지원 완료"){
-	                    	const nowApply = document.getElementById("nowApply");
-	                    	nowApply.disabled = true;
-	                    }
+	                	console.log("서버 응답:", response);
+	                    alert(response);
 	                },
 	                error: function (error) {
 	                    alert('즉시지원에 실패 하셨습니다.ㅜ');
@@ -300,6 +297,43 @@ main {
 	        });
 	    });
 		
+		
+		
+		/* 공고에 지원했으면 즉시지원버튼 비활성화 */
+		$(document).ready(function() {
+			// 페이지 로드 시 URL에서 mem_no와 resume_no 가져오기
+			const urlParams = new URLSearchParams(window.location.search);
+			let recruit_no = "${recruit_no}";
+
+			// resume_no를 이용하여 상세 정보 가져오기
+			function getRecruitDetail(recruit_no, com_no, com_detail_no) {
+				$.ajax({
+					url : "http://localhost:8888/api/recruit/applyChk",
+					type : "GET",
+					data : {
+						recruit_no : recruit_no,
+						resume_no : 2
+					},
+					success : function(data) {
+						console.log(data);
+						$('#nowApply').prop('disabled', true);
+						$("nowApply").css("background", "#eee");
+						$('#recruitDetail-area').html(output);
+					},
+					error : function(error) {
+						console.error("Error fetching resume detail:", error);
+					}
+				});
+			}
+
+			// resume_no가 있으면 상세 정보 요청
+			if (recruit_no && com_no && com_detail_no) {
+				getRecruitDetail(recruit_no, com_no, com_detail_no);
+				console.log(recruit_no + ", " + com_no, ", " + com_detail_no);
+			} else {
+				console.error("recruit number is missing.");
+			}
+		});
 		
 		
 		
