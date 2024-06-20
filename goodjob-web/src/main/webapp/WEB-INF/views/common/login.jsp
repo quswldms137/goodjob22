@@ -149,14 +149,11 @@ main {
 				</div>
 			</form>
 		</div>
-
-
 	</main>
 	<footer>
 		<%@ include file="../front/footer.jsp"%>
 	</footer>
 	<script>
-	
 	document.addEventListener("DOMContentLoaded", function() {
 	    // 페이지가 로드되면 개인회원 버튼을 기본으로 활성화 상태로 설정
 	    var normalMemberBtn = document.getElementById('normal-member');

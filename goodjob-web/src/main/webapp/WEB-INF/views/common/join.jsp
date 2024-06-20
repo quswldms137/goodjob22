@@ -351,87 +351,84 @@ color:red
 			} else if(usernameCheckedNum == 1){
 				const username1 = document
 				.querySelector("Input[name='username']");
-		const password1 = document
-				.querySelector("Input[name='password']");
-		const role1 = document.querySelector("Input[name='role']");
-		const mem_name1 = document
-				.querySelector("Input[name='mem_name']");
-		const mem_tel1 = document
-				.querySelector("Input[name='mem_tel']");
-		const mem_email1 = document
-				.querySelector("Input[name='mem_email']");
-		const mem_gender1 = document
-				.querySelector("Input[name='mem_gender']:checked");
-		const mem_birth1 = document
-				.querySelector("Input[name='mem_birth']");
-		const mem_addr1 = document
-				.querySelector("Input[name='mem_addr']");
-
-		if (username1.value == '') {
-			alert("아이디를 입력해 주세요.");
-			username1.focus();
-			return;
-		} else if (password1.value == '') {
-			alert("비밀번호를 입력해 주세요.");
-			password1.focus();
-			return;
-		} else if (mem_name1.value == '') {
-			alert("이름을 입력해 주세요.");
-			mem_name1.focus();
-			return;
-		} else if (mem_tel1.value == '') {
-			alert("전화번호를 입력해 주세요.");
-			mem_tel1.focus();
-			return;
-		} else if (mem_tel1.value.match(/[^0-9]/g)) {
-			alert("전화번호는 숫자만 입력해주세요.");
-			return;
-		} else if (mem_email1.value == '') {
-			alert("이메일을 입력해 주세요.");
-			mem_email1.focus();
-			return;
-		} else if (!mem_gender1) {
-			alert("성별을 선택해 주세요.");
-			return;
-		} else if (mem_birth1.value == '') {
-			alert("생년월일을 선택해 주세요.");
-			mem_birth1.focus();
-			return;
-		} else if (mem_addr1.value == '') {
-			alert("주소를 입력해주세요.");
-			mem_addr1.focus();
-			return;
-		} else {
-			const member = {
-				username : username1.value,
-				password : password1.value,
-				role : role1.value,
-				mem_name : mem_name1.value,
-				mem_tel : mem_tel1.value,
-				mem_email : mem_email1.value,
-				mem_gender : mem_gender1.value,
-				mem_birth : mem_birth1.value,
-				mem_addr : mem_addr1.value
-			}
-			console.log(member);
-			const sendData = JSON.stringify(member);
-			const xhttp = new XMLHttpRequest();
-			xhttp.onload = function() {
-				if (this.status === 200) {
-					alert(this.responseText);
-					window.location.href = "http://localhost:9991/";
+				const password1 = document
+						.querySelector("Input[name='password']");
+				const role1 = document.querySelector("Input[name='role']");
+				const mem_name1 = document
+						.querySelector("Input[name='mem_name']");
+				const mem_tel1 = document
+						.querySelector("Input[name='mem_tel']");
+				const mem_email1 = document
+						.querySelector("Input[name='mem_email']");
+				const mem_gender1 = document
+						.querySelector("Input[name='mem_gender']:checked");
+				const mem_birth1 = document
+						.querySelector("Input[name='mem_birth']");
+				const mem_addr1 = document
+						.querySelector("Input[name='mem_addr']");
+		
+				if (username1.value == '') {
+					alert("아이디를 입력해 주세요.");
+					username1.focus();
+					return;
+				} else if (password1.value == '') {
+					alert("비밀번호를 입력해 주세요.");
+					password1.focus();
+					return;
+				} else if (mem_name1.value == '') {
+					alert("이름을 입력해 주세요.");
+					mem_name1.focus();
+					return;
+				} else if (mem_tel1.value == '') {
+					alert("전화번호를 입력해 주세요.");
+					mem_tel1.focus();
+					return;
+				} else if (mem_tel1.value.match(/[^0-9]/g)) {
+					alert("전화번호는 숫자만 입력해주세요.");
+					return;
+				} else if (mem_email1.value == '') {
+					alert("이메일을 입력해 주세요.");
+					mem_email1.focus();
+					return;
+				} else if (!mem_gender1) {
+					alert("성별을 선택해 주세요.");
+					return;
+				} else if (mem_birth1.value == '') {
+					alert("생년월일을 선택해 주세요.");
+					mem_birth1.focus();
+					return;
+				} else if (mem_addr1.value == '') {
+					alert("주소를 입력해주세요.");
+					mem_addr1.focus();
+					return;
 				} else {
-					alert("가입실패");
+					const member = {
+						username : username1.value,
+						password : password1.value,
+						role : role1.value,
+						mem_name : mem_name1.value,
+						mem_tel : mem_tel1.value,
+						mem_email : mem_email1.value,
+						mem_gender : mem_gender1.value,
+						mem_birth : mem_birth1.value,
+						mem_addr : mem_addr1.value
+					}
+					console.log(member);
+					const sendData = JSON.stringify(member);
+					const xhttp = new XMLHttpRequest();
+					xhttp.onload = function() {
+						if (this.status === 200) {
+							alert(this.responseText);
+							window.location.href = "http://localhost:9991/common99/login";
+						} else {
+							alert("가입실패");
+						}
+					}
+					xhttp.open("POST", "http://localhost:8888/api/join/member");
+					xhttp.setRequestHeader("Content-type", "application/json");
+					xhttp.send(sendData);
 				}
 			}
-			xhttp.open("POST", "http://localhost:8888/api/join/member");
-			xhttp.setRequestHeader("Content-type", "application/json");
-			xhttp.send(sendData);
-		}
-				
-			}
-			
-
 		}
 
 		function companySubmit(event) {
@@ -521,7 +518,7 @@ color:red
 				xhttp.onload = function() {
 					if (this.status === 200) {
 						alert(this.responseText);
-						window.location.href = "http://localhost:9991/";
+						window.location.href = "http://localhost:9991/common99/login";
 					} else {
 						alert("다시 가입을 시도해주시기 바랍니다.");
 					}

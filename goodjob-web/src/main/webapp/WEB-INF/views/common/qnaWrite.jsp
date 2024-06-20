@@ -174,7 +174,7 @@ table, tr, th, td{
 	color:#777;
 }
 #qnaList .table .category{
-	width:90px;
+	width:100px;
 	font-size:13px;
 	color:#666;
 }
@@ -396,7 +396,7 @@ table, tr, th, td{
 				xhttp.onload = function() {
 					if (this.status === 200) {
 						alert(this.responseText);
-						window.location.href = "http://localhost:9991/"
+						window.location.href = "http://localhost:9991/qna99/qnaWrite?test=1"
 					} else {
 						alert("다시 입력해주세요.");
 					}
