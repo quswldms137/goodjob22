@@ -47,18 +47,32 @@ main #container {
 	cursor: pointer;
 }
 
-#home-tab {
-	background: #fff;
-	color: #333;
-	border: 1px solid #333;
-	border-bottom: 0;
+#home-tab.active {
+    background: #fff;
+    color: #333;
+    border: 1px solid #333;
+    border-bottom: 0;
 }
 
-#profile-tab {
-	color: #999;
-	border: 1px solid #ccc;
-	background: #fafafa;
-	border-bottom: 1px solid #333;
+#profile-tab.active {
+    background: #fff;
+    color: #333;
+    border: 1px solid #333;
+    border-bottom: 0;
+}
+
+#home-tab.inactive {
+    color: #999;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    border-bottom: 1px solid #333;
+}
+
+#profile-tab.inactive {
+    color: #999;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    border-bottom: 1px solid #333;
 }
 
 .choice-qna select {
@@ -140,12 +154,50 @@ main #container {
 
 table, tr, th, td{
 	border-collapse:collapse;
-	border:1px solid #333;
-	width:500px;
+	border:1px solid #eee;
+	border-right:0;
+	border-left:0;
+	padding:20px;
+	text-align:center;
 }
-.qnaList .table{
+
+#qnaList{
+	width:100%;
+}
+#qnaList .table{
+	width:100%;
+	margin:0 auto;
 	
 }
+#qnaList .table .listNum{
+	width:40px;
+	color:#777;
+}
+#qnaList .table .category{
+	width:90px;
+	font-size:13px;
+	color:#666;
+}
+#qnaList .table .listRegdate{
+	width:85px;
+	font-size:13px;
+	color:#aaa;
+}
+
+.tab-btn ul button.active {
+    background: #fff;
+    color: #333;
+    border: 1px solid #333;
+    border-bottom: 0;
+}
+
+.tab-btn ul button.inactive {
+    color: #999;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    border-bottom: 1px solid #333;
+}
+.table
 </style>
 </head>
 <body>
@@ -234,6 +286,17 @@ table, tr, th, td{
 			// 이벤트 리스너 설정
 			$('#submitWrite').on('click', submitQuestion);
 			$('#submitUpdate').on('click', submitUpdate);
+			
+			// 초기 상태 설정
+	        var homeTab = document.getElementById('home-tab');
+	        var profileTab = document.getElementById('profile-tab');
+	        
+	        homeTab.classList.add("active");
+	        homeTab.classList.remove("inactive");
+	        profileTab.classList.remove("active");
+	        profileTab.classList.add("inactive");
+	        homeTab.setAttribute('aria-selected', 'true');
+	        profileTab.setAttribute('aria-selected', 'false');
 
 		});
 
@@ -244,11 +307,13 @@ table, tr, th, td{
 			var profileTab = document.getElementById('profile-tab');
 
 			writeForm.style.display = 'block';
-			qnaList.style.display = 'none';
-			homeTab.classList.add("active");
-			profileTab.classList.remove("active");
-			homeTab.setAttribute('aria-selected', 'true');
-			profileTab.setAttribute('aria-selected', 'false');
+		    qnaList.style.display = 'none';
+		    homeTab.classList.add("active");
+		    homeTab.classList.remove("inactive");
+		    profileTab.classList.remove("active");
+		    profileTab.classList.add("inactive");
+		    homeTab.setAttribute('aria-selected', 'true');
+		    profileTab.setAttribute('aria-selected', 'false');
 		}
 
 		function submitQuestion(event) {
@@ -310,11 +375,13 @@ table, tr, th, td{
 			var profileTab = document.getElementById('profile-tab');
 
 			writeForm.style.display = 'none';
-			qnaList.style.display = 'block';
-			homeTab.classList.remove("active");
-			profileTab.classList.add("active");
-			homeTab.setAttribute('aria-selected', 'false');
-			profileTab.setAttribute('aria-selected', 'true');
+		    qnaList.style.display = 'block';
+		    homeTab.classList.remove("active");
+		    homeTab.classList.add("inactive");
+		    profileTab.classList.add("active");
+		    profileTab.classList.remove("inactive");
+		    homeTab.setAttribute('aria-selected', 'false');
+		    profileTab.setAttribute('aria-selected', 'true');
 
 			xhttp.onload = function() {
 				if (this.readyState == 4 && this.status == 200) {
@@ -323,14 +390,16 @@ table, tr, th, td{
 					let table = '<table class="table"><tr><th scope="col">번호</th><th scope="col">카테고리</th><th scope="col">제목</th><th scope="col">작성일자</th></tr><tbody class="table-group-divider">';
 
 					for (let i = 0; i < data.length; i++) {
+						table += '<div class="qna-list-area">';
 						table += '<tr>';
-						table += '<td>' + (i + 1) + '</td>';
-						table += '<td>' + data[i].category + '</td>';
+						table += '<td class="listNum">' + (i + 1) + '</td>';
+						table += '<td class="category">' + data[i].category + '</td>';
 						table += '<td><a href="/qna99/qnaDetail?cs_no='
 								+ data[i].cs_no + '">' + data[i].title
 								+ '</a></td>';
-						table += '<td>' + data[i].reg_date + '</td>';
+						table += '<td class="listRegdate">' + data[i].reg_date + '</td>';
 						table += '</tr>';
+						table += '</div>';
 					}
 					table += '</tbody></table>';
 
