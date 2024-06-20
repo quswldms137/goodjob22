@@ -15,9 +15,44 @@ main {
 }
 
 main #container {
-	width:900px;
-	min-height:700px;
-	box-sizing:border-box;
+	width: 740px;
+	margin: 0 auto;
+	min-height: 700px;
+	background: #fff;
+}
+
+.findId-big-title {
+	margin-bottom: 15px;
+	font-weight: 400;
+	font-size: 22px;
+}
+
+.findId-small-title{
+	margin-left: 10px;
+	font-weight: 400;
+	font-size: 15px;
+}
+
+#memberForm input[type="text"],
+#companyForm input[type="text"] {
+	width: 400px;
+	height: 48px;
+	padding-left: 8px;
+	box-sizing: border-box;
+	border: 1px solid #dadada;
+	border-radius: 5px 5px 0 0;
+	font-family: "Pretendard Variable", Pretendard;
+}
+button{
+	padding:15px 50px;
+	color:#fff;
+	background:#FB8500;
+	border:1px solid #FB8500;
+	font-size:14px;
+}
+
+.button{
+	border-radius: 5px;
 }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -31,9 +66,14 @@ main #container {
 			<%@ include file="../front/common-sidebar-all.jsp"%>
 		</div>
 	<div id="container">
-	<h3>아이디 찾기</h3>
-	<div>회원정보 입력</div>
-	<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>
+	<h3 class="findId-big-title">아이디 찾기</h3>
+	<div class="<div>회원정보 입력</div>
+	<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>">
+		<div>회원정보 입력</div>
+		<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>
+	</div>
+	
+	
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	 	<li class="nav-item" role="presentation">
 	   		<button class="nav-link active" id="home-tab" onclick="showForm('memberForm')" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">개인회원</button>
@@ -45,13 +85,13 @@ main #container {
 	<div id="memberForm" style="display:block;">
 		<span>이름</span><input type="text" name="mem_name"><br>
 		<span>전화번호</span><input type="text" name="mem_tel"><br>
-		<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindMemUsername(event)">아이디 찾기</button>
+		<button type="submit" class="button" onclick="submitFindMemUsername(event)">아이디 찾기</button>
 		
 	</div>
 	<div id="companyForm" style="display:none;">
 		<span>가입자명</span><input type="text" name="com_name"><br>
 		<span>사업자등록번호</span><input type="number" name="com_companynum"><br>
-		<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindComUsername(event)">아이디 찾기2</button>
+		<button type="submit" class="button" onclick="submitFindComUsername(event)">아이디 찾기2</button>
 	</div>
 	</div>
 	</main>

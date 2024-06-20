@@ -15,15 +15,68 @@ main {
 }
 
 main #container {
-	width:900px;
-	min-height:700px;
-	box-sizing:border-box;
+	width: 740px;
+	margin: 0 auto;
+	min-height: 700px;
+	background: #fff;
 }
+
 #red {
 	color: red;
 }
+
+.findPw-big-title {
+	margin-bottom: 15px;
+	font-weight: 400;
+	font-size: 22px;
+}
+
+.modifyForm{
+	margin-right:120px;
+	text-align:center;
+	margin-top:20px;
+}
+button{
+	padding:15px 50px;
+	color:#fff;
+	background:#FB8500;
+	border:1px solid #FB8500;
+	font-size:14px;
+}
+
+.button{
+	border-radius: 5px;
+}
+
+.table {
+  width: 800px;
+  border-collapse: collapse; /* 테두리 겹침을 없애 깔끔하게 만듦 */
+  margin: 20px 20px; /* 상하 여백 */
+}
+
+.table th, .table td {
+  padding: 20px 30px; /* 셀 패딩 */
+  border: 1px solid #ddd; /* 셀 테두리 */
+  text-align: left; /* 텍스트 왼쪽 정렬 */
+}
+
+.table th {
+  background-color: #FDFDFD;
+  color: #333; /* 헤더 글자색 */
+}
+
+.table input[type="password"] {
+	width: 200px;
+	height: 25px;
+	padding-left: 8px;
+	border: 1px solid #dadada;
+	box-sizing: border-box;
+	border-radius: 0 0 5px 5px;
+	box-shadow: 0px 5px 5px #fafafa;
+	font-family: "Pretendard Variable", Pretendard;
+}
+
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
 	<header>
@@ -34,15 +87,23 @@ main #container {
 			<%@ include file="../front/common-sidebar-all.jsp"%>
 		</div>
 	<div id="container">
-	<div>비밀번호 재설정</div>
-	<div><span id="red">새로운 비밀번호</span>를 입력해 주세요.</div>
-	<table>
+	<div class="findPw-big-title">비밀번호 재설정</div>
+	<table class="table">
+		<tr>
+			<th>
+				<span id="red">새로운 비밀번호</span>를 입력해 주세요.
+			</th>
+			<td>
+			</td>
+		</tr>
 		<tr>
 			<th>새로운 비밀번호</th>
-			<td><input type="text" name="password"></td>
+			<td><input type="password" name="password"></td>
 		</tr>
 	</table>
-	<button type="submit" class="btn btn-primary btn-lg" onclick="modifyPassword(event)">확인</button>
+	<div class="modifyForm">
+		<button type="submit" class="button" onclick="modifyPassword(event)">확인</button>
+	</div>	
 	</div>
 	</main>
 	<footer>
