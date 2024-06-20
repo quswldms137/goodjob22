@@ -7,4 +7,8 @@
 		insert into mem_recruit (resume_no, recruit_no, resume_pass, view, interview_pass)
 		values(#{resume_no}, #{recruit_no}, 0, 0, 0)
 	</insert>
+	
+	<select id="applyChk">
+		select count(*) from mem_recruit where resume_no = #{resume_no} and recruit_no = #{recruit_no}
+	</select>
 </mapper>

@@ -15,6 +15,9 @@ public class MemRecruitService {
 	
 	@Autowired
 	private IResumeDao_JHY resumeDao;
+	
+	@Autowired
+	private IMemberRecruitDao memberRecruitDao;
 
 	/* 구직자 공고 상세페이지 즉시지원 */
 	public int nowApplyService(Long recruit_no, Long mem_no) {
@@ -28,6 +31,15 @@ public class MemRecruitService {
 		}
 		
 		return 0;
+	}
+	
+	/* 공고 상세페이지에서 즉시지원하면 버튼 비활성화 할라고 */
+	public int applyChkService(Long resume_no, Long recruit_no) {
+	
+		int result = memberRecruitDao.applyChk(resume_no, recruit_no);
+		
+		return result;
+		
 	}
 	
 }

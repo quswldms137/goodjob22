@@ -20,5 +20,9 @@ public class MemberController {
 		return "updateMemberInfo";
 	}
 	
-	
+	@GetMapping("/applyList")
+	public String applyList() {
+		
+		return "member/applyList";
+	}
 }
