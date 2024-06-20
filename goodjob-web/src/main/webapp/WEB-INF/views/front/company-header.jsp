@@ -106,7 +106,7 @@ header {
 					<li><a href="/company/employManage">공고·지원자 관리</a></li>
 					<li><a href="#">인재관리</a></li>
 					<li><a href="#">커뮤니티</a></li>
-					<li><a href="#">이벤트</a></li>
+					<li><a href="/company/event">이벤트</a></li>
 				</ul>
 				<ul>
 					<li class="gomain"><a href="http://localhost:9991/">메인으로 가기</a></li>

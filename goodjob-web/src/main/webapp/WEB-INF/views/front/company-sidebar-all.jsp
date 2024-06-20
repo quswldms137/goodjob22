@@ -95,11 +95,11 @@ ul {
 			<h3>공고·지원자 관리</h3>
 			<p><a href="/company/employManage">전체 채용공고 관리</a></p>
 			<p><a href="/company/receiveResume">지원자 관리</a></p>
-			<p><a href="#">면접 캘린더</a></p>
+			<!--  <p><a href="#">면접 캘린더</a></p> -->
 		</div>
 		<div class="sidebar-box sidebar-box3">
 			<h3>인재관리</h3>
-			<p><a href="#">인재 검색</a></p>
+			<!-- <p><a href="#">인재 검색</a></p>  -->
 			<p><a href="/company/interestMemberList?com_no=1">관심 구직자 목록</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box6">
