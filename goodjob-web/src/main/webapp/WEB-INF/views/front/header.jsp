@@ -183,13 +183,34 @@ header {
 <script>
 window.onload = function(){
 	const username = localStorage.getItem("username");
+	const role = localStorage.getItem("role");
 	console.log(username);
+	console.log(role);
 	
 	if(username){
 		notLogin.style.display = "none";
 		login.style.display = "block";
-		document.getElementById("username").innerText = username + ' 님';
-	}
+		
+		const usernameElement = document.getElementById("username");
+		usernameElement.innerText = username + ' 님';
+		
+		const parentLink = usernameElement.closest('a');
+		
+		if(role === 'ROLE_COMPANY'){
+			parentLink.href = "/company";
+		} else{
+			parentLink.href = "/resume/resumeManager";
+		}
+	} 
+	
+	
+	
+	
+	
+// 	if(role === "ROLE_COMPANY"){
+// 		parentLink.href="/company/";
+// 	} 
+	
 }
 
 function logout(){
