@@ -14,37 +14,36 @@
 main {
 	width: 1100px;
 	margin: 80px auto;
-	border: 1px solid #eee;
 }
 
 .slide {
 	display: flex;
 }
 
-#vip {
-	margin: 20px 0;
-	width: 1100px;
-	height: 300px;
-	overflow: hidden;
-	display: flex;
-	flex-wrap: nowrap;
-	position: relative;
+.skillMatchingH3{
+	font-size:20px;
 }
-
 #skillRecommendation {
 	margin: 20px 0;
-	height: 330px;
+	height: auto;
 	overflow: hidden;
 	transition: all 1s ease-out;
 	display: flex;
+	justify-content:space-between;
+	padding:20px 0;
 }
 
+.vip-title{
+	font-size:20px;
+	margin-top:100px;
+}
 #vip {
 	width: 300vw;
 	margin: 20px 0;
-	height: 330px;
+	height: auto;
 	overflow: hidden;
 	display: flex;
+	gap:20px;
 	flex-wrap: nowrap;
 	position: relative;
 }
@@ -63,25 +62,50 @@ label:hover {
 }
 
 .skill, .all {
-	width: 275px;
-	height: 330px;
-	border: 1px solid black;
+	width: 260px;
+	height: 100%;
+	border: 1px solid #ccc;
+	border-radius:5px;
 	box-sizing: border-box;
+	transition:all 0.3s
+}
+.skill:hover{
+	transform: translateY(-10px);
 }
 
 .vip {
-	width: 275px;
-	height: 300px;
-	border: 1px solid black;
+	width: 255px;
+	height: 100%;
+	border: 1px solid #ccc;
+	border-radius:5px;
 	box-sizing: border-box;
+}
+.vip .img-box{
+	height:120px;
+	border-bottom:1px solid #eee;
+	overflow:hidden;
 }
 
 .skill p, .vip p, .all p {
-	margin: 5px 0;
+	padding-top:5px;
+	padding-left:15px;
+	margin-bottom:0;
 }
-
+.skill p:nth-child(2),
+.vip p:nth-child(2),
+.all p:nth-child(2){
+	padding-top:15px;
+	font-size:14px;
+}
+.skill .img-box{
+	height:120px;
+	border-bottom:1px solid #eee;
+	overflow:hidden;
+}
 .skill img, .vip img, .all img {
 	max-width: 100%;
+	padding:5px;
+	box-sizing:border-box;
 }
 
 .scrapImg {
@@ -94,9 +118,12 @@ label:hover {
 }
 
 .applyBtn {
-	border: 1px solid orange;
-	padding: 2px;
-	color: orange;
+	display:block;
+	text-align:center;
+	border-top: 1px solid #eee;
+	padding: 5px;
+	color: #FB8500;
+	font-size:15px;
 }
 
 .last {
@@ -155,7 +182,7 @@ body::-webkit-scrollbar {
 	<main>
 		<h3 class="skillMatchingH3">스킬 매칭</h3>
 		<div id="skillRecommendation"></div>
-		<h3>VIP 채용공고</h3>
+		<h3 class="vip-title">VIP 채용공고</h3>
 		<div id="vip"></div>
 
 		<h3>채용공고</h3>
@@ -190,14 +217,14 @@ body::-webkit-scrollbar {
 						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						str += '<div class="skill"> ' + 
-						'<a href="/employ/detail/' + response[i].recruit_no + '/' + response[i].com_no + '/' + response[i].com_detail_no + '" ><div> ' +
-						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
-						'</div> ' + 
+						'<a href="/employ/detail/' + response[i].recruit_no + '/' + response[i].com_no + '/' + response[i].com_detail_no + '" >' +
+						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/coupang.jpg"></div>' +
 						'<p>' + response[i].com_name + '</p> ' +
 						'<p><b>' + response[i].title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn apply' + response[i].recruit_no + '" onclick="applyRecruit(event)">즉시지원</span><span>D-' + diff + '</span> ' + 
+						'<p class="last"><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + response[i].recruit_no + '"></span></p> ' +
+						'<span class="applyBtn apply' + response[i].recruit_no + '" onclick="applyRecruit(event)">즉시지원</span>' + 
 						'</div> ';
 						
 						}						
@@ -232,14 +259,14 @@ body::-webkit-scrollbar {
 						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
 						
 						str += '<div class="vip"> ' + 
-						'<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" ><div> ' +
-						'<img alt="채용공고 사진" src="/resource/img/coupang.jpg"> ' +
-						'</div> ' + 
+						'<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" >' +
+						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/coupang.jpg"></div>' +
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span><span>D-' + diff + '</span> ' + 
+						'<p class="last"><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
+						'<span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span>' +
 						'</div> ';
 					});
 					
@@ -272,8 +299,9 @@ body::-webkit-scrollbar {
 						'<p>' + item.com_name + '</p> ' +
 						'<p><b>' + item.title + '</b></p> ' +
 						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span><span>D-' + diff + '</span> ' + 
+						'<p class="last"><span>D-' + diff + '</span> ' + 
 						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + item.recruit_no + '"></span></span></p> ' +
+						'<span class="applyBtn apply' + item.recruit_no + '" onclick="applyRecruit(event)" >즉시지원</span>' +
 						'</div> ';
 					});
 					
