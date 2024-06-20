@@ -156,14 +156,13 @@ main #container {
 			<div id="detail"></div>
 			
 			<div class="doModify">
-				<a href="#">돌아가기</a>
+				<a href="/qna99/qnaWrite?test=1">돌아가기</a>
 				<a href="/qna99/qnaWrite">수정/삭제하기</a>
 			</div>
+			
+			<div id="answer"></div>
 		</div>
-		<!-- 문의 상세내용 -->
-		<div id="answer" style="display: none;">
-			<input type="text" name="answer"><br>
-		</div>
+		
 
 	</main>
 	<footer>
@@ -216,14 +215,27 @@ main #container {
 						cs_no : cs_no
 					},
 					success : function(data) {
-						let detail = '<div class="category">' + data.category + '</div>';
-						detail += '<div class="title">' + data.title;
-						detail += '<span>'+ data.reg_date +'</span>';
-						detail += '</div>'
-						detail += '<div class="content">' + data.content + '</div>';
-
-						$('#detail').html(detail);
-
+						console.log(data.answer);
+						if(data.answer != null){
+							let detail = '<div class="category">' + data.category + '</div>';
+							detail += '<div class="title">' + data.title;
+							detail += '<span>'+ data.reg_date +'</span>';
+							detail += '</div>';
+							detail += '<div class="content">' + data.content + '</div>';
+							$('#detail').html(detail);
+							// 답변 내역
+							let answer = '<div>문의 답변</div>';
+							answer += '<div>'+ data.answer +'</div>';
+							$('#answer').html(answer);
+							
+						} else {
+							let detail2 = '<div class="category">' + data.category + '</div>';
+							detail2 += '<div class="title">' + data.title;
+							detail2 += '<span>'+ data.reg_date +'</span>';
+							detail2 += '</div>';
+							detail2 += '<div class="content">' + data.content + '</div>';
+							$('#detail').html(detail2);
+						}
 					},
 					error : function(error) {
 						alert("불러오는데 실패했습니다. 다시 시도해주세요.", error);

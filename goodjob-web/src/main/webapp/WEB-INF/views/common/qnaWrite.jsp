@@ -197,7 +197,9 @@ table, tr, th, td{
     background: #fafafa;
     border-bottom: 1px solid #333;
 }
-.table
+#qnaNull{
+	text-align:center;
+}
 </style>
 </head>
 <body>
@@ -261,6 +263,7 @@ table, tr, th, td{
 			</div>
 			<div id="qnaListContainer" style="display: none;">
 				<div id="qnaList"></div>
+				<div id="qnaNull"></div>
 			</div>
 		</div>
 	</main>
@@ -274,15 +277,33 @@ table, tr, th, td{
 			let cs_no = urlParams.get('cs_no');
 			let test = urlParams.get('test');
 			
+			var homeTab = document.getElementById('home-tab');
+		    var profileTab = document.getElementById('profile-tab');
+		        
 			var writeForm = $('#submitWrite');
 			var modifyForm = $('#submitUpdate');
 			var cancelBtn = $(".cancel-btn");
 			var deleteQna = $("#deleteQna");
 			
 			console.log(cs_no);
+			//test값이 넘어오면 list보여지기
 			if(test){
+				var writeForm = document.getElementById('qnaWrite');
+				var qnaList = document.getElementById('qnaListContainer');
+				var homeTab = document.getElementById('home-tab');
+				var profileTab = document.getElementById('profile-tab');
+
+				writeForm.style.display = 'none';
+			    qnaList.style.display = 'block';
+			    homeTab.classList.remove("active");
+			    homeTab.classList.add("inactive");
+			    profileTab.classList.add("active");
+			    profileTab.classList.remove("inactive");
+			    homeTab.setAttribute('aria-selected', 'false');
+			    profileTab.setAttribute('aria-selected', 'true');
 				getQnaList();
 			}
+			//cs_no값이 넘어오면 입력폼에 값 넣어지기
 			if (cs_no) {
 				modifyContent(cs_no);
 				writeForm.hide();
@@ -297,12 +318,11 @@ table, tr, th, td{
 			}
 
 			// 이벤트 리스너 설정
-			$('#submitWrite').on('click', submitQuestion);
-			$('#submitUpdate').on('click', submitUpdate);
-			$('#deleteQna').on('click', deleteQna);
+			$('body').on('click', '#submitWrite',submitQuestion);
+			$('body').on('click', '#submitUpdate', submitUpdate);
+			$('body').on('click', '#deleteQna', deleteQnaFunction);
 			// 초기 상태 설정
-	        var homeTab = document.getElementById('home-tab');
-	        var profileTab = document.getElementById('profile-tab');
+	       
 	        
 	        homeTab.classList.add("active");
 	        homeTab.classList.remove("inactive");
@@ -313,8 +333,7 @@ table, tr, th, td{
 
 		});
 
-		function deleteQna(event){
-			alert("삭제");
+		function deleteQnaFunction(event){
 			const urlParams = new URLSearchParams(window.location.search);
 			let cs_no = urlParams.get('cs_no');
 			console.log(cs_no);
@@ -328,10 +347,6 @@ table, tr, th, td{
 				}
 			};
 			xhttp.open("DELETE", "http://localhost:8888/api/qna-99?cs_no="+cs_no);
-// 			const username = localStorage.getItem("username");
-// 			const role = localStorage.getItem("role");
-// 			xhttp.setRequestHeader("username", username);
-// 			xhttp.setRequestHeader("role", role);
 			xhttp.send();
 		}
 		
@@ -383,7 +398,7 @@ table, tr, th, td{
 				xhttp.onload = function() {
 					if (this.status === 200) {
 						alert(this.responseText);
-						window.location.href = "http://localhost:9991/common99"
+						window.location.href = "http://localhost:9991/"
 					} else {
 						alert("다시 입력해주세요.");
 					}
@@ -421,24 +436,29 @@ table, tr, th, td{
 			xhttp.onload = function() {
 				if (this.readyState == 4 && this.status == 200) {
 					const data = JSON.parse(this.responseText);
+					console.log("data: ",data);
+					if(data != null && data.length > 0){
+						let table = '<table class="table"><tr><th scope="col">번호</th><th scope="col">카테고리</th><th scope="col">제목</th><th scope="col">작성일자</th></tr><tbody class="table-group-divider">';
 
-					let table = '<table class="table"><tr><th scope="col">번호</th><th scope="col">카테고리</th><th scope="col">제목</th><th scope="col">작성일자</th></tr><tbody class="table-group-divider">';
+						for (let i = 0; i < data.length; i++) {
+							table += '<div class="qna-list-area">';
+							table += '<tr>';
+							table += '<td class="listNum">' + (i + 1) + '</td>';
+							table += '<td class="category">' + data[i].category + '</td>';
+							table += '<td><a href="/qna99/qnaDetail?cs_no='
+									+ data[i].cs_no + '">' + data[i].title
+									+ '</a></td>';
+							table += '<td class="listRegdate">' + data[i].reg_date + '</td>';
+							table += '</tr>';
+							table += '</div>';
+						}
+						table += '</tbody></table>';
 
-					for (let i = 0; i < data.length; i++) {
-						table += '<div class="qna-list-area">';
-						table += '<tr>';
-						table += '<td class="listNum">' + (i + 1) + '</td>';
-						table += '<td class="category">' + data[i].category + '</td>';
-						table += '<td><a href="/qna99/qnaDetail?cs_no='
-								+ data[i].cs_no + '">' + data[i].title
-								+ '</a></td>';
-						table += '<td class="listRegdate">' + data[i].reg_date + '</td>';
-						table += '</tr>';
-						table += '</div>';
+						document.getElementById("qnaList").innerHTML = table;
+					} else {
+						document.getElementById("qnaNull").innerHTML = "문의 내역이 없습니다.";
 					}
-					table += '</tbody></table>';
-
-					document.getElementById("qnaList").innerHTML = table;
+					
 				} else if (this.readyState == 4 && this.status != 200) {
 					alert("목록을 불러올 수 없습니다. 다시 시도해주세요.");
 				}
@@ -507,7 +527,7 @@ table, tr, th, td{
 				xhttp.onload = function() {
 					if (this.status === 200) {
 						alert(this.responseText);
-						window.location.href = "/qna99/qnaDetail";
+						loadDetail(cs_no);
 						// getQnaList(); // 필요한 경우 이 줄의 주석을 제거합니다.
 					} else {
 						alert("다시 입력해주세요.");
