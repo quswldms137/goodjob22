@@ -202,16 +202,18 @@ font-size: 20px;
 					pages = totalItem / 4;
 				}
 				
+				console.log(response);
 				
-				let str = '<div class="userList-area"><ul class="userList-title"><li>이름</li><li>가입일</li><li>아이디</li><li>연락처</li></ul>';
+				let str = '<div class="userList-area"><ul class="userList-title"><li>이름</li><li>사업자번호</li><li>아이디</li><li>연락처</li></ul>';
 				
 				response.forEach(company => {
+					console.log(company.com_tel);
 					str += '<a href="/admin/company/detail/' + company.com_no + '">';
 					str += '<ul class="userList-cont">';
 					str += '<li>'+ company.com_name +'</li>';
-					str += '<li>'+ company.make_date +'</li>';
+					str += '<li>'+ company.com_companynum +'</li>';
 					str += '<li>'+ company.username +'</li>';
-					str += '<li>'+ company.mem_tel +'</li>';
+					str += '<li>'+ company.com_tel +'</li>';
 					str += '</ul>';
 					str += '</a>';
 				});
@@ -291,14 +293,14 @@ font-size: 20px;
 	        success: function(response){
 	            const totalItem = response[0].total;
 	            let pages = Math.ceil(totalItem / 4);
-	            let str = '<div class="userList-area"><ul class="userList-title"><li>이름</li><li>가입일</li><li>아이디</li><li>연락처</li></ul>';
+	            let str = '<div class="userList-area"><ul class="userList-title"><li>이름</li><li>사업자번호</li><li>아이디</li><li>연락처</li></ul>';
 	            response.forEach(company => {
 	                str += '<a href="/admin/company/detail/' + company.com_no + '">';
 	                str += '<ul class="userList-cont">';
 	                str += '<li>'+ company.com_name +'</li>';
-	                str += '<li>'+ company.make_date +'</li>';
+	                str += '<li>'+ company.com_companynum +'</li>';
 	                str += '<li>'+ company.username +'</li>';
-	                str += '<li>'+ company.mem_tel +'</li>';
+	                str += '<li>'+ company.com_tel +'</li>';
 	                str += '</ul>';
 	                str += '</a>';
 	            });

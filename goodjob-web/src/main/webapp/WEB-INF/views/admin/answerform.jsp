@@ -114,7 +114,10 @@ hr{
 				dataType : "json",
 				success : function(response){
 					
-					
+					let answer = response.answer;
+					if(response.answer === null){
+						answer = "";
+					}
 					let str = '';
 						str += '<div id="detail"> ' + 
 							   '<p class="category">' + response.category + '</p>' +
@@ -126,9 +129,9 @@ hr{
 							   '<div class="answer-content">' + response.content + '</div>' + 
 							   '</div> ' + 
 							   '<hr>' +
-							   '<div id="inputs"><textarea placeholder="답변을 입력하세요.">' + response.answer + '</textarea> ';
+							   '<div id="inputs"><textarea placeholder="답변을 입력하세요.">' + answer + '</textarea> ';
 							   if(response.answer === null){
-									str +=	'<input type="button" value="답변작성" onclick="registAnswer(event)" id="answer' + response.cs_no + '"></div>';
+									str +=	'<input type="button" value="답변작성" onclick="return registAnswer(event)" id="answer' + response.cs_no + '"></div>';
 							   }else {
 								   str += '<input type="button" value="답변수정" onclick="updateAnswer(event)" id="answer' + response.cs_no + '"></div>';
 							   }
@@ -144,6 +147,14 @@ hr{
 		});
 		
 		function registAnswer(event){
+			
+			const answer = document.querySelector("textarea");
+			if(answer.value === ""){
+				alert("답변이 입력되지 않았습니다.");
+				answer.focus();
+				return false;
+			}
+			
 			const data = JSON.stringify({
 				cs_no : event.target.id.substring(6),
 				answer : $("textarea").val()
@@ -156,6 +167,7 @@ hr{
 			xhr.open("POST", "http://localhost:8888/api/qna/answer", true);
 			xhr.setRequestHeader("Content-type", "application/json");
 			xhr.send(data);
+			return true;
 		}
 		
 		function updateAnswer(event){
