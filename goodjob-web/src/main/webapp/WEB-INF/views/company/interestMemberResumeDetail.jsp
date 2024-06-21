@@ -33,6 +33,10 @@ main #container {
 		text-align : center;
 		margin-top: 20px;
 }
+.sidebar-box3 p:nth-child(2) a {
+	color:#fb8500 !important;
+}
+
 input[type="button"] {
 	width: 160px;
 	color: #FB8500;
