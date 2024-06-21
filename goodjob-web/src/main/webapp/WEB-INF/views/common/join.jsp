@@ -302,12 +302,12 @@ color:red
 						idcheckno.innerHTML="";
 						idcheckok.innerHTML=this.responseText;	
 						inputUsername.style.border = '1px solid green';
-						usernameCheckedNum = 1
+						usernameCheckedNum = 2;
 					}else{
 						idcheckok.innerHTML="";
 						idcheckno.innerHTML=this.responseText;
 						inputUsername.style.border = '1px solid red';
-						usernameCheckedNum = 2;
+						usernameCheckedNum = 1;
 						return ;
 					}		
 				} else {
@@ -346,10 +346,10 @@ color:red
 			if(usernameCheckedNum == 0){
 				alert("ID 중복 확인을 해주세요.");
 				return ;
-			} else if(usernameCheckedNum == 2){
+			} else if(usernameCheckedNum == 1){
 				alert("중복된 아이디 입니다. 다른 아이디를 입력해주세요.");
 				return ;
-			} else if(usernameCheckedNum == 1){
+			} else if(usernameCheckedNum == 2){
 				const username1 = document
 				.querySelector("Input[name='username']");
 				const password1 = document
