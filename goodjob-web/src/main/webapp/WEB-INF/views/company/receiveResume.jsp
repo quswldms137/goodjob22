@@ -92,6 +92,9 @@ main #container {
 	align-items: center;
 	justify-content: center;
 }
+.sidebar-box2 p:nth-child(3) a{
+	color:#fb8500 !important;
+}
 
 .updateBtn, .deleteBtn {
 	background-color: orange;

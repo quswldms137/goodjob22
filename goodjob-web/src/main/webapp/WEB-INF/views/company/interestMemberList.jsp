@@ -20,8 +20,13 @@ body {
 	background:#fff;
 }
 
+<<<<<<< HEAD
 .sidebar-box3 a:nth-child(1) {
 	color: #FB8500 !important;
+=======
+.sidebar-box2 p:nth-child(2) {
+	font-weight: bold;
+>>>>>>> eafa3a3 (사이드바 효과변경)
 }
 
 main {
