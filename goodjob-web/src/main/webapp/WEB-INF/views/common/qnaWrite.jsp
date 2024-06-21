@@ -34,6 +34,10 @@ main #container {
 	margin-bottom: 50px;
 }
 
+.sidebar-box3 p:nth-child(2) a{
+	color: #FB8500 !important;
+}
+
 .tab-btn ul {
 	display: flex;
 	justify-content: center;
