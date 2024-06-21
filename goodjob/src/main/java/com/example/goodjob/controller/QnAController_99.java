@@ -29,7 +29,7 @@ public class QnAController_99 {
 	@PostMapping("/insert")
 	public ResponseEntity<String> regQuestion(@RequestBody ServiceQuestionDto serviceQuestionDto,
 			@RequestHeader("username")String username, @RequestHeader("role")String role ) {
-		System.out.println("실행,,,,");
+		System.out.println("문의글 작성 컨트롤러,,,,");
 		
 		System.out.println(serviceQuestionDto);
 		
@@ -88,7 +88,7 @@ public class QnAController_99 {
 	@PutMapping("/modify")
 	public ResponseEntity<String> modifyQuestion(@RequestBody ServiceQuestionDto serviceQuestionDto,
 			@RequestHeader("username")String username) {
-		System.out.println("실행,,,,");
+		System.out.println("문의글 수정 컨트롤러,,,");
 		
 		System.out.println("수정된 내용: " + serviceQuestionDto);
 		

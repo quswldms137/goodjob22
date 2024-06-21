@@ -318,7 +318,8 @@ table, tr, th, td{
 			}
 
 			// 이벤트 리스너 설정
-			$('body').on('click', '#submitWrite',submitQuestion);
+			$('#submitWrite').off('click');
+			$('#submitWrite').one('click', submitQuestion);
 			$('body').on('click', '#submitUpdate', submitUpdate);
 			$('body').on('click', '#deleteQna', deleteQnaFunction);
 			// 초기 상태 설정
