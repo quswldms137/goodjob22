@@ -7,7 +7,12 @@
 	
 	<!-- 내가 쓴 채용공고 목록 조회하기 (지금은 로그인 연동 X -> 등록된 채용공고 전부다 불러옴)-->
 	<select id="findAll">
-		select * from recruit
+		SELECT r.title, r.career, r.education, r.location, 
+				r.FIELD, r.RANK, r.pay, r.deadline_date, 
+				r.recruit_no, r.com_no, cd.com_detail_no 
+				FROM recruit r
+		LEFT JOIN company_detail cd
+		ON r.com_no = cd.com_no 
 	</select>
 	
 	<!-- com_no 로 받아서 내가 쓴 채용공고 목록 조회용 -->

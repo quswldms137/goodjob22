@@ -50,7 +50,7 @@ public class CompanyController_JHY {
 	private ICompanyDetailDao_JYC companyDetailDao;
 	
 	
-	// 기업 메인페이지 내가 쓴 채용공고 목록 조회 (로그인 연동전이라 모든 목록 불러오게 설정해둠)
+	// 기업 메인페이지 내가 쓴 채용공고 목록 조회 (로그인 연동전이라 모든 목록 불러오게 설정해둠) - 로그인 연동 완료(자기가 쓴 채용공고 목록만 보임)
 	@GetMapping("/index")
 	public List<RecruitDto> main(@RequestParam("username") String username) {
 		Long com_no = qnaService.getCom_no(username);
@@ -59,6 +59,14 @@ public class CompanyController_JHY {
 		System.out.println(com_no);
 		System.out.println(list);
 		Long com_detail_no = com_detail_no_.getCom_detail_no();
+		
+		return list;
+	}
+	// 비회원이 기업 메인 페이지 접속시 휑한거 같아서 모든 채용공고 보여주기로 함.
+	@GetMapping("/index2")
+	public List<RecruitDto> main() {
+		List<RecruitDto> list = companyDao.findAll();
+		System.out.println(list);
 		
 		return list;
 	}

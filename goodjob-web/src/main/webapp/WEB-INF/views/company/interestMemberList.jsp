@@ -21,7 +21,7 @@ body {
 }
 
 .sidebar-box3 a:nth-child(1) {
-	font-weight: bold;
+	color: #FB8500 !important;
 }
 
 main {
