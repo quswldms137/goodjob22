@@ -51,8 +51,18 @@ main #container {
 	box-sizing:border-box;
 	margin-bottom:10px;
 }
-.resume-area h3{
-	
+.resume-area-box a{
+	display:flex;
+	align-items:center;
+}
+.main-resume{
+	display:inline-block;
+	font-size:10px;
+	padding:3px 8px;
+	border:1px solid #FB8500;
+	border-radius:5px;
+	color:#FB8500;
+	margin-left:15px;
 }
 </style>
 </head>
@@ -89,7 +99,11 @@ main #container {
 	            
 	            for(let i = 0; i < data.length; i++){
 	            	output += '<div class="resume-area-box">';
-	                output += '<h3><a href="/resume/resumeDetail?resume_no='+ data[i].resume_no +'&mem_no='+ data[i].mem_no +'">' + data[i].title + '</a></h3>';
+	                output += '<h3><a href="/resume/resumeDetail?resume_no='+ data[i].resume_no +'&mem_no='+ data[i].mem_no +'">' + data[i].title;
+	                if(data[i].main == 1){
+	                output += '<span class="main-resume">대표</span>';
+	                }
+	                output += '</a></h3>';
 	                output += '</div>';
 	            }
 	            
