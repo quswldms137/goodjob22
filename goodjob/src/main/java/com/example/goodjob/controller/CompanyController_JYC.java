@@ -15,7 +15,7 @@ import com.example.goodjob.dto.CompanyDto_JYC;
 import com.example.goodjob.dto.MemberDto;
 import com.example.goodjob.service.CompanyService_JYC;
 
-@CrossOrigin("http://localhost:9991/")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/company/")
 public class CompanyController_JYC {

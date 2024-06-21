@@ -102,7 +102,7 @@ main #container {
 }
 
 .updateBtn:hover, .deleteBtn:hover {
-	background-color: #FB8500;
+	background-color: skyblue;
 }
 
 #h1 {

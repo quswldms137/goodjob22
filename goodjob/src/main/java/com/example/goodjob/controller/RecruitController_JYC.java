@@ -14,7 +14,7 @@ import com.example.goodjob.dto.RecruitDto_JYC;
 import com.example.goodjob.service.RecruitService_JYC;
 import com.example.goodjob.service.SkillService_JYC;
 
-@CrossOrigin("http://localhost:9991")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/recruit")
 public class RecruitController_JYC {
