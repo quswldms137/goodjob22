@@ -176,7 +176,7 @@ span {
 				response.forEach(memrecruit => {
 					
 	            	const deadline_date = " ~ " + memrecruit.recruitDto.deadline_date.split("-")[1] + "." + memrecruit.recruitDto.deadline_date.split("-")[2];
-	            	const title = memrecruit.recruitDto.title.substring(10) + "...";
+	            	const title = memrecruit.recruitDto.title.substring(0, 10) + "...";
 	            	
 	            	let interview = "";
 	            	if(memrecruit.interview_pass === 0){
