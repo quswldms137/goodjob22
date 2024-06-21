@@ -87,7 +87,7 @@ header {
 		<div id="company-head">
 			<div class="company-head-top">
 				<div class="company-logo">
-					<a href="#"><img src="/resource/img/logo-white.png"></a>
+					<a href="/company"><img src="/resource/img/logo-white.png"></a>
 				</div>
 				<div class="company-login-area" id="notLogin">
 					<ul>
