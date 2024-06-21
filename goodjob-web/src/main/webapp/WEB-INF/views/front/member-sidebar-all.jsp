@@ -87,7 +87,7 @@ ul {
 			<p><a href="/member/applyList">입사지원 현황</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box4">
-			<h3>커뮤니티</h3>
+			<h3>고객센터</h3>
 			<p><a href="/qna">문의 내역</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box5">
