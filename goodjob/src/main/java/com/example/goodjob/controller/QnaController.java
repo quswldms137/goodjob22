@@ -109,8 +109,9 @@ public class QnaController {
 	
 	@PutMapping("/answer")
 	public ResponseEntity<String> updateAnswer(@RequestBody ServiceQuestionDto serviceQuestionDto){
-
-		String result = serviceQuestionService.updateAnswer(serviceQuestionDto.getCs_no(), serviceQuestionDto.getAnswer());
+		String answer = serviceQuestionDto.getAnswer();
+		answer.replace("\n", "<br>");
+		String result = serviceQuestionService.updateAnswer(serviceQuestionDto.getCs_no(), answer);
 		
 		if(!result.equals("답변이 성공적으로 수정되었습니다.")) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)

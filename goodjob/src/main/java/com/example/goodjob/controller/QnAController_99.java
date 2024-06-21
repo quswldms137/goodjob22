@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.goodjob.dto.ServiceQuestionDto;
 import com.example.goodjob.service.QnaService99;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/qna-99")
@@ -28,7 +30,7 @@ public class QnAController_99 {
 	
 	@PostMapping("/insert")
 	public ResponseEntity<String> regQuestion(@RequestBody ServiceQuestionDto serviceQuestionDto,
-			@RequestHeader("username")String username, @RequestHeader("role")String role ) {
+			@RequestHeader("username")String username, @RequestHeader("role")String role, HttpServletRequest request) {
 		System.out.println("문의글 작성 컨트롤러,,,,");
 		
 		System.out.println(serviceQuestionDto);
@@ -39,6 +41,8 @@ public class QnAController_99 {
 		Long mem_no = qnaService.getMem_no(username);
 		Long com_no = qnaService.getCom_no(username);
 
+		String content = serviceQuestionDto.getContent();
+		content = content.replace("\n", "<br>");
 		if(mem_no != null) {
 			System.out.println("mem_no: " + mem_no);
 			serviceQuestionDto.setMem_no(mem_no);
