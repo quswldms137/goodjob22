@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+body{
+	background:#f7f7f7;
+}
+
+#sidebar{
+	background:#fff;
+}
+
 main {
 	width: 1100px;
 	margin: 80px auto;
@@ -18,8 +26,10 @@ main {
 main #container {
 	width: 900px;
 	min-height: 700px;
-	border: 1px solid #ccc;
+	border: 1px solid #eee;
+	border-radius:5px;
 	box-sizing: border-box;
+	background:#fff;
 }
 #container h1{
 	font-size: 1.3rem;
