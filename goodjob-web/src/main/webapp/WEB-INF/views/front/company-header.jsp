@@ -77,13 +77,7 @@ header {
 	.gomain a{
 	border-bottom:0 !important;
 	}
-li {
-	margin-right: 20px;
-}
 
-.company-nav ul li {
-	margin-left: 65px;
-}
 
 </style>
 </head>
