@@ -175,7 +175,7 @@ public class CompanyController_JHY {
 		if(count == 0) {
 			comInterestDao.regInterestMember(comInterestDto.getCom_no(), comInterestDto.getMem_no());
 			str = "관심 구직자로 등록되었습니다.";
-		}else if(count == 1) {
+		}else {
 			comInterestDao.deleteInterestMember(comInterestDto.getCom_no(), comInterestDto.getMem_no());
 			str = "관심 구직자에서 해제되었습니다.";
 		}

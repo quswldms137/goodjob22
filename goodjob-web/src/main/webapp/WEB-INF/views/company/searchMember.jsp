@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>관심 구직자 목록</title>
+<title>인재검색</title>
 <style>
 
 body {
@@ -45,7 +45,7 @@ main #container {
 	padding-bottom:10px;
 }
 
-.sidebar-box3 p:nth-child(3) {
+.sidebar-box3 p:nth-child(2) {
 	font-weight: bold;
 }
 
