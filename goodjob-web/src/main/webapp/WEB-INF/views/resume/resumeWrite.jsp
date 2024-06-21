@@ -30,6 +30,7 @@
 				<p class="personal_info_title">인적사항</p>
 				<div class="personal_info">
 					<div class="personal_info_content">
+						<input type="hidden" name="main" value="1">
 						<input type="hidden" name="mem_no" value="">
 						<input type="text" name="username" placeholder="이름" value="">
 						<input type="text" name="mem_birth" placeholder="ex) 0000-00-00" value="">
@@ -177,13 +178,43 @@
 	});
 	
 	$(document).ready(function () {
+		
+            const username = localStorage.getItem("username");
+		
+		$.ajax({
+            type: 'GET',
+            url: 'http://localhost:8888/api/resume/inputMem/' + username,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+            	console.log(response);
+            	
+            	document.querySelector("input[name='mem_no']").value = response.mem_no;
+            	document.querySelector("input[name='username']").value = response.username;
+            	document.querySelector("input[name='mem_birth']").value = response.mem_birth;
+            	document.querySelector("input[name='mem_tel']").value = response.mem_tel;
+            	document.querySelector("input[name='mem_email']").value = response.mem_email;
+            	document.querySelector("input[name='mem_addr']").value = response.mem_addr;
+            	//document.querySelector("input[name='mem_gender']").value = response.mem_gender;
+            	//document.querySelector("input[name='military']").value = response.military;
+            	
+            },
+            error: function (error) {
+                alert('이력서 등록에 실패하였습니다.');
+                console.error('Error:', error);
+            }
+        });
+		
+		
+		
         $('#resumeForm').submit(function (event) {
             event.preventDefault(); // 폼 기본 제출 방지
             
-            const username = localStorage.getItem("username");
-
+            
             var formData = new FormData(this);
 
+			console.log(formData);
+			
             $.ajax({
                 type: 'POST',
                 url: 'http://localhost:8888/api/resume/write',

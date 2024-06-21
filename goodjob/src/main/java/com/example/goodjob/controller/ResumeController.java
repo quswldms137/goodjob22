@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,8 +84,7 @@ public class ResumeController {
 			@RequestParam("grades") String grades, @RequestParam("major") String major,
 			@RequestParam("username") String username, @RequestParam("mem_birth") String mem_birth,
 			@RequestParam("mem_gender") String mem_gender, @RequestParam("mem_email") String mem_email,
-			@RequestParam("mem_tel") String mem_tel,
-			@RequestHeader("username") String username2) {
+			@RequestParam("mem_tel") String mem_tel) {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -263,8 +263,10 @@ public class ResumeController {
 
 	/* 로그인된 멤버 이력서 리스트 */
 	@GetMapping("/list")
-	public List<ResumeDto> resumeList(@RequestParam("mem_no") Long mem_no) {
+	public List<ResumeDto> resumeList(@RequestParam("username") String username) {
 
+		Long mem_no = qnaService99.getMem_no(username);
+		
 		return resumeService.resumeGetService(mem_no);
 	}
 	
@@ -282,6 +284,20 @@ public class ResumeController {
 		SkillDto skilldto = skillService.getSkillDetailService(resume_no);
 		
 		return new ResumeDetailDto(resumedto, careerdto, licensedto, etcdto, educationdto, skilldto, memberdto);
+	}
+	
+	@GetMapping("/inputMem/{username}")
+	public MemberDto inputMem(@PathVariable("username") String username) {
+		
+		System.out.println(username);
+		
+		Long mem_no = qnaService99.getMem_no(username);
+		
+		
+		MemberDto result = memberService.getMemberDetailService(mem_no);
+		
+		return result;
+		
 	}
 	
 	
