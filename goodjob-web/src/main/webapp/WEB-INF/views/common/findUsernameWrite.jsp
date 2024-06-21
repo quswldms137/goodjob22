@@ -33,6 +33,23 @@ main #container {
 	font-size: 15px;
 }
 
+#memberForm,
+#companyForm {
+	width: 450px;
+	margin: 30px;
+	border: 1px solid #dadada;
+	border-radius: 5px;
+}
+
+#memberForm .memberForm-in,
+#companyForm .companyForm-in {
+	width: 100%;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 #memberForm input[type="text"],
 #companyForm input[type="text"] {
 	width: 400px;
@@ -41,6 +58,30 @@ main #container {
 	box-sizing: border-box;
 	border: 1px solid #dadada;
 	border-radius: 5px 5px 0 0;
+	font-family: "Pretendard Variable", Pretendard;
+}
+
+#memberForm input[name="mem_name"],
+#companyForm input[name="com_name"] {
+	border-bottom:0;
+	border-radius: 5px 5px 0 0;
+	font-family: "Pretendard Variable", Pretendard;
+}
+
+#memberForm input[name="mem_tel"],
+#companyForm input[name="com_companynum"] {
+	border-radius:0 0 5px 5px ;
+}
+
+
+#memberForm input[type="password"],
+#companyForm input[type="password"] {
+	width: 400px;
+	height: 48px;
+	padding-left: 8px;
+	box-sizing: border-box;
+	border: 1px solid #dadada;
+	border-radius:0 0 5px 5px;
 	font-family: "Pretendard Variable", Pretendard;
 }
 button{
@@ -67,13 +108,10 @@ button{
 		</div>
 	<div id="container">
 	<h3 class="findId-big-title">아이디 찾기</h3>
-	<div class="<div>회원정보 입력</div>
-	<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>">
+	<div class="findId-small-title">
 		<div>회원정보 입력</div>
 		<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>
 	</div>
-	
-	
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	 	<li class="nav-item" role="presentation">
 	   		<button class="nav-link active" id="home-tab" onclick="showForm('memberForm')" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">개인회원</button>
@@ -82,15 +120,35 @@ button{
 	   		<button class="nav-link" id="profile-tab" onclick="showForm('companyForm')" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">기업회원</button>
 	 	</li>
 	</ul>
-	<div id="memberForm" style="display:block;">
-		<span>이름</span><input type="text" name="mem_name"><br>
-		<span>전화번호</span><input type="text" name="mem_tel"><br>
-		<button type="submit" class="button" onclick="submitFindMemUsername(event)">아이디 찾기</button>
-		
+	<div id="memberForm" style="display: block;">
+		<form>
+			<div class="memberForm-in">
+				<input type="text" name="mem_name" placeholder="이름"> 
+				<input type="text" name="mem_tel" placeholder="전화번호">
+				<br>
+				<button type="submit" onclick="submitFindMemUsername(event)">아이디 찾기</button>
+			</div>
+		</form>
 	</div>
+	<div id="companyForm" style="display: none;">
+		<form>
+			<div class="companyForm-in">
+				<input type="text" name="com_name" placeholder="기업명"> 
+				<input type="text" name="com_companynum" placeholder="사업자등록번호">
+				<br>
+				<button type="submit" onclick="submitFindComUsername(event)">아이디 찾기</button>
+			</div>
+		</form>
+	</div>
+<!-- 	<div id="memberForm" style="display:block;"> -->
+<!-- 		<span>이름</span><input type="text" name="mem_name"><br> -->
+<!-- 		<span>전화번호</span><input type="text" name="mem_tel"><br> -->
+<!-- 		<button type="submit" class="button" onclick="submitFindMemUsername(event)">아이디 찾기</button> -->
+		
+<!-- 	</div> -->
 	<div id="companyForm" style="display:none;">
 		<span>가입자명</span><input type="text" name="com_name"><br>
-		<span>사업자등록번호</span><input type="number" name="com_companynum"><br>
+		<span>사업자등록번호</span><input type="text" name="com_companynum"><br>
 		<button type="submit" class="button" onclick="submitFindComUsername(event)">아이디 찾기2</button>
 	</div>
 	</div>

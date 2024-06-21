@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>굿잡 - 비밀번호 찾기</title>
 <style>
 main {
 	width: 1100px;
@@ -15,10 +15,75 @@ main {
 }
 
 main #container {
-	width:900px;
-	min-height:700px;
-	box-sizing:border-box;
+	width: 740px;
+	margin: 0 auto;
+	min-height: 700px;
+	background: #fff;
 }
+
+.qna-big-title {
+	margin-bottom: 20px;
+	font-weight: 400;
+	font-size: 22px;
+}
+
+.findId-small-title{
+	margin-left: 10px;
+	font-weight: 400;
+	font-size: 15px;
+}
+
+#memberForm,
+#companyForm {
+	width: 450px;
+	margin: 30px;
+	border: 1px solid #dadada;
+	border-radius: 5px;
+}
+
+.memberForm-in button[type="submit"],
+.companyForm-in button[type="submit"] {
+	width: 400px;
+	height: 48px;
+	border: 1px solid #FB8500;
+	border-radius: 5px;
+	background: #FB8500;
+	color: #fff;
+	font-size: 16px;
+	font-family: "Pretendard Variable", Pretendard;
+}
+
+
+#memberForm .memberForm-in,
+#companyForm .companyForm-in {
+	width: 100%;
+	margin: 20px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.memberForm-in input[type="text"],
+.companyForm-in input[type="text"] {
+	width: 400px;
+	height: 48px;
+	padding-left: 8px;
+	box-sizing: border-box;
+	border: 1px solid #dadada;
+	border-radius: 5px 5px 0 0;
+	font-family: "Pretendard Variable", Pretendard;
+}
+.memberForm-in input[type="number"],
+.companyForm-in input[type="number"] {
+	width: 400px;
+	height: 48px;
+	padding-left: 8px;
+	box-sizing: border-box;
+	border: 1px solid #dadada;
+	border-radius: 5px 5px 0 0;
+	font-family: "Pretendard Variable", Pretendard;
+}
+
 </style>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -31,9 +96,11 @@ main #container {
 			<%@ include file="../front/common-sidebar-all.jsp"%>
 		</div>
 	<div id="container">
-	<h3>비밀번호 찾기</h3>
-	<div>회원정보 입력</div>
-	<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>
+	<h3 class="qna-big-title">비밀번호 찾기</h3>
+	<div class="findId-small-title">
+		<div>회원정보 입력</div>
+		<div>회원별로 가입 시 입력한 본인정보를 입력해 주세요.</div>
+	</div>
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	 	<li class="nav-item" role="presentation">
 	   		<button class="nav-link active" id="home-tab" onclick="showForm('memberForm')" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">개인회원</button>
@@ -42,19 +109,36 @@ main #container {
 	   		<button class="nav-link" id="profile-tab" onclick="showForm('companyForm')" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">기업회원</button>
 	 	</li>
 	</ul>
-	<div id="memberForm" style="display:block;">
-		<span>아이디</span><input type="text" name="username"><br>
-		<span>이름</span><input type="text" name="mem_name"><br>
-		<span>전화번호</span><input type="text" name="mem_tel"><br>
-		<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindMemPassword(event)">비밀번호 찾기</button>
-		
+	<div id="memberForm" style="display: block;">
+		<form>
+			<div class="memberForm-in">
+				<input type="text" name="username" placeholder="아이디"> 
+				<input type="text" name="mem_name" placeholder="이름">
+				<input type="text" name="mem_tel" placeholder="전화번호">
+				
+				<button type="submit" onclick="submitFindMemPassword(event)">비밀번호 찾기</button>
+			</div>
+		</form>
 	</div>
-	<div id="companyForm" style="display:none;">
-		<span>아이디</span><input type="text" name="username1"><br>
-		<span>가입자명</span><input type="text" name="com_name"><br>
-		<span>사업자등록번호</span><input type="number" name="com_companynum"><br>
-		<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindComPassword(event)">비밀번호 찾기</button>
+	<div id="companyForm" style="display: none;">
+		<form>
+			<div class="companyForm-in">
+				<input type="text" name="username1" placeholder="아이디"> 
+				<input type="text" name="com_name" placeholder="기업명">
+				<input type="text" name="com_companynum" placeholder="사업자등록번호">
+				
+				<button type="submit" onclick="submitFindComPassword(event)">비밀번호 찾기</button>
+			</div>
+		</form>
 	</div>
+	
+	
+<!-- 	<div id="companyForm" style="display:none;"> -->
+<!-- 		<span>아이디</span><input type="text" name="username1"><br> -->
+<!-- 		<span>가입자명</span><input type="text" name="com_name"><br> -->
+<!-- 		<span>사업자등록번호</span><input type="number" name="com_companynum"><br> -->
+<!-- 		<button type="submit" class="btn btn-primary btn-lg" onclick="submitFindComPassword(event)">비밀번호 찾기</button> -->
+<!-- 	</div> -->
 	</div>
 	</main>
 	<footer>
@@ -136,7 +220,7 @@ main #container {
 		const username = document.querySelector("Input[name='username1']");
 		const com_name = document.querySelector("Input[name='com_name']");
 		const com_companynum = document.querySelector("Input[name='com_companynum']");
-		
+		console.log(com_companynum);
 		if(com_name.value == null){
 			alert("가입자명을 입력해주세요.");
 			com_name.focus();
@@ -160,7 +244,7 @@ main #container {
 				com_companynum : com_companynum.value
 			};
 			
-			console.log(findPassword);
+			console.log("findPw",findPassword);
 			const sendData = JSON.stringify(findPassword);
 			const xhttp = new XMLHttpRequest();
 			

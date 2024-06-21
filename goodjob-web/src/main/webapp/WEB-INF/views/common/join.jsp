@@ -74,6 +74,7 @@ main {
 	border-radius:5px 5px 0 0;
 	border-bottom:0;
 }
+
 .memberJoinform input[name="mem_name"],
 .companyJoinform input[name="mem_name"]{
 	border-radius:0;
@@ -161,16 +162,15 @@ main {
 }
 .companyJoinform input[type="password"]{
 	border:1px solid #dadada;
-	border-radius:0 0 5px 5px;
-	margin-bottom:10px;
+	border-radius: 5px 5px 0 0;
+	border-bottom:0;
 }
 .companyJoinform input[name="username1"]{
-	border-bottom:0;
-	border-radius:5px 5px 0 0;
+	border-radius:5px;
 }
 .companyJoinform input[name="com_name"]{
 	border:1px solid #dadada;
-	border-radius:5px 5px 0 0;
+		border-radius:0;
 }
 .companyJoinform input[name="com_type"]{
 	border:1px solid #dadada;
@@ -253,6 +253,7 @@ color:red
 			<form name="frm_comJoin">
 				<div class="companyJoinform">
 					<input type="text" name="username1" placeholder="아이디">
+					<button onclick="checkUsername(event)" class="id-dupl-chk">ID 중복 확인</button>
 					<input type="password" name="password1" placeholder="비밀번호">
 					<input type="hidden" name="role1" value="ROLE_COMPANY">
 					<input type="text" name="com_name" placeholder="기업명">
