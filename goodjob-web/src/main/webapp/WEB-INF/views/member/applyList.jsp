@@ -176,7 +176,7 @@ span {
 				response.forEach(memrecruit => {
 					
 	            	const deadline_date = " ~ " + memrecruit.recruitDto.deadline_date.split("-")[1] + "." + memrecruit.recruitDto.deadline_date.split("-")[2];
-	            	
+	            	const title = memrecruit.recruitDto.title.substring(10) + "...";
 	            	
 	            	let interview = "";
 	            	if(memrecruit.interview_pass === 0){
@@ -206,7 +206,7 @@ span {
 	            	}
 	            	
 	            	output += '<tr id="row' + memrecruit.mem_recruit_no + '"><td>' + memrecruit.recruitDto.com_name + '</td> ' + 
-	            	 '<td><a href="/employ/detail/' + memrecruit.recruitDto.recruit_no + '/' + memrecruit.recruitDto.com_no + '/' + memrecruit.recruitDto.com_detail_no + '">' + memrecruit.recruitDto.title + '</a></td> ' + 
+	            	 '<td><a href="/employ/detail/' + memrecruit.recruitDto.recruit_no + '/' + memrecruit.recruitDto.com_no + '/' + memrecruit.recruitDto.com_detail_no + '">' + title + '</a></td> ' + 
 	            	'<td>' + deadline_date + '</td> ';
 	            	
 	            	if(interview === '심사중'){
