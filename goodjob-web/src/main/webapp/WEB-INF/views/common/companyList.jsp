@@ -136,7 +136,7 @@ main {
 			<div id="filters">
         		<select id="jobTypeFilter">
             		<option value="">직종</option>
-                	<option value="개발">개발/프로그래밍</option>
+                	<option value="개발/프로그래밍">개발/프로그래밍</option>
                 	<option value="디자인">디자인</option>
                 	<option value="마케팅/광고">마케팅/광고</option>
                 	<option value="경영/사무">경영/사무</option>
