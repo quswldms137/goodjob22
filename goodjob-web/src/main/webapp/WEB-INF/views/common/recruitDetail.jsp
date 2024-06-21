@@ -287,7 +287,7 @@ main {
 	                data: JSON.stringify(data),      	
 	                contentType: "application/json",
 	                success: function (response) {
-	                    alert('공고 스크랩 성공!!');
+	                	 alert('해당 채용공고가 스크랩 되었습니다🤩');
 	                },
 	                error: function (error) {
 	                    alert('공고 스크랩에 실패 하셨습니다.ㅜ');

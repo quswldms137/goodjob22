@@ -37,7 +37,7 @@ public class ComInterstScrapController94 {
 		// 관심기업 등록 DAO 호출
 		int result = comInterestDao.addInterestCompany(mem_no, com_no);
 		if(result > 0) {
-			return "관심기업이 등록되었습니다!";
+			return "관심기업이 등록되었습니다😜";
 		} else {
 	        return "관심기업 등록에 실패했습니다.";
 	    }
@@ -55,7 +55,7 @@ public class ComInterstScrapController94 {
 
 		int result = scrapRecruitDao.addScrap(mem_no, recruit_no);
 		if(result > 0) {
-			return "해당 채용공고가 스크랩 되었습니다!";
+			return "해당 채용공고가 스크랩 되었습니다🤩";
 		} else {
 	        return "스크랩에 실패했습니다.";
 	    }

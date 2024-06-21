@@ -62,7 +62,7 @@ public class RecruitController93 {
 		
         int result = memRecruitService.nowApplyService(memRecruitDto.getRecruit_no(), mem_no);
         if(result > 0) {
-        	return ResponseEntity.ok("즉시지원 완료"); 
+        	return ResponseEntity.ok("해당 공고에 지원 성공하셨습니다😎"); 
         }
         
         return ResponseEntity.ok("즉시지원 실패");
@@ -78,7 +78,7 @@ public class RecruitController93 {
 		
 		scrapRecruitService.scrapRecruitRegService(scrapRecruitDto);
 		
-		return ResponseEntity.ok("공고 스크랩 성공");
+		return ResponseEntity.ok("해당 채용공고가 스크랩 되었습니다🤩");
 		
 	}
 	
