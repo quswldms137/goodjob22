@@ -21,7 +21,7 @@ import com.example.goodjob.service.MemberService;
 import com.example.goodjob.service.ScrapRecruitService;
 
 
-@CrossOrigin("http://localhost:9991/")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/subscrap")
 public class SubScrapController {

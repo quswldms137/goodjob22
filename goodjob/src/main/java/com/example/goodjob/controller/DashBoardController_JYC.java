@@ -14,7 +14,7 @@ import com.example.goodjob.service.CSkillService_JYC;
 import com.example.goodjob.service.CompanyService_JYC;
 import com.example.goodjob.service.UserService_JYC;
 
-@CrossOrigin("http://localhost:9991/")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/dashboard")
 public class DashBoardController_JYC {

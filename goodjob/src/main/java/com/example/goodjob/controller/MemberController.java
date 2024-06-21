@@ -20,7 +20,7 @@ import com.example.goodjob.service.MemberService;
 import com.example.goodjob.service.SkillService_JYC;
 import com.example.goodjob.service.UserService;
 
-@CrossOrigin("http://localhost:9991")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/member")
 public class MemberController {

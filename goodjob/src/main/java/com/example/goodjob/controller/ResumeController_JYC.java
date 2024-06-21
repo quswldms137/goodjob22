@@ -17,7 +17,7 @@ import com.example.goodjob.dto.MemRecruitDto;
 import com.example.goodjob.dto.ResumeDto;
 import com.example.goodjob.service.ResumeService_JYC;
 
-@CrossOrigin("http://localhost:9991")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/resume")
 public class ResumeController_JYC {

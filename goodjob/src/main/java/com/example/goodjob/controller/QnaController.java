@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.goodjob.dto.ServiceQuestionDto;
 import com.example.goodjob.service.ServiceQuestionService;
 
-@CrossOrigin("http://localhost:9991")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/qna")
 public class QnaController {
