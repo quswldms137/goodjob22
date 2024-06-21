@@ -78,11 +78,12 @@ main #container {
 
 
 	<script>
-	function getResumeList(mem_no) {
+	function getResumeList(username) {
+		
 	    $.ajax({
 	        url: "http://localhost:8888/api/resume/list",
 	        type: "GET",
-	        data: { mem_no: mem_no},
+	        data: { username: username},
 	        success: function(data) {
 	            let output = "";
 	            
@@ -103,8 +104,8 @@ main #container {
 	}
 
 	$(document).ready(function() {
-		let mem_no = 1;
-		getResumeList(mem_no);
+		const username = localStorage.getItem("username");
+		getResumeList(username);
 	});
 	</script>
 

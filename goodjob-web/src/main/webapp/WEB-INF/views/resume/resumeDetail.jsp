@@ -177,6 +177,7 @@ main #container {
 	$(document).ready(function () {
 	    // 페이지 로드 시 URL에서 mem_no와 resume_no 가져오기
 	    const urlParams = new URLSearchParams(window.location.search);
+	    const username = localStorage.getItem("username");
 	    const mem_no = urlParams.get('mem_no');
 	    const resume_no = urlParams.get('resume_no');
 
