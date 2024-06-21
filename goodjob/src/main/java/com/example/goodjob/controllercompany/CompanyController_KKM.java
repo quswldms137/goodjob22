@@ -98,13 +98,32 @@ public class CompanyController_KKM {
 		System.out.println("컴앤오 :" + com_no);
 		System.out.println("유저네임 :" + username);
 		if(result == null) {
-			return ""; 
+			return "등록된 기업정보가 없습니다 등록페이지로 이동합니다!!"; 
 		}else {
-			return "이미 기정정보가 존재합니다 수정페이지로 이동합니다!!";
+			return "이미 기업정보가 존재합니다 수정페이지로 이동합니다!!";
 		}
 		
 		 
 	}
+	
+	//Detail이 있는지 확인하기
+		@GetMapping("/infomodi/detail/{username}")
+		public String findInfoModify(@PathVariable("username")String username) {
+			
+			Long com_no = qnaService.getCom_no(username);
+			CompanyDetailDto97 result = icompany.getkeyvalue(com_no);
+			System.out.println("result:" + result);
+			System.out.println("컴앤오 :" + com_no);
+			System.out.println("유저네임 :" + username);
+			if(result != null) {
+				return "이미 기업정보가 존재합니다 수정페이지로 이동합니다!!"; 
+			}else {
+				return "등록된 기업정보가 없습니다 등록페이지로 이동합니다!!";
+			}
+			
+			 
+		}
+	
 	
 	// (기업)내 정보 등록 post
 	@PostMapping("/info")
@@ -242,7 +261,12 @@ public class CompanyController_KKM {
 		 
 		 return resumeDetailDto;
 	 }
-	 
+	 //지원자 및 관심 구직자 합격 불합격
+	 @PutMapping("passfail")
+	 public ResponseEntity<String> passfail(){
+		 
+		 return null;
+	 }
 	 
 	 
 	 

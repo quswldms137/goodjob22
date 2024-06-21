@@ -207,7 +207,7 @@ input[type="button"] {
 				method : "GET",
 				dataType : "text",
 				success : function(response){
-					if(response === "이미 기정정보가 존재합니다 수정페이지로 이동합니다!!"){
+					if(response === "이미 기업정보가 존재합니다 수정페이지로 이동합니다!!"){
 						alert(response);
 						location.href="/company/infoModify";
 					}

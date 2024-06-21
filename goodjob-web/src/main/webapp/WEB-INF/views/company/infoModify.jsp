@@ -184,8 +184,23 @@ input[type="button"] {
 			// 페이지 로드 시 URL에서 com_no 가져오기
 			// const urlParams = new URLSearchParams(window.location.search);
 			// const com_no = urlParams.get('com_no');
-			
 			const username = localStorage.getItem("username");
+			$.ajax({
+				
+				url : 'http://localhost:8888/api/company/infomodi/detail/' + username,
+				method : "GET",
+				dataType : "text",
+				success : function(response){
+					if(response === "등록된 기업정보가 없습니다 등록페이지로 이동합니다!!"){
+						alert(response);
+						location.href="/company/info";
+					}
+				},
+				error : function(xhr, status, error){
+					console.log(error);
+				}
+			});
+			
 			
 			if (username !== null) {
 				getinfoDetail(username);
