@@ -40,8 +40,8 @@ main #container {
 	padding-bottom: 10px;
 }
 
-.sidebar-box2 p:nth-child(2) {
-	font-weight: bold;
+.sidebar-box2 p:nth-child(2) a{
+	color: #FB8500 !important;
 }
 
 .recruit-area {
