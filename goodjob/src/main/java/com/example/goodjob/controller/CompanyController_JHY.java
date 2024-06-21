@@ -26,7 +26,7 @@ import com.example.goodjob.dto.ResumeAndSkillDto;
 import com.example.goodjob.dto.ResumeDto;
 import com.example.goodjob.service.QnaService99;
 
-@CrossOrigin("http://localhost:9991/")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/company")
 public class CompanyController_JHY {

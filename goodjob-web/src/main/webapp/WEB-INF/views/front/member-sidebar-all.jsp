@@ -60,12 +60,11 @@ ul {
 }
 
 #sidebar .sidebar-box2,
-#sidebar .sidebar-box3,
 #sidebar .sidebar-box5{
 	height:133px;
 	padding-top:30px;
 }
-#sidebar .sidebar-box4{
+#sidebar .sidebar-box4, #sidebar .sidebar-box3{
 	height: 90px;
 }
 
@@ -86,7 +85,6 @@ ul {
 		<div class="sidebar-box sidebar-box3">
 			<h3>입사지원·제안 관리</h3>
 			<p><a href="/member/applyList">입사지원 현황</a></p>
-			<p><a href="#">받은 포지션 제안</a></p>
 		</div>
 		<div class="sidebar-box sidebar-box4">
 			<h3>커뮤니티</h3>
