@@ -36,9 +36,9 @@ public class MemInterestService {
 
 		if (list.size() > 0) {
 
-			list.forEach(e -> {
-				CompanyDto_JYC companyDto = iCompanyDao.findByCom_no(e);
-				CompanyDto_JYC companyDetailDto = iCompanyDetailDao.findByCom_no(e);
+			list.forEach(memInterest -> {
+				CompanyDto_JYC companyDto = iCompanyDao.findByCom_no(memInterest);
+				CompanyDto_JYC companyDetailDto = iCompanyDetailDao.findByCom_no(memInterest);
 
 				companyDto.setCom_detail_no(companyDetailDto.getCom_detail_no());
 				companyDto.setIntrodiction(companyDetailDto.getIntrodiction());
@@ -58,6 +58,8 @@ public class MemInterestService {
 				result.add(companyDto);
 			});
 		}
+		
+		System.out.println("result : " + result);
 		
 		return result;
 	}

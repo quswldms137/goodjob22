@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.goodjob.dao.ICompanyDao_JYC;
+import com.example.goodjob.dao.ICompanyDetailDao_JYC;
 import com.example.goodjob.dao.IRecruitDao_JYC;
 import com.example.goodjob.dao.IScrapRecruitDao;
 import com.example.goodjob.dto.RecruitDto_JYC;
@@ -17,11 +18,13 @@ public class ScrapRecruitService {
 	private IScrapRecruitDao iScrapRecruitDao;
 	private IRecruitDao_JYC iRecruitDao;
 	private ICompanyDao_JYC iCompanyDao;
+	private ICompanyDetailDao_JYC iCompanyDetailDao;
 	
-	public ScrapRecruitService(IScrapRecruitDao iScrapRecruitDao, IRecruitDao_JYC iRecruitDao, ICompanyDao_JYC iCompanyDao) {
+	public ScrapRecruitService(IScrapRecruitDao iScrapRecruitDao, IRecruitDao_JYC iRecruitDao, ICompanyDao_JYC iCompanyDao, ICompanyDetailDao_JYC iCompanyDetailDao) {
 		this.iScrapRecruitDao = iScrapRecruitDao;
 		this.iRecruitDao = iRecruitDao;
 		this.iCompanyDao = iCompanyDao;
+		this.iCompanyDetailDao = iCompanyDetailDao;
 	}
 	
 	public List<RecruitDto_JYC> getScrapList(Long mem_no, int page) {
@@ -39,6 +42,7 @@ public class ScrapRecruitService {
 				String com_name = iCompanyDao.getCom_name(recruitDto.getCom_no());
 				recruitDto.setCom_name(com_name);
 				recruitDto.setTotal(count.size());
+				recruitDto.setCom_detail_no(iCompanyDetailDao.getCom_detail_no(recruitDto.getCom_no()));
 				result.add(recruitDto);
 			});
 		}
