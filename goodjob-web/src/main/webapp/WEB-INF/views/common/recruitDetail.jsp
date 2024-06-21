@@ -179,7 +179,7 @@ main {
 						
 						let output = '<div class="info-area-left">';
 						output += '<div class="info-area-leftTop">';
-						output += '<p>'+ data.company.username +'<a href="#">❤ 관심기업</a></p>';
+						output += '<p>'+ data.company.com_name +'<a href="#">❤ 관심기업</a></p>';
 						output += '<h1>'+ data.recruit.title +'</h1>';
 						output += '</div>';
 						output += '<div class="info-area-leftBot">';
