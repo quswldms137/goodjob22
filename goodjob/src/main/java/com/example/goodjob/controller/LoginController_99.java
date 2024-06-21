@@ -43,7 +43,6 @@ public class LoginController_99 {
         boolean result = passwordService.checkPassword(password, hashedPassword);
         
         if("ROLE_MEMBER".equals(role) && result) {
-        	System.out.println(result);
         	session.setAttribute("user", userDto);
             //Header에 저장
             response.setHeader("username", userDto.getUsername());
