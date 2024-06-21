@@ -163,7 +163,7 @@ main #container {
 					
 					response.forEach(item =>{
 						 str += '<div id="item_box" class="item' + item.cs_no + '"> ' + 
-								'<a href="#"> ' +
+								'<a href="/qna99/qnaDetail?cs_no=' + item.cs_no +'"> ' +
  								'<p><span class="category"><b></b>' + item.category + '</span><span class="date"><b></b>' + item.reg_date + '</span>' +
 						 		'<p><b>' + item.title + '</b></p> ' + 
 								'<p class="content">' + item.content + '</p> ';
