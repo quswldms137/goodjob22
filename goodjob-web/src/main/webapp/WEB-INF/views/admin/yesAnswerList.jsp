@@ -181,7 +181,7 @@ main #container {
 					}
 					
 					
-					let str = '<ul class="noanswer-list-title"><li>카테고리</li><li>제목</li><li>작성일</li><li>답변여부</li><li>답변작성</li></ul>';
+					let str = '<ul class="answer-list-title"><li>카테고리</li><li>제목</li><li>작성일</li><li>답변여부</li><li>답변작성</li></ul>';
 				      
 					response.forEach(qna => {
 						
@@ -194,7 +194,7 @@ main #container {
 						}else{
 							str += '<li><div class="answer" style="color:blue"><b>답변 : </b>O</div></li>';
 						}
-						str += '<li><input type="button" value="답변작성" onclick="answerToQna(event)" id="answer' + qna.cs_no + '"></li>';
+						str += '<li><input type="button" value="답변수정" onclick="answerToQna(event)" id="answer' + qna.cs_no + '"></li>';
 						str += '</ul>';
 						
 					});
@@ -245,7 +245,7 @@ main #container {
 		            } else {
 		                str += '<li><div class="answer" style="color:blue"><b>답변 : </b>O</div></li>';
 		            }
-		            str += '<li><input type="button" value="답변작성" onclick="answerToQna(event)" id="answer' + qna.cs_no + '"></li>';
+		            str += '<li><input type="button" value="답변수정" onclick="answerToQna(event)" id="answer' + qna.cs_no + '"></li>';
 		            str += '</ul>';
 		        });
 

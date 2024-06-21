@@ -231,27 +231,26 @@ label:hover {
 					if(response.length > 0){
 						
 					
-						for(let i = 0; i < 4; i++){
+						response.forEach(skill => {
 							
-						const location = response[i].location;
+							
+							const oldDate = new Date(skill.deadline_date);
+							const newDate = new Date();
+							let diff = Math.abs(newDate.getTime() - oldDate.getTime());
+							diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+							str += '<div class="skill"> ' + 
+							'<a href="/employ/detail/' + skill.recruit_no + '/' + skill.com_no + '/' + skill.com_detail_no + '" >' +
+							'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/' + skill.img_url + '"></div>' +
+							'<p>' + skill.com_name + '</p> ' +
+							'<p><b>' + skill.title + '</b></p> ' +
+							'<p><span>' + skill.location + '</span></p></a>' +
+							'<p class="last"><span>D-' + diff + '</span> ' + 
+							'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + skill.recruit_no + '"></span>' +
+							'</p>' + 
+							'<span class="applyBtn apply' + skill.recruit_no + '" onclick="applyRecruit(event)">즉시지원</span>' + 
+							'</div> ';
+						});
 						
-						const oldDate = new Date(response[i].deadline_date);
-						const newDate = new Date();
-						let diff = Math.abs(newDate.getTime() - oldDate.getTime());
-						diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
-						str += '<div class="skill"> ' + 
-						'<a href="/employ/detail/' + response[i].recruit_no + '/' + response[i].com_no + '/' + response[i].com_detail_no + '" >' +
-						'<div class="img-box"><img alt="채용공고 사진" src="/resource/img/' + response[i].img_url + '"></div>' +
-						'<p>' + response[i].com_name + '</p> ' +
-						'<p><b>' + response[i].title + '</b></p> ' +
-						'<p><span>' + location + '</span></p></a>' +
-						'<p class="last"><span>D-' + diff + '</span> ' + 
-						'<span><img onclick="changeScrap(event)" alt="스크랩한 공고" src="/resource/img/noscrap.png" class="scrapImg scrap' + response[i].recruit_no + '"></span>' +
-						'</p>' + 
-						'<span class="applyBtn apply' + response[i].recruit_no + '" onclick="applyRecruit(event)">즉시지원</span>' + 
-						'</div> ';
-						
-						}						
 					
 					$("#skillRecommendation").html(str);
 					}else{
