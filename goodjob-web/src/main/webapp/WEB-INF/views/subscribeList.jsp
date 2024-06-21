@@ -122,7 +122,7 @@ main #container {
 							}
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
-									   '<a href="#" class="info"> ' + 
+									   '<a href="/company94/companyDetail?com_no=' + item.com_no + '" class="info"> ' + 
 									   '<p class="com_name">' + item.com_name + '</p> ' +
 									   '<div> ' + 
 									   '<span>' + item.sectors + '</span><span> &#183; </span><span>' + item.com_addr + '</span><span> &#183; </span> ' + 
@@ -204,7 +204,7 @@ main #container {
 				let str = "";
 				response.forEach(item => {
 					str += '<div id="company_box"> ' + 
-						   '<a href="#" class="info"> ' + 
+						   '<a href="/company94/companyDetail?com_no=' + item.com_no + '" class="info"> ' + 
 						   '<p class="com_name">' + item.com_name + '</p> ' + 
 						   '<div> ' + 
 						   '<span>' + item.sectors + '</span><span> &#183; </span><span>' + item.com_addr + '</span><span> &#183; </span> ' + 

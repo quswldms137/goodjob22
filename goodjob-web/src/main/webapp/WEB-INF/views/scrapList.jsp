@@ -121,13 +121,15 @@ input[type=button]:hover{
 		$(document).ready(
 				function() {
 					const username = localStorage.getItem("username");
-
+					
 					$.ajax({
 						url : "http://localhost:8888/api/subscrap/scrap/1/"
 								+ username,
 						dataType : "json",
 						method : "GET",
 						success : function(response) {
+							
+							console.log(response);
 							
 							const totalItem = response[0].total;
 							let pages = 0;
@@ -141,7 +143,7 @@ input[type=button]:hover{
 							let str = "";
 							response.forEach(item => {
 								str += '<div id="company_box"> ' + 
-									   '<a href="/employ/detail/' + item.recruit_no + '" class="info"> ' + 
+									   '<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" class="info"> ' + 
 									   '<p class="com_name">' + item.com_name + '</p> ' + 
 									   '<p class="title">' + item.title + '</p>' + 
 									   '<p class="detail"><span>' + item.career + ', </span><span>' + item.education + ', </span><span>' + 
@@ -260,7 +262,7 @@ input[type=button]:hover{
 				let str = "";
 				response.forEach(item => {
 					str += '<div id="company_box"> ' + 
-						   '<a href="/employ/detail/' + item.recruit_no + '" class="info"> ' + 
+						   '<a href="/employ/detail/' + item.recruit_no + '/' + item.com_no + '/' + item.com_detail_no + '" class="info"> ' + 
 						   '<p class="com_name">' + item.com_name + '</p> ' + 
 						   '<p class="title">' + item.title + '</p>' + 
 						   '<p class="detail"><span>' + item.career + ', </span><span>' + item.education + ', </span><span>' + 
