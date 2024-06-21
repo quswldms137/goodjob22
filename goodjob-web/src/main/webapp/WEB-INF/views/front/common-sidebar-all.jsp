@@ -84,7 +84,7 @@ margin-bottom: 0;
 		<div class="sidebar-box sidebar-box4">
 			<h3>고객센터</h3>
 		</div>
-		<div class="sidebar-box sidebar-box5">
+		<div class="sidebar-box sidebar-box3">
 			<h3>문의·신고</h3>
 			<p><a href="/qna99/qnaWrite">문의글 작성하기</a></p>
 			<p><a href="/qna99/qnaWrite?test=1">내가 작성한 문의</a></p>
