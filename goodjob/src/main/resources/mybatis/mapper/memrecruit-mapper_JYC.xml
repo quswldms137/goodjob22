@@ -12,4 +12,7 @@
 	<delete id="deleteByRecruit_no">
 		DELETE FROM mem_recruit WHERE recruit_no = #{recruit_no};
 	</delete>
+	<delete id="deleteByMem_Recruit_no">
+		DELETE FROM mem_recruit WHERE mem_recruit_no = #{mem_recruit_no};
+	</delete>
 </mapper>

@@ -43,8 +43,12 @@ public class ResumeController_JYC {
 	@GetMapping("/mylist/{username}")
 	public ResponseEntity<List<MemRecruitDto>> getMyMemRecruitList(@PathVariable("username") String username) {
 
+		System.out.println("username : " + username);
+		
 		List<MemRecruitDto> result = resumeService.getMyMemRecruitList(username);
 
+		System.out.println("result : " + result);
+		
 		if (result != null) {
 
 			return ResponseEntity.status(HttpStatus.OK).body(result);

@@ -71,11 +71,9 @@ public class ResumeService_JYC {
 	
 	public String deleteMemRecruit(Long mem_recruit_no) {
 		
-		System.out.println("mem_recruit_no : " + mem_recruit_no);
+		System.out.println("mem_recruti_no : " + mem_recruit_no);
 		
-		int result = iMemRecruitDao.deleteByRecruit_no(mem_recruit_no);
-		
-		System.out.println("result : " + result);
+		int result = iMemRecruitDao.deleteByMem_Recruit_no(mem_recruit_no);
 		
 		if(result > 0) {
 			return "지원 취소 성공했습니다.";
