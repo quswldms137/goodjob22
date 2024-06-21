@@ -57,11 +57,7 @@ public class ResumeController_JYC {
 	@DeleteMapping("/mylist")
 	public ResponseEntity<String> deleteMemRecruit(@RequestParam("mem_recruit_no") Long mem_recruit_no){
 
-		System.out.println("mem_recruit_no : " + mem_recruit_no);
-		
 		String result = resumeService.deleteMemRecruit(mem_recruit_no);
-		
-		System.out.println("result : " + result);
 		
 		if(result.equals("지원 취소 성공했습니다.")) {
 			return ResponseEntity.status(HttpStatus.OK)
